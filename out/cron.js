@@ -143,9 +143,11 @@ function execute() {
         });
     });
 }
-execute();
-//cron.schedule('*/2 * * * *', () => {
-//    console.log(`${Date.now()} Running a task every two minutes`);
-//    execute();
-//});
+function start() {
+    cron.schedule('*/2 * * * *', function () {
+        console.log(Date.now() + " Running a task every two minutes");
+        execute();
+    });
+}
+start();
 //# sourceMappingURL=cron.js.map
