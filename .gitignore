@@ -1,0 +1,20 @@
+./*/*.pyc
+./*/*/*.pyc
+./*.private
+./*/*.private
+./*/*/*.private
+*.log
+./*.log
+./**/*.log
+./db/data
+db/data/
+.env
+*.private
+./*/*.private
+# Dependency directories
+node_modules/
+jspm_packages/
+server/
+# TypeScript v1 declaration files
+typings
+node_modules
