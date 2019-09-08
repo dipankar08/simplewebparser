@@ -85,7 +85,7 @@ let news18_english:ExpandLinkConfig = {
 
 async function save(res){
     const body = { '_payload': res}; 
-    fetch('http://simplestore.dipankar.co.in/api/news/create', {
+    fetch('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
         method: 'post',
         body:    JSON.stringify(body),
         headers: { 'Content-Type': 'application/json' },
@@ -95,17 +95,19 @@ async function save(res){
 }
 
 async function execute(){   
-    //save(await zeenews.parseMany(zeenews_bengali));
+    save(await zeenews.parseMany(zeenews_bengali));
+    save(await news18_cra1.parseMany(news18_bengali));
     //save(await zeenews.parseMany(zeenews_english));
     //save(await zeenews.parseMany(zeenews_hindi));
-    //save(await news18_cra1.parseMany(news18_bengali));
-    save(await news18.parseMany(news18_hindi));
+ 
+    //save(await news18.parseMany(news18_hindi));
     //save(await news18.parseMany(news18_english));
 }
 
-execute();
-
-//cron.schedule('*/2 * * * *', () => {
-//    console.log(`${Date.now()} Running a task every two minutes`);
-//    execute();
-//});
+function start(){
+    cron.schedule('*/2 * * * *', () => {
+        console.log(`${Date.now()} Running a task every two minutes`);
+        execute();
+    });
+}
+start();

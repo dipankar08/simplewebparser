@@ -113,7 +113,7 @@ function save(res) {
         var body;
         return __generator(this, function (_a) {
             body = { '_payload': res };
-            fetch('http://simplestore.dipankar.co.in/api/news/create', {
+            fetch('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
                 method: 'post',
                 body: JSON.stringify(body),
                 headers: { 'Content-Type': 'application/json' },
@@ -126,22 +126,18 @@ function save(res) {
 }
 function execute() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var _a, _b;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0:
-                    //save(await zeenews.parseMany(zeenews_bengali));
-                    //save(await zeenews.parseMany(zeenews_english));
-                    //save(await zeenews.parseMany(zeenews_hindi));
-                    //save(await news18_cra1.parseMany(news18_bengali));
                     _a = save;
-                    return [4 /*yield*/, news18.parseMany(news18_hindi)];
+                    return [4 /*yield*/, zeenews.parseMany(zeenews_bengali)];
                 case 1:
-                    //save(await zeenews.parseMany(zeenews_bengali));
-                    //save(await zeenews.parseMany(zeenews_english));
-                    //save(await zeenews.parseMany(zeenews_hindi));
-                    //save(await news18_cra1.parseMany(news18_bengali));
-                    _a.apply(void 0, [_b.sent()]);
+                    _a.apply(void 0, [_c.sent()]);
+                    _b = save;
+                    return [4 /*yield*/, news18_cra1.parseMany(news18_bengali)];
+                case 2:
+                    _b.apply(void 0, [_c.sent()]);
                     return [2 /*return*/];
             }
         });
