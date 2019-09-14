@@ -36,118 +36,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
-var fetch = require('node-fetch');
-var crawler_1 = require("./crawler");
-var LIMIT = 2;
-var LANG;
-(function (LANG) {
-    LANG[LANG["BENGALI"] = 0] = "BENGALI";
-    LANG[LANG["ENGLISH"] = 1] = "ENGLISH";
-    LANG[LANG["HINDI"] = 2] = "HINDI";
-})(LANG || (LANG = {}));
-var bartaman = new crawler_1.Crawler([
-    { name: 'title', selector: '.head-news h4', type: crawler_1.Type.TEXT },
-    { name: 'details', selector: '.head-news .content', type: crawler_1.Type.TEXT },
-    { name: 'img', selector: '.head-news .thumbnail img', type: crawler_1.Type.IMAGE },
-]);
-var anandabazar = new crawler_1.Crawler([
-    { name: 'title', selector: '#story_container h1', type: crawler_1.Type.TEXT },
-    { name: 'details', selector: '#story_container .articleBody', type: crawler_1.Type.TEXT },
-    { name: 'img', selector: '#story_container  img', type: crawler_1.Type.IMAGE },
-]);
-// -- ZEE NEWS --
-var zeenews = new crawler_1.Crawler([
-    { name: 'title', selector: '.content h1', type: crawler_1.Type.TEXT },
-    { name: 'details', selector: '.content .article', type: crawler_1.Type.TEXT },
-    { name: 'img', selector: '.article-image-block img', type: crawler_1.Type.IMAGE },
-]);
-var zeenews_bengali = {
-    root_url: 'https://zeenews.india.com/bengali/',
-    a_selector_list: ['.mini-list-story > a'],
-    extra: { 'lang': LANG[LANG.BENGALI] },
-    limit: LIMIT,
-};
-var zeenews_hindi = {
-    root_url: 'https://zeenews.india.com/hindi/',
-    a_selector_list: ['.mini-list-story .mini-con  a'],
-    extra: { 'lang': LANG[LANG.HINDI] },
-    limit: LIMIT,
-};
-var zeenews_english = {
-    root_url: 'https://zeenews.india.com/',
-    a_selector_list: ['.mini-list-story .mini-con  a'],
-    extra: { 'lang': LANG[LANG.ENGLISH] },
-    limit: LIMIT,
-};
-// news18
-var news18 = new crawler_1.Crawler([
-    { name: 'title', selector: '#article h1', type: crawler_1.Type.TEXT },
-    { name: 'details', selector: '#article .storypara', type: crawler_1.Type.TEXT },
-    { name: 'img', selector: '#article .articleimg img', type: crawler_1.Type.IMAGE },
-]);
-var news18_cra1 = new crawler_1.Crawler([
-    { name: 'title', selector: '.article_box h1', type: crawler_1.Type.TEXT },
-    { name: 'details', selector: '.article_box #article_body p', type: crawler_1.Type.TEXT },
-    { name: 'img', selector: '.article_box .articleimg img', type: crawler_1.Type.IMAGE },
-]);
-var news18_bengali = {
-    root_url: 'https://bengali.news18.com/',
-    a_selector_list: ['.ld-story-rgt li  a'],
-    extra: { 'lang': LANG[LANG.BENGALI] },
-    limit: LIMIT,
-};
-var news18_hindi = {
-    root_url: 'https://hindi.news18.com/',
-    a_selector_list: ['#hp-breaknews > a', '.ld-story-rgt li  a'],
-    extra: { 'lang': LANG[LANG.HINDI] },
-    limit: LIMIT,
-};
-var news18_english = {
-    root_url: 'https://www.news18.com/',
-    a_selector_list: ['.lead-mstory li  a'],
-    extra: { 'lang': LANG[LANG.ENGLISH] },
-    limit: LIMIT,
-};
-function save(res) {
+var anandabazar_1 = require("./config/anandabazar");
+var zeenews_bengali_1 = require("./config/zeenews_bengali");
+var news18_bengali_1 = require("./config/news18_bengali");
+var oneindia_bengali_1 = require("./config/oneindia_bengali");
+var bbc_bengali_1 = require("./config/bbc_bengali");
+var kolkata247_1 = require("./config/kolkata247");
+var configList = [
+    // BENGALI
+    new anandabazar_1.AnandabazarConfig(),
+    new zeenews_bengali_1.ZeeNewsConfig(),
+    new news18_bengali_1.News18Config(),
+    new oneindia_bengali_1.OneIndiaBengaliConfig(),
+    new bbc_bengali_1.BbcBengaliConfig(),
+    new kolkata247_1.Kolkata247()
+];
+function prod() {
     return __awaiter(this, void 0, void 0, function () {
-        var body;
+        var _i, configList_1, item;
         return __generator(this, function (_a) {
-            body = { '_payload': res };
-            fetch('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
-                method: 'post',
-                body: JSON.stringify(body),
-                headers: { 'Content-Type': 'application/json' },
-            })
-                .then(function (res) { return res.json(); })
-                .then(function (json) { return console.log(json); });
-            return [2 /*return*/];
-        });
-    });
-}
-function execute() {
-    return __awaiter(this, void 0, void 0, function () {
-        var _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+            switch (_a.label) {
                 case 0:
-                    _a = save;
-                    return [4 /*yield*/, zeenews.parseMany(zeenews_bengali)];
+                    _i = 0, configList_1 = configList;
+                    _a.label = 1;
                 case 1:
-                    _a.apply(void 0, [_c.sent()]);
-                    _b = save;
-                    return [4 /*yield*/, news18_cra1.parseMany(news18_bengali)];
+                    if (!(_i < configList_1.length)) return [3 /*break*/, 4];
+                    item = configList_1[_i];
+                    return [4 /*yield*/, item.execute()];
                 case 2:
-                    _b.apply(void 0, [_c.sent()]);
-                    return [2 /*return*/];
+                    _a.sent();
+                    _a.label = 3;
+                case 3:
+                    _i++;
+                    return [3 /*break*/, 1];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
-function start() {
-    cron.schedule('*/2 * * * *', function () {
-        console.log(Date.now() + " Running a task every two minutes");
-        execute();
+function cronJob() {
+    cron.schedule('*/15 * * * *', function () {
+        console.log(Date.now() + " Running a task every 15 minutes");
+        prod();
     });
 }
-start();
+//prod();
+new kolkata247_1.Kolkata247().execute();
 //# sourceMappingURL=cron.js.map

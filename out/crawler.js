@@ -45,6 +45,16 @@ var Type;
     Type[Type["IMAGE"] = 1] = "IMAGE";
     Type[Type["MULTI_TEXT"] = 2] = "MULTI_TEXT";
 })(Type = exports.Type || (exports.Type = {}));
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
 var Crawler = /** @class */ (function () {
     function Crawler(config) {
         this.config = config;
@@ -73,10 +83,10 @@ var Crawler = /** @class */ (function () {
                             switch (item.type) {
                                 case Type.TEXT:
                                     val = this.cleanHtmlData($(item.selector).text().trim());
-                                    result[item.name] = val;
+                                    result[item.name.toString()] = val;
                                     break;
                                 case Type.IMAGE:
-                                    result[item.name] = this.absUrl(url, $(item.selector).attr('src'));
+                                    result[item.name.toString()] = this.absUrl(url, $(item.selector).attr('src'));
                                     break;
                             }
                         }
@@ -97,14 +107,14 @@ var Crawler = /** @class */ (function () {
             return __generator(this, function (_f) {
                 switch (_f.label) {
                     case 0:
-                        console.log("[DEBUG] Parse many for : " + config.root_url);
-                        console.log("[DEBUG] TRY Fetching... " + config.root_url);
-                        return [4 /*yield*/, request(config.root_url)];
+                        console.log("[DEBUG] Parse many for : " + config.url);
+                        console.log("[DEBUG] TRY Fetching... " + config.url);
+                        return [4 /*yield*/, request(config.url)];
                     case 1:
                         resp = _f.sent();
                         $ = cheerio.load(resp.body);
                         url_list1 = [];
-                        for (_i = 0, _a = config.a_selector_list; _i < _a.length; _i++) {
+                        for (_i = 0, _a = config.selectors; _i < _a.length; _i++) {
                             s = _a[_i];
                             for (_b = 0, _c = $(s); _b < _c.length; _b++) {
                                 n = _c[_b];
@@ -115,11 +125,11 @@ var Crawler = /** @class */ (function () {
                         url_list2 = [];
                         for (_d = 0, url_list1_1 = url_list1; _d < url_list1_1.length; _d++) {
                             u = url_list1_1[_d];
-                            url_list2.push(this.absUrl(config.root_url, u.attribs.href));
+                            url_list2.push(this.absUrl(config.url.toString(), u.attribs.href));
                         }
                         console.log("[DEBUG] URL LIST : " + url_list2);
                         if (url_list2.length == 0) {
-                            console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.root_url);
+                            console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
                         result = [];
@@ -131,7 +141,9 @@ var Crawler = /** @class */ (function () {
                         return [4 /*yield*/, this.parse(u)];
                     case 3:
                         res = _f.sent();
-                        result.push(_.assignIn(res, config.extra));
+                        if (res != null) {
+                            result.push(_.assignIn(res, config.extra));
+                        }
                         _f.label = 4;
                     case 4:
                         _e++;
