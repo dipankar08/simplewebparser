@@ -26,6 +26,7 @@ async function prod(){
     }
 }
 
+// run in every 15 min
 function cronJob(){
     cron.schedule('*/15 * * * *', () => {
         console.log(`${Date.now()} Running a task every 15 minutes`);
@@ -33,5 +34,5 @@ function cronJob(){
     });
 }
 
-prod();
+cronJob();
 //new Kolkata247().execute()
