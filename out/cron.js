@@ -80,6 +80,6 @@ function cronJob() {
         prod();
     });
 }
-//prod();
-new kolkata247_1.Kolkata247().execute();
+prod();
+//new Kolkata247().execute()
 //# sourceMappingURL=cron.js.map
