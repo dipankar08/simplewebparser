@@ -17,7 +17,8 @@ export enum STREAM{
     SCIENCE,
     ENTERTAINMENT,
     MOVIE,
-    LIFESTYLE
+    LIFESTYLE,
+    TECHNOLOGY
 }
 
 export type ListConfig = {

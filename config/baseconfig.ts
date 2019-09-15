@@ -41,7 +41,7 @@ export abstract class BaseConfig {
             await this.save(await anandabazar.parseMany({
                 url:config.url,
                 selectors:config.selectors,
-                limit:LIMIT,
+                limit:this.getLimit(),
                 extra:{
                     'lang':LANG[this.getLang()],
                     'stream':STREAM[item]
@@ -53,10 +53,10 @@ export abstract class BaseConfig {
     async save(res:Array<StringAnyMap>){
 
         let res1 = res.filter(x => { 
-            if(x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
+            if(x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
                 return true;
             } else{
-                console.log(`[ERROR] Empty data receiced so NOT saving this, URL: ${x.url}`)
+                console.log(`>>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
                 return false
             }
         })

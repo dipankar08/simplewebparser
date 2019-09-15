@@ -86,7 +86,10 @@ var Crawler = /** @class */ (function () {
                                     result[item.name.toString()] = val;
                                     break;
                                 case Type.IMAGE:
-                                    result[item.name.toString()] = this.absUrl(url, $(item.selector).attr('src'));
+                                    if (!item.attr) {
+                                        item.attr = 'src';
+                                    }
+                                    result[item.name.toString()] = this.absUrl(url, $(item.selector).attr(item.attr));
                                     break;
                             }
                         }

@@ -90,7 +90,7 @@ var BaseConfig = /** @class */ (function () {
                         return [4 /*yield*/, anandabazar.parseMany({
                                 url: config.url,
                                 selectors: config.selectors,
-                                limit: CONST_1.LIMIT,
+                                limit: this.getLimit(),
                                 extra: {
                                     'lang': CONST_1.LANG[this.getLang()],
                                     'stream': CONST_1.STREAM[item]
@@ -113,11 +113,11 @@ var BaseConfig = /** @class */ (function () {
             var res1, body;
             return __generator(this, function (_a) {
                 res1 = res.filter(function (x) {
-                    if (x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
+                    if (x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
                         return true;
                     }
                     else {
-                        console.log("[ERROR] Empty data receiced so NOT saving this, URL: " + x.url);
+                        console.log(">>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
                         return false;
                     }
                 });

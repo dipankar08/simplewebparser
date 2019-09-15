@@ -13,7 +13,8 @@ export enum Type {
 export type PageParseConfig = {
     name: String,
     selector: String;
-    type: Type
+    type: Type,
+    attr?:String, 
 }
 
 export type ExpandLinkConfig = {
@@ -60,7 +61,10 @@ export class Crawler {
                         result[item.name.toString()]=val;
                         break;
                     case Type.IMAGE:
-                        result[item.name.toString()]= this.absUrl(url, $(item.selector).attr('src'))
+                        if(!item.attr){
+                            item.attr = 'src' 
+                        }
+                        result[item.name.toString()]= this.absUrl(url, $(item.selector).attr(item.attr))
                         break;
                 }
             }

@@ -42,6 +42,10 @@ var news18_bengali_1 = require("./config/news18_bengali");
 var oneindia_bengali_1 = require("./config/oneindia_bengali");
 var bbc_bengali_1 = require("./config/bbc_bengali");
 var kolkata247_1 = require("./config/kolkata247");
+var ndtv_bangla_1 = require("./config/ndtv_bangla");
+var ndtv_english_1 = require("./config/ndtv_english");
+var ndtv_hindi_1 = require("./config/ndtv_hindi");
+var business_insiders_1 = require("./config/business_insiders");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -49,7 +53,13 @@ var configList = [
     new news18_bengali_1.News18Config(),
     new oneindia_bengali_1.OneIndiaBengaliConfig(),
     new bbc_bengali_1.BbcBengaliConfig(),
-    new kolkata247_1.Kolkata247()
+    new kolkata247_1.Kolkata247(),
+    new ndtv_bangla_1.NDTVBanglaConfig(),
+    // ENGLISH
+    new ndtv_english_1.NDTVEnglishConfig(),
+    //HINDI
+    new ndtv_hindi_1.NDTVHindiConfig(),
+    new business_insiders_1.BusinessInsidersConfig(),
 ];
 function prod() {
     return __awaiter(this, void 0, void 0, function () {
@@ -81,6 +91,6 @@ function cronJob() {
         prod();
     });
 }
-cronJob();
-//new Kolkata247().execute()
+//cronJob();
+new business_insiders_1.BusinessInsidersConfig().execute();
 //# sourceMappingURL=cron.js.map

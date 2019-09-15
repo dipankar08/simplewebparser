@@ -9,6 +9,10 @@ import { News18Config } from './config/news18_bengali';
 import { OneIndiaBengaliConfig } from './config/oneindia_bengali';
 import { BbcBengaliConfig } from './config/bbc_bengali';
 import { Kolkata247 } from './config/kolkata247';
+import { NDTVBanglaConfig } from './config/ndtv_bangla';
+import { NDTVEnglishConfig } from './config/ndtv_english';
+import { NDTVHindiConfig } from './config/ndtv_hindi';
+import { BusinessInsidersConfig } from './config/business_insiders';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -17,7 +21,15 @@ var configList:Array<BaseConfig> =[
     new News18Config(),
     new OneIndiaBengaliConfig(),
     new BbcBengaliConfig(),
-    new Kolkata247()
+    new Kolkata247(),
+    new NDTVBanglaConfig(),
+
+    // ENGLISH
+    new NDTVEnglishConfig(),
+
+    //HINDI
+    new NDTVHindiConfig(),
+    new BusinessInsidersConfig(),
 ]
 
 async function prod(){  
@@ -34,5 +46,5 @@ function cronJob(){
     });
 }
 
-cronJob();
-//new Kolkata247().execute()
+//cronJob();
+new BusinessInsidersConfig().execute()
