@@ -21,7 +21,7 @@ export class AnandabazarConfig extends BaseConfig {
     }
 
     getTestPageUrl(): String {
-        return "https://www.anandabazar.com/state/mamata-banerjee-says-that-she-will-accept-pay-commission-recommendation-dgtl-1.1045083"
+        return "https://www.anandabazar.com/state/live-updates-of-jadavpur-university-unrest-dgtl-1.1047914"
     }
 
     getListConfig(stream: STREAM): ListConfig{

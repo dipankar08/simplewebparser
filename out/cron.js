@@ -91,6 +91,6 @@ function cronJob() {
         prod();
     });
 }
-//cronJob();
-new business_insiders_1.BusinessInsidersConfig().execute();
+cronJob();
+//new AnandabazarConfig().test()
 //# sourceMappingURL=cron.js.map

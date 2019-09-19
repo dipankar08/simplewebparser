@@ -46,5 +46,5 @@ function cronJob(){
     });
 }
 
-//cronJob();
-new BusinessInsidersConfig().execute()
+cronJob();
+//new AnandabazarConfig().test()

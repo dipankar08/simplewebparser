@@ -169,6 +169,9 @@ var Crawler = /** @class */ (function () {
     Crawler.prototype.cleanHtmlData = function (str) {
         str = str.replace(/[\t ]+/g, " ");
         str = str.replace(/[\r\n]+/g, '\n');
+        str = str.replace(/[\n]+/g, '\n');
+        // somehow replace consecutive replace doesn't work
+        str = str.split("\n").filter(function (x) { return x.trim().length > 1; }).join("\n");
         str = str.trim();
         if (str.length == 0) {
             console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
