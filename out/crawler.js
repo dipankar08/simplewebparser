@@ -57,7 +57,8 @@ var Type;
 ;
 ;
 var Crawler = /** @class */ (function () {
-    function Crawler(config) {
+    function Crawler(rootConfig, config) {
+        this.rootConfig = rootConfig;
         this.config = config;
     }
     Crawler.prototype.parse = function (url) {
@@ -117,21 +118,22 @@ var Crawler = /** @class */ (function () {
     };
     Crawler.prototype.parseMany = function (config) {
         return __awaiter(this, void 0, void 0, function () {
-            var resp, e_1, $, url_list1, _i, _a, s, _b, _c, n, url_list2, _d, url_list1_1, u, result, _e, url_list2_1, u, res;
-            return __generator(this, function (_f) {
-                switch (_f.label) {
+            var resp, e_1, $, url_list1, _i, _a, s, _b, _c, n, urls_abs, url_filtered, _d, urls_abs_1, u, _e, _f, ic, urls_final, result, _g, urls_final_1, u, res;
+            var _this = this;
+            return __generator(this, function (_h) {
+                switch (_h.label) {
                     case 0:
                         console.log("[DEBUG] Parse many for : " + config.url);
                         console.log("[DEBUG] TRY Fetching... " + config.url);
-                        _f.label = 1;
+                        _h.label = 1;
                     case 1:
-                        _f.trys.push([1, 3, , 4]);
+                        _h.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, request(config.url)];
                     case 2:
-                        resp = _f.sent();
+                        resp = _h.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        e_1 = _f.sent();
+                        e_1 = _h.sent();
                         analytics_1.Analytics.exception(e_1);
                         return [2 /*return*/, null];
                     case 4:
@@ -141,36 +143,49 @@ var Crawler = /** @class */ (function () {
                             s = _a[_i];
                             for (_b = 0, _c = $(s); _b < _c.length; _b++) {
                                 n = _c[_b];
-                                url_list1.push(n);
+                                url_list1.push(n.attribs.href);
                             }
                         }
-                        url_list1 = url_list1.slice(0, config.limit);
-                        url_list2 = [];
-                        for (_d = 0, url_list1_1 = url_list1; _d < url_list1_1.length; _d++) {
-                            u = url_list1_1[_d];
-                            url_list2.push(this.absUrl(config.url.toString(), u.attribs.href));
+                        urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
+                        url_filtered = [];
+                        if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
+                            for (_d = 0, urls_abs_1 = urls_abs; _d < urls_abs_1.length; _d++) {
+                                u = urls_abs_1[_d];
+                                for (_e = 0, _f = this.rootConfig.ignoreUrlRegex; _e < _f.length; _e++) {
+                                    ic = _f[_e];
+                                    if (u.indexOf(ic) != -1) {
+                                        console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                                        break;
+                                    }
+                                    url_filtered.push(u);
+                                }
+                            }
                         }
-                        console.log("[DEBUG] URL LIST : " + url_list2);
-                        if (url_list2.length == 0) {
+                        else {
+                            url_filtered = urls_abs;
+                        }
+                        urls_final = url_filtered.slice(0, config.limit);
+                        console.log("[DEBUG] URL LIST : " + urls_final);
+                        if (urls_final.length == 0) {
                             analytics_1.Analytics.action('broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors);
                             console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
                         result = [];
-                        _e = 0, url_list2_1 = url_list2;
-                        _f.label = 5;
+                        _g = 0, urls_final_1 = urls_final;
+                        _h.label = 5;
                     case 5:
-                        if (!(_e < url_list2_1.length)) return [3 /*break*/, 8];
-                        u = url_list2_1[_e];
+                        if (!(_g < urls_final_1.length)) return [3 /*break*/, 8];
+                        u = urls_final_1[_g];
                         return [4 /*yield*/, this.parse(u)];
                     case 6:
-                        res = _f.sent();
+                        res = _h.sent();
                         if (res != null) {
                             result.push(_.assignIn(res, config.extra));
                         }
-                        _f.label = 7;
+                        _h.label = 7;
                     case 7:
-                        _e++;
+                        _g++;
                         return [3 /*break*/, 5];
                     case 8: return [2 /*return*/, result];
                 }

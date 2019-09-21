@@ -34,6 +34,11 @@ var News18Config = /** @class */ (function (_super) {
             { name: 'img', selector: '.article_box .articleimg img', type: crawler_1.Type.IMAGE },
         ];
     };
+    News18Config.prototype.getRootConfig = function () {
+        return {
+            ignoreUrlRegex: ['/photogallery/', '/videos/'] // any URL contains photogallery will be ignored.
+        };
+    };
     News18Config.prototype.getTestPageUrl = function () {
         return "https://bengali.news18.com/news/kolkata/biman-basu-on-police-lathicharge-on-left-protesters-dc-368264.html";
     };

@@ -11,11 +11,15 @@ export enum Type {
     IMAGE,
     MULTI_TEXT,
 }
+export type RootConfig = {
+    ignoreUrlRegex?:Array<string>, // Give the regex if a url match with it - it will just ignore.
+}
+
 export type PageParseConfig = {
     name: String,
     selector: String;
     type: Type,
-    attr?:String, 
+    attr?:String,
 }
 
 export type ExpandLinkConfig = {
@@ -41,8 +45,12 @@ export interface StringBooleanMap extends StringTMap<boolean> {};
 export interface NumberBooleanMap extends NumberTMap<boolean> {};
 
 export class Crawler {
+
     config: Array<PageParseConfig>;
-    constructor(config: Array<PageParseConfig>) {
+    rootConfig:RootConfig;
+
+    constructor(rootConfig:RootConfig, config: Array<PageParseConfig>) {
+        this.rootConfig = rootConfig;
         this.config = config;
     }
     public async parse(url: string):Promise<StringAnyMap|null> {
@@ -95,32 +103,55 @@ export class Crawler {
             return null;
         }
         let $ = cheerio.load(resp.body);
-        let url_list1:any[] = []
+        let url_list1:string[] = []
         for(let s of config.selectors){
             for(let n of $(s)){
-                url_list1.push(n)
+                url_list1.push(n.attribs.href)
             }
         }
-        url_list1 = url_list1.slice(0, config.limit);
-        let url_list2 = []
-        for(let  u of url_list1){
-            url_list2.push(this.absUrl(config.url.toString(), u.attribs.href))
+
+        // Make Abs URL
+        let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
+          
+
+       
+        // run filter
+        let url_filtered = []
+        if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
+            for(let u of urls_abs){
+                for (let ic of this.rootConfig.ignoreUrlRegex){
+                    if(u.indexOf(ic) != -1){
+                        console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
+                        break;
+                    }
+                    url_filtered.push(u)
+                }
+            }
+        } else{
+            url_filtered = urls_abs;
         }
-        console.log(`[DEBUG] URL LIST : ${url_list2}`);
-        if(url_list2.length == 0){
+
+        // put a limit
+        let urls_final = url_filtered.slice(0, config.limit);
+
+       
+        console.log(`[DEBUG] URL LIST : ${urls_final}`);
+
+
+        if(urls_final.length == 0){
             Analytics.action('broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`)
             console.log(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
             return []
         }
+
         let result = []
-        for( let u of url_list2){
+        for( let u of urls_final){
             let res = await this.parse(u);
             if(res != null){
                 result.push(_.assignIn(res, config.extra))
             }
         }
         return result;
-
     }
 
     public absUrl(root:string, url:string){

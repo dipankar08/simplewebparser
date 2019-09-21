@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig } from "./CONST";
 
 export class News18Config extends BaseConfig {
@@ -11,6 +11,7 @@ export class News18Config extends BaseConfig {
     getLang(): LANG {
         return LANG.BENGALI
     }
+
     getLimit():number{
         return 5;
     }
@@ -21,6 +22,12 @@ export class News18Config extends BaseConfig {
         { name: 'details', selector: '.article_box #article_body p', type: Type.TEXT },
         { name: 'img', selector: '.article_box .articleimg img', type: Type.IMAGE },
       ]
+    }
+
+    getRootConfig():RootConfig{
+        return {
+            ignoreUrlRegex: ['/photogallery/','/videos/'] // any URL contains photogallery will be ignored.
+        }
     }
 
     getTestPageUrl(): String {

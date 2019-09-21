@@ -42,9 +42,9 @@ var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
         this.tag = tag;
     }
-    BaseConfig.prototype.getLimit = function () {
-        return CONST_1.LIMIT;
-    };
+    BaseConfig.prototype.getRootConfig = function () { return {}; };
+    ;
+    BaseConfig.prototype.getLimit = function () { return CONST_1.LIMIT; };
     BaseConfig.prototype.test = function () {
         return __awaiter(this, void 0, void 0, function () {
             var crawler, res;
@@ -52,7 +52,7 @@ var BaseConfig = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         console.log("[" + this.tag + "] Test started");
-                        crawler = new crawler_1.Crawler(this.getPageParseConfig());
+                        crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
                         return [4 /*yield*/, crawler.parse(this.getTestPageUrl().toString())];
                     case 1:
                         res = _a.sent();
@@ -75,7 +75,7 @@ var BaseConfig = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         console.log("[" + this.tag + "] Execution started");
-                        crawler = new crawler_1.Crawler(this.getPageParseConfig());
+                        crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
                         _i = 0, _a = Object.values(CONST_1.STREAM);
                         _c.label = 1;
                     case 1:

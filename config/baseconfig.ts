@@ -1,4 +1,4 @@
-import {PageParseConfig, Crawler, StringAnyMap} from '../crawler'
+import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
 import { LANG, ListConfig, STREAM, LIMIT } from './CONST';
 const fetch_req = require('node-fetch');
 
@@ -8,18 +8,17 @@ export abstract class BaseConfig {
         this.tag = tag;
     }
 
+    protected getRootConfig():RootConfig { return {}} ;
     abstract getPageParseConfig():Array<PageParseConfig> ;
+
     abstract getLang(): LANG
     abstract getListConfig(STREAM):ListConfig;
     abstract  getTestPageUrl(): String
-    protected getLimit():number{
-        return LIMIT;
-    }
-
+    protected getLimit():number{ return LIMIT; }
 
     async test(){
         console.log(`[${this.tag}] Test started`);
-        let crawler = new Crawler(this.getPageParseConfig());
+        let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
         let res = await crawler.parse(this.getTestPageUrl().toString())
         if(res.title.length >10 && res.details.length >10 && res.img.length >10){
             console.log(`[${this.tag}] Test Passed`);
@@ -31,7 +30,7 @@ export abstract class BaseConfig {
 
     async execute(){
         console.log(`[${this.tag}] Execution started`);
-        let crawler = new Crawler(this.getPageParseConfig());
+        let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
         for(let item of Object.values(STREAM)){
             let config = this.getListConfig(item)
             if(config == null || config.url == null){

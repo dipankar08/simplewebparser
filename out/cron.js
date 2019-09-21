@@ -95,5 +95,5 @@ function cronJob() {
     });
 }
 cronJob();
-//new AnandabazarConfig().test()
+//new News18Config().execute()
 //# sourceMappingURL=cron.js.map
