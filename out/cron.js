@@ -94,5 +94,5 @@ function cronJob() {
     });
 }
 cronJob();
-//new NDTVBanglaConfig().execute()
+//new PratidinConfig().execute()
 //# sourceMappingURL=cron.js.map

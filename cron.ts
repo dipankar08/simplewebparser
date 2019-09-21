@@ -14,6 +14,7 @@ import { NDTVEnglishConfig } from './config/ndtv_english';
 import { NDTVHindiConfig } from './config/ndtv_hindi';
 import { BusinessInsidersConfig } from './config/business_insiders';
 import { Analytics } from './analytics';
+import { PratidinConfig } from './config/pratidin';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -50,4 +51,4 @@ function cronJob(){
 }
 
 cronJob();
-//new NDTVBanglaConfig().execute()
+//new PratidinConfig().execute()
