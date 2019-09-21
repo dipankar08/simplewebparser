@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var analytics_1 = require("./analytics");
 var _ = require('lodash');
 var request = require('async-request'), response;
 var cheerio = require('cheerio');
@@ -61,7 +62,7 @@ var Crawler = /** @class */ (function () {
     }
     Crawler.prototype.parse = function (url) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, url1, resp, $, _i, _a, item, val, error_1;
+            var result, url1, resp, error_1, $, _i, _a, item, val, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -69,20 +70,29 @@ var Crawler = /** @class */ (function () {
                         result['url'] = url;
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _b.trys.push([1, 6, , 7]);
                         console.log(url);
                         url1 = new Url(url);
                         console.log("[DEBUG] TRY Fetching... " + url);
-                        return [4 /*yield*/, request(url)];
+                        _b.label = 2;
                     case 2:
+                        _b.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, request(url)];
+                    case 3:
                         resp = _b.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _b.sent();
+                        analytics_1.Analytics.exception(error_1);
+                        return [2 /*return*/, {}];
+                    case 5:
                         result['hostname'] = url1.hostname;
                         $ = cheerio.load(resp.body);
                         for (_i = 0, _a = this.config; _i < _a.length; _i++) {
                             item = _a[_i];
                             switch (item.type) {
                                 case Type.TEXT:
-                                    val = this.cleanHtmlData($(item.selector).text().trim());
+                                    val = this.cleanHtmlData(url, $(item.selector).text().trim());
                                     result[item.name.toString()] = val;
                                     break;
                                 case Type.IMAGE:
@@ -93,28 +103,38 @@ var Crawler = /** @class */ (function () {
                                     break;
                             }
                         }
-                        return [3 /*break*/, 4];
-                    case 3:
-                        error_1 = _b.sent();
-                        console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_1);
-                        console.log(error_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/, result];
+                        return [3 /*break*/, 7];
+                    case 6:
+                        error_2 = _b.sent();
+                        analytics_1.Analytics.exception(error_2);
+                        console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
+                        console.log(error_2);
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/, result];
                 }
             });
         });
     };
     Crawler.prototype.parseMany = function (config) {
         return __awaiter(this, void 0, void 0, function () {
-            var resp, $, url_list1, _i, _a, s, _b, _c, n, url_list2, _d, url_list1_1, u, result, _e, url_list2_1, u, res;
+            var resp, e_1, $, url_list1, _i, _a, s, _b, _c, n, url_list2, _d, url_list1_1, u, result, _e, url_list2_1, u, res;
             return __generator(this, function (_f) {
                 switch (_f.label) {
                     case 0:
                         console.log("[DEBUG] Parse many for : " + config.url);
                         console.log("[DEBUG] TRY Fetching... " + config.url);
-                        return [4 /*yield*/, request(config.url)];
+                        _f.label = 1;
                     case 1:
+                        _f.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, request(config.url)];
+                    case 2:
                         resp = _f.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _f.sent();
+                        analytics_1.Analytics.exception(e_1);
+                        return [2 /*return*/, null];
+                    case 4:
                         $ = cheerio.load(resp.body);
                         url_list1 = [];
                         for (_i = 0, _a = config.selectors; _i < _a.length; _i++) {
@@ -132,26 +152,27 @@ var Crawler = /** @class */ (function () {
                         }
                         console.log("[DEBUG] URL LIST : " + url_list2);
                         if (url_list2.length == 0) {
+                            analytics_1.Analytics.action('broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors);
                             console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
                         result = [];
                         _e = 0, url_list2_1 = url_list2;
-                        _f.label = 2;
-                    case 2:
-                        if (!(_e < url_list2_1.length)) return [3 /*break*/, 5];
+                        _f.label = 5;
+                    case 5:
+                        if (!(_e < url_list2_1.length)) return [3 /*break*/, 8];
                         u = url_list2_1[_e];
                         return [4 /*yield*/, this.parse(u)];
-                    case 3:
+                    case 6:
                         res = _f.sent();
                         if (res != null) {
                             result.push(_.assignIn(res, config.extra));
                         }
-                        _f.label = 4;
-                    case 4:
+                        _f.label = 7;
+                    case 7:
                         _e++;
-                        return [3 /*break*/, 2];
-                    case 5: return [2 /*return*/, result];
+                        return [3 /*break*/, 5];
+                    case 8: return [2 /*return*/, result];
                 }
             });
         });
@@ -166,7 +187,7 @@ var Crawler = /** @class */ (function () {
         return (new Url(root)).origin + url;
     };
     // this function will clean the data.
-    Crawler.prototype.cleanHtmlData = function (str) {
+    Crawler.prototype.cleanHtmlData = function (url, str) {
         str = str.replace(/[\t ]+/g, " ");
         str = str.replace(/[\r\n]+/g, '\n');
         str = str.replace(/[\n]+/g, '\n');
@@ -174,6 +195,7 @@ var Crawler = /** @class */ (function () {
         str = str.split("\n").filter(function (x) { return x.trim().length > 1; }).join("\n");
         str = str.trim();
         if (str.length == 0) {
+            analytics_1.Analytics.action('parse_empty_data', "Effected URL: " + url + " for string " + str);
             console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
         }
         return str;

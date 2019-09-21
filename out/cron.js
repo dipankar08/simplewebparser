@@ -46,6 +46,7 @@ var ndtv_bangla_1 = require("./config/ndtv_bangla");
 var ndtv_english_1 = require("./config/ndtv_english");
 var ndtv_hindi_1 = require("./config/ndtv_hindi");
 var business_insiders_1 = require("./config/business_insiders");
+var analytics_1 = require("./analytics");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -67,6 +68,7 @@ function prod() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    analytics_1.Analytics.action('cron_run', "Started at " + Date.now());
                     _i = 0, configList_1 = configList;
                     _a.label = 1;
                 case 1:
@@ -86,6 +88,7 @@ function prod() {
 }
 // run in every 15 min
 function cronJob() {
+    analytics_1.Analytics.launch("crawler");
     cron.schedule('*/15 * * * *', function () {
         console.log(Date.now() + " Running a task every 15 minutes");
         prod();

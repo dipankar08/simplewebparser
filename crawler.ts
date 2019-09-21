@@ -1,4 +1,5 @@
 import { strict } from "assert";
+import { Analytics } from "./analytics";
 var _ = require('lodash');
 
 let request = require('async-request'),
@@ -44,20 +45,26 @@ export class Crawler {
     constructor(config: Array<PageParseConfig>) {
         this.config = config;
     }
-    public async parse(url: string):Promise<StringAnyMap> {
+    public async parse(url: string):Promise<StringAnyMap|null> {
         let result:StringAnyMap ={}
         result['url']= url;
         try {
             console.log(url);
             let url1 = new Url(url);
             console.log(`[DEBUG] TRY Fetching... ${url}`);
-            let resp = await request(url);
+            var resp;
+            try{
+                resp = await request(url);
+            } catch(error){
+                Analytics.exception(error)
+                return {};
+            }
             result['hostname'] =url1.hostname
             let $ = cheerio.load(resp.body);
             for (var item of this.config) {
                 switch (item.type) {
                     case Type.TEXT:
-                        let val = this.cleanHtmlData($(item.selector).text().trim())
+                        let val = this.cleanHtmlData(url, $(item.selector).text().trim())
                         result[item.name.toString()]=val;
                         break;
                     case Type.IMAGE:
@@ -69,15 +76,24 @@ export class Crawler {
                 }
             }
         } catch (error) {
+            Analytics.exception(error)
             console.log(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
             console.log(error);
         }
         return result;
     }
-    public async parseMany(config:ExpandLinkConfig):Promise<Array<StringAnyMap>> {
+
+    public async parseMany(config:ExpandLinkConfig):Promise<Array<StringAnyMap>|null> {
         console.log(`[DEBUG] Parse many for : ${config.url}`);
         console.log(`[DEBUG] TRY Fetching... ${config.url}`);
-        let resp = await request(config.url);
+
+        var resp;
+        try{
+            resp = await request(config.url);
+        } catch(e){
+            Analytics.exception(e)
+            return null;
+        }
         let $ = cheerio.load(resp.body);
         let url_list1:any[] = []
         for(let s of config.selectors){
@@ -92,6 +108,7 @@ export class Crawler {
         }
         console.log(`[DEBUG] URL LIST : ${url_list2}`);
         if(url_list2.length == 0){
+            Analytics.action('broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`)
             console.log(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
             return []
         }
@@ -117,7 +134,7 @@ export class Crawler {
     }
 
     // this function will clean the data.
-    public cleanHtmlData(str:string){
+    public cleanHtmlData(url:string, str:string){
         str = str.replace(/[\t ]+/g, " ");
         str = str.replace(/[\r\n]+/g, '\n'); 
         str = str.replace(/[\n]+/g, '\n'); 
@@ -125,6 +142,7 @@ export class Crawler {
         str = str.split("\n").filter(x=> x.trim().length > 1).join("\n");
         str = str.trim()
         if(str.length == 0){
+            Analytics.action('parse_empty_data', `Effected URL: ${url} for string ${str}`)
             console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
         }
         return str;

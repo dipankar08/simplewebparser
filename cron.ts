@@ -13,6 +13,7 @@ import { NDTVBanglaConfig } from './config/ndtv_bangla';
 import { NDTVEnglishConfig } from './config/ndtv_english';
 import { NDTVHindiConfig } from './config/ndtv_hindi';
 import { BusinessInsidersConfig } from './config/business_insiders';
+import { Analytics } from './analytics';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -33,6 +34,7 @@ var configList:Array<BaseConfig> =[
 ]
 
 async function prod(){  
+    Analytics.action('cron_run', `Started at ${Date.now()}`)
     for(let item of configList){
         await item.execute();
     }
@@ -40,6 +42,7 @@ async function prod(){
 
 // run in every 15 min
 function cronJob(){
+    Analytics.launch("crawler");
     cron.schedule('*/15 * * * *', () => {
         console.log(`${Date.now()} Running a task every 15 minutes`);
         prod();

@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var crawler_1 = require("../crawler");
 var CONST_1 = require("./CONST");
-var fetch = require('node-fetch');
+var fetch_req = require('node-fetch');
 var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
         this.tag = tag;
@@ -70,12 +70,12 @@ var BaseConfig = /** @class */ (function () {
     };
     BaseConfig.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var anandabazar, _i, _a, item, config, _b;
+            var crawler, _i, _a, item, config, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         console.log("[" + this.tag + "] Execution started");
-                        anandabazar = new crawler_1.Crawler(this.getPageParseConfig());
+                        crawler = new crawler_1.Crawler(this.getPageParseConfig());
                         _i = 0, _a = Object.values(CONST_1.STREAM);
                         _c.label = 1;
                     case 1:
@@ -87,7 +87,7 @@ var BaseConfig = /** @class */ (function () {
                             return [3 /*break*/, 4];
                         }
                         _b = this.save;
-                        return [4 /*yield*/, anandabazar.parseMany({
+                        return [4 /*yield*/, crawler.parseMany({
                                 url: config.url,
                                 selectors: config.selectors,
                                 limit: this.getLimit(),
@@ -112,6 +112,9 @@ var BaseConfig = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var res1, body;
             return __generator(this, function (_a) {
+                if (res == null) {
+                    return [2 /*return*/];
+                }
                 res1 = res.filter(function (x) {
                     if (x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
                         return true;
@@ -122,7 +125,7 @@ var BaseConfig = /** @class */ (function () {
                     }
                 });
                 body = { '_payload': res1 };
-                fetch('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
+                fetch_req('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
                     method: 'post',
                     body: JSON.stringify(body),
                     headers: { 'Content-Type': 'application/json' },

@@ -1,6 +1,6 @@
 import {PageParseConfig, Crawler, StringAnyMap} from '../crawler'
 import { LANG, ListConfig, STREAM, LIMIT } from './CONST';
-const fetch = require('node-fetch');
+const fetch_req = require('node-fetch');
 
 export abstract class BaseConfig {
     tag: string;    
@@ -31,14 +31,14 @@ export abstract class BaseConfig {
 
     async execute(){
         console.log(`[${this.tag}] Execution started`);
-        let anandabazar = new Crawler(this.getPageParseConfig());
+        let crawler = new Crawler(this.getPageParseConfig());
         for(let item of Object.values(STREAM)){
             let config = this.getListConfig(item)
             if(config == null || config.url == null){
                 console.log(`[${this.tag}] Ignoring config for ${item}`);
                 continue;
             }
-            await this.save(await anandabazar.parseMany({
+            await this.save(await crawler.parseMany({
                 url:config.url,
                 selectors:config.selectors,
                 limit:this.getLimit(),
@@ -50,8 +50,10 @@ export abstract class BaseConfig {
         }
     }
 
-    async save(res:Array<StringAnyMap>){
-
+    async save(res:Array<StringAnyMap>|null){
+        if(res == null){
+            return;
+        }
         let res1 = res.filter(x => { 
             if(x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
                 return true;
@@ -61,7 +63,7 @@ export abstract class BaseConfig {
             }
         })
         const body = { '_payload': res1}; 
-        fetch('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
+        fetch_req('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
             method: 'post',
             body:    JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' },
