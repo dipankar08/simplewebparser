@@ -193,6 +193,9 @@ var Crawler = /** @class */ (function () {
         });
     };
     Crawler.prototype.absUrl = function (root, url) {
+        if (url == null || url.length == 0) {
+            return null;
+        }
         if (url[0] == '/' && url[1] == '/') {
             return Url(root).protocol + url;
         }

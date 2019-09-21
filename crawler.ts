@@ -155,6 +155,9 @@ export class Crawler {
     }
 
     public absUrl(root:string, url:string){
+        if(url == null || url.length == 0){
+            return null
+        }
         if(url[0] == '/' && url[1] == '/'){
             return Url(root).protocol+url;
         }

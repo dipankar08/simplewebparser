@@ -23,7 +23,7 @@ var configList:Array<BaseConfig> =[
     new OneIndiaBengaliConfig(),
     new BbcBengaliConfig(),
     new Kolkata247(),
-    new NDTVBanglaConfig(),
+    // new NDTVBanglaConfig(), Broken
 
     // ENGLISH
     new NDTVEnglishConfig(),
@@ -50,4 +50,4 @@ function cronJob(){
 }
 
 cronJob();
-//new News18Config().execute()
+//new NDTVBanglaConfig().execute()
