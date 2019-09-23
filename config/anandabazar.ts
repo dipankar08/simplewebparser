@@ -80,10 +80,6 @@ export class AnandabazarConfig extends BaseConfig {
                 'url':'https://www.anandabazar.com/travel',
                 'selectors':['.carousel-inner .item a']
             }
-            case STREAM.WOMEN:return {
-                'url':'https://www.anandabazar.com/women',
-                'selectors':[]
-            }
             case STREAM.NONE:return {
                 'url':'',
                 'selectors':[]
