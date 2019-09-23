@@ -14,7 +14,8 @@ export class AnandabazarConfig extends BaseConfig {
 
     getRootConfig():RootConfig{
         return {
-            ignoreUrlRegex:['/photogallery/']
+            ignoreUrlRegex:['/photogallery/'],
+            ignoreLineRegex:['পড়ুন:']
         }
     }
 
@@ -27,7 +28,7 @@ export class AnandabazarConfig extends BaseConfig {
     }
 
     getTestPageUrl(): String {
-        return "https://www.anandabazar.com/supplementary/rabibashoriyo/galper-feriwala-a-short-story-written-by-debdulal-kundu-1.1045582"
+        return "https://www.anandabazar.com/state/cbi-vs-rajeev-kumar-cbi-continues-search-operation-to-locate-rajeev-kumar-dgtl-1.1049774"
     }
 
     getListConfig(stream: STREAM): ListConfig{

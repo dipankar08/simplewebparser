@@ -21,7 +21,9 @@ export abstract class BaseConfig {
         let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
         let res = await crawler.parse(this.getTestPageUrl().toString())
         if(res.title.length >10 && res.details.length >10 && res.img.length >10){
-            console.log(res);
+            console.log(res.title);
+            console.log(res.details)
+            console.log(res.img)
             console.log(`[${this.tag}] Test Passed`);
         } else{
             console.log(`[${this.tag}] Test Failed for url: ${this.getTestPageUrl()}`);

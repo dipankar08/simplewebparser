@@ -57,7 +57,9 @@ var BaseConfig = /** @class */ (function () {
                     case 1:
                         res = _a.sent();
                         if (res.title.length > 10 && res.details.length > 10 && res.img.length > 10) {
-                            console.log(res);
+                            console.log(res.title);
+                            console.log(res.details);
+                            console.log(res.img);
                             console.log("[" + this.tag + "] Test Passed");
                         }
                         else {

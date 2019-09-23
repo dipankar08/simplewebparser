@@ -111,5 +111,5 @@ function cronJob() {
     prod();
 }
 cronJob();
-//new AajBanglaConfig().execute()
+//new AnandabazarConfig().test()
 //# sourceMappingURL=cron.js.map

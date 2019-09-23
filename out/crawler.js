@@ -63,7 +63,7 @@ var Crawler = /** @class */ (function () {
     }
     Crawler.prototype.parse = function (url) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, url1, resp, error_1, $, _i, _a, item, val, error_2;
+            var result, url1, resp, error_1, $_1, _i, _a, item, val, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -88,19 +88,19 @@ var Crawler = /** @class */ (function () {
                         return [2 /*return*/, {}];
                     case 5:
                         result['hostname'] = url1.hostname;
-                        $ = cheerio.load(resp.body);
+                        $_1 = cheerio.load(resp.body);
                         for (_i = 0, _a = this.config; _i < _a.length; _i++) {
                             item = _a[_i];
                             switch (item.type) {
                                 case Type.TEXT:
-                                    val = this.cleanHtmlData(url, $(item.selector).text().trim());
+                                    val = this.cleanHtmlData(url, $_1(item.selector).toArray().map(function (x) { return $_1(x).text(); }).join('\n'));
                                     result[item.name.toString()] = val;
                                     break;
                                 case Type.IMAGE:
                                     if (!item.attr) {
                                         item.attr = 'src';
                                     }
-                                    result[item.name.toString()] = this.absUrl(url, $(item.selector).attr(item.attr));
+                                    result[item.name.toString()] = this.absUrl(url, $_1(item.selector).attr(item.attr));
                                     break;
                             }
                         }
@@ -208,12 +208,28 @@ var Crawler = /** @class */ (function () {
     };
     // this function will clean the data.
     Crawler.prototype.cleanHtmlData = function (url, str) {
+        var _this = this;
+        str = str.trim();
         str = str.replace(/[\t ]+/g, " ");
         str = str.replace(/[\r\n]+/g, '\n');
         str = str.replace(/[\n]+/g, '\n');
         // somehow replace consecutive replace doesn't work
-        str = str.split("\n").filter(function (x) { return x.trim().length > 1; }).join("\n");
-        str = str.trim();
+        str = str.split("\n").filter(function (x) {
+            if (x.trim().length < 1) {
+                return false;
+            }
+            var shouldNotIgnore = true;
+            if (_this.rootConfig.ignoreLineRegex != null) {
+                for (var _i = 0, _a = _this.rootConfig.ignoreLineRegex; _i < _a.length; _i++) {
+                    var regex = _a[_i];
+                    if (x.indexOf(regex) != -1) {
+                        shouldNotIgnore = false;
+                        break;
+                    }
+                }
+            }
+            return shouldNotIgnore;
+        }).join("\n");
         if (str.length == 0) {
             analytics_1.Analytics.action('parse_empty_data', "Effected URL: " + url + " for string " + str);
             console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");

@@ -26,7 +26,8 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     };
     AnandabazarConfig.prototype.getRootConfig = function () {
         return {
-            ignoreUrlRegex: ['/photogallery/']
+            ignoreUrlRegex: ['/photogallery/'],
+            ignoreLineRegex: ['পড়ুন:']
         };
     };
     AnandabazarConfig.prototype.getPageParseConfig = function () {
@@ -37,7 +38,7 @@ var AnandabazarConfig = /** @class */ (function (_super) {
         ];
     };
     AnandabazarConfig.prototype.getTestPageUrl = function () {
-        return "https://www.anandabazar.com/supplementary/rabibashoriyo/galper-feriwala-a-short-story-written-by-debdulal-kundu-1.1045582";
+        return "https://www.anandabazar.com/state/cbi-vs-rajeev-kumar-cbi-continues-search-operation-to-locate-rajeev-kumar-dgtl-1.1049774";
     };
     AnandabazarConfig.prototype.getListConfig = function (stream) {
         switch (stream) {
@@ -88,10 +89,6 @@ var AnandabazarConfig = /** @class */ (function (_super) {
             case CONST_1.STREAM.TRAVEL: return {
                 'url': 'https://www.anandabazar.com/travel',
                 'selectors': ['.carousel-inner .item a']
-            };
-            case CONST_1.STREAM.WOMEN: return {
-                'url': 'https://www.anandabazar.com/women',
-                'selectors': []
             };
             case CONST_1.STREAM.NONE: return {
                 'url': '',

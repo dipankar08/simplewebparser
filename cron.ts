@@ -67,4 +67,4 @@ function cronJob(){
 }
 
 cronJob();
-//new AajBanglaConfig().execute()
+//new AnandabazarConfig().test()

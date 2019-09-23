@@ -13,6 +13,7 @@ export enum Type {
 }
 export type RootConfig = {
     ignoreUrlRegex?:Array<string>, // Give the regex if a url match with it - it will just ignore.
+    ignoreLineRegex?:Array<string>, // it will ignone this line in a para while parsing a text.
 }
 
 export type PageParseConfig = {
@@ -72,7 +73,7 @@ export class Crawler {
             for (var item of this.config) {
                 switch (item.type) {
                     case Type.TEXT:
-                        let val = this.cleanHtmlData(url, $(item.selector).text().trim())
+                        let val = this.cleanHtmlData(url, $(item.selector).toArray().map((x: any)=>$(x).text()).join('\n'))
                         result[item.name.toString()]=val;
                         break;
                     case Type.IMAGE:
@@ -170,12 +171,27 @@ export class Crawler {
 
     // this function will clean the data.
     public cleanHtmlData(url:string, str:string){
+        str = str.trim()
         str = str.replace(/[\t ]+/g, " ");
         str = str.replace(/[\r\n]+/g, '\n'); 
         str = str.replace(/[\n]+/g, '\n'); 
         // somehow replace consecutive replace doesn't work
-        str = str.split("\n").filter(x=> x.trim().length > 1).join("\n");
-        str = str.trim()
+        str = str.split("\n").filter( x=> {
+            if(x.trim().length < 1){
+                return false;
+            }
+            let shouldNotIgnore = true;
+            if(this.rootConfig.ignoreLineRegex != null){
+                for(let regex of this.rootConfig.ignoreLineRegex ){
+                    if(x.indexOf(regex) != -1){
+                        shouldNotIgnore = false;
+                        break; 
+                    }
+                }
+            }
+            return shouldNotIgnore;
+        }
+        ).join("\n");
         if(str.length == 0){
             Analytics.action('parse_empty_data', `Effected URL: ${url} for string ${str}`)
             console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)

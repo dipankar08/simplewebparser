@@ -32,7 +32,7 @@ var AajBanglaConfig = /** @class */ (function (_super) {
         ];
     };
     AajBanglaConfig.prototype.getTestPageUrl = function () {
-        return "http://aajbangla.in/indo-us-hand-in-hand-to-stop-radical-islamic/";
+        return "https://www.aajbangla.in/read-on-to-know-how-to-spend-all-day-2/";
     };
     AajBanglaConfig.prototype.getListConfig = function (stream) {
         switch (stream) {
