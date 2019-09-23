@@ -48,12 +48,14 @@ var Analytics = /** @class */ (function () {
         if (extra) {
             res = extra;
         }
-        res['type'] = type;
+        res['type'] = 'action';
+        res['action'] = type;
         res['target_id'] = target_id;
+        res['tag'] = target_id;
         this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', res);
     };
     Analytics.exception = function (e) {
-        this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', { type: e.name, location: 'Please see the stack', stack: e.stack });
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', { type: "exception", "error": e.name, location: 'Please see the stack', stack: e.stack });
     };
     Analytics.timeitStart = function (tag) {
     };
@@ -67,7 +69,7 @@ var Analytics = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         this.app_id = napp_id;
-                        body = { "app_id": this.app_id, "app_version": "1.0", "device_os": "linux", "device_id": "linux", "device_api": "0" };
+                        body = { "type": "launch", "app_id": this.app_id, "app_version": "1.0", "device_os": "linux", "device_id": "linux", "device_api": "0" };
                         return [4 /*yield*/, fetch_req('http://simplestore.dipankar.co.in/api/_analytics/launch', {
                                 method: 'post',
                                 body: JSON.stringify(body),

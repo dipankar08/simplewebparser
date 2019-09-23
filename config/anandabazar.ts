@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig } from "./CONST";
 
 export class AnandabazarConfig extends BaseConfig {
@@ -12,6 +12,12 @@ export class AnandabazarConfig extends BaseConfig {
         return LANG.BENGALI
     }
 
+    getRootConfig():RootConfig{
+        return {
+            ignoreUrlRegex:['/photogallery/']
+        }
+    }
+
     getPageParseConfig(): Array<PageParseConfig> {
       return [
         { name: 'title', selector: '#story_container h1', type: Type.TEXT },
@@ -21,7 +27,7 @@ export class AnandabazarConfig extends BaseConfig {
     }
 
     getTestPageUrl(): String {
-        return "https://www.anandabazar.com/state/live-updates-of-jadavpur-university-unrest-dgtl-1.1047914"
+        return "https://www.anandabazar.com/supplementary/rabibashoriyo/galper-feriwala-a-short-story-written-by-debdulal-kundu-1.1045582"
     }
 
     getListConfig(stream: STREAM): ListConfig{
@@ -65,6 +71,22 @@ export class AnandabazarConfig extends BaseConfig {
             case STREAM.LIFESTYLE:return {
                 'url':'https://www.anandabazar.com/others/science',
                 'selectors':['.sectionstoryinside-sub >div>a']
+            }
+            case STREAM.SHORT_STORY:return {
+                'url':'hhttps://www.anandabazar.com/topic/short-story',
+                'selectors':['.row .article-image > a']
+            }
+            case STREAM.TRAVEL:return {
+                'url':'https://www.anandabazar.com/travel',
+                'selectors':['.carousel-inner .item a']
+            }
+            case STREAM.WOMEN:return {
+                'url':'https://www.anandabazar.com/women',
+                'selectors':[]
+            }
+            case STREAM.NONE:return {
+                'url':'',
+                'selectors':[]
             }
         }
     } 

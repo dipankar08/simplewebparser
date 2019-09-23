@@ -5,7 +5,7 @@ import { LANG, STREAM, ListConfig } from "./CONST";
 
 export class AnandabazarConfig extends BaseConfig {
     constructor() { 
-        super("anandabazar"); 
+        super(""); 
     }
 
     getLang(): LANG {
@@ -14,9 +14,9 @@ export class AnandabazarConfig extends BaseConfig {
 
     getPageParseConfig(): Array<PageParseConfig> {
       return [
-        { name: 'title', selector: '#story_container h1', type: Type.TEXT },
+        { name: 'title',   selector: '#story_container h1', type: Type.TEXT },
+        { name: 'img',     selector: '#story_container  img', type: Type.IMAGE },
         { name: 'details', selector: '#story_container .articleBody', type: Type.TEXT },
-        { name: 'img', selector: '#story_container  img', type: Type.IMAGE },
       ]
     }
 

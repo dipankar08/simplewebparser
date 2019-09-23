@@ -16,18 +16,20 @@ export class Analytics {
 
     static pendingItems:Array<Item> = []
 
-    static  action(type:string, target_id:string, extra?:Object){
+    static action(type:string, target_id:string, extra?:Object){
         var res = {}
         if(extra){
             res = extra;
         }
-        res['type'] = type;
+        res['type'] = 'action';
+        res['action'] = type;
         res['target_id'] = target_id
+        res['tag'] = target_id
         this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', res)
     }
 
      static exception(e:Error){
-         this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', {type:e.name, location:'Please see the stack', stack:e.stack})
+         this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', {type:"exception", "error": e.name, location:'Please see the stack', stack:e.stack})
     }
 
      static timeitStart(tag:string){
@@ -39,7 +41,7 @@ export class Analytics {
     }
     static async launch(napp_id:string){
         this.app_id = napp_id
-        let body = {"app_id":this.app_id,"app_version":"1.0","device_os":"linux", "device_id":"linux","device_api":"0"} 
+        let body = {"type":"launch", "app_id":this.app_id,"app_version":"1.0","device_os":"linux", "device_id":"linux","device_api":"0"} 
         await fetch_req('http://simplestore.dipankar.co.in/api/_analytics/launch', {
             method: 'post',
             body:    JSON.stringify(body),

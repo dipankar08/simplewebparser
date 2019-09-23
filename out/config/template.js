@@ -19,7 +19,7 @@ var CONST_1 = require("./CONST");
 var AnandabazarConfig = /** @class */ (function (_super) {
     __extends(AnandabazarConfig, _super);
     function AnandabazarConfig() {
-        return _super.call(this, "anandabazar") || this;
+        return _super.call(this, "") || this;
     }
     AnandabazarConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
@@ -27,8 +27,8 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     AnandabazarConfig.prototype.getPageParseConfig = function () {
         return [
             { name: 'title', selector: '#story_container h1', type: crawler_1.Type.TEXT },
-            { name: 'details', selector: '#story_container .articleBody', type: crawler_1.Type.TEXT },
             { name: 'img', selector: '#story_container  img', type: crawler_1.Type.IMAGE },
+            { name: 'details', selector: '#story_container .articleBody', type: crawler_1.Type.TEXT },
         ];
     };
     AnandabazarConfig.prototype.getTestPageUrl = function () {

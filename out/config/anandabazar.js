@@ -24,6 +24,11 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     AnandabazarConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };
+    AnandabazarConfig.prototype.getRootConfig = function () {
+        return {
+            ignoreUrlRegex: ['/photogallery/']
+        };
+    };
     AnandabazarConfig.prototype.getPageParseConfig = function () {
         return [
             { name: 'title', selector: '#story_container h1', type: crawler_1.Type.TEXT },
@@ -32,7 +37,7 @@ var AnandabazarConfig = /** @class */ (function (_super) {
         ];
     };
     AnandabazarConfig.prototype.getTestPageUrl = function () {
-        return "https://www.anandabazar.com/state/live-updates-of-jadavpur-university-unrest-dgtl-1.1047914";
+        return "https://www.anandabazar.com/supplementary/rabibashoriyo/galper-feriwala-a-short-story-written-by-debdulal-kundu-1.1045582";
     };
     AnandabazarConfig.prototype.getListConfig = function (stream) {
         switch (stream) {
@@ -75,6 +80,22 @@ var AnandabazarConfig = /** @class */ (function (_super) {
             case CONST_1.STREAM.LIFESTYLE: return {
                 'url': 'https://www.anandabazar.com/others/science',
                 'selectors': ['.sectionstoryinside-sub >div>a']
+            };
+            case CONST_1.STREAM.SHORT_STORY: return {
+                'url': 'hhttps://www.anandabazar.com/topic/short-story',
+                'selectors': ['.row .article-image > a']
+            };
+            case CONST_1.STREAM.TRAVEL: return {
+                'url': 'https://www.anandabazar.com/travel',
+                'selectors': ['.carousel-inner .item a']
+            };
+            case CONST_1.STREAM.WOMEN: return {
+                'url': 'https://www.anandabazar.com/women',
+                'selectors': []
+            };
+            case CONST_1.STREAM.NONE: return {
+                'url': '',
+                'selectors': []
             };
         }
     };

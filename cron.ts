@@ -15,6 +15,10 @@ import { NDTVHindiConfig } from './config/ndtv_hindi';
 import { BusinessInsidersConfig } from './config/business_insiders';
 import { Analytics } from './analytics';
 import { PratidinConfig } from './config/pratidin';
+import { TheHinduConfig } from './config/thehindu';
+import { AjjKalConfig } from './config/ajjkal';
+import { DainikStatesmanConfig } from './config/dainikstatesman';
+import { AajBanglaConfig } from './config/ajjbangla';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -24,31 +28,41 @@ var configList:Array<BaseConfig> =[
     new OneIndiaBengaliConfig(),
     new BbcBengaliConfig(),
     new Kolkata247(),
+    new PratidinConfig(),
+    new AjjKalConfig(),
+    new DainikStatesmanConfig(),
+    new AajBanglaConfig(),
     // new NDTVBanglaConfig(), Broken
 
     // ENGLISH
-    new NDTVEnglishConfig(),
+    //new NDTVEnglishConfig(),
+    new TheHinduConfig(),
 
     //HINDI
-    new NDTVHindiConfig(),
+    //new NDTVHindiConfig(),
     new BusinessInsidersConfig(),
 ]
 
 async function prod(){  
-    Analytics.action('cron_run', `Started at ${Date.now()}`)
     for(let item of configList){
         await item.execute();
     }
 }
 
-// run in every 15 min
+// run in every 30 min
 function cronJob(){
     Analytics.launch("crawler");
-    cron.schedule('*/15 * * * *', () => {
+    cron.schedule('*/30 * * * *', () => {
         console.log(`${Date.now()} Running a task every 15 minutes`);
-        prod();
+        try{
+            Analytics.action('cron_run_start', `Started at ${Date.now()}`)
+            prod();
+        } catch(err){
+            Analytics.action("crash","Server has crashed with error")
+            Analytics.exception(err);
+        }
     });
 }
 
 cronJob();
-//new PratidinConfig().execute()
+//new AajBanglaConfig().execute()

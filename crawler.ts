@@ -112,9 +112,10 @@ export class Crawler {
 
         // Make Abs URL
         let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
-          
 
-       
+        // find unique
+        urls_abs = Array.from(new Set(urls_abs))
+          
         // run filter
         let url_filtered = []
         if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){

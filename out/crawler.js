@@ -147,6 +147,8 @@ var Crawler = /** @class */ (function () {
                             }
                         }
                         urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
+                        // find unique
+                        urls_abs = Array.from(new Set(urls_abs));
                         url_filtered = [];
                         if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
                             for (_d = 0, urls_abs_1 = urls_abs; _d < urls_abs_1.length; _d++) {

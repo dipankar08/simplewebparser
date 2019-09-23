@@ -42,10 +42,13 @@ var news18_bengali_1 = require("./config/news18_bengali");
 var oneindia_bengali_1 = require("./config/oneindia_bengali");
 var bbc_bengali_1 = require("./config/bbc_bengali");
 var kolkata247_1 = require("./config/kolkata247");
-var ndtv_english_1 = require("./config/ndtv_english");
-var ndtv_hindi_1 = require("./config/ndtv_hindi");
 var business_insiders_1 = require("./config/business_insiders");
 var analytics_1 = require("./analytics");
+var pratidin_1 = require("./config/pratidin");
+var thehindu_1 = require("./config/thehindu");
+var ajjkal_1 = require("./config/ajjkal");
+var dainikstatesman_1 = require("./config/dainikstatesman");
+var ajjbangla_1 = require("./config/ajjbangla");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -54,11 +57,16 @@ var configList = [
     new oneindia_bengali_1.OneIndiaBengaliConfig(),
     new bbc_bengali_1.BbcBengaliConfig(),
     new kolkata247_1.Kolkata247(),
+    new pratidin_1.PratidinConfig(),
+    new ajjkal_1.AjjKalConfig(),
+    new dainikstatesman_1.DainikStatesmanConfig(),
+    new ajjbangla_1.AajBanglaConfig(),
     // new NDTVBanglaConfig(), Broken
     // ENGLISH
-    new ndtv_english_1.NDTVEnglishConfig(),
+    //new NDTVEnglishConfig(),
+    new thehindu_1.TheHinduConfig(),
     //HINDI
-    new ndtv_hindi_1.NDTVHindiConfig(),
+    //new NDTVHindiConfig(),
     new business_insiders_1.BusinessInsidersConfig(),
 ];
 function prod() {
@@ -67,7 +75,6 @@ function prod() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    analytics_1.Analytics.action('cron_run', "Started at " + Date.now());
                     _i = 0, configList_1 = configList;
                     _a.label = 1;
                 case 1:
@@ -85,14 +92,21 @@ function prod() {
         });
     });
 }
-// run in every 15 min
+// run in every 30 min
 function cronJob() {
     analytics_1.Analytics.launch("crawler");
-    cron.schedule('*/15 * * * *', function () {
+    cron.schedule('*/30 * * * *', function () {
         console.log(Date.now() + " Running a task every 15 minutes");
-        prod();
+        try {
+            analytics_1.Analytics.action('cron_run_start', "Started at " + Date.now());
+            prod();
+        }
+        catch (err) {
+            analytics_1.Analytics.action("crash", "Server has crashed with error");
+            analytics_1.Analytics.exception(err);
+        }
     });
 }
 cronJob();
-//new PratidinConfig().execute()
+//new AajBanglaConfig().execute()
 //# sourceMappingURL=cron.js.map

@@ -8,6 +8,7 @@ export enum LANG{
 }
 
 export enum STREAM{
+    NONE,
     HEADLINE,
     FIRST_PAGE,
     COUNTRY,
@@ -18,7 +19,22 @@ export enum STREAM{
     ENTERTAINMENT,
     MOVIE,
     LIFESTYLE,
-    TECHNOLOGY
+    TECHNOLOGY,
+    GADGETS,
+    SPORTS,
+    MARKETS,
+    SHORT_STORY,
+    TRAVEL,
+    WOMEN,
+    OFF_BEAT,
+    TOUR,
+    EDUCATION,
+    EDITORIAL,
+    HEALTH,
+    FOOD,
+    OTHER,
+    BANGLADESH,
+    HOROSCOPE,
 }
 
 export type ListConfig = {
