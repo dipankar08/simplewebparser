@@ -71,10 +71,12 @@ var configList = [
 ];
 function prod() {
     return __awaiter(this, void 0, void 0, function () {
-        var _i, configList_1, item;
+        var _i, configList_1, item, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    _a.trys.push([0, 5, , 6]);
+                    analytics_1.Analytics.action('cron_run_start', "Started at " + Date.now());
                     _i = 0, configList_1 = configList;
                     _a.label = 1;
                 case 1:
@@ -87,7 +89,13 @@ function prod() {
                 case 3:
                     _i++;
                     return [3 /*break*/, 1];
-                case 4: return [2 /*return*/];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    err_1 = _a.sent();
+                    analytics_1.Analytics.action("crash", "Server has crashed with error");
+                    analytics_1.Analytics.exception(err_1);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
@@ -97,15 +105,10 @@ function cronJob() {
     analytics_1.Analytics.launch("crawler");
     cron.schedule('*/30 * * * *', function () {
         console.log(Date.now() + " Running a task every 15 minutes");
-        try {
-            analytics_1.Analytics.action('cron_run_start', "Started at " + Date.now());
-            prod();
-        }
-        catch (err) {
-            analytics_1.Analytics.action("crash", "Server has crashed with error");
-            analytics_1.Analytics.exception(err);
-        }
+        prod();
     });
+    // run now too.
+    prod();
 }
 cronJob();
 //new AajBanglaConfig().execute()

@@ -44,9 +44,15 @@ var configList:Array<BaseConfig> =[
 ]
 
 async function prod(){  
-    for(let item of configList){
-        await item.execute();
-    }
+    try{
+        Analytics.action('cron_run_start', `Started at ${Date.now()}`)
+            for(let item of configList){
+                await item.execute();
+            }
+        } catch(err){
+            Analytics.action("crash","Server has crashed with error")
+            Analytics.exception(err);
+        }
 }
 
 // run in every 30 min
@@ -54,14 +60,10 @@ function cronJob(){
     Analytics.launch("crawler");
     cron.schedule('*/30 * * * *', () => {
         console.log(`${Date.now()} Running a task every 15 minutes`);
-        try{
-            Analytics.action('cron_run_start', `Started at ${Date.now()}`)
             prod();
-        } catch(err){
-            Analytics.action("crash","Server has crashed with error")
-            Analytics.exception(err);
-        }
     });
+    // run now too.
+    prod(); 
 }
 
 cronJob();
