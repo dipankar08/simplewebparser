@@ -73,7 +73,7 @@ export class AnandabazarConfig extends BaseConfig {
                 'selectors':['.sectionstoryinside-sub >div>a']
             }
             case STREAM.SHORT_STORY:return {
-                'url':'hhttps://www.anandabazar.com/topic/short-story',
+                'url':'https://www.anandabazar.com/topic/short-story',
                 'selectors':['.row .article-image > a']
             }
             case STREAM.TRAVEL:return {

@@ -35,7 +35,7 @@ export class DainikStatesmanConfig extends BaseConfig {
                 'selectors':['.newslistbx h3 > a']
             }
             case STREAM.INTERNATIONAL: return {
-                'url':'dainikstatesmannews.com/world',
+                'url':'https://www.dainikstatesmannews.com/world',
                 'selectors':['.newslistbx h3 > a']
             }
             case STREAM.STATE: return {

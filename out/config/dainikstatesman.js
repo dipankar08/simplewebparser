@@ -44,7 +44,7 @@ var DainikStatesmanConfig = /** @class */ (function (_super) {
                 'selectors': ['.newslistbx h3 > a']
             };
             case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': 'dainikstatesmannews.com/world',
+                'url': 'https://www.dainikstatesmannews.com/world',
                 'selectors': ['.newslistbx h3 > a']
             };
             case CONST_1.STREAM.STATE: return {

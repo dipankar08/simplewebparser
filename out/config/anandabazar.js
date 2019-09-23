@@ -82,7 +82,7 @@ var AnandabazarConfig = /** @class */ (function (_super) {
                 'selectors': ['.sectionstoryinside-sub >div>a']
             };
             case CONST_1.STREAM.SHORT_STORY: return {
-                'url': 'hhttps://www.anandabazar.com/topic/short-story',
+                'url': 'https://www.anandabazar.com/topic/short-story',
                 'selectors': ['.row .article-image > a']
             };
             case CONST_1.STREAM.TRAVEL: return {
