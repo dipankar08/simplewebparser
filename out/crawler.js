@@ -107,7 +107,7 @@ var Crawler = /** @class */ (function () {
                         return [3 /*break*/, 7];
                     case 6:
                         error_2 = _b.sent();
-                        analytics_1.Analytics.exception(error_2);
+                        analytics_1.Analytics.exception(error_2, result);
                         console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
                         console.log(error_2);
                         return [3 /*break*/, 7];
@@ -169,7 +169,7 @@ var Crawler = /** @class */ (function () {
                         urls_final = url_filtered.slice(0, config.limit);
                         console.log("[DEBUG] URL LIST : " + urls_final);
                         if (urls_final.length == 0) {
-                            analytics_1.Analytics.action('broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors);
+                            analytics_1.Analytics.action('broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors, { hostname: new Url(config.url).hostname, url: config.url });
                             console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
@@ -231,8 +231,8 @@ var Crawler = /** @class */ (function () {
             return shouldNotIgnore;
         }).join("\n");
         if (str.length == 0) {
-            analytics_1.Analytics.action('parse_empty_data', "Effected URL: " + url + " for string " + str);
             console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
+            analytics_1.Analytics.action("parse_empty_data", url, { "hostname": (new Url(url).hostname) });
         }
         return str;
     };

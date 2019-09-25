@@ -1,5 +1,6 @@
 import { strict } from "assert";
 import { Analytics } from "./analytics";
+import { url } from "inspector";
 var _ = require('lodash');
 
 let request = require('async-request'),
@@ -85,7 +86,7 @@ export class Crawler {
                 }
             }
         } catch (error) {
-            Analytics.exception(error)
+            Analytics.exception(error, result)
             console.log(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
             console.log(error);
         }
@@ -136,12 +137,9 @@ export class Crawler {
         // put a limit
         let urls_final = url_filtered.slice(0, config.limit);
 
-       
         console.log(`[DEBUG] URL LIST : ${urls_final}`);
-
-
         if(urls_final.length == 0){
-            Analytics.action('broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`)
+            Analytics.action('broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`,{hostname:new Url(config.url).hostname, url:config.url})
             console.log(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
             return []
         }
@@ -193,8 +191,8 @@ export class Crawler {
         }
         ).join("\n");
         if(str.length == 0){
-            Analytics.action('parse_empty_data', `Effected URL: ${url} for string ${str}`)
             console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
+            Analytics.action("parse_empty_data",url,{"hostname":(new Url(url).hostname)})
         }
         return str;
     }

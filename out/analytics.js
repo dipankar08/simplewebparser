@@ -40,22 +40,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //POST => http://{{server}}/api/_analytics/exception => {"app_id":"{{app_id}}", "session":"{{session}}","type":"RuntimeException", "location":"Main.c:20","stack":"full stack here"} => Tracked exception
 //POST => http://{{server}}/api/_analytics/timeit => {"app_id":"{{app_id}}", "session":"{{session}}", "total_time": 10000, "type" :"Activity", "block":"MainActivity"} => Tracked timeit
 var fetch_req = require('node-fetch');
+var _ = require('underscore');
 var Analytics = /** @class */ (function () {
     function Analytics() {
     }
-    Analytics.action = function (type, target_id, extra) {
+    Analytics.action = function (action, target_id, extra) {
+        if (extra === void 0) { extra = {}; }
         var res = {};
-        if (extra) {
-            res = extra;
-        }
         res['type'] = 'action';
-        res['action'] = type;
+        res['action'] = action;
         res['target_id'] = target_id;
         res['tag'] = target_id;
-        this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', res);
+        var obj = _.extend(res, extra);
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', obj);
     };
-    Analytics.exception = function (e) {
-        this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', { type: "exception", "error": e.name, location: 'Please see the stack', stack: e.stack });
+    Analytics.exception = function (e, extra) {
+        if (extra === void 0) { extra = {}; }
+        var errObj = { type: "exception", "error": e.name, location: 'Please see the stack', stack: e.stack };
+        var obj = _.extend(errObj, extra);
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', obj);
     };
     Analytics.timeitStart = function (tag) {
     };

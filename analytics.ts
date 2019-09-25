@@ -3,6 +3,7 @@
 //POST => http://{{server}}/api/_analytics/exception => {"app_id":"{{app_id}}", "session":"{{session}}","type":"RuntimeException", "location":"Main.c:20","stack":"full stack here"} => Tracked exception
 //POST => http://{{server}}/api/_analytics/timeit => {"app_id":"{{app_id}}", "session":"{{session}}", "total_time": 10000, "type" :"Activity", "block":"MainActivity"} => Tracked timeit
 const fetch_req = require('node-fetch');
+const _ = require('underscore');
 
 type Item = {
     url:String,
@@ -16,20 +17,20 @@ export class Analytics {
 
     static pendingItems:Array<Item> = []
 
-    static action(type:string, target_id:string, extra?:Object){
+    static action(action:string, target_id:string, extra:Object ={}){
         var res = {}
-        if(extra){
-            res = extra;
-        }
         res['type'] = 'action';
-        res['action'] = type;
+        res['action'] = action;
         res['target_id'] = target_id
         res['tag'] = target_id
-        this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', res)
+        let obj = _.extend(res, extra)
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', obj)
     }
 
-     static exception(e:Error){
-         this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', {type:"exception", "error": e.name, location:'Please see the stack', stack:e.stack})
+     static exception(e:Error, extra:Object = {}){
+         let errObj = {type:"exception", "error": e.name, location:'Please see the stack', stack:e.stack};
+         let obj = _.extend(errObj, extra)
+         this.pump('http://simplestore.dipankar.co.in/api/_analytics/exception', obj )
     }
 
      static timeitStart(tag:string){
