@@ -37,49 +37,10 @@ var BbcBengaliConfig = /** @class */ (function (_super) {
     BbcBengaliConfig.prototype.getTestPageUrl = function () {
         return "https://www.bbc.com/bengali/news-49696031";
     };
-    BbcBengaliConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': 'https://www.bbc.com/bengali/news',
-                'selectors': ['.eagle .eagle-item > a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    BbcBengaliConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
+        ];
     };
     return BbcBengaliConfig;
 }(baseconfig_1.BaseConfig));

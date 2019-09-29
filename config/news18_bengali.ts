@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type, RootConfig } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class News18Config extends BaseConfig {
     constructor() { 
@@ -34,48 +34,14 @@ export class News18Config extends BaseConfig {
         return "https://bengali.news18.com/news/kolkata/biman-basu-on-police-lathicharge-on-left-protesters-dc-368264.html"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://bengali.news18.com/national/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-            case STREAM.STATE:return {
-                'url':'https://bengali.news18.com/kolkata/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':'https://bengali.news18.com/international/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':'https://bengali.news18.com/technology/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':'https://bengali.news18.com/entertainment/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-            case STREAM.MOVIE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':'https://bengali.news18.com/life-style/',
-                'selectors':['.nwslist-withbrdr li a']
-            }
-        }
-    } 
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.COUNTRY, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/national/'},
+            {stream: STREAM.STATE, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/kolkata/'},
+            {stream: STREAM.INTERNATIONAL, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/international/'},
+            {stream: STREAM.TECHNOLOGY, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/technology/'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/entertainment/'},
+            {stream: STREAM.LIFESTYLE, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/life-style/'},
+        ]
+    }
 }

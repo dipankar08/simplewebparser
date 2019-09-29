@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class OneIndiaBengaliConfig extends BaseConfig {
     constructor() { 
@@ -24,48 +24,14 @@ export class OneIndiaBengaliConfig extends BaseConfig {
         return "https://bengali.oneindia.com/news/west-bengal/bjp-councillor-of-garulia-chandrabhan-singh-joins-tmc-in-presence-of-jyotipriya-mallick-061638.html"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':'https://bengali.oneindia.com/news/kolkata/',
-                'selectors':['article .article-img a']
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://bengali.oneindia.com/news/india/',
-                'selectors':['article .article-img a']
-            }
-            case STREAM.STATE:return {
-                'url':'https://bengali.oneindia.com/news/west-bengal/',
-                'selectors':['article .article-img a']
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':'https://bengali.oneindia.com/news/international/',
-                'selectors':['article .article-img a']
-            }
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.MOVIE:return {
-                'url':'https://bengali.oneindia.com/movies/',
-                'selectors':['article .article-img a']
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':null,
-                'selectors':[]
-            }
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.FIRST_PAGE, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/kolkata/'},
+            {stream: STREAM.COUNTRY, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/india/'},
+            {stream: STREAM.FIRST_PAGE, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/kolkata/'},
+            {stream: STREAM.STATE, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/west-bengal/'},
+            {stream: STREAM.INTERNATIONAL, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/international/'},
+            {stream: STREAM.ENTERTAINMENT, selector:'article .article-img a',url:'https://bengali.oneindia.com/news/movies/'},
+        ]
         }
-    } 
 }

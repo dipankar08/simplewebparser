@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class Kolkata247 extends BaseConfig {
     constructor() { 
@@ -24,48 +24,13 @@ export class Kolkata247 extends BaseConfig {
         return "https://www.kolkata24x7.com/ex-kolkata-police-com-rajiv-kumar-missing-cbi/"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':'https://www.kolkata24x7.com/category/kolkata/',
-                'selectors':['.td-module-thumb > a']
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://www.kolkata24x7.com/category/national-news/',
-                'selectors':['.td-module-thumb > a']
-            }
-            case STREAM.STATE:return {
-                'url':'https://www.kolkata24x7.com/category/west-bengal/',
-                'selectors':['.td-module-thumb > a']
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':'https://www.kolkata24x7.com/category/international-news/',
-                'selectors':['.td-module-thumb > a']
-            }
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':'https://www.kolkata24x7.com/category/tech-news/',
-                'selectors':['.td-module-thumb > a']
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.MOVIE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':null,
-                'selectors':[]
-            }
-        }
-    } 
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.FIRST_PAGE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/kolkata/'},
+            {stream: STREAM.COUNTRY, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/national-news/'},
+            {stream: STREAM.STATE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/west-bengal/'},
+            {stream: STREAM.INTERNATIONAL, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/international-news/'},
+            {stream: STREAM.SCIENCE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/tech-news/'},
+        ]
+    }
 }

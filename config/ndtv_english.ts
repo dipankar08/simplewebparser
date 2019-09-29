@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class NDTVEnglishConfig extends BaseConfig {
     constructor() { 
@@ -29,48 +29,10 @@ export class NDTVEnglishConfig extends BaseConfig {
         return "https://www.ndtv.com/india-news/blame-game-starts-as-wheels-come-off-indias-auto-sector-foreign-media-2101144"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':'https://www.ndtv.com/latest',
-                'selectors':['#ins_storylist .new_storylising_img > a']
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://www.ndtv.com/india',
-                'selectors':['#ins_storylist .new_storylising_img > a']
-            }
-            case STREAM.STATE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.MOVIE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':null,
-                'selectors':[]
-            }
-        }
-    } 
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.FIRST_PAGE, selector:'#ins_storylist .new_storylising_img > a',url:'https://www.ndtv.com/latest'},
+            {stream: STREAM.COUNTRY, selector:'#ins_storylist .new_storylising_img > a',url:'https://www.ndtv.com/india'},
+        ]
+    }
 }

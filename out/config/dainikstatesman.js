@@ -37,41 +37,17 @@ var DainikStatesmanConfig = /** @class */ (function (_super) {
     DainikStatesmanConfig.prototype.getTestPageUrl = function () {
         return "https://www.dainikstatesmannews.com/india/babul-assures-ju-attackers-mother-of-no-harm/8988";
     };
-    DainikStatesmanConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://www.dainikstatesmannews.com/india',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': 'https://www.dainikstatesmannews.com/world',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': 'https://www.dainikstatesmannews.com/bengal',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': 'https://www.dainikstatesmannews.com/binodan',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.SPORTS: return {
-                'url': 'https://www.dainikstatesmannews.com/sports',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.EDITORIAL: return {
-                'url': 'https://www.dainikstatesmannews.com/editorial',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.FOOD: return {
-                'url': 'https://www.dainikstatesmannews.com/food',
-                'selectors': ['.newslistbx h3 > a']
-            };
-            case CONST_1.STREAM.OTHER: return {
-                'url': 'https://www.dainikstatesmannews.com/bichitra',
-                'selectors': ['.newslistbx h3 > a']
-            };
-        }
+    DainikStatesmanConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/india' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/world' },
+            { stream: CONST_1.STREAM.STATE, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bengal' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/binodan' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/sports' },
+            { stream: CONST_1.STREAM.EDITORIAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/editorial' },
+            { stream: CONST_1.STREAM.FOOD, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/food' },
+            { stream: CONST_1.STREAM.OTHER, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bichitra' },
+        ];
     };
     return DainikStatesmanConfig;
 }(baseconfig_1.BaseConfig));

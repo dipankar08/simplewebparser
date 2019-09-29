@@ -111,5 +111,5 @@ function cronJob() {
     prod();
 }
 cronJob();
-//new AnandabazarConfig().test()
+//new BusinessInsidersConfig().execute()
 //# sourceMappingURL=cron.js.map

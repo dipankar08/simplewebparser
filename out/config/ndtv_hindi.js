@@ -37,49 +37,10 @@ var NDTVHindiConfig = /** @class */ (function (_super) {
     NDTVHindiConfig.prototype.getTestPageUrl = function () {
         return " https://khabar.ndtv.com/news/india/ashok-gehlot-said-pm-modi-cannot-mislead-people-by-taking-the-name-of-pakistan-every-time-2101136";
     };
-    NDTVHindiConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': null,
-                'selectors': ['#ins_storylist .new_storylising_img > a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://khabar.ndtv.com/news/india',
-                'selectors': ['.new_storylising .nstory_header > a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    NDTVHindiConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.new_storylising .nstory_header > a', url: 'https://khabar.ndtv.com/news/india' },
+        ];
     };
     return NDTVHindiConfig;
 }(baseconfig_1.BaseConfig));

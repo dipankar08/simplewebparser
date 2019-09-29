@@ -37,57 +37,21 @@ var AjjKalConfig = /** @class */ (function (_super) {
     AjjKalConfig.prototype.getTestPageUrl = function () {
         return "https://aajkaal.in/news/northbengal/jungle-safari-bgdc";
     };
-    AjjKalConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': 'https://aajkaal.in/kolkata',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': 'https://aajkaal.in/state',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://aajkaal.in/national',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': 'https://aajkaal.in/international',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': 'https://aajkaal.in/business',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': 'https://aajkaal.in/entertainment',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.SPORTS: return {
-                'url': 'https://aajkaal.in/sports',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': 'https://aajkaal.in/lifestyle',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.OFF_BEAT: return {
-                'url': 'https://aajkaal.in/offbeat',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.TOUR: return {
-                'url': 'https://aajkaal.in/tour',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': 'https://aajkaal.in/sciencetechnology',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-            case CONST_1.STREAM.EDUCATION: return {
-                'url': 'https://aajkaal.in/helth',
-                'selectors': ['.news-tabe .col-md-4 .image-holder > a']
-            };
-        }
+    AjjKalConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/kolkata' },
+            { stream: CONST_1.STREAM.STATE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/state' },
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/national' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/international' },
+            { stream: CONST_1.STREAM.BUSINESS, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/business' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/entertainment' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/sports' },
+            { stream: CONST_1.STREAM.LIFESTYLE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/lifestyle' },
+            { stream: CONST_1.STREAM.OFF_BEAT, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/offbeat' },
+            { stream: CONST_1.STREAM.TOUR, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/tour' },
+            { stream: CONST_1.STREAM.SCIENCE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/sciencetechnology' },
+            { stream: CONST_1.STREAM.EDUCATION, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/helth' },
+        ];
     };
     return AjjKalConfig;
 }(baseconfig_1.BaseConfig));

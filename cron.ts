@@ -67,4 +67,4 @@ function cronJob(){
 }
 
 cronJob();
-//new AnandabazarConfig().test()
+//new BusinessInsidersConfig().execute()

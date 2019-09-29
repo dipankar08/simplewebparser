@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var analytics_1 = require("./analytics");
+var CONST_1 = require("./config/CONST");
 var _ = require('lodash');
 var request = require('async-request'), response;
 var cheerio = require('cheerio');
@@ -194,6 +195,109 @@ var Crawler = /** @class */ (function () {
             });
         });
     };
+    // Much Optimized Crawling
+    Crawler.prototype.parseStoryList = function (storyConfig) {
+        return __awaiter(this, void 0, void 0, function () {
+            var urlList, _loop_1, this_1, _i, storyConfig_1, config, resp, obj, result, _a, urlList_1, u, res;
+            var _this = this;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        console.log("[INFO] Total Story List count: " + storyConfig.length);
+                        urlList = [];
+                        _loop_1 = function (config) {
+                            var resp_1, $, url_list1, _i, _a, n, urls_abs, urls_final, err_1;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
+                                    case 0:
+                                        _b.trys.push([0, 2, , 3]);
+                                        console.log("[INFO] Fetching link " + config.url);
+                                        return [4 /*yield*/, request(config.url)];
+                                    case 1:
+                                        resp_1 = _b.sent();
+                                        $ = cheerio.load(resp_1.body);
+                                        url_list1 = [];
+                                        for (_i = 0, _a = $(config.selector); _i < _a.length; _i++) {
+                                            n = _a[_i];
+                                            url_list1.push(n.attribs.href);
+                                        }
+                                        urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
+                                        urls_abs = Array.from(new Set(urls_abs));
+                                        urls_abs = this_1.getFilteredUrl(urls_abs);
+                                        urls_final = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
+                                        if (urls_final.length == 0) {
+                                            analytics_1.Analytics.action("error_parse_root_url", config.url);
+                                        }
+                                        urlList = urlList.concat(urls_final);
+                                        return [3 /*break*/, 3];
+                                    case 2:
+                                        err_1 = _b.sent();
+                                        analytics_1.Analytics.action("error_parse_root_url", config.url);
+                                        analytics_1.Analytics.exception(err_1, { "url": config.url });
+                                        return [3 /*break*/, 3];
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        };
+                        this_1 = this;
+                        _i = 0, storyConfig_1 = storyConfig;
+                        _b.label = 1;
+                    case 1:
+                        if (!(_i < storyConfig_1.length)) return [3 /*break*/, 4];
+                        config = storyConfig_1[_i];
+                        return [5 /*yield**/, _loop_1(config)];
+                    case 2:
+                        _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4:
+                        console.log("[INFO] Total count of Story Link: " + urlList.length);
+                        // remove duplicate :
+                        urlList = Array.from(new Set(urlList));
+                        console.log("[INFO] Total count of Story Link(After remove duplicate): " + urlList.length);
+                        if (urlList.length == 0) {
+                            return [2 /*return*/, null];
+                        }
+                        return [4 /*yield*/, request('http://simplestore.dipankar.co.in/api/news/exist', {
+                                method: 'POST',
+                                data: JSON.stringify({
+                                    _field: 'url',
+                                    _value: urlList
+                                })
+                            })];
+                    case 5:
+                        resp = _b.sent();
+                        obj = JSON.parse(resp.body);
+                        if (obj.status == 'success') {
+                            urlList = urlList.filter(function (x) { return obj.out.found_list[x] == null; });
+                        }
+                        console.log("[INFO] Total link which is NOT in DB: " + urlList.length + ", DB Found count: " + obj.out.found_count);
+                        if (urlList.length == 0) {
+                            return [2 /*return*/];
+                        }
+                        result = [];
+                        _a = 0, urlList_1 = urlList;
+                        _b.label = 6;
+                    case 6:
+                        if (!(_a < urlList_1.length)) return [3 /*break*/, 9];
+                        u = urlList_1[_a];
+                        return [4 /*yield*/, this.parse(u)];
+                    case 7:
+                        res = _b.sent();
+                        if (res != null) {
+                            result.push(_.assignIn(res, {}));
+                        }
+                        _b.label = 8;
+                    case 8:
+                        _a++;
+                        return [3 /*break*/, 6];
+                    case 9: return [2 /*return*/, result];
+                }
+            });
+        });
+    };
     Crawler.prototype.absUrl = function (root, url) {
         if (url == null || url.length == 0) {
             return null;
@@ -235,6 +339,26 @@ var Crawler = /** @class */ (function () {
             analytics_1.Analytics.action("parse_empty_data", url, { "hostname": (new Url(url).hostname) });
         }
         return str;
+    };
+    Crawler.prototype.getFilteredUrl = function (urls_abs) {
+        if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
+            var url_filtered = [];
+            for (var _i = 0, urls_abs_2 = urls_abs; _i < urls_abs_2.length; _i++) {
+                var u = urls_abs_2[_i];
+                for (var _a = 0, _b = this.rootConfig.ignoreUrlRegex; _a < _b.length; _a++) {
+                    var ic = _b[_a];
+                    if (u.indexOf(ic) != -1) {
+                        console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                        break;
+                    }
+                    url_filtered.push(u);
+                }
+            }
+            return url_filtered;
+        }
+        else {
+            return urls_abs;
+        }
     };
     return Crawler;
 }());

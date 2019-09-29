@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LIMIT = 2;
+exports.LIMIT = 5;
 var LANG;
 (function (LANG) {
     LANG[LANG["BENGALI"] = 0] = "BENGALI";

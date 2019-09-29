@@ -1,6 +1,6 @@
 import { StringifyOptions } from "querystring";
 
-export const LIMIT:number =2;
+export const LIMIT:number = 5;
 export enum LANG{
     BENGALI,
     ENGLISH,
@@ -40,4 +40,11 @@ export enum STREAM{
 export type ListConfig = {
     url:String,
     selectors:Array<String>
+}
+
+export type StoryListConfig = {
+    url:string,
+    selector:string,
+    limit?:number,
+    stream:STREAM,
 }

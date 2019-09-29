@@ -1,6 +1,7 @@
 import { strict } from "assert";
 import { Analytics } from "./analytics";
 import { url } from "inspector";
+import { StoryListConfig, LIMIT } from "./config/CONST";
 var _ = require('lodash');
 
 let request = require('async-request'),
@@ -47,7 +48,6 @@ export interface StringBooleanMap extends StringTMap<boolean> {};
 export interface NumberBooleanMap extends NumberTMap<boolean> {};
 
 export class Crawler {
-
     config: Array<PageParseConfig>;
     rootConfig:RootConfig;
 
@@ -154,6 +154,72 @@ export class Crawler {
         return result;
     }
 
+    // Much Optimized Crawling
+    public async parseStoryList(storyConfig: Array<StoryListConfig>): Promise<Array<StringAnyMap>|null> {
+        console.log(`[INFO] Total Story List count: ${storyConfig.length}`)
+        let urlList =[]
+        for( let config of storyConfig){
+            try{
+                console.log(`[INFO] Fetching link ${config.url}`)
+                let resp = await request(config.url);
+                let $ = cheerio.load(resp.body);
+                let url_list1: Array<string>  = []
+                for(let n of $(config.selector)){
+                    url_list1.push(n.attribs.href)
+                }
+                let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
+                urls_abs = Array.from(new Set(urls_abs))
+                urls_abs = this.getFilteredUrl(urls_abs)
+
+                let urls_final = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
+                if(urls_final.length ==0){
+                    Analytics.action("error_parse_root_url", config.url); 
+                }
+                urlList = urlList.concat(urls_final)
+            }catch(err){
+                Analytics.action("error_parse_root_url", config.url);
+                Analytics.exception(err,{"url":config.url})
+            }
+        }
+        console.log(`[INFO] Total count of Story Link: ${urlList.length}`)
+
+        // remove duplicate :
+        urlList = Array.from(new Set(urlList))
+        console.log(`[INFO] Total count of Story Link(After remove duplicate): ${urlList.length}`)
+
+        if(urlList.length == 0){
+            return null
+        }
+        // find duplicate in server
+        let resp = await request('http://simplestore.dipankar.co.in/api/news/exist',{
+            method: 'POST',
+            data: JSON.stringify({
+                _field: 'url',
+                _value:urlList
+            })
+        });
+
+        let obj = JSON.parse(resp.body)
+        if(obj.status == 'success'){
+            urlList =  urlList.filter(x=> obj.out.found_list[x] == null)
+        }
+        console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
+        if(urlList.length == 0){
+            return;
+        }
+
+        // Now fetch the URL which not in DB and insert.
+        let result = []
+        for( let u of urlList){
+            let res = await this.parse(u);
+            if(res != null){
+                result.push(_.assignIn(res, {}))
+            }
+        }
+        return result
+    }
+
+
     public absUrl(root:string, url:string){
         if(url == null || url.length == 0){
             return null
@@ -195,6 +261,24 @@ export class Crawler {
             Analytics.action("parse_empty_data",url,{"hostname":(new Url(url).hostname)})
         }
         return str;
+    }
+
+    private getFilteredUrl(urls_abs){
+        if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
+            let url_filtered = []
+            for(let u of urls_abs){
+                for (let ic of this.rootConfig.ignoreUrlRegex){
+                    if(u.indexOf(ic) != -1){
+                        console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
+                        break;
+                    }
+                    url_filtered.push(u)
+                }
+            }
+            return url_filtered;
+        }else{
+            return urls_abs;
+        }
     }
 }
 

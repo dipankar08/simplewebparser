@@ -34,49 +34,14 @@ var ZeeNewsConfig = /** @class */ (function (_super) {
     ZeeNewsConfig.prototype.getTestPageUrl = function () {
         return "https://zeenews.india.com/bengali/kolkata/bjp-protest-against-state-government-over-nabanna-abhijan_277198.html";
     };
-    ZeeNewsConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://zeenews.india.com/bengali/nation',
-                'selectors': ['.maincontent .section-article > a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': 'https://zeenews.india.com/bengali/state',
-                'selectors': ['.maincontent .section-article > a']
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': 'https://zeenews.india.com/bengali/world',
-                'selectors': ['.maincontent .section-article > a']
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': 'https://zeenews.india.com/bengali/entertainment',
-                'selectors': ['.maincontent .section-article > a']
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': 'https://zeenews.india.com/bengali/lifestyle',
-                'selectors': ['.maincontent .section-article > a']
-            };
-        }
+    ZeeNewsConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/nation' },
+            { stream: CONST_1.STREAM.STATE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/state' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/world' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/entertainment' },
+            { stream: CONST_1.STREAM.LIFESTYLE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/lifestyle' },
+        ];
     };
     return ZeeNewsConfig;
 }(baseconfig_1.BaseConfig));

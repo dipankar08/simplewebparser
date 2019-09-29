@@ -1,5 +1,5 @@
 import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
-import { LANG, ListConfig, STREAM, LIMIT } from './CONST';
+import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig } from './CONST';
 const fetch_req = require('node-fetch');
 
 export abstract class BaseConfig {
@@ -12,9 +12,16 @@ export abstract class BaseConfig {
     abstract getPageParseConfig():Array<PageParseConfig> ;
 
     abstract getLang(): LANG
-    abstract getListConfig(STREAM):ListConfig;
+
+    protected getListConfig(STREAM):ListConfig{
+        return null
+    }
     abstract  getTestPageUrl(): String
     protected getLimit():number{ return LIMIT; }
+
+    protected getStoryListConfig():Array<StoryListConfig>{
+        return []
+    }
 
     async test(){
         console.log(`[${this.tag}] Test started`);
@@ -34,22 +41,7 @@ export abstract class BaseConfig {
     async execute(){
         console.log(`[${this.tag}] Execution started`);
         let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
-        for(let item of Object.values(STREAM)){
-            let config = this.getListConfig(item)
-            if(config == null || config.url == null){
-                console.log(`[${this.tag}] Ignoring config for ${item}`);
-                continue;
-            }
-            await this.save(await crawler.parseMany({
-                url:config.url,
-                selectors:config.selectors,
-                limit:this.getLimit(),
-                extra:{
-                    'lang':LANG[this.getLang()],
-                    'stream':STREAM[item]
-                }
-            }));
-        }
+        await this.save(await crawler.parseStoryList(this.getStoryListConfig()));
     }
 
     async save(res:Array<StringAnyMap>|null){

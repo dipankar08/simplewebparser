@@ -44,7 +44,13 @@ var BaseConfig = /** @class */ (function () {
     }
     BaseConfig.prototype.getRootConfig = function () { return {}; };
     ;
+    BaseConfig.prototype.getListConfig = function (STREAM) {
+        return null;
+    };
     BaseConfig.prototype.getLimit = function () { return CONST_1.LIMIT; };
+    BaseConfig.prototype.getStoryListConfig = function () {
+        return [];
+    };
     BaseConfig.prototype.test = function () {
         return __awaiter(this, void 0, void 0, function () {
             var crawler, res;
@@ -73,40 +79,18 @@ var BaseConfig = /** @class */ (function () {
     };
     BaseConfig.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var crawler, _i, _a, item, config, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var crawler, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         console.log("[" + this.tag + "] Execution started");
                         crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
-                        _i = 0, _a = Object.values(CONST_1.STREAM);
-                        _c.label = 1;
-                    case 1:
-                        if (!(_i < _a.length)) return [3 /*break*/, 5];
-                        item = _a[_i];
-                        config = this.getListConfig(item);
-                        if (config == null || config.url == null) {
-                            console.log("[" + this.tag + "] Ignoring config for " + item);
-                            return [3 /*break*/, 4];
-                        }
-                        _b = this.save;
-                        return [4 /*yield*/, crawler.parseMany({
-                                url: config.url,
-                                selectors: config.selectors,
-                                limit: this.getLimit(),
-                                extra: {
-                                    'lang': CONST_1.LANG[this.getLang()],
-                                    'stream': CONST_1.STREAM[item]
-                                }
-                            })];
-                    case 2: return [4 /*yield*/, _b.apply(this, [_c.sent()])];
-                    case 3:
-                        _c.sent();
-                        _c.label = 4;
-                    case 4:
-                        _i++;
-                        return [3 /*break*/, 1];
-                    case 5: return [2 /*return*/];
+                        _a = this.save;
+                        return [4 /*yield*/, crawler.parseStoryList(this.getStoryListConfig())];
+                    case 1: return [4 /*yield*/, _a.apply(this, [_b.sent()])];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/];
                 }
             });
         });

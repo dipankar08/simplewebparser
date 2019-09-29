@@ -37,49 +37,11 @@ var NDTVEnglishConfig = /** @class */ (function (_super) {
     NDTVEnglishConfig.prototype.getTestPageUrl = function () {
         return "https://www.ndtv.com/india-news/blame-game-starts-as-wheels-come-off-indias-auto-sector-foreign-media-2101144";
     };
-    NDTVEnglishConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': 'https://www.ndtv.com/latest',
-                'selectors': ['#ins_storylist .new_storylising_img > a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://www.ndtv.com/india',
-                'selectors': ['#ins_storylist .new_storylising_img > a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    NDTVEnglishConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '#ins_storylist .new_storylising_img > a', url: 'https://www.ndtv.com/latest' },
+            { stream: CONST_1.STREAM.COUNTRY, selector: '#ins_storylist .new_storylising_img > a', url: 'https://www.ndtv.com/india' },
+        ];
     };
     return NDTVEnglishConfig;
 }(baseconfig_1.BaseConfig));

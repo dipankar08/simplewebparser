@@ -37,49 +37,10 @@ var PratidinConfig = /** @class */ (function (_super) {
     PratidinConfig.prototype.getTestPageUrl = function () {
         return "https://www.sangbadpratidin.in/world/pakistan-turns-aggressive-constructs-airfield-in-pok/";
     };
-    PratidinConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': 'https://www.sangbadpratidin.in/latest-update/',
-                'selectors': ['ul.more_news_list li > a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    PratidinConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'ul.more_news_list li > a', url: 'https://www.sangbadpratidin.in/latest-update/' },
+        ];
     };
     return PratidinConfig;
 }(baseconfig_1.BaseConfig));

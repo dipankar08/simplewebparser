@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class ZeeNewsConfig extends BaseConfig {
     constructor() { 
@@ -24,50 +24,13 @@ export class ZeeNewsConfig extends BaseConfig {
         return "https://zeenews.india.com/bengali/kolkata/bjp-protest-against-state-government-over-nabanna-abhijan_277198.html"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://zeenews.india.com/bengali/nation',
-                'selectors':['.maincontent .section-article > a']
-            }
-            case STREAM.STATE:return {
-                'url':'https://zeenews.india.com/bengali/state',
-                'selectors':['.maincontent .section-article > a']
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':'https://zeenews.india.com/bengali/world',
-                'selectors':['.maincontent .section-article > a']
-            }
-
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':'https://zeenews.india.com/bengali/entertainment',
-                'selectors':['.maincontent .section-article > a']
-            }
-
-            case STREAM.MOVIE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':'https://zeenews.india.com/bengali/lifestyle',
-                'selectors':['.maincontent .section-article > a']
-            }
-        }
-    } 
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.COUNTRY, selector:'.maincontent .section-article > a',url:'https://zeenews.india.com/bengali/nation'},
+            {stream: STREAM.STATE, selector:'.maincontent .section-article > a',url:'https://zeenews.india.com/bengali/state'},
+            {stream: STREAM.INTERNATIONAL, selector:'.maincontent .section-article > a',url:'https://zeenews.india.com/bengali/world'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.maincontent .section-article > a',url:'https://zeenews.india.com/bengali/entertainment'},
+            {stream: STREAM.LIFESTYLE, selector:'.maincontent .section-article > a',url:'https://zeenews.india.com/bengali/lifestyle'},
+        ]
+    }
 }

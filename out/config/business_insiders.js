@@ -34,49 +34,12 @@ var BusinessInsidersConfig = /** @class */ (function (_super) {
     BusinessInsidersConfig.prototype.getTestPageUrl = function () {
         return "https://www.businessinsider.in/yes-bank-promoters-seek-probe-against-short-sellers-hammering-the-stock/articleshow/71108464.cms";
     };
-    BusinessInsidersConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': "https://www.businessinsider.in/business",
-                'selectors': [".toplist_stories figure > a"]
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': "https://www.businessinsider.in/science",
-                'selectors': [".toplist_stories figure > a"]
-            };
-            case CONST_1.STREAM.TECHNOLOGY: return {
-                'url': "https://www.businessinsider.in/sai",
-                'selectors': [".toplist_stories figure > a"]
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    BusinessInsidersConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.BUSINESS, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/business" },
+            { stream: CONST_1.STREAM.SCIENCE, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/science" },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/sai" },
+        ];
     };
     return BusinessInsidersConfig;
 }(baseconfig_1.BaseConfig));

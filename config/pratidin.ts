@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class PratidinConfig extends BaseConfig {
     constructor() { 
@@ -27,49 +27,10 @@ export class PratidinConfig extends BaseConfig {
     getTestPageUrl(): String {
         return "https://www.sangbadpratidin.in/world/pakistan-turns-aggressive-constructs-airfield-in-pok/"
     }
-
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.FIRST_PAGE:return {
-                'url':'https://www.sangbadpratidin.in/latest-update/',
-                'selectors':['ul.more_news_list li > a']
-            }
-            case STREAM.COUNTRY:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.STATE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.BUSINESS:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.SCIENCE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.MOVIE:return {
-                'url':null,
-                'selectors':[]
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':null,
-                'selectors':[]
-            }
-        }
-    } 
+    
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.FIRST_PAGE, selector:'ul.more_news_list li > a',url:'https://www.sangbadpratidin.in/latest-update/'},
+        ]
+    }
 }

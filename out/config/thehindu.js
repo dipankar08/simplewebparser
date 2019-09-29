@@ -43,43 +43,19 @@ var TheHinduConfig = /** @class */ (function (_super) {
     TheHinduConfig.prototype.getTestPageUrl = function () {
         return "https://www.thehindu.com/news/cities/mumbai/choose-between-nationalistic-and-family-oriented-parties-says-amit-shah/article29481003.ece?homepage=true";
     };
-    TheHinduConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.TECHNOLOGY: return {
-                'url': 'https://www.thehindu.com/sci-tech/technology/',
-                'selectors': this.commonSelector
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': 'https://www.thehindu.com/sci-tech/science/',
-                'selectors': this.commonSelector
-            };
-            case CONST_1.STREAM.GADGETS: return {
-                'url': 'https://www.thehindu.com/sci-tech/technology/gadgets/',
-                'selectors': this.commonSelector
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': 'https://www.thehindu.com/entertainment/',
-                'selectors': ['.slick-initialized .slick-slide > a']
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': 'https://www.thehindu.com/business/',
-                'selectors': ['.slick-initialized .slick-slide > a']
-            };
-            case CONST_1.STREAM.SPORTS: return {
-                'url': 'https://www.thehindu.com/sport/',
-                'selectors': ['.slick-initialized .slick-slide > a']
-            };
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': 'https://www.thehindu.com/news/',
-                'selectors': ['.slick-initialized .slick-slide > a']
-            };
-            case CONST_1.STREAM.MARKETS: return {
-                'url': 'https://www.thehindu.com/business/markets/',
-                'selectors': ['.main .story1-3x100-container > a',
-                    '.main .spc33x3-1story-container > a',
-                    '.main .story-card-33 > a']
-            };
-        }
+    TheHinduConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.main .story1-3x100-container > a', url: 'https://www.thehindu.com/sci-tech/technology/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.main .spc33x3-1story-container > a', url: 'https://www.thehindu.com/sci-tech/technology/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.main .story-card-33 > a', url: 'https://www.thehindu.com/sci-tech/technology/' },
+            { stream: CONST_1.STREAM.SCIENCE, selector: '.main .story1-3x100-container > a', url: 'https://www.thehindu.com/sci-tech/science/' },
+            { stream: CONST_1.STREAM.SCIENCE, selector: '.main .spc33x3-1story-container > a', url: 'https://www.thehindu.com/sci-tech/science/' },
+            { stream: CONST_1.STREAM.SCIENCE, selector: '.main .story-card-33 > a', url: 'https://www.thehindu.com/sci-tech/science/' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/entertainment/' },
+            { stream: CONST_1.STREAM.BUSINESS, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/business/' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/sport/' },
+            { stream: CONST_1.STREAM.HEADLINE, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/news/' },
+        ];
     };
     return TheHinduConfig;
 }(baseconfig_1.BaseConfig));

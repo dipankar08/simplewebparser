@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class DainikStatesmanConfig extends BaseConfig {
     constructor() { 
@@ -28,40 +28,16 @@ export class DainikStatesmanConfig extends BaseConfig {
         return "https://www.dainikstatesmannews.com/india/babul-assures-ju-attackers-mother-of-no-harm/8988"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.COUNTRY: return {
-                'url':'https://www.dainikstatesmannews.com/india',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.INTERNATIONAL: return {
-                'url':'https://www.dainikstatesmannews.com/world',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.STATE: return {
-                'url':'https://www.dainikstatesmannews.com/bengal',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.ENTERTAINMENT: return {
-                'url':'https://www.dainikstatesmannews.com/binodan',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.SPORTS: return {
-                'url':'https://www.dainikstatesmannews.com/sports',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.EDITORIAL: return {
-                'url':'https://www.dainikstatesmannews.com/editorial',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.FOOD: return {
-                'url':'https://www.dainikstatesmannews.com/food',
-                'selectors':['.newslistbx h3 > a']
-            }
-            case STREAM.OTHER: return {
-                'url':'https://www.dainikstatesmannews.com/bichitra',
-                'selectors':['.newslistbx h3 > a']
-            }
-        }
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.COUNTRY, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/india'},
+            {stream: STREAM.INTERNATIONAL, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/world'},
+            {stream: STREAM.STATE, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/bengal'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/binodan'},
+            {stream: STREAM.SPORTS, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/sports'},
+            {stream: STREAM.EDITORIAL, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/editorial'},
+            {stream: STREAM.FOOD, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/food'},
+            {stream: STREAM.OTHER, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/bichitra'},
+        ]
     } 
 }

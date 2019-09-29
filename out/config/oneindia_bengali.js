@@ -34,49 +34,15 @@ var OneIndiaBengaliConfig = /** @class */ (function (_super) {
     OneIndiaBengaliConfig.prototype.getTestPageUrl = function () {
         return "https://bengali.oneindia.com/news/west-bengal/bjp-councillor-of-garulia-chandrabhan-singh-joins-tmc-in-presence-of-jyotipriya-mallick-061638.html";
     };
-    OneIndiaBengaliConfig.prototype.getListConfig = function (stream) {
-        switch (stream) {
-            case CONST_1.STREAM.HEADLINE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.FIRST_PAGE: return {
-                'url': 'https://bengali.oneindia.com/news/kolkata/',
-                'selectors': ['article .article-img a']
-            };
-            case CONST_1.STREAM.COUNTRY: return {
-                'url': 'https://bengali.oneindia.com/news/india/',
-                'selectors': ['article .article-img a']
-            };
-            case CONST_1.STREAM.STATE: return {
-                'url': 'https://bengali.oneindia.com/news/west-bengal/',
-                'selectors': ['article .article-img a']
-            };
-            case CONST_1.STREAM.INTERNATIONAL: return {
-                'url': 'https://bengali.oneindia.com/news/international/',
-                'selectors': ['article .article-img a']
-            };
-            case CONST_1.STREAM.BUSINESS: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.SCIENCE: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.ENTERTAINMENT: return {
-                'url': null,
-                'selectors': []
-            };
-            case CONST_1.STREAM.MOVIE: return {
-                'url': 'https://bengali.oneindia.com/movies/',
-                'selectors': ['article .article-img a']
-            };
-            case CONST_1.STREAM.LIFESTYLE: return {
-                'url': null,
-                'selectors': []
-            };
-        }
+    OneIndiaBengaliConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/kolkata/' },
+            { stream: CONST_1.STREAM.COUNTRY, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/india/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/kolkata/' },
+            { stream: CONST_1.STREAM.STATE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/west-bengal/' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/international/' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/movies/' },
+        ];
     };
     return OneIndiaBengaliConfig;
 }(baseconfig_1.BaseConfig));

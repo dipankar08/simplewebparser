@@ -1,7 +1,7 @@
 
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type } from "../crawler";
-import { LANG, STREAM, ListConfig } from "./CONST";
+import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class AjjKalConfig extends BaseConfig {
     constructor() { 
@@ -28,56 +28,21 @@ export class AjjKalConfig extends BaseConfig {
         return "https://aajkaal.in/news/northbengal/jungle-safari-bgdc"
     }
 
-    getListConfig(stream: STREAM): ListConfig{
-        switch(stream){
-            case STREAM.HEADLINE: return {
-                'url':'https://aajkaal.in/kolkata',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.STATE:return {
-                'url':'https://aajkaal.in/state',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.COUNTRY:return {
-                'url':'https://aajkaal.in/national',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.INTERNATIONAL:return {
-                'url':'https://aajkaal.in/international',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.BUSINESS:return {
-                'url':'https://aajkaal.in/business',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.ENTERTAINMENT:return {
-                'url':'https://aajkaal.in/entertainment',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.SPORTS:return {
-                'url':'https://aajkaal.in/sports',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.LIFESTYLE:return {
-                'url':'https://aajkaal.in/lifestyle',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.OFF_BEAT:return {
-                'url':'https://aajkaal.in/offbeat',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.TOUR:return {
-                'url':'https://aajkaal.in/tour',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.SCIENCE:return {
-                'url':'https://aajkaal.in/sciencetechnology',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-            case STREAM.EDUCATION:return {
-                'url':'https://aajkaal.in/helth',
-                'selectors':['.news-tabe .col-md-4 .image-holder > a']
-            }
-        }
-    } 
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.FIRST_PAGE, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/kolkata'},
+            {stream: STREAM.STATE, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/state'},
+            {stream: STREAM.COUNTRY, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/national'},
+            {stream: STREAM.INTERNATIONAL, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/international'},
+            {stream: STREAM.BUSINESS, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/business'},
+
+            {stream: STREAM.ENTERTAINMENT, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/entertainment'},
+            {stream: STREAM.SPORTS, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/sports'},
+            {stream: STREAM.LIFESTYLE, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/lifestyle'},
+            {stream: STREAM.OFF_BEAT, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/offbeat'},
+            {stream: STREAM.TOUR, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/tour'},
+            {stream: STREAM.SCIENCE, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/sciencetechnology'},
+            {stream: STREAM.EDUCATION, selector:'.news-tabe .col-md-4 .image-holder > a',url:'https://aajkaal.in/helth'},
+        ]
+    }
 }
