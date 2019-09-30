@@ -2,7 +2,7 @@ import { strict } from "assert";
 import { Analytics } from "./analytics";
 import { url } from "inspector";
 import { StoryListConfig, LIMIT } from "./config/CONST";
-var _ = require('lodash');
+import {uniqBy, assignIn} from "lodash"
 
 let request = require('async-request'),
     response;
@@ -139,7 +139,7 @@ export class Crawler {
 
         console.log(`[DEBUG] URL LIST : ${urls_final}`);
         if(urls_final.length == 0){
-            Analytics.action('broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`,{hostname:new Url(config.url).hostname, url:config.url})
+            Analytics.action('error_broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`,{hostname:new Url(config.url).hostname, url:config.url})
             console.log(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
             return []
         }
@@ -148,7 +148,7 @@ export class Crawler {
         for( let u of urls_final){
             let res = await this.parse(u);
             if(res != null){
-                result.push(_.assignIn(res, config.extra))
+                result.push(assignIn(res, config.extra))
             }
         }
         return result;
@@ -157,7 +157,7 @@ export class Crawler {
     // Much Optimized Crawling
     public async parseStoryList(storyConfig: Array<StoryListConfig>): Promise<Array<StringAnyMap>|null> {
         console.log(`[INFO] Total Story List count: ${storyConfig.length}`)
-        let urlList =[]
+        let urlList:Array<StringAnyMap> =[]
         for( let config of storyConfig){
             try{
                 console.log(`[INFO] Fetching link ${config.url}`)
@@ -175,7 +175,7 @@ export class Crawler {
                 if(urls_final.length ==0){
                     Analytics.action("error_parse_root_url", config.url); 
                 }
-                urlList = urlList.concat(urls_final)
+                urlList = urlList.concat(urls_final.map(x=> {return {'url': x, 'extra':config.extra}}))
             }catch(err){
                 Analytics.action("error_parse_root_url", config.url);
                 Analytics.exception(err,{"url":config.url})
@@ -184,7 +184,8 @@ export class Crawler {
         console.log(`[INFO] Total count of Story Link: ${urlList.length}`)
 
         // remove duplicate :
-        urlList = Array.from(new Set(urlList))
+        urlList = uniqBy(urlList,'url')
+        //urlList = Array.from(new Set(urlList))
         console.log(`[INFO] Total count of Story Link(After remove duplicate): ${urlList.length}`)
 
         if(urlList.length == 0){
@@ -195,25 +196,29 @@ export class Crawler {
             method: 'POST',
             data: JSON.stringify({
                 _field: 'url',
-                _value:urlList
+                _value:urlList.map(x=>x.url)
             })
         });
 
         let obj = JSON.parse(resp.body)
         if(obj.status == 'success'){
-            urlList =  urlList.filter(x=> obj.out.found_list[x] == null)
-        }
-        console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
-        if(urlList.length == 0){
+            urlList =  urlList.filter(x=> obj.out.found_list[x.url] == null)
+            console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
+            Analytics.action('stat_parse_duplicate','',{'unique_count':obj.out.found_list.length - obj.out.found_count, 'duplicate_count': obj.out.found_count,'domain':Url(url).hostname})
+            if(urlList.length == 0){
+                return;
+            }
+        } else{
             return;
         }
+        
 
         // Now fetch the URL which not in DB and insert.
         let result = []
         for( let u of urlList){
-            let res = await this.parse(u);
+            let res = await this.parse(u.url);
             if(res != null){
-                result.push(_.assignIn(res, {}))
+                result.push(assignIn(res, u.extra))
             }
         }
         return result
@@ -258,7 +263,6 @@ export class Crawler {
         ).join("\n");
         if(str.length == 0){
             console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
-            Analytics.action("parse_empty_data",url,{"hostname":(new Url(url).hostname)})
         }
         return str;
     }

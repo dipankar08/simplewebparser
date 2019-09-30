@@ -36,8 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var analytics_1 = require("./analytics");
+var inspector_1 = require("inspector");
 var CONST_1 = require("./config/CONST");
-var _ = require('lodash');
+var lodash_1 = require("lodash");
 var request = require('async-request'), response;
 var cheerio = require('cheerio');
 var Url = require('url-parse');
@@ -170,7 +171,7 @@ var Crawler = /** @class */ (function () {
                         urls_final = url_filtered.slice(0, config.limit);
                         console.log("[DEBUG] URL LIST : " + urls_final);
                         if (urls_final.length == 0) {
-                            analytics_1.Analytics.action('broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors, { hostname: new Url(config.url).hostname, url: config.url });
+                            analytics_1.Analytics.action('error_broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors, { hostname: new Url(config.url).hostname, url: config.url });
                             console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
@@ -184,7 +185,7 @@ var Crawler = /** @class */ (function () {
                     case 6:
                         res = _h.sent();
                         if (res != null) {
-                            result.push(_.assignIn(res, config.extra));
+                            result.push(lodash_1.assignIn(res, config.extra));
                         }
                         _h.label = 7;
                     case 7:
@@ -228,7 +229,7 @@ var Crawler = /** @class */ (function () {
                                         if (urls_final.length == 0) {
                                             analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         }
-                                        urlList = urlList.concat(urls_final);
+                                        urlList = urlList.concat(urls_final.map(function (x) { return { 'url': x, 'extra': config.extra }; }));
                                         return [3 /*break*/, 3];
                                     case 2:
                                         err_1 = _b.sent();
@@ -255,7 +256,8 @@ var Crawler = /** @class */ (function () {
                     case 4:
                         console.log("[INFO] Total count of Story Link: " + urlList.length);
                         // remove duplicate :
-                        urlList = Array.from(new Set(urlList));
+                        urlList = lodash_1.uniqBy(urlList, 'url');
+                        //urlList = Array.from(new Set(urlList))
                         console.log("[INFO] Total count of Story Link(After remove duplicate): " + urlList.length);
                         if (urlList.length == 0) {
                             return [2 /*return*/, null];
@@ -264,17 +266,21 @@ var Crawler = /** @class */ (function () {
                                 method: 'POST',
                                 data: JSON.stringify({
                                     _field: 'url',
-                                    _value: urlList
+                                    _value: urlList.map(function (x) { return x.url; })
                                 })
                             })];
                     case 5:
                         resp = _b.sent();
                         obj = JSON.parse(resp.body);
                         if (obj.status == 'success') {
-                            urlList = urlList.filter(function (x) { return obj.out.found_list[x] == null; });
+                            urlList = urlList.filter(function (x) { return obj.out.found_list[x.url] == null; });
+                            console.log("[INFO] Total link which is NOT in DB: " + urlList.length + ", DB Found count: " + obj.out.found_count);
+                            analytics_1.Analytics.action('stat_parse_duplicate', '', { 'unique_count': obj.out.found_list.length - obj.out.found_count, 'duplicate_count': obj.out.found_count, 'domain': Url(inspector_1.url).hostname });
+                            if (urlList.length == 0) {
+                                return [2 /*return*/];
+                            }
                         }
-                        console.log("[INFO] Total link which is NOT in DB: " + urlList.length + ", DB Found count: " + obj.out.found_count);
-                        if (urlList.length == 0) {
+                        else {
                             return [2 /*return*/];
                         }
                         result = [];
@@ -283,11 +289,11 @@ var Crawler = /** @class */ (function () {
                     case 6:
                         if (!(_a < urlList_1.length)) return [3 /*break*/, 9];
                         u = urlList_1[_a];
-                        return [4 /*yield*/, this.parse(u)];
+                        return [4 /*yield*/, this.parse(u.url)];
                     case 7:
                         res = _b.sent();
                         if (res != null) {
-                            result.push(_.assignIn(res, {}));
+                            result.push(lodash_1.assignIn(res, u.extra));
                         }
                         _b.label = 8;
                     case 8:
@@ -336,7 +342,6 @@ var Crawler = /** @class */ (function () {
         }).join("\n");
         if (str.length == 0) {
             console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
-            analytics_1.Analytics.action("parse_empty_data", url, { "hostname": (new Url(url).hostname) });
         }
         return str;
     };

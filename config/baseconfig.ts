@@ -1,6 +1,7 @@
 import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
 import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig } from './CONST';
-const fetch_req = require('node-fetch');
+import { Analytics } from '../analytics';
+let request = require('async-request')
 
 export abstract class BaseConfig {
     tag: string;    
@@ -39,9 +40,14 @@ export abstract class BaseConfig {
     }
 
     async execute(){
-        console.log(`[${this.tag}] Execution started`);
+        console.log(`[${this.tag}] Execution started for ${this.getRootConfig()}`);
         let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
-        await this.save(await crawler.parseStoryList(this.getStoryListConfig()));
+        let newConfig:Array<StoryListConfig> = this.getStoryListConfig().map(x => {
+            x.extra ={'lang':LANG[this.getLang()]}
+            x.extra['stream'] = STREAM[x.stream];
+            return x;
+        })
+        await this.save(await crawler.parseStoryList(newConfig));
     }
 
     async save(res:Array<StringAnyMap>|null){
@@ -52,17 +58,24 @@ export abstract class BaseConfig {
             if(x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
                 return true;
             } else{
+                Analytics.action("error_empty_data",x.url);
                 console.log(`>>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
                 return false
             }
         })
+        if(res1.length == 0){
+            return;
+        }
         const body = { '_payload': res1}; 
-        fetch_req('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
-            method: 'post',
-            body:    JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' },
-        })
-        .then(res => res.json())
-        .then(json => console.log(json));
+        let resp = await request('http://simplestore.dipankar.co.in/api/news/bulk_insert',{
+            method: 'POST',
+            data: JSON.stringify(body)
+        });
+        console.log(resp);
+        if((JSON.parse(resp.body)).status =='error'){
+            Analytics.action('error_saving_data', resp.body);
+        } else{
+            console.log("[Debug] Data saved properly in the server")
+        }
     }
 }

@@ -37,7 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var crawler_1 = require("../crawler");
 var CONST_1 = require("./CONST");
-var fetch_req = require('node-fetch');
+var analytics_1 = require("../analytics");
+var request = require('async-request');
 var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
         this.tag = tag;
@@ -79,14 +80,20 @@ var BaseConfig = /** @class */ (function () {
     };
     BaseConfig.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var crawler, _a;
+            var crawler, newConfig, _a;
+            var _this = this;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        console.log("[" + this.tag + "] Execution started");
+                        console.log("[" + this.tag + "] Execution started for " + this.getRootConfig());
                         crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
+                        newConfig = this.getStoryListConfig().map(function (x) {
+                            x.extra = { 'lang': CONST_1.LANG[_this.getLang()] };
+                            x.extra['stream'] = CONST_1.STREAM[x.stream];
+                            return x;
+                        });
                         _a = this.save;
-                        return [4 /*yield*/, crawler.parseStoryList(this.getStoryListConfig())];
+                        return [4 /*yield*/, crawler.parseStoryList(newConfig)];
                     case 1: return [4 /*yield*/, _a.apply(this, [_b.sent()])];
                     case 2:
                         _b.sent();
@@ -97,29 +104,42 @@ var BaseConfig = /** @class */ (function () {
     };
     BaseConfig.prototype.save = function (res) {
         return __awaiter(this, void 0, void 0, function () {
-            var res1, body;
+            var res1, body, resp;
             return __generator(this, function (_a) {
-                if (res == null) {
-                    return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        if (res == null) {
+                            return [2 /*return*/];
+                        }
+                        res1 = res.filter(function (x) {
+                            if (x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
+                                return true;
+                            }
+                            else {
+                                analytics_1.Analytics.action("error_empty_data", x.url);
+                                console.log(">>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
+                                return false;
+                            }
+                        });
+                        if (res1.length == 0) {
+                            return [2 /*return*/];
+                        }
+                        body = { '_payload': res1 };
+                        return [4 /*yield*/, request('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
+                                method: 'POST',
+                                data: JSON.stringify(body)
+                            })];
+                    case 1:
+                        resp = _a.sent();
+                        console.log(resp);
+                        if ((JSON.parse(resp.body)).status == 'error') {
+                            analytics_1.Analytics.action('error_saving_data', resp.body);
+                        }
+                        else {
+                            console.log("[Dubug] Data saved properly in the server");
+                        }
+                        return [2 /*return*/];
                 }
-                res1 = res.filter(function (x) {
-                    if (x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
-                        return true;
-                    }
-                    else {
-                        console.log(">>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
-                        return false;
-                    }
-                });
-                body = { '_payload': res1 };
-                fetch_req('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
-                    method: 'post',
-                    body: JSON.stringify(body),
-                    headers: { 'Content-Type': 'application/json' },
-                })
-                    .then(function (res) { return res.json(); })
-                    .then(function (json) { return console.log(json); });
-                return [2 /*return*/];
             });
         });
     };

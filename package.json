@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/lodash": "^4.14.141",
     "async-request": "^1.2.0",
     "cheerio": "^1.0.0-rc.3",
     "got": "^9.6.0",
