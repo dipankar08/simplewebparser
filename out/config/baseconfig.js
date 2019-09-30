@@ -136,7 +136,7 @@ var BaseConfig = /** @class */ (function () {
                             analytics_1.Analytics.action('error_saving_data', resp.body);
                         }
                         else {
-                            console.log("[Dubug] Data saved properly in the server");
+                            console.log("[Debug] Data saved properly in the server");
                         }
                         return [2 /*return*/];
                 }
