@@ -202,10 +202,10 @@ export class Crawler {
 
         let obj = JSON.parse(resp.body)
         if(obj.status == 'success'){
+            Analytics.action('stat_parse_duplicate','dummy',{'unique_count':urlList.length - obj.out.found_count, 'duplicate_count': obj.out.found_count,'domain':Url(url).hostname})
             urlList =  urlList.filter(x=> obj.out.found_list[x.url] == null)
             console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
-            Analytics.action('stat_parse_duplicate','',{'unique_count':obj.out.found_list.length - obj.out.found_count, 'duplicate_count': obj.out.found_count,'domain':Url(url).hostname})
-            if(urlList.length == 0){
+           if(urlList.length == 0){
                 return;
             }
         } else{
