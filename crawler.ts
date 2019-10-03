@@ -59,9 +59,8 @@ export class Crawler {
         let result:StringAnyMap ={}
         result['url']= url;
         try {
-            console.log(url);
+            console.log(`[DEBUG] Try fetching... ${url}`);
             let url1 = new Url(url);
-            console.log(`[DEBUG] TRY Fetching... ${url}`);
             var resp;
             try{
                 resp = await request(url);
@@ -169,10 +168,11 @@ export class Crawler {
                 }
                 let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
                 urls_abs = Array.from(new Set(urls_abs))
-                urls_abs = this.getFilteredUrl(urls_abs)
-                urls_abs = urls_abs.reverse()
+                urls_abs = this.getFilteredUrl(config.url, urls_abs)
 
                 let urls_final = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
+                // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
+                urls_abs = urls_abs.reverse()
                 if(urls_final.length ==0){
                     Analytics.action("error_parse_root_url", config.url); 
                 }
@@ -268,10 +268,15 @@ export class Crawler {
         return str;
     }
 
-    private getFilteredUrl(urls_abs){
+    private getFilteredUrl(root_url, urls_abs){
         if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
             let url_filtered = []
             for(let u of urls_abs){
+                // ensure same domain.
+                if(Url(u).hostname != Url(root_url).hostname){
+                    console.log(`[INFO] Ignore url ${u} for out of domain fetch`)
+                    continue;
+                }
                 for (let ic of this.rootConfig.ignoreUrlRegex){
                     if(u.indexOf(ic) != -1){
                         console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)

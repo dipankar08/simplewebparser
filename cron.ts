@@ -19,6 +19,8 @@ import { TheHinduConfig } from './config/thehindu';
 import { AjjKalConfig } from './config/ajjkal';
 import { DainikStatesmanConfig } from './config/dainikstatesman';
 import { AajBanglaConfig } from './config/ajjbangla';
+import { NilkonthoConfig } from './config/nilkontho';
+import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -32,6 +34,8 @@ var configList:Array<BaseConfig> =[
     new AjjKalConfig(),
     new DainikStatesmanConfig(),
     new AajBanglaConfig(),
+    new NilkonthoConfig(),
+    new IndiaTimesBengaliConfig(),
     // new NDTVBanglaConfig(), Broken
 
     // ENGLISH
@@ -67,4 +71,4 @@ function cronJob(){
 }
 
 cronJob();
-//new PratidinConfig().execute()
+//new IndiaTimesBengaliConfig().execute()

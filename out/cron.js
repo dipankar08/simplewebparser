@@ -49,6 +49,8 @@ var thehindu_1 = require("./config/thehindu");
 var ajjkal_1 = require("./config/ajjkal");
 var dainikstatesman_1 = require("./config/dainikstatesman");
 var ajjbangla_1 = require("./config/ajjbangla");
+var nilkontho_1 = require("./config/nilkontho");
+var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -61,6 +63,8 @@ var configList = [
     new ajjkal_1.AjjKalConfig(),
     new dainikstatesman_1.DainikStatesmanConfig(),
     new ajjbangla_1.AajBanglaConfig(),
+    new nilkontho_1.NilkonthoConfig(),
+    new indiatimes_bengali_1.IndiaTimesBengaliConfig(),
     // new NDTVBanglaConfig(), Broken
     // ENGLISH
     //new NDTVEnglishConfig(),
@@ -111,5 +115,5 @@ function cronJob() {
     prod();
 }
 cronJob();
-//new PratidinConfig().execute()
+//new IndiaTimesBengaliConfig().execute()
 //# sourceMappingURL=cron.js.map

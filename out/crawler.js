@@ -74,9 +74,8 @@ var Crawler = /** @class */ (function () {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 6, , 7]);
-                        console.log(url);
+                        console.log("[DEBUG] Try fetching... " + url);
                         url1 = new Url(url);
-                        console.log("[DEBUG] TRY Fetching... " + url);
                         _b.label = 2;
                     case 2:
                         _b.trys.push([2, 4, , 5]);
@@ -224,9 +223,10 @@ var Crawler = /** @class */ (function () {
                                         }
                                         urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
                                         urls_abs = Array.from(new Set(urls_abs));
-                                        urls_abs = this_1.getFilteredUrl(urls_abs);
-                                        urls_abs = urls_abs.reverse();
+                                        urls_abs = this_1.getFilteredUrl(config.url, urls_abs);
                                         urls_final = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
+                                        // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
+                                        urls_abs = urls_abs.reverse();
                                         if (urls_final.length == 0) {
                                             analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         }
@@ -346,11 +346,16 @@ var Crawler = /** @class */ (function () {
         }
         return str;
     };
-    Crawler.prototype.getFilteredUrl = function (urls_abs) {
+    Crawler.prototype.getFilteredUrl = function (root_url, urls_abs) {
         if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
             var url_filtered = [];
             for (var _i = 0, urls_abs_2 = urls_abs; _i < urls_abs_2.length; _i++) {
                 var u = urls_abs_2[_i];
+                // ensure same domain.
+                if (Url(u).hostname != Url(root_url).hostname) {
+                    console.log("[INFO] Ignore url " + u + " for out of domain fetch");
+                    continue;
+                }
                 for (var _a = 0, _b = this.rootConfig.ignoreUrlRegex; _a < _b.length; _a++) {
                     var ic = _b[_a];
                     if (u.indexOf(ic) != -1) {
