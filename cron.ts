@@ -66,5 +66,5 @@ function cronJob(){
     prod(); 
 }
 
-//cronJob();
-new PratidinConfig().execute()
+cronJob();
+//new PratidinConfig().execute()

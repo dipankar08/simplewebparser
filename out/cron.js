@@ -110,6 +110,6 @@ function cronJob() {
     // run now too.
     prod();
 }
-//cronJob();
-new pratidin_1.PratidinConfig().execute();
+cronJob();
+//new PratidinConfig().execute()
 //# sourceMappingURL=cron.js.map
