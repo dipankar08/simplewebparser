@@ -26,7 +26,9 @@ export class Kolkata247 extends BaseConfig {
 
     getStoryListConfig():Array<StoryListConfig>{
         return [
-            {stream: STREAM.FIRST_PAGE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/kolkata/'},
+            {stream: STREAM.HEADLINE, selector:'.td_module_4 .td-module-thumb > a',url:'https://www.kolkata24x7.com/', limit:5},
+            {stream: STREAM.FIRST_PAGE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/', limit:30},
+            {stream: STREAM.STATE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/kolkata/'},
             {stream: STREAM.COUNTRY, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/national-news/'},
             {stream: STREAM.STATE, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/west-bengal/'},
             {stream: STREAM.INTERNATIONAL, selector:'.td-module-thumb > a',url:'https://www.kolkata24x7.com/category/international-news/'},

@@ -225,6 +225,7 @@ var Crawler = /** @class */ (function () {
                                         urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
                                         urls_abs = Array.from(new Set(urls_abs));
                                         urls_abs = this_1.getFilteredUrl(urls_abs);
+                                        urls_abs = urls_abs.reverse();
                                         urls_final = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
                                         if (urls_final.length == 0) {
                                             analytics_1.Analytics.action("error_parse_root_url", config.url);

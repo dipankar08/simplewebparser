@@ -36,7 +36,9 @@ var Kolkata247 = /** @class */ (function (_super) {
     };
     Kolkata247.prototype.getStoryListConfig = function () {
         return [
-            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/category/kolkata/' },
+            { stream: CONST_1.STREAM.HEADLINE, selector: '.td_module_4 .td-module-thumb > a', url: 'https://www.kolkata24x7.com/', limit: 5 },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/', limit: 30 },
+            { stream: CONST_1.STREAM.STATE, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/category/kolkata/' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/category/national-news/' },
             { stream: CONST_1.STREAM.STATE, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/category/west-bengal/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-module-thumb > a', url: 'https://www.kolkata24x7.com/category/international-news/' },

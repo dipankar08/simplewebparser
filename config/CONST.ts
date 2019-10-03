@@ -12,9 +12,11 @@ export enum STREAM{
     NONE,
     HEADLINE,
     FIRST_PAGE,
-    COUNTRY,
+
     STATE,
+    COUNTRY,
     INTERNATIONAL,
+    
     BUSINESS,
     SCIENCE,
     ENTERTAINMENT,

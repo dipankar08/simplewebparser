@@ -170,6 +170,7 @@ export class Crawler {
                 let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
                 urls_abs = Array.from(new Set(urls_abs))
                 urls_abs = this.getFilteredUrl(urls_abs)
+                urls_abs = urls_abs.reverse()
 
                 let urls_final = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
                 if(urls_final.length ==0){

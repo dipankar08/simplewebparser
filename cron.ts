@@ -66,5 +66,5 @@ function cronJob(){
     prod(); 
 }
 
-cronJob();
-//new BusinessInsidersConfig().execute()
+//cronJob();
+new PratidinConfig().execute()
