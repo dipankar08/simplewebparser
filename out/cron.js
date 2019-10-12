@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
+var request = require("request-promise");
 var anandabazar_1 = require("./config/anandabazar");
 var zeenews_bengali_1 = require("./config/zeenews_bengali");
 var news18_bengali_1 = require("./config/news18_bengali");
@@ -114,6 +115,27 @@ function cronJob() {
     // run now too.
     prod();
 }
+function test() {
+    return __awaiter(this, void 0, void 0, function () {
+        var body, resp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    body = { _payload: [{ "title1": "রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই" }] };
+                    return [4 /*yield*/, request({
+                            uri: 'http://simplestore.dipankar.co.in/api/test/bulk_insert',
+                            method: 'POST',
+                            body: body,
+                            json: true
+                        })];
+                case 1:
+                    resp = _a.sent();
+                    console.log(resp);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 cronJob();
-//new IndiaTimesBengaliConfig().execute()
+//new OneIndiaBengaliConfig().execute()
 //# sourceMappingURL=cron.js.map

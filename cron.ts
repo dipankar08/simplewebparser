@@ -1,4 +1,5 @@
 const cron = require('node-cron');
+const request = require("request-promise");
 
  import {Crawler, Type, ExpandLinkConfig} from './crawler'
 import { BaseConfig } from './config/baseconfig';
@@ -70,5 +71,17 @@ function cronJob(){
     prod(); 
 }
 
+async function test(){
+    var body = {_payload: [{"title1":"রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই"}]}; 
+    let resp = await request({
+        uri:'http://simplestore.dipankar.co.in/api/test/bulk_insert',
+        method: 'POST',
+        body: body,
+        json:true
+    });
+    console.log(resp)
+}
+
+
 cronJob();
-//new IndiaTimesBengaliConfig().execute()
+//new OneIndiaBengaliConfig().execute()

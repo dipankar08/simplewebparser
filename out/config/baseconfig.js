@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var crawler_1 = require("../crawler");
 var CONST_1 = require("./CONST");
 var analytics_1 = require("../analytics");
-var request = require('async-request');
+var request = require("request-promise");
 var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
         this.tag = tag;
@@ -125,18 +125,20 @@ var BaseConfig = /** @class */ (function () {
                             return [2 /*return*/];
                         }
                         body = { '_payload': res1 };
-                        return [4 /*yield*/, request('http://simplestore.dipankar.co.in/api/news/bulk_insert', {
+                        return [4 /*yield*/, request({
+                                uri: 'http://simplestore.dipankar.co.in/api/news/bulk_insert',
                                 method: 'POST',
-                                data: JSON.stringify(body)
+                                body: body,
+                                json: true
                             })];
                     case 1:
                         resp = _a.sent();
                         console.log(resp);
-                        if ((JSON.parse(resp.body)).status == 'error') {
-                            analytics_1.Analytics.action('error_saving_data', resp.body);
+                        if ((resp.status == 'error')) {
+                            analytics_1.Analytics.action('error_saving_data', resp);
                         }
                         else {
-                            console.log("[Debug] Data saved properly in the server");
+                            console.log("[Debug] Data saved properly in the server: " + resp.msg);
                         }
                         return [2 /*return*/];
                 }

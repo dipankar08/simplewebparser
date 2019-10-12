@@ -1,7 +1,7 @@
 import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
 import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig } from './CONST';
 import { Analytics } from '../analytics';
-let request = require('async-request')
+const request = require("request-promise");
 
 export abstract class BaseConfig {
     tag: string;    
@@ -67,15 +67,19 @@ export abstract class BaseConfig {
             return;
         }
         const body = { '_payload': res1}; 
-        let resp = await request('http://simplestore.dipankar.co.in/api/news/bulk_insert',{
+
+        let resp = await request({
+            uri:'http://simplestore.dipankar.co.in/api/news/bulk_insert',
             method: 'POST',
-            data: JSON.stringify(body)
+            body: body,
+            json:true
         });
+        
         console.log(resp);
-        if((JSON.parse(resp.body)).status =='error'){
-            Analytics.action('error_saving_data', resp.body);
+        if((resp.status =='error')){
+            Analytics.action('error_saving_data', resp);
         } else{
-            console.log("[Debug] Data saved properly in the server")
+            console.log(`[Debug] Data saved properly in the server: ${resp.msg}`)
         }
     }
 }

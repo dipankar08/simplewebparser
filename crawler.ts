@@ -4,7 +4,7 @@ import { url } from "inspector";
 import { StoryListConfig, LIMIT } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
 
-let request = require('async-request'),
+let request = require('async-request'), // TODO: move to const request = require("request-promise");
     response;
 const cheerio = require('cheerio')
 var Url = require('url-parse');
