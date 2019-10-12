@@ -22,6 +22,7 @@ import { DainikStatesmanConfig } from './config/dainikstatesman';
 import { AajBanglaConfig } from './config/ajjbangla';
 import { NilkonthoConfig } from './config/nilkontho';
 import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
+import { BartamanConfig } from './config/bartaman';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -37,6 +38,7 @@ var configList:Array<BaseConfig> =[
     new AajBanglaConfig(),
     new NilkonthoConfig(),
     new IndiaTimesBengaliConfig(),
+    new BartamanConfig(),
     // new NDTVBanglaConfig(), Broken
 
     // ENGLISH
@@ -74,14 +76,15 @@ function cronJob(){
 async function test(){
     var body = {_payload: [{"title1":"রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই"}]}; 
     let resp = await request({
-        uri:'http://simplestore.dipankar.co.in/api/test/bulk_insert',
-        method: 'POST',
-        body: body,
-        json:true
+        uri:'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
+        method: 'GET',
+        headers:{
+            'Accept-Encoding': 'gzip'
+        }
     });
     console.log(resp)
 }
 
-
+//test()
 cronJob();
-//new OneIndiaBengaliConfig().execute()
+//new BartamanConfig().execute()

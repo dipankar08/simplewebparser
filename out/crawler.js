@@ -66,7 +66,7 @@ var Crawler = /** @class */ (function () {
     }
     Crawler.prototype.parse = function (url) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, url1, resp, error_1, $_1, _i, _a, item, val, error_2;
+            var result, url1, body, resp, error_1, $_1, _i, _a, item, val, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -74,23 +74,30 @@ var Crawler = /** @class */ (function () {
                         result['url'] = url;
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 6, , 7]);
+                        _b.trys.push([1, 9, , 10]);
                         console.log("[DEBUG] Try fetching... " + url);
                         url1 = new Url(url);
                         _b.label = 2;
                     case 2:
-                        _b.trys.push([2, 4, , 5]);
-                        return [4 /*yield*/, request(url)];
+                        _b.trys.push([2, 7, , 8]);
+                        if (!this.rootConfig.networkFetcher) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.rootConfig.networkFetcher(url)];
                     case 3:
+                        body = _b.sent();
+                        return [3 /*break*/, 6];
+                    case 4: return [4 /*yield*/, request(url)];
+                    case 5:
                         resp = _b.sent();
-                        return [3 /*break*/, 5];
-                    case 4:
+                        body = resp.body;
+                        _b.label = 6;
+                    case 6: return [3 /*break*/, 8];
+                    case 7:
                         error_1 = _b.sent();
                         analytics_1.Analytics.exception(error_1);
                         return [2 /*return*/, {}];
-                    case 5:
+                    case 8:
                         result['hostname'] = url1.hostname;
-                        $_1 = cheerio.load(resp.body);
+                        $_1 = cheerio.load(body);
                         for (_i = 0, _a = this.config; _i < _a.length; _i++) {
                             item = _a[_i];
                             switch (item.type) {
@@ -106,14 +113,14 @@ var Crawler = /** @class */ (function () {
                                     break;
                             }
                         }
-                        return [3 /*break*/, 7];
-                    case 6:
+                        return [3 /*break*/, 10];
+                    case 9:
                         error_2 = _b.sent();
                         analytics_1.Analytics.exception(error_2, result);
                         console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
                         console.log(error_2);
-                        return [3 /*break*/, 7];
-                    case 7: return [2 /*return*/, result];
+                        return [3 /*break*/, 10];
+                    case 10: return [2 /*return*/, result];
                 }
             });
         });
@@ -207,16 +214,25 @@ var Crawler = /** @class */ (function () {
                         console.log("[INFO] Total Story List count: " + storyConfig.length);
                         urlList = [];
                         _loop_1 = function (config) {
-                            var resp_1, $, url_list1, _i, _a, n, urls_abs, urls_final, err_1;
+                            var body, resp_1, $, url_list1, _i, _a, n, urls_abs, urls_final, err_1;
                             return __generator(this, function (_b) {
                                 switch (_b.label) {
                                     case 0:
-                                        _b.trys.push([0, 2, , 3]);
+                                        _b.trys.push([0, 5, , 6]);
                                         console.log("[INFO] Fetching link " + config.url);
-                                        return [4 /*yield*/, request(config.url)];
+                                        body = null;
+                                        if (!this_1.rootConfig.networkFetcher) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, this_1.rootConfig.networkFetcher(config.url)];
                                     case 1:
+                                        body = _b.sent();
+                                        return [3 /*break*/, 4];
+                                    case 2: return [4 /*yield*/, request(config.url)];
+                                    case 3:
                                         resp_1 = _b.sent();
-                                        $ = cheerio.load(resp_1.body);
+                                        body = resp_1.body;
+                                        _b.label = 4;
+                                    case 4:
+                                        $ = cheerio.load(body);
                                         url_list1 = [];
                                         for (_i = 0, _a = $(config.selector); _i < _a.length; _i++) {
                                             n = _a[_i];
@@ -232,13 +248,13 @@ var Crawler = /** @class */ (function () {
                                             analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         }
                                         urlList = urlList.concat(urls_final.map(function (x) { return { 'url': x, 'extra': config.extra }; }));
-                                        return [3 /*break*/, 3];
-                                    case 2:
+                                        return [3 /*break*/, 6];
+                                    case 5:
                                         err_1 = _b.sent();
                                         analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         analytics_1.Analytics.exception(err_1, { "url": config.url });
-                                        return [3 /*break*/, 3];
-                                    case 3: return [2 /*return*/];
+                                        return [3 /*break*/, 6];
+                                    case 6: return [2 /*return*/];
                                 }
                             });
                         };
@@ -310,13 +326,23 @@ var Crawler = /** @class */ (function () {
         if (url == null || url.length == 0) {
             return null;
         }
+        // https or http://
+        if (url.startsWith("http")) {
+            return url;
+        }
+        if (url.startsWith("www")) {
+            return url;
+        }
+        //  starts with //abc.face
         if (url[0] == '/' && url[1] == '/') {
             return Url(root).protocol + url;
         }
-        if (url[0] != '/') {
-            return url;
+        // syarts with /abc/def
+        if (url[0] == '/') {
+            return (new Url(root)).origin + url;
         }
-        return (new Url(root)).origin + url;
+        // sarts with anything else like "detailsnews?..."
+        return Url(root).origin + "/" + url;
     };
     // this function will clean the data.
     Crawler.prototype.cleanHtmlData = function (url, str) {

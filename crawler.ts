@@ -16,6 +16,7 @@ export enum Type {
 export type RootConfig = {
     ignoreUrlRegex?:Array<string>, // Give the regex if a url match with it - it will just ignore.
     ignoreLineRegex?:Array<string>, // it will ignone this line in a para while parsing a text.
+    networkFetcher?: Function,
 }
 
 export type PageParseConfig = {
@@ -61,15 +62,20 @@ export class Crawler {
         try {
             console.log(`[DEBUG] Try fetching... ${url}`);
             let url1 = new Url(url);
-            var resp;
+            var body;
             try{
-                resp = await request(url);
+                if(this.rootConfig.networkFetcher){
+                    body = await this.rootConfig.networkFetcher(url);
+                } else{
+                    let resp = await request(url);
+                    body = resp.body
+                }
             } catch(error){
                 Analytics.exception(error)
                 return {};
             }
             result['hostname'] =url1.hostname
-            let $ = cheerio.load(resp.body);
+            let $ = cheerio.load(body);
             for (var item of this.config) {
                 switch (item.type) {
                     case Type.TEXT:
@@ -84,7 +90,7 @@ export class Crawler {
                         break;
                 }
             }
-        } catch (error) {
+        } catch (error) {     
             Analytics.exception(error, result)
             console.log(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
             console.log(error);
@@ -160,8 +166,15 @@ export class Crawler {
         for( let config of storyConfig){
             try{
                 console.log(`[INFO] Fetching link ${config.url}`)
-                let resp = await request(config.url);
-                let $ = cheerio.load(resp.body);
+                let body = null;
+                if(this.rootConfig.networkFetcher){
+                    body = await this.rootConfig.networkFetcher(config.url);
+                } else{
+                    let resp = await request(config.url);
+                    body = resp.body;
+                }
+
+                let $ = cheerio.load(body);
                 let url_list1: Array<string>  = []
                 for(let n of $(config.selector)){
                     url_list1.push(n.attribs.href)
@@ -230,13 +243,26 @@ export class Crawler {
         if(url == null || url.length == 0){
             return null
         }
+        // https or http://
+        if(url.startsWith("http")){
+            return url;
+        }
+
+        if(url.startsWith("www")){
+            return url;
+        }
+
+        //  starts with //abc.face
         if(url[0] == '/' && url[1] == '/'){
             return Url(root).protocol+url;
         }
-        if(url[0] != '/'){
-            return url;
+        // syarts with /abc/def
+        if(url[0] == '/'){
+            return (new Url(root)).origin+url;
         }
-        return (new Url(root)).origin+url;
+
+        // sarts with anything else like "detailsnews?..."
+        return Url(root).origin+"/"+url;
     }
 
     // this function will clean the data.

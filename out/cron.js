@@ -52,6 +52,7 @@ var dainikstatesman_1 = require("./config/dainikstatesman");
 var ajjbangla_1 = require("./config/ajjbangla");
 var nilkontho_1 = require("./config/nilkontho");
 var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
+var bartaman_1 = require("./config/bartaman");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -66,6 +67,7 @@ var configList = [
     new ajjbangla_1.AajBanglaConfig(),
     new nilkontho_1.NilkonthoConfig(),
     new indiatimes_bengali_1.IndiaTimesBengaliConfig(),
+    new bartaman_1.BartamanConfig(),
     // new NDTVBanglaConfig(), Broken
     // ENGLISH
     //new NDTVEnglishConfig(),
@@ -123,10 +125,11 @@ function test() {
                 case 0:
                     body = { _payload: [{ "title1": "রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই" }] };
                     return [4 /*yield*/, request({
-                            uri: 'http://simplestore.dipankar.co.in/api/test/bulk_insert',
-                            method: 'POST',
-                            body: body,
-                            json: true
+                            uri: 'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
+                            method: 'GET',
+                            headers: {
+                                'Accept-Encoding': 'gzip'
+                            }
                         })];
                 case 1:
                     resp = _a.sent();
@@ -136,6 +139,7 @@ function test() {
         });
     });
 }
+//test()
 cronJob();
-//new OneIndiaBengaliConfig().execute()
+//new BartamanConfig().execute()
 //# sourceMappingURL=cron.js.map
