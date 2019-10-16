@@ -96,6 +96,7 @@ var Crawler = /** @class */ (function () {
                         analytics_1.Analytics.exception(error_1);
                         return [2 /*return*/, {}];
                     case 8:
+                        console.log("[INFO Fetching done!");
                         result['hostname'] = url1.hostname;
                         $_1 = cheerio.load(body);
                         for (_i = 0, _a = this.config; _i < _a.length; _i++) {
@@ -110,6 +111,9 @@ var Crawler = /** @class */ (function () {
                                         item.attr = 'src';
                                     }
                                     result[item.name.toString()] = this.absUrl(url, $_1(item.selector).attr(item.attr));
+                                    if (!result[item.name.toString()]) {
+                                        result[item.name.toString()] = this.rootConfig.defaultImg;
+                                    }
                                     break;
                             }
                         }
@@ -214,24 +218,27 @@ var Crawler = /** @class */ (function () {
                         console.log("[INFO] Total Story List count: " + storyConfig.length);
                         urlList = [];
                         _loop_1 = function (config) {
-                            var body, resp_1, $, url_list1, _i, _a, n, urls_abs, urls_final, err_1;
+                            var body, resp_1, $, url_list1, _i, _a, n, urls_abs, err_1;
                             return __generator(this, function (_b) {
                                 switch (_b.label) {
                                     case 0:
-                                        _b.trys.push([0, 5, , 6]);
+                                        console.log("[INFO] =====================  PROCESSING " + CONST_1.STREAM[config.stream] + " =======================");
+                                        _b.label = 1;
+                                    case 1:
+                                        _b.trys.push([1, 6, , 7]);
                                         console.log("[INFO] Fetching link " + config.url);
                                         body = null;
-                                        if (!this_1.rootConfig.networkFetcher) return [3 /*break*/, 2];
+                                        if (!this_1.rootConfig.networkFetcher) return [3 /*break*/, 3];
                                         return [4 /*yield*/, this_1.rootConfig.networkFetcher(config.url)];
-                                    case 1:
+                                    case 2:
                                         body = _b.sent();
-                                        return [3 /*break*/, 4];
-                                    case 2: return [4 /*yield*/, request(config.url)];
-                                    case 3:
+                                        return [3 /*break*/, 5];
+                                    case 3: return [4 /*yield*/, request(config.url)];
+                                    case 4:
                                         resp_1 = _b.sent();
                                         body = resp_1.body;
-                                        _b.label = 4;
-                                    case 4:
+                                        _b.label = 5;
+                                    case 5:
                                         $ = cheerio.load(body);
                                         url_list1 = [];
                                         for (_i = 0, _a = $(config.selector); _i < _a.length; _i++) {
@@ -239,22 +246,26 @@ var Crawler = /** @class */ (function () {
                                             url_list1.push(n.attribs.href);
                                         }
                                         urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
+                                        console.log("[INFO] LinkFound/all: " + urls_abs.length);
                                         urls_abs = Array.from(new Set(urls_abs));
+                                        console.log("[INFO] LinkFound/unique: " + urls_abs.length);
                                         urls_abs = this_1.getFilteredUrl(config.url, urls_abs);
-                                        urls_final = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
+                                        console.log("[INFO] LinkFound/filter: " + urls_abs.length);
+                                        urls_abs = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
+                                        console.log("[INFO] LinkFound/slice: " + urls_abs.length);
                                         // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                                         urls_abs = urls_abs.reverse();
-                                        if (urls_final.length == 0) {
+                                        if (urls_abs.length == 0) {
                                             analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         }
-                                        urlList = urlList.concat(urls_final.map(function (x) { return { 'url': x, 'extra': config.extra }; }));
-                                        return [3 /*break*/, 6];
-                                    case 5:
+                                        urlList = urlList.concat(urls_abs.map(function (x) { return { 'url': x, 'extra': config.extra }; }));
+                                        return [3 /*break*/, 7];
+                                    case 6:
                                         err_1 = _b.sent();
                                         analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         analytics_1.Analytics.exception(err_1, { "url": config.url });
-                                        return [3 /*break*/, 6];
-                                    case 6: return [2 /*return*/];
+                                        return [3 /*break*/, 7];
+                                    case 7: return [2 /*return*/];
                                 }
                             });
                         };
@@ -373,30 +384,32 @@ var Crawler = /** @class */ (function () {
         }
         return this.replaceEncodings(str);
     };
+    // cut out url which is invalid.
     Crawler.prototype.getFilteredUrl = function (root_url, urls_abs) {
-        if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
-            var url_filtered = [];
-            for (var _i = 0, urls_abs_2 = urls_abs; _i < urls_abs_2.length; _i++) {
-                var u = urls_abs_2[_i];
-                // ensure same domain.
-                if (Url(u).hostname != Url(root_url).hostname) {
-                    console.log("[INFO] Ignore url " + u + " for out of domain fetch");
-                    continue;
-                }
+        var url_filtered = [];
+        for (var _i = 0, urls_abs_2 = urls_abs; _i < urls_abs_2.length; _i++) {
+            var u = urls_abs_2[_i];
+            if (Url(u).hostname != Url(root_url).hostname) {
+                console.log("[INFO] Ignore url " + u + " for out of domain fetch");
+                continue;
+            }
+            if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
+                var flag = 0;
                 for (var _a = 0, _b = this.rootConfig.ignoreUrlRegex; _a < _b.length; _a++) {
                     var ic = _b[_a];
                     if (u.indexOf(ic) != -1) {
                         console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                        flag = 1;
                         break;
                     }
-                    url_filtered.push(u);
+                }
+                if (flag == 1) {
+                    continue;
                 }
             }
-            return url_filtered;
+            url_filtered.push(u);
         }
-        else {
-            return urls_abs;
-        }
+        return url_filtered;
     };
     Crawler.prototype.replaceEncodings = function (data) {
         data = data.replace("%20", " ");

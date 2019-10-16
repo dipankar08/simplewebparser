@@ -39,7 +39,7 @@ var cron = require('node-cron');
 var request = require("request-promise");
 var anandabazar_1 = require("./config/anandabazar");
 var zeenews_bengali_1 = require("./config/zeenews_bengali");
-var news18_bengali_1 = require("./config/news18_bengali");
+var news18_1 = require("./config/news18");
 var oneindia_bengali_1 = require("./config/oneindia_bengali");
 var bbc_bengali_1 = require("./config/bbc_bengali");
 var kolkata247_1 = require("./config/kolkata247");
@@ -57,7 +57,7 @@ var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
     new zeenews_bengali_1.ZeeNewsConfig(),
-    new news18_bengali_1.News18Config(),
+    new news18_1.News18BengaliConfig(),
     new oneindia_bengali_1.OneIndiaBengaliConfig(),
     new bbc_bengali_1.BbcBengaliConfig(),
     new kolkata247_1.Kolkata247(),
@@ -72,9 +72,11 @@ var configList = [
     // ENGLISH
     //new NDTVEnglishConfig(),
     new thehindu_1.TheHinduConfig(),
+    new news18_1.News18EnglishConfig(),
     //HINDI
     //new NDTVHindiConfig(),
     new business_insiders_1.BusinessInsidersConfig(),
+    new news18_1.News18HindiConfig(),
 ];
 function prod() {
     return __awaiter(this, void 0, void 0, function () {
@@ -141,5 +143,5 @@ function test() {
 }
 //test()
 cronJob();
-//new BartamanConfig().execute()
+//new News18HindiConfig().execute()
 //# sourceMappingURL=cron.js.map

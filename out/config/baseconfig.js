@@ -63,15 +63,14 @@ var BaseConfig = /** @class */ (function () {
                         return [4 /*yield*/, crawler.parse(this.getTestPageUrl().toString())];
                     case 1:
                         res = _a.sent();
-                        if (res.title.length > 10 && res.details.length > 10 && res.img.length > 10) {
-                            console.log(res.title);
-                            console.log(res.details);
-                            console.log(res.img);
+                        console.log(res.title);
+                        console.log(res.details);
+                        console.log(res.img);
+                        if (res.title.length > 10 && res.details.length > 10 && res.img != undefined && res.img.length > 10) {
                             console.log("[" + this.tag + "] Test Passed");
                         }
                         else {
                             console.log("[" + this.tag + "] Test Failed for url: " + this.getTestPageUrl());
-                            console.log(res);
                         }
                         return [2 /*return*/];
                 }

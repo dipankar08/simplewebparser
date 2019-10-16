@@ -1,7 +1,7 @@
 import { strict } from "assert";
 import { Analytics } from "./analytics";
 import { url } from "inspector";
-import { StoryListConfig, LIMIT } from "./config/CONST";
+import { StoryListConfig, LIMIT, STREAM } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
 
 let request = require('async-request'), // TODO: move to const request = require("request-promise");
@@ -17,6 +17,7 @@ export type RootConfig = {
     ignoreUrlRegex?:Array<string>, // Give the regex if a url match with it - it will just ignore.
     ignoreLineRegex?:Array<string>, // it will ignone this line in a para while parsing a text.
     networkFetcher?: Function,
+    defaultImg?:String, // default image to be shown if img not found.
 }
 
 export type PageParseConfig = {
@@ -74,6 +75,7 @@ export class Crawler {
                 Analytics.exception(error)
                 return {};
             }
+            console.log("[INFO Fetching done!")
             result['hostname'] =url1.hostname
             let $ = cheerio.load(body);
             for (var item of this.config) {
@@ -87,6 +89,9 @@ export class Crawler {
                             item.attr = 'src' 
                         }
                         result[item.name.toString()]= this.absUrl(url, $(item.selector).attr(item.attr))
+                        if(!result[item.name.toString()]){
+                            result[item.name.toString()] = this.rootConfig.defaultImg;
+                        }
                         break;
                 }
             }
@@ -164,6 +169,7 @@ export class Crawler {
         console.log(`[INFO] Total Story List count: ${storyConfig.length}`)
         let urlList:Array<StringAnyMap> =[]
         for( let config of storyConfig){
+            console.log(`[INFO] =====================  PROCESSING ${STREAM[config.stream]} =======================`)
             try{
                 console.log(`[INFO] Fetching link ${config.url}`)
                 let body = null;
@@ -180,16 +186,19 @@ export class Crawler {
                     url_list1.push(n.attribs.href)
                 }
                 let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
+                console.log(`[INFO] LinkFound/all: ${urls_abs.length}`)
                 urls_abs = Array.from(new Set(urls_abs))
+                console.log(`[INFO] LinkFound/unique: ${urls_abs.length}`)
                 urls_abs = this.getFilteredUrl(config.url, urls_abs)
-
-                let urls_final = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
+                console.log(`[INFO] LinkFound/filter: ${urls_abs.length}`)
+                urls_abs = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
+                console.log(`[INFO] LinkFound/slice: ${urls_abs.length}`)
                 // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                 urls_abs = urls_abs.reverse()
-                if(urls_final.length ==0){
+                if(urls_abs.length ==0){
                     Analytics.action("error_parse_root_url", config.url); 
                 }
-                urlList = urlList.concat(urls_final.map(x=> {return {'url': x, 'extra':config.extra}}))
+                urlList = urlList.concat(urls_abs.map(x=> {return {'url': x, 'extra':config.extra}}))
             }catch(err){
                 Analytics.action("error_parse_root_url", config.url);
                 Analytics.exception(err,{"url":config.url})
@@ -295,27 +304,30 @@ export class Crawler {
         return this.replaceEncodings(str);
     }
 
+    // cut out url which is invalid.
     private getFilteredUrl(root_url, urls_abs){
-        if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
-            let url_filtered = []
-            for(let u of urls_abs){
-                // ensure same domain.
-                if(Url(u).hostname != Url(root_url).hostname){
-                    console.log(`[INFO] Ignore url ${u} for out of domain fetch`)
-                    continue;
-                }
+        let url_filtered = []
+        for(let u of urls_abs){
+            if(Url(u).hostname != Url(root_url).hostname){
+                console.log(`[INFO] Ignore url ${u} for out of domain fetch`)
+                continue;
+            }
+            if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
+                let flag =0;
                 for (let ic of this.rootConfig.ignoreUrlRegex){
                     if(u.indexOf(ic) != -1){
                         console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
-                        break;
+                        flag =1;
+                        break;   
                     }
-                    url_filtered.push(u)
+                }
+                if (flag ==1) {
+                    continue;
                 }
             }
-            return url_filtered;
-        }else{
-            return urls_abs;
+            url_filtered.push(u)
         }
+        return url_filtered;
     }
 
    private replaceEncodings(data:string) {
