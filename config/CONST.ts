@@ -1,7 +1,7 @@
 import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../crawler";
 
-export const LIMIT:number = 5;
+export const LIMIT:number = 10;
 export enum LANG{
     BENGALI,
     ENGLISH,

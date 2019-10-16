@@ -7,7 +7,7 @@ import { AnandabazarConfig } from './config/anandabazar';
 import { ListConfig } from './config/CONST';
 import { ZeeNewsConfig } from './config/zeenews_bengali';
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
-import { OneIndiaBengaliConfig } from './config/oneindia_bengali';
+import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
 import { BbcBengaliConfig } from './config/bbc_bengali';
 import { Kolkata247 } from './config/kolkata247';
 import { NDTVBanglaConfig } from './config/ndtv_bangla';
@@ -45,11 +45,13 @@ var configList:Array<BaseConfig> =[
     //new NDTVEnglishConfig(),
     new TheHinduConfig(),
     new News18EnglishConfig(),
+    new OneIndiaEnglishConfig(),
 
     //HINDI
     //new NDTVHindiConfig(),
     new BusinessInsidersConfig(),
     new News18HindiConfig(),
+    new OneIndiaHindiConfig(),
 ]
 
 async function prod(){  
@@ -89,4 +91,4 @@ async function test(){
 
 //test()
 cronJob();
-//new News18HindiConfig().execute()
+//new OneIndiaEnglishConfig().execute()
