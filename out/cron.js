@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
 var request = require("request-promise");
 var anandabazar_1 = require("./config/anandabazar");
-var zeenews_bengali_1 = require("./config/zeenews_bengali");
+var zeenews_1 = require("./config/zeenews");
 var news18_1 = require("./config/news18");
 var oneindia_1 = require("./config/oneindia");
 var bbc_bengali_1 = require("./config/bbc_bengali");
@@ -56,7 +56,7 @@ var bartaman_1 = require("./config/bartaman");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
-    new zeenews_bengali_1.ZeeNewsConfig(),
+    new zeenews_1.ZeeNewsBengaliConfig(),
     new news18_1.News18BengaliConfig(),
     new oneindia_1.OneIndiaBengaliConfig(),
     new bbc_bengali_1.BbcBengaliConfig(),
@@ -74,11 +74,13 @@ var configList = [
     new thehindu_1.TheHinduConfig(),
     new news18_1.News18EnglishConfig(),
     new oneindia_1.OneIndiaEnglishConfig(),
+    new zeenews_1.ZeeNewsEnglishConfig(),
     //HINDI
     //new NDTVHindiConfig(),
     new business_insiders_1.BusinessInsidersConfig(),
     new news18_1.News18HindiConfig(),
     new oneindia_1.OneIndiaHindiConfig(),
+    new zeenews_1.ZeeNewsHindiConfig(),
 ];
 function prod() {
     return __awaiter(this, void 0, void 0, function () {
@@ -145,5 +147,5 @@ function test() {
 }
 //test()
 cronJob();
-//new OneIndiaEnglishConfig().execute()
+//new ZeeNewsHindiConfig().test()
 //# sourceMappingURL=cron.js.map

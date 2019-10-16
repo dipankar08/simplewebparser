@@ -5,7 +5,7 @@ const request = require("request-promise");
 import { BaseConfig } from './config/baseconfig';
 import { AnandabazarConfig } from './config/anandabazar';
 import { ListConfig } from './config/CONST';
-import { ZeeNewsConfig } from './config/zeenews_bengali';
+import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/zeenews';
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
 import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
 import { BbcBengaliConfig } from './config/bbc_bengali';
@@ -27,7 +27,7 @@ import { BartamanConfig } from './config/bartaman';
 var configList:Array<BaseConfig> =[
     // BENGALI
     new AnandabazarConfig(),
-    new ZeeNewsConfig(),
+    new ZeeNewsBengaliConfig(),
     new News18BengaliConfig(),
     new OneIndiaBengaliConfig(),
     new BbcBengaliConfig(),
@@ -46,12 +46,14 @@ var configList:Array<BaseConfig> =[
     new TheHinduConfig(),
     new News18EnglishConfig(),
     new OneIndiaEnglishConfig(),
+    new ZeeNewsEnglishConfig(),
 
     //HINDI
     //new NDTVHindiConfig(),
     new BusinessInsidersConfig(),
     new News18HindiConfig(),
     new OneIndiaHindiConfig(),
+    new ZeeNewsHindiConfig(),
 ]
 
 async function prod(){  
@@ -91,4 +93,4 @@ async function test(){
 
 //test()
 cronJob();
-//new OneIndiaEnglishConfig().execute()
+//new ZeeNewsHindiConfig().test()
