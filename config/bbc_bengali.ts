@@ -1,13 +1,17 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class BbcBengaliConfig extends BaseConfig {
     constructor() { 
         super("anandabazar"); 
     }
-
+    getRootConfig():RootConfig{
+        return {
+            'title': 'BCC Bangla'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

@@ -21,6 +21,11 @@ var AjjKalConfig = /** @class */ (function (_super) {
     function AjjKalConfig() {
         return _super.call(this, "") || this;
     }
+    AjjKalConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'AajKal'
+        };
+    };
     AjjKalConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

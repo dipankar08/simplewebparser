@@ -1,13 +1,17 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class PratidinConfig extends BaseConfig {
     constructor() { 
         super("Pratidin"); 
     }
-
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Pratidin'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

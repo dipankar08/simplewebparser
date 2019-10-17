@@ -21,6 +21,11 @@ var BusinessInsidersConfig = /** @class */ (function (_super) {
     function BusinessInsidersConfig() {
         return _super.call(this, "BusinessInsiders") || this;
     }
+    BusinessInsidersConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'Business_Inssider'
+        };
+    };
     BusinessInsidersConfig.prototype.getLang = function () {
         return CONST_1.LANG.ENGLISH;
     };

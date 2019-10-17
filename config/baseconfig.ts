@@ -9,7 +9,7 @@ export abstract class BaseConfig {
         this.tag = tag;
     }
 
-    protected getRootConfig():RootConfig { return {}} ;
+    abstract getRootConfig():RootConfig;
     abstract getPageParseConfig():Array<PageParseConfig> ;
 
     abstract getLang(): LANG

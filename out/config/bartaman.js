@@ -59,7 +59,8 @@ var BartamanConfig = /** @class */ (function (_super) {
     }
     BartamanConfig.prototype.getRootConfig = function () {
         return {
-            networkFetcher: this.getDataFromUrl
+            networkFetcher: this.getDataFromUrl,
+            title: "Bartaman",
         };
     };
     BartamanConfig.prototype.getLang = function () {

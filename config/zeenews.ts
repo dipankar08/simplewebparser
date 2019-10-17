@@ -13,7 +13,8 @@ export class ZeeNewsBengaliConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/video/'],
-            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title:"Zee News",
         }
     }
     getPageParseConfig(): Array<PageParseConfig> {
@@ -48,7 +49,8 @@ export class ZeeNewsEnglishConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/video/'],
-            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title:"Zee News",
         }
     }
     getPageParseConfig(): Array<PageParseConfig> {
@@ -90,7 +92,8 @@ export class ZeeNewsHindiConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/video/'],
-            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg:'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title:"Zee News",
         }
     }
     getPageParseConfig(): Array<PageParseConfig> {

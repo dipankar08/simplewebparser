@@ -24,6 +24,11 @@ var AajBanglaConfig = /** @class */ (function (_super) {
     AajBanglaConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };
+    AajBanglaConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'AajBangla'
+        };
+    };
     AajBanglaConfig.prototype.getPageParseConfig = function () {
         return [
             { name: 'title', selector: '.td-main-content .td-post-title h1', type: crawler_1.Type.TEXT },

@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class AnandabazarConfig extends BaseConfig {
@@ -8,6 +8,11 @@ export class AnandabazarConfig extends BaseConfig {
         super(""); 
     }
 
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Temp'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

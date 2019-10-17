@@ -27,6 +27,11 @@ var TheHinduConfig = /** @class */ (function (_super) {
         ];
         return _this;
     }
+    TheHinduConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'The Hindu'
+        };
+    };
     TheHinduConfig.prototype.getLang = function () {
         return CONST_1.LANG.ENGLISH;
     };

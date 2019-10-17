@@ -18,6 +18,7 @@ export type RootConfig = {
     ignoreLineRegex?:Array<string>, // it will ignone this line in a para while parsing a text.
     networkFetcher?: Function,
     defaultImg?:String, // default image to be shown if img not found.
+    title:String, // optinal title
 }
 
 export type PageParseConfig = {

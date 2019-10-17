@@ -21,6 +21,11 @@ var DainikStatesmanConfig = /** @class */ (function (_super) {
     function DainikStatesmanConfig() {
         return _super.call(this, "") || this;
     }
+    DainikStatesmanConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'Statesman Bengali'
+        };
+    };
     DainikStatesmanConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

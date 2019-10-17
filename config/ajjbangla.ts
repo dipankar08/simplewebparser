@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class AajBanglaConfig extends BaseConfig {
@@ -10,6 +10,11 @@ export class AajBanglaConfig extends BaseConfig {
 
     getLang(): LANG {
         return LANG.BENGALI
+    }
+    getRootConfig():RootConfig{
+        return {
+            'title': 'AajBangla'
+        }
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

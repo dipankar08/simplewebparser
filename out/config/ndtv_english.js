@@ -21,6 +21,11 @@ var NDTVEnglishConfig = /** @class */ (function (_super) {
     function NDTVEnglishConfig() {
         return _super.call(this, "NDTV") || this;
     }
+    NDTVEnglishConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'NDTV'
+        };
+    };
     NDTVEnglishConfig.prototype.getLang = function () {
         return CONST_1.LANG.ENGLISH;
     };

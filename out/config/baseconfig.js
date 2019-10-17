@@ -43,8 +43,6 @@ var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
         this.tag = tag;
     }
-    BaseConfig.prototype.getRootConfig = function () { return {}; };
-    ;
     BaseConfig.prototype.getListConfig = function (STREAM) {
         return null;
     };

@@ -13,7 +13,8 @@ export class OneIndiaBengaliConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/videos/'],
-            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title:"OneIndia",
         }
     }
 
@@ -51,7 +52,8 @@ export class OneIndiaEnglishConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/videos/'],
-            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title:"One India",
         }
     }
 
@@ -88,7 +90,8 @@ export class OneIndiaHindiConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/videos/'],
-            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg:'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title:"OneIndia",
         }
     }
 

@@ -25,7 +25,10 @@ var IndiaTimesBengaliConfig = /** @class */ (function (_super) {
         return CONST_1.LANG.BENGALI;
     };
     IndiaTimesBengaliConfig.prototype.getRootConfig = function () {
-        return { ignoreUrlRegex: ['videoshow'] };
+        return {
+            ignoreUrlRegex: ['videoshow'],
+            title: "India Times Bengali"
+        };
     };
     IndiaTimesBengaliConfig.prototype.getPageParseConfig = function () {
         return [

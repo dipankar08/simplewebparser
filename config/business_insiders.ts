@@ -1,11 +1,17 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class BusinessInsidersConfig extends BaseConfig {
     constructor() { 
         super("BusinessInsiders"); 
+    }
+
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Business_Inssider'
+        }
     }
 
     getLang(): LANG {

@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class AjjKalConfig extends BaseConfig {
@@ -8,6 +8,11 @@ export class AjjKalConfig extends BaseConfig {
         super(""); 
     }
 
+    getRootConfig():RootConfig{
+        return {
+            'title': 'AajKal'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

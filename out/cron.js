@@ -36,8 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
+var Url = require('url-parse');
 var request = require("request-promise");
 var anandabazar_1 = require("./config/anandabazar");
+var CONST_1 = require("./config/CONST");
 var zeenews_1 = require("./config/zeenews");
 var news18_1 = require("./config/news18");
 var oneindia_1 = require("./config/oneindia");
@@ -115,28 +117,65 @@ function prod() {
 }
 // run in every 30 min
 function cronJob() {
-    analytics_1.Analytics.launch("crawler");
-    cron.schedule('*/30 * * * *', function () {
-        console.log(Date.now() + " Running a task every 15 minutes");
-        prod();
-    });
-    // run now too.
-    prod();
-}
-function test() {
     return __awaiter(this, void 0, void 0, function () {
-        var body, resp;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    body = { _payload: [{ "title1": "রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই" }] };
+                    analytics_1.Analytics.launch("crawler");
+                    return [4 /*yield*/, updateprofile()];
+                case 1:
+                    _a.sent();
+                    cron.schedule('*/30 * * * *', function () {
+                        console.log(Date.now() + " Running a task every 15 minutes");
+                        prod();
+                    });
+                    // run now too.
+                    prod();
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function updateprofile() {
+    return __awaiter(this, void 0, void 0, function () {
+        var payload, _i, configList_2, config, resp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    payload = [];
+                    for (_i = 0, configList_2 = configList; _i < configList_2.length; _i++) {
+                        config = configList_2[_i];
+                        payload.push({ "lang": CONST_1.LANG[config.getLang()], "hostname": new Url(config.getTestPageUrl()).hostname, "img": config.getRootConfig().defaultImg, "title": config.getRootConfig().title });
+                    }
                     return [4 /*yield*/, request({
-                            uri: 'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
-                            method: 'GET',
-                            headers: {
-                                'Accept-Encoding': 'gzip'
-                            }
+                            uri: 'http://simplestore.dipankar.co.in/api/news_profile/insertorupdate',
+                            method: 'POST',
+                            body: {
+                                _payload: payload,
+                                _field: 'hostname'
+                            },
+                            json: true
                         })];
+                case 1:
+                    resp = _a.sent();
+                    console.log(resp);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+function test() {
+    return __awaiter(this, void 0, void 0, function () {
+        var resp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request({
+                        uri: 'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
+                        method: 'GET',
+                        headers: {
+                            'Accept-Encoding': 'gzip'
+                        }
+                    })];
                 case 1:
                     resp = _a.sent();
                     console.log(resp);

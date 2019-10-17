@@ -21,6 +21,11 @@ var PratidinConfig = /** @class */ (function (_super) {
     function PratidinConfig() {
         return _super.call(this, "Pratidin") || this;
     }
+    PratidinConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'Pratidin'
+        };
+    };
     PratidinConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

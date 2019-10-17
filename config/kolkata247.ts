@@ -1,13 +1,17 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class Kolkata247 extends BaseConfig {
     constructor() { 
         super("anandabazar"); 
     }
-
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Kolkata 24X7'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

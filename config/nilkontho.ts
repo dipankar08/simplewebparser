@@ -1,13 +1,17 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class NilkonthoConfig extends BaseConfig {
     constructor() { 
         super(""); 
     }
-
+    getRootConfig():RootConfig{
+        return {
+            'title': 'NilKontho'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }

@@ -15,7 +15,8 @@ export class AnandabazarConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex:['/photogallery/'],
-            ignoreLineRegex:['পড়ুন:']
+            ignoreLineRegex:['পড়ুন:'],
+            title:"Anandabazar"
         }
     }
 

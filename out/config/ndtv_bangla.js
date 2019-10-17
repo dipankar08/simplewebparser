@@ -21,6 +21,11 @@ var NDTVBanglaConfig = /** @class */ (function (_super) {
     function NDTVBanglaConfig() {
         return _super.call(this, "NDTV") || this;
     }
+    NDTVBanglaConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'NDTV'
+        };
+    };
     NDTVBanglaConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

@@ -1,10 +1,11 @@
 const cron = require('node-cron');
-const request = require("request-promise");
+var Url = require('url-parse');
 
  import {Crawler, Type, ExpandLinkConfig} from './crawler'
+ const request = require("request-promise");
 import { BaseConfig } from './config/baseconfig';
 import { AnandabazarConfig } from './config/anandabazar';
-import { ListConfig } from './config/CONST';
+import { ListConfig, LANG } from './config/CONST';
 import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/zeenews';
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
 import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
@@ -23,6 +24,7 @@ import { AajBanglaConfig } from './config/ajjbangla';
 import { NilkonthoConfig } from './config/nilkontho';
 import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
 import { BartamanConfig } from './config/bartaman';
+import { hostname } from 'os';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -56,6 +58,7 @@ var configList:Array<BaseConfig> =[
     new ZeeNewsHindiConfig(),
 ]
 
+
 async function prod(){  
     try{
         Analytics.action('cron_run_start', `Started at ${Date.now()}`)
@@ -69,8 +72,9 @@ async function prod(){
 }
 
 // run in every 30 min
-function cronJob(){
+async function cronJob(){
     Analytics.launch("crawler");
+    await updateprofile()
     cron.schedule('*/30 * * * *', () => {
         console.log(`${Date.now()} Running a task every 15 minutes`);
             prod();
@@ -79,8 +83,26 @@ function cronJob(){
     prod(); 
 }
 
+async function updateprofile(){
+    var payload =[]
+    for(var config of configList){
+        payload.push({"lang":LANG[config.getLang()], "hostname":new Url(config.getTestPageUrl()).hostname, "img":config.getRootConfig().defaultImg,"title":config.getRootConfig().title})
+    }
+
+    let resp = await request({
+        uri:'http://simplestore.dipankar.co.in/api/news_profile/insertorupdate',
+        method: 'POST',
+        body:{
+            _payload:payload,
+            _field:'hostname'
+        },
+        json: true
+    });
+    console.log(resp)
+
+}
+
 async function test(){
-    var body = {_payload: [{"title1":"রাজ্যবাসীর জন্য সুখবর! বড় অংশ থেকে বর্ষার বিদায়, বাকি অংশে কয়েকদিনের মধ্যেই"}]}; 
     let resp = await request({
         uri:'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
         method: 'GET',

@@ -27,7 +27,8 @@ var ZeeNewsBengaliConfig = /** @class */ (function (_super) {
     ZeeNewsBengaliConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/video/'],
-            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title: "Zee News",
         };
     };
     ZeeNewsBengaliConfig.prototype.getPageParseConfig = function () {
@@ -63,7 +64,8 @@ var ZeeNewsEnglishConfig = /** @class */ (function (_super) {
     ZeeNewsEnglishConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/video/'],
-            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title: "Zee News",
         };
     };
     ZeeNewsEnglishConfig.prototype.getPageParseConfig = function () {
@@ -103,7 +105,8 @@ var ZeeNewsHindiConfig = /** @class */ (function (_super) {
     ZeeNewsHindiConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/video/'],
-            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png'
+            defaultImg: 'https://english.cdn.zeenews.com/images/logo/zeenewslogo_nav.png',
+            title: "Zee News",
         };
     };
     ZeeNewsHindiConfig.prototype.getPageParseConfig = function () {

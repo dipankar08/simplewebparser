@@ -21,6 +21,11 @@ var Kolkata247 = /** @class */ (function (_super) {
     function Kolkata247() {
         return _super.call(this, "anandabazar") || this;
     }
+    Kolkata247.prototype.getRootConfig = function () {
+        return {
+            'title': 'Kolkata 24X7'
+        };
+    };
     Kolkata247.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

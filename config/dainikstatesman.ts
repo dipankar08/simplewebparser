@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class DainikStatesmanConfig extends BaseConfig {
@@ -8,9 +8,15 @@ export class DainikStatesmanConfig extends BaseConfig {
         super(""); 
     }
 
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Statesman Bengali'
+        }
+    }
     getLang(): LANG {
         return LANG.BENGALI
     }
+
 
     getLimit():number{
         return 3;

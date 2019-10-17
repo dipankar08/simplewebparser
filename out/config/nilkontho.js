@@ -21,6 +21,11 @@ var NilkonthoConfig = /** @class */ (function (_super) {
     function NilkonthoConfig() {
         return _super.call(this, "") || this;
     }
+    NilkonthoConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'NilKontho'
+        };
+    };
     NilkonthoConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

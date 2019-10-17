@@ -12,7 +12,8 @@ export class BartamanConfig extends BaseConfig {
     
     getRootConfig():RootConfig{
         return {
-            networkFetcher:this.getDataFromUrl
+            networkFetcher:this.getDataFromUrl,
+            title:"Bartaman",
         }
     }
     getLang(): LANG {

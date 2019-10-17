@@ -21,6 +21,11 @@ var NDTVHindiConfig = /** @class */ (function (_super) {
     function NDTVHindiConfig() {
         return _super.call(this, "NDTV") || this;
     }
+    NDTVHindiConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'NDTV'
+        };
+    };
     NDTVHindiConfig.prototype.getLang = function () {
         return CONST_1.LANG.HINDI;
     };

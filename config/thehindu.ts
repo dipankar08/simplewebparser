@@ -1,6 +1,6 @@
 
 import {BaseConfig} from "./baseconfig";
-import { PageParseConfig, Type } from "../crawler";
+import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
 
 export class TheHinduConfig extends BaseConfig {
@@ -12,6 +12,11 @@ export class TheHinduConfig extends BaseConfig {
         super("TheHindu"); 
     }
 
+    getRootConfig():RootConfig{
+        return {
+            'title': 'The Hindu'
+        }
+    }
     getLang(): LANG {
         return LANG.ENGLISH
     }

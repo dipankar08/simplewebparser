@@ -21,6 +21,11 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     function AnandabazarConfig() {
         return _super.call(this, "") || this;
     }
+    AnandabazarConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'Temp'
+        };
+    };
     AnandabazarConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

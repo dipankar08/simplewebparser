@@ -12,7 +12,10 @@ export class IndiaTimesBengaliConfig extends BaseConfig {
         return LANG.BENGALI
     }
     getRootConfig():RootConfig{
-        return {ignoreUrlRegex:['videoshow']}
+        return {
+            ignoreUrlRegex:['videoshow'],
+            title:"India Times Bengali"
+        }
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

@@ -33,7 +33,8 @@ var News18BengaliConfig = /** @class */ (function (_super) {
     };
     News18BengaliConfig.prototype.getRootConfig = function () {
         return {
-            ignoreUrlRegex: ['/photogallery/', '/videos/'] // any URL contains photogallery will be ignored.
+            ignoreUrlRegex: ['/photogallery/', '/videos/'],
+            title: "News18",
         };
     };
     News18BengaliConfig.prototype.getTestPageUrl = function () {
@@ -69,7 +70,8 @@ var News18EnglishConfig = /** @class */ (function (_super) {
     };
     News18EnglishConfig.prototype.getRootConfig = function () {
         return {
-            ignoreUrlRegex: ['/photogallery/', '/videos/'] // any URL contains photogallery will be ignored.
+            ignoreUrlRegex: ['/photogallery/', '/videos/'],
+            title: "News18"
         };
     };
     News18EnglishConfig.prototype.getTestPageUrl = function () {
@@ -108,7 +110,8 @@ var News18HindiConfig = /** @class */ (function (_super) {
     };
     News18HindiConfig.prototype.getRootConfig = function () {
         return {
-            ignoreUrlRegex: ['/photogallery/', '/videos/'] // any URL contains photogallery will be ignored.
+            ignoreUrlRegex: ['/photogallery/', '/videos/'],
+            title: "News 18"
         };
     };
     News18HindiConfig.prototype.getTestPageUrl = function () {

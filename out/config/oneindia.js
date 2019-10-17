@@ -27,7 +27,8 @@ var OneIndiaBengaliConfig = /** @class */ (function (_super) {
     OneIndiaBengaliConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/videos/'],
-            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title: "OneIndia",
         };
     };
     OneIndiaBengaliConfig.prototype.getPageParseConfig = function () {
@@ -64,7 +65,8 @@ var OneIndiaEnglishConfig = /** @class */ (function (_super) {
     OneIndiaEnglishConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/videos/'],
-            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title: "One India",
         };
     };
     OneIndiaEnglishConfig.prototype.getPageParseConfig = function () {
@@ -99,7 +101,8 @@ var OneIndiaHindiConfig = /** @class */ (function (_super) {
     OneIndiaHindiConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/videos/'],
-            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg'
+            defaultImg: 'https://hindi.oneindia.com/images/hindi-oneindia-logo.svg',
+            title: "OneIndia",
         };
     };
     OneIndiaHindiConfig.prototype.getPageParseConfig = function () {

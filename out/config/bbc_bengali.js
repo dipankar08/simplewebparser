@@ -21,6 +21,11 @@ var BbcBengaliConfig = /** @class */ (function (_super) {
     function BbcBengaliConfig() {
         return _super.call(this, "anandabazar") || this;
     }
+    BbcBengaliConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'BCC Bangla'
+        };
+    };
     BbcBengaliConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };

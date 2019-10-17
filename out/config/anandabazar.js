@@ -27,7 +27,8 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     AnandabazarConfig.prototype.getRootConfig = function () {
         return {
             ignoreUrlRegex: ['/photogallery/'],
-            ignoreLineRegex: ['পড়ুন:']
+            ignoreLineRegex: ['পড়ুন:'],
+            title: "Anandabazar"
         };
     };
     AnandabazarConfig.prototype.getPageParseConfig = function () {
