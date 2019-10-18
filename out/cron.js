@@ -55,6 +55,7 @@ var ajjbangla_1 = require("./config/ajjbangla");
 var nilkontho_1 = require("./config/nilkontho");
 var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
 var bartaman_1 = require("./config/bartaman");
+var techcrunch_1 = require("./config/techcrunch");
 var configList = [
     // BENGALI
     new anandabazar_1.AnandabazarConfig(),
@@ -77,6 +78,7 @@ var configList = [
     new news18_1.News18EnglishConfig(),
     new oneindia_1.OneIndiaEnglishConfig(),
     new zeenews_1.ZeeNewsEnglishConfig(),
+    new techcrunch_1.TechCrunchConfig(),
     //HINDI
     //new NDTVHindiConfig(),
     new business_insiders_1.BusinessInsidersConfig(),

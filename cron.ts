@@ -50,6 +50,7 @@ var configList:Array<BaseConfig> =[
     new News18EnglishConfig(),
     new OneIndiaEnglishConfig(),
     new ZeeNewsEnglishConfig(),
+    new TechCrunchConfig(),
 
     //HINDI
     //new NDTVHindiConfig(),
