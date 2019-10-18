@@ -25,6 +25,7 @@ import { NilkonthoConfig } from './config/nilkontho';
 import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
 import { BartamanConfig } from './config/bartaman';
 import { hostname } from 'os';
+import { TechCrunchConfig } from './config/techcrunch';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -115,4 +116,4 @@ async function test(){
 
 //test()
 cronJob();
-//new ZeeNewsHindiConfig().test()
+//new TechCrunchConfig().execute()

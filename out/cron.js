@@ -186,5 +186,5 @@ function test() {
 }
 //test()
 cronJob();
-//new ZeeNewsHindiConfig().test()
+//new TechCrunchConfig().execute()
 //# sourceMappingURL=cron.js.map
