@@ -30,6 +30,7 @@ import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig } from './config/
 
 var configList:Array<BaseConfig> =[
     // BENGALI
+    new GNEBanglaConfig(),
     new DarkariTipsConfig(),
     new BanglarPranConfig(),
     new AnandabazarConfig(),
