@@ -59,6 +59,7 @@ var techcrunch_1 = require("./config/techcrunch");
 var banglarpran_1 = require("./config/banglarpran");
 var configList = [
     // BENGALI
+    new banglarpran_1.DarkariTipsConfig(),
     new banglarpran_1.BanglarPranConfig(),
     new anandabazar_1.AnandabazarConfig(),
     new zeenews_1.ZeeNewsBengaliConfig(),
@@ -190,5 +191,5 @@ function test() {
 }
 //test()
 cronJob();
-//new BanglarPranConfig().execute()
+//new GNEBanglaConfig().execute()
 //# sourceMappingURL=cron.js.map

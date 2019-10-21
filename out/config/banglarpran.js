@@ -59,4 +59,81 @@ var BanglarPranConfig = /** @class */ (function (_super) {
     return BanglarPranConfig;
 }(baseconfig_1.BaseConfig));
 exports.BanglarPranConfig = BanglarPranConfig;
+var DarkariTipsConfig = /** @class */ (function (_super) {
+    __extends(DarkariTipsConfig, _super);
+    function DarkariTipsConfig() {
+        return _super.call(this, "") || this;
+    }
+    DarkariTipsConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'Darkari Tips'
+        };
+    };
+    DarkariTipsConfig.prototype.getLang = function () {
+        return CONST_1.LANG.BENGALI;
+    };
+    DarkariTipsConfig.prototype.getLimit = function () {
+        return 2;
+    };
+    DarkariTipsConfig.prototype.getPageParseConfig = function () {
+        return [
+            { name: 'title', selector: 'article header h1', type: crawler_1.Type.TEXT },
+            { name: 'img', selector: 'article  .td-post-featured-image img', type: crawler_1.Type.IMAGE },
+            { name: 'details', selector: 'article .td-post-content > p', type: crawler_1.Type.TEXT },
+        ];
+    };
+    DarkariTipsConfig.prototype.getTestPageUrl = function () {
+        return "https://www.darkaritips.com/baby-care/ja-ja-kornio-2/";
+    };
+    DarkariTipsConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/headline/', limit: 4 },
+            { stream: CONST_1.STREAM.HEALTH, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/health-message/', limit: 4 },
+            { stream: CONST_1.STREAM.LIFESTYLE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/lifestyle/', limit: 4 },
+        ];
+    };
+    return DarkariTipsConfig;
+}(baseconfig_1.BaseConfig));
+exports.DarkariTipsConfig = DarkariTipsConfig;
+var GNEBanglaConfig = /** @class */ (function (_super) {
+    __extends(GNEBanglaConfig, _super);
+    function GNEBanglaConfig() {
+        return _super.call(this, "") || this;
+    }
+    GNEBanglaConfig.prototype.getRootConfig = function () {
+        return {
+            'title': 'GNE Bangla'
+        };
+    };
+    GNEBanglaConfig.prototype.getLang = function () {
+        return CONST_1.LANG.BENGALI;
+    };
+    GNEBanglaConfig.prototype.getLimit = function () {
+        return 2;
+    };
+    GNEBanglaConfig.prototype.getPageParseConfig = function () {
+        return [
+            { name: 'title', selector: 'article header h1', type: crawler_1.Type.TEXT },
+            { name: 'img', selector: 'article  .td-post-featured-image img', type: crawler_1.Type.IMAGE },
+            { name: 'details', selector: 'article .td-post-content > p', type: crawler_1.Type.TEXT },
+        ];
+    };
+    GNEBanglaConfig.prototype.getTestPageUrl = function () {
+        return "https://gnebangla.in/international/2019/10/17/%e0%a6%ad%e0%a6%af%e0%a6%bc%e0%a6%99%e0%a7%8d%e0%a6%95%e0%a6%b0-%e0%a6%ac%e0%a6%bf%e0%a6%aa%e0%a6%a6-%e0%a6%a4%e0%a6%be%e0%a6%87-%e0%a6%8f%e0%a6%87-%e0%a6%ae%e0%a6%be%e0%a6%9b%e0%a6%95%e0%a7%87/";
+    };
+    GNEBanglaConfig.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.VIRAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/viral-news/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/local-news/', limit: 4 },
+            { stream: CONST_1.STREAM.STATE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/west-bengal/', limit: 4 },
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/national-news/', limit: 4 },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/international/', limit: 4 },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/technology/', limit: 4 },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/sports-news/', limit: 4 },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/entertainment/', limit: 4 },
+        ];
+    };
+    return GNEBanglaConfig;
+}(baseconfig_1.BaseConfig));
+exports.GNEBanglaConfig = GNEBanglaConfig;
 //# sourceMappingURL=banglarpran.js.map

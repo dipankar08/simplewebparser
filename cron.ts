@@ -26,10 +26,11 @@ import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
 import { BartamanConfig } from './config/bartaman';
 import { hostname } from 'os';
 import { TechCrunchConfig } from './config/techcrunch';
-import { BanglarPranConfig } from './config/banglarpran';
+import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig } from './config/banglarpran';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
+    new DarkariTipsConfig(),
     new BanglarPranConfig(),
     new AnandabazarConfig(),
     new ZeeNewsBengaliConfig(),
@@ -119,4 +120,4 @@ async function test(){
 
 //test()
 cronJob();
-//new BanglarPranConfig().execute()
+//new GNEBanglaConfig().execute()
