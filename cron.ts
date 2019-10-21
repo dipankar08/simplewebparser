@@ -5,7 +5,7 @@ var Url = require('url-parse');
  const request = require("request-promise");
 import { BaseConfig } from './config/baseconfig';
 import { AnandabazarConfig } from './config/anandabazar';
-import { ListConfig, LANG } from './config/CONST';
+import { ListConfig, LANG, STREAM } from './config/CONST';
 import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/zeenews';
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
 import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
@@ -92,7 +92,15 @@ async function cronJob(){
 async function updateprofile(){
     var payload =[]
     for(var config of configList){
-        payload.push({"lang":LANG[config.getLang()], "hostname":new Url(config.getTestPageUrl()).hostname, "img":config.getRootConfig().defaultImg,"title":config.getRootConfig().title})
+        
+        payload.push(
+            {
+                "lang":LANG[config.getLang()],
+                "hostname":new Url(config.getTestPageUrl()).hostname,
+                "img":config.getRootConfig().defaultImg,
+                "title":config.getRootConfig().title,
+                "streams": Array.from(new Set(config.getStoryListConfig().map(x=>STREAM[x.stream]))),
+            })
     }
 
     let resp = await request({

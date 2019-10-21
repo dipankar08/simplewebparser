@@ -20,7 +20,7 @@ export abstract class BaseConfig {
     abstract  getTestPageUrl(): String
     protected getLimit():number{ return LIMIT; }
 
-    protected getStoryListConfig():Array<StoryListConfig>{
+    public getStoryListConfig():Array<StoryListConfig>{
         return []
     }
 

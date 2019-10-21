@@ -151,7 +151,13 @@ function updateprofile() {
                     payload = [];
                     for (_i = 0, configList_2 = configList; _i < configList_2.length; _i++) {
                         config = configList_2[_i];
-                        payload.push({ "lang": CONST_1.LANG[config.getLang()], "hostname": new Url(config.getTestPageUrl()).hostname, "img": config.getRootConfig().defaultImg, "title": config.getRootConfig().title });
+                        payload.push({
+                            "lang": CONST_1.LANG[config.getLang()],
+                            "hostname": new Url(config.getTestPageUrl()).hostname,
+                            "img": config.getRootConfig().defaultImg,
+                            "title": config.getRootConfig().title,
+                            "streams": Array.from(new Set(config.getStoryListConfig().map(function (x) { return CONST_1.STREAM[x.stream]; }))),
+                        });
                     }
                     return [4 /*yield*/, request({
                             uri: 'http://simplestore.dipankar.co.in/api/news_profile/insertorupdate',
