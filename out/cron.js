@@ -56,8 +56,10 @@ var nilkontho_1 = require("./config/nilkontho");
 var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
 var bartaman_1 = require("./config/bartaman");
 var techcrunch_1 = require("./config/techcrunch");
+var banglarpran_1 = require("./config/banglarpran");
 var configList = [
     // BENGALI
+    new banglarpran_1.BanglarPranConfig(),
     new anandabazar_1.AnandabazarConfig(),
     new zeenews_1.ZeeNewsBengaliConfig(),
     new news18_1.News18BengaliConfig(),
@@ -188,5 +190,5 @@ function test() {
 }
 //test()
 cronJob();
-//new TechCrunchConfig().execute()
+//new BanglarPranConfig().execute()
 //# sourceMappingURL=cron.js.map

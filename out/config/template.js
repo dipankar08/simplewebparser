@@ -21,11 +21,6 @@ var AnandabazarConfig = /** @class */ (function (_super) {
     function AnandabazarConfig() {
         return _super.call(this, "") || this;
     }
-    AnandabazarConfig.prototype.getRootConfig = function () {
-        return {
-            'title': 'Temp'
-        };
-    };
     AnandabazarConfig.prototype.getLang = function () {
         return CONST_1.LANG.BENGALI;
     };
@@ -43,6 +38,12 @@ var AnandabazarConfig = /** @class */ (function (_super) {
         return [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'ul.more_news_list li > a', url: 'https://www.sangbadpratidin.in/latest-update/' },
         ];
+    };
+    AnandabazarConfig.prototype.getRootConfig = function () {
+        //>>>>>>>  FILL IT HERE <<<<<<<<<
+        return {
+            'title': ''
+        };
     };
     return AnandabazarConfig;
 }(baseconfig_1.BaseConfig));

@@ -7,12 +7,6 @@ export class AnandabazarConfig extends BaseConfig {
     constructor() { 
         super(""); 
     }
-
-    getRootConfig():RootConfig{
-        return {
-            'title': 'Temp'
-        }
-    }
     getLang(): LANG {
         return LANG.BENGALI
     }
@@ -33,5 +27,11 @@ export class AnandabazarConfig extends BaseConfig {
         return [
             {stream: STREAM.FIRST_PAGE, selector:'ul.more_news_list li > a',url:'https://www.sangbadpratidin.in/latest-update/'},
         ]
+    }
+    getRootConfig():RootConfig{
+        //>>>>>>>  FILL IT HERE <<<<<<<<<
+        return {
+            'title': ''
+        }
     }
 }

@@ -8,15 +8,13 @@ export enum LANG{
     HINDI,
 }
 
-export enum STREAM{
+export enum STREAM {
     NONE,
     HEADLINE,
     FIRST_PAGE,
-
     STATE,
     COUNTRY,
     INTERNATIONAL,
-    
     BUSINESS,
     SCIENCE,
     ENTERTAINMENT,
@@ -38,6 +36,9 @@ export enum STREAM{
     OTHER,
     BANGLADESH,
     HOROSCOPE,
+    POLITICS,
+    VIRAL,
+    DOOARS
 }
 
 export type ListConfig = {
