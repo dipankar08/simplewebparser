@@ -46,6 +46,7 @@ export abstract class BaseConfig {
         let newConfig:Array<StoryListConfig> = this.getStoryListConfig().map(x => {
             x.extra ={'lang':LANG[this.getLang()]}
             x.extra['stream'] = STREAM[x.stream];
+            x.extra['is_active']= "1"
             return x;
         })
         await this.save(await crawler.parseStoryList(newConfig));

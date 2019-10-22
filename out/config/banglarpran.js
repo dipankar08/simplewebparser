@@ -23,7 +23,8 @@ var BanglarPranConfig = /** @class */ (function (_super) {
     }
     BanglarPranConfig.prototype.getRootConfig = function () {
         return {
-            'title': 'Banglar Pran'
+            'title': 'Banglar Pran',
+            is_active: true,
         };
     };
     BanglarPranConfig.prototype.getLang = function () {
@@ -66,7 +67,8 @@ var DarkariTipsConfig = /** @class */ (function (_super) {
     }
     DarkariTipsConfig.prototype.getRootConfig = function () {
         return {
-            'title': 'Darkari Tips'
+            title: 'Darkari Tips',
+            is_active: true,
         };
     };
     DarkariTipsConfig.prototype.getLang = function () {
@@ -102,7 +104,8 @@ var GNEBanglaConfig = /** @class */ (function (_super) {
     }
     GNEBanglaConfig.prototype.getRootConfig = function () {
         return {
-            'title': 'GNE Bangla'
+            'title': 'GNE Bangla',
+            is_active: true,
         };
     };
     GNEBanglaConfig.prototype.getLang = function () {

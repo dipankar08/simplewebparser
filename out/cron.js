@@ -95,27 +95,31 @@ function prod() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 5, , 6]);
+                    _a.trys.push([0, 6, , 7]);
                     analytics_1.Analytics.action('cron_run_start', "Started at " + Date.now());
                     _i = 0, configList_1 = configList;
                     _a.label = 1;
                 case 1:
-                    if (!(_i < configList_1.length)) return [3 /*break*/, 4];
+                    if (!(_i < configList_1.length)) return [3 /*break*/, 5];
                     item = configList_1[_i];
+                    if (!item.getRootConfig().is_active) return [3 /*break*/, 3];
                     return [4 /*yield*/, item.execute()];
                 case 2:
                     _a.sent();
-                    _a.label = 3;
+                    return [3 /*break*/, 4];
                 case 3:
+                    console.log("[INFO] Ignored as not active");
+                    _a.label = 4;
+                case 4:
                     _i++;
                     return [3 /*break*/, 1];
-                case 4: return [3 /*break*/, 6];
-                case 5:
+                case 5: return [3 /*break*/, 7];
+                case 6:
                     err_1 = _a.sent();
                     analytics_1.Analytics.action("crash", "Server has crashed with error");
                     analytics_1.Analytics.exception(err_1);
-                    return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                    return [3 /*break*/, 7];
+                case 7: return [2 /*return*/];
             }
         });
     });
@@ -156,6 +160,7 @@ function updateprofile() {
                             "img": config.getRootConfig().defaultImg,
                             "title": config.getRootConfig().title,
                             "streams": Array.from(new Set(config.getStoryListConfig().map(function (x) { return CONST_1.STREAM[x.stream]; }))),
+                            "is_active": config.getRootConfig().is_active,
                         });
                     }
                     return [4 /*yield*/, request({

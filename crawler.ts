@@ -19,6 +19,12 @@ export type RootConfig = {
     networkFetcher?: Function,
     defaultImg?:String, // default image to be shown if img not found.
     title:String, // optinal title
+    is_active?:Boolean,
+}
+
+export type SourceConfig = {
+    isActive: false,
+    isActiveMsg: 'Coming soon.',
 }
 
 export type PageParseConfig = {

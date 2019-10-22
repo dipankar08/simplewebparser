@@ -7,10 +7,10 @@ export class BanglarPranConfig extends BaseConfig {
     constructor() { 
         super(""); 
     }
-
     getRootConfig():RootConfig{
         return {
-            'title': 'Banglar Pran'
+            'title': 'Banglar Pran',
+            is_active:true,
         }
     }
     getLang(): LANG {
@@ -61,7 +61,8 @@ export class DarkariTipsConfig extends BaseConfig {
 
     getRootConfig():RootConfig{
         return {
-            'title': 'Darkari Tips'
+            title: 'Darkari Tips',
+            is_active:true,
         }
     }
     getLang(): LANG {
@@ -101,7 +102,8 @@ export class GNEBanglaConfig extends BaseConfig {
 
     getRootConfig():RootConfig{
         return {
-            'title': 'GNE Bangla'
+            'title': 'GNE Bangla',
+            is_active:true,
         }
     }
     getLang(): LANG {
@@ -136,7 +138,6 @@ export class GNEBanglaConfig extends BaseConfig {
             {stream: STREAM.TECHNOLOGY, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/technology/',limit:4},
             {stream: STREAM.SPORTS, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/sports-news/',limit:4},
             {stream: STREAM.ENTERTAINMENT, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/entertainment/',limit:4},
-
         ]
     }
 }

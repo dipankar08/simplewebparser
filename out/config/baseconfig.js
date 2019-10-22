@@ -87,6 +87,7 @@ var BaseConfig = /** @class */ (function () {
                         newConfig = this.getStoryListConfig().map(function (x) {
                             x.extra = { 'lang': CONST_1.LANG[_this.getLang()] };
                             x.extra['stream'] = CONST_1.STREAM[x.stream];
+                            x.extra['is_active'] = "1";
                             return x;
                         });
                         _a = this.save;

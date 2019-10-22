@@ -69,7 +69,11 @@ async function prod(){
     try{
         Analytics.action('cron_run_start', `Started at ${Date.now()}`)
             for(let item of configList){
-                await item.execute();
+                if(item.getRootConfig().is_active){
+                    await item.execute();
+                } else{
+                    console.log("[INFO] Ignored as not active");
+                }
             }
         } catch(err){
             Analytics.action("crash","Server has crashed with error")
@@ -100,6 +104,7 @@ async function updateprofile(){
                 "img":config.getRootConfig().defaultImg,
                 "title":config.getRootConfig().title,
                 "streams": Array.from(new Set(config.getStoryListConfig().map(x=>STREAM[x.stream]))),
+                "is_active":config.getRootConfig().is_active,
             })
     }
 
