@@ -28,7 +28,8 @@ var AnandabazarConfig = /** @class */ (function (_super) {
         return {
             ignoreUrlRegex: ['/photogallery/'],
             ignoreLineRegex: ['পড়ুন:'],
-            title: "Anandabazar"
+            title: "Anandabazar",
+            is_active: true,
         };
     };
     AnandabazarConfig.prototype.getPageParseConfig = function () {
