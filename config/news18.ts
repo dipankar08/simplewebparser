@@ -21,7 +21,7 @@ export class News18BengaliConfig extends BaseConfig {
         return {
             ignoreUrlRegex: ['/photogallery/','/videos/'], // any URL contains photogallery will be ignored.
             title:"News18",
-
+            is_active:true,
         }
     }
     getTestPageUrl(): String {
@@ -56,7 +56,8 @@ export class News18EnglishConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex: ['/photogallery/','/videos/'], // any URL contains photogallery will be ignored.
-            title:"News18"
+            title:"News18",
+            is_active:true,
         }
     }
     getTestPageUrl(): String {
@@ -94,7 +95,8 @@ export class News18HindiConfig extends BaseConfig {
     getRootConfig():RootConfig{
         return {
             ignoreUrlRegex: ['/photogallery/','/videos/'], // any URL contains photogallery will be ignored.
-            title:"News 18"
+            title:"News 18",
+            is_active:true,
         }
     }
     getTestPageUrl(): String {
