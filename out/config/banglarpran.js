@@ -89,9 +89,9 @@ var DarkariTipsConfig = /** @class */ (function (_super) {
     };
     DarkariTipsConfig.prototype.getStoryListConfig = function () {
         return [
-            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/headline/', limit: 4 },
-            { stream: CONST_1.STREAM.HEALTH, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/health-message/', limit: 4 },
-            { stream: CONST_1.STREAM.LIFESTYLE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/lifestyle/', limit: 4 },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/headline/' },
+            { stream: CONST_1.STREAM.HEALTH, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/health-message/' },
+            { stream: CONST_1.STREAM.LIFESTYLE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.darkaritips.com/category/lifestyle/' },
         ];
     };
     return DarkariTipsConfig;
@@ -127,13 +127,13 @@ var GNEBanglaConfig = /** @class */ (function (_super) {
     GNEBanglaConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.VIRAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/viral-news/' },
-            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/local-news/', limit: 4 },
-            { stream: CONST_1.STREAM.STATE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/west-bengal/', limit: 4 },
-            { stream: CONST_1.STREAM.COUNTRY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/national-news/', limit: 4 },
-            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/international/', limit: 4 },
-            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/technology/', limit: 4 },
-            { stream: CONST_1.STREAM.SPORTS, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/sports-news/', limit: 4 },
-            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/entertainment/', limit: 4 },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/local-news/' },
+            { stream: CONST_1.STREAM.STATE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/west-bengal/' },
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/national-news/' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/international/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/technology/' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/sports-news/' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/entertainment/' },
         ];
     };
     return GNEBanglaConfig;
