@@ -42,7 +42,7 @@ var configList:Array<BaseConfig> =[
     new PratidinConfig(),
     new AjjKalConfig(),
     new DainikStatesmanConfig(),
-    new AajBanglaConfig(),
+    // new AajBanglaConfig(), <<< COPY WRITE.>>>
     new NilkonthoConfig(),
     new IndiaTimesBengaliConfig(),
     new BartamanConfig(),

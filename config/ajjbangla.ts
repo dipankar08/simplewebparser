@@ -31,6 +31,7 @@ export class AajBanglaConfig extends BaseConfig {
 
     getStoryListConfig():Array<StoryListConfig>{
         return [
+            /* 
            {stream: STREAM.COUNTRY, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a6%e0%a7%87%e0%a6%b6/'},
            {stream: STREAM.HEADLINE, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%95%e0%a6%b2%e0%a6%95%e0%a6%be%e0%a6%a4%e0%a6%be/'},
            {stream: STREAM.STATE, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/'},
@@ -41,6 +42,7 @@ export class AajBanglaConfig extends BaseConfig {
            {stream: STREAM.HOROSCOPE, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c%e0%a6%95%e0%a7%87%e0%a6%b0-%e0%a6%a6%e0%a6%bf%e0%a6%a8/'},
            {stream: STREAM.LIFESTYLE, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%b2%e0%a6%be%e0%a6%87%e0%a6%ab%e0%a6%b8%e0%a7%8d%e0%a6%9f%e0%a6%be%e0%a6%87%e0%a6%b2/'},
            {stream: STREAM.TOUR, selector:'.td-category-grid .td-module-thumb > a',url:'https://www.aajbangla.in/category/%e0%a6%ad%e0%a7%8d%e0%a6%b0%e0%a6%ae%e0%a6%a3/'},
+            */
         ]
     }
 }

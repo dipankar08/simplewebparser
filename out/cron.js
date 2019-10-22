@@ -51,7 +51,6 @@ var pratidin_1 = require("./config/pratidin");
 var thehindu_1 = require("./config/thehindu");
 var ajjkal_1 = require("./config/ajjkal");
 var dainikstatesman_1 = require("./config/dainikstatesman");
-var ajjbangla_1 = require("./config/ajjbangla");
 var nilkontho_1 = require("./config/nilkontho");
 var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
 var bartaman_1 = require("./config/bartaman");
@@ -71,7 +70,7 @@ var configList = [
     new pratidin_1.PratidinConfig(),
     new ajjkal_1.AjjKalConfig(),
     new dainikstatesman_1.DainikStatesmanConfig(),
-    new ajjbangla_1.AajBanglaConfig(),
+    // new AajBanglaConfig(), <<< COPY WRITE.>>>
     new nilkontho_1.NilkonthoConfig(),
     new indiatimes_bengali_1.IndiaTimesBengaliConfig(),
     new bartaman_1.BartamanConfig(),
