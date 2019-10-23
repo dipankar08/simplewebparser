@@ -71,14 +71,12 @@ export class KolkataTimes24 extends BaseConfig {
     getStoryListConfig():Array<StoryListConfig>{
         return [
             {stream: STREAM.OFF_BEAT, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/offbeat/'},
-
-
             {stream: STREAM.FIRST_PAGE, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/kolkata/', limit:5},
             {stream: STREAM.STATE, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/west-bengal/'},
             {stream: STREAM.COUNTRY, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/national/'},
             {stream: STREAM.INTERNATIONAL, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/world/'},
             {stream: STREAM.POLITICS, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/politics/'},
-
+            
             {stream: STREAM.SPORTS, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/sports/'},
             {stream: STREAM.BUSINESS, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/business-and-economy/'},
             {stream: STREAM.TECHNOLOGY, selector:'.td-module-thumb > a',url:'https://kolkatatimes24.com/category/technology/'},

@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
     
         {
             "type": "node",
@@ -19,8 +20,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Analytics Program",
-            "program": "${workspaceFolder}/analytics.ts",
+            "name": "Test",
+            "program": "${workspaceFolder}/test.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/out/**/*.js"

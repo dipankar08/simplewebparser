@@ -10,7 +10,8 @@ export class TechCrunchConfig extends BaseConfig {
 
     getRootConfig():RootConfig{
         return {
-            'title': 'Tech Crunch'
+            'title': 'Tech Crunch',
+            is_active:true,
         }
     }
     getLang(): LANG {

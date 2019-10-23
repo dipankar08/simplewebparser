@@ -1,6 +1,7 @@
 import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
 import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig } from './CONST';
 import { Analytics } from '../analytics';
+import { SummeryBuilder, SummaryStrategy } from './summary/SummaryManager';
 const request = require("request-promise");
 
 export abstract class BaseConfig {
@@ -68,6 +69,24 @@ export abstract class BaseConfig {
         if(res1.length == 0){
             return;
         }
+        // building summary as we insert.
+        let sb = new SummeryBuilder()
+        res1 = res1.map(x=>{
+            switch(x.lang){
+                case LANG[LANG.BENGALI]:
+                    x['summary']= sb.buildSummary(x.details, SummaryStrategy.BENAGLI)
+                    break;
+                case LANG[LANG.ENGLISH]:
+                    x['summary']= sb.buildSummary(x.details, SummaryStrategy.ENGLISH)
+                    break;
+                case LANG[LANG.HINDI]:
+                    x['summary']= sb.buildSummary(x.details, SummaryStrategy.HINDI)
+                    break;
+            }
+            return x;
+        })
+
+
         const body = { '_payload': res1}; 
 
         let resp = await request({

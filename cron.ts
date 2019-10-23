@@ -73,7 +73,7 @@ async function prod(){
                 if(item.getRootConfig().is_active){
                     await item.execute();
                 } else{
-                    console.log("[INFO] Ignored as not active");
+                    console.log(`[INFO] Ignored as not active :${item.getRootConfig().title}`);
                 }
             }
         } catch(err){
@@ -122,17 +122,5 @@ async function updateprofile(){
 
 }
 
-async function test(){
-    let resp = await request({
-        uri:'https://bartamanpatrika.com/detailNews.php?cID=13&nID=191793&P=1',
-        method: 'GET',
-        headers:{
-            'Accept-Encoding': 'gzip'
-        }
-    });
-    console.log(resp)
-}
-
-//test()
 cronJob();
-//new KolkataTimes24().execute()
+//new TechCrunchConfig().execute()

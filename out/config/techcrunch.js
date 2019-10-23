@@ -23,7 +23,8 @@ var TechCrunchConfig = /** @class */ (function (_super) {
     }
     TechCrunchConfig.prototype.getRootConfig = function () {
         return {
-            'title': 'Tech Crunch'
+            'title': 'Tech Crunch',
+            is_active: true,
         };
     };
     TechCrunchConfig.prototype.getLang = function () {

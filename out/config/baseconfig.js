@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var crawler_1 = require("../crawler");
 var CONST_1 = require("./CONST");
 var analytics_1 = require("../analytics");
+var SummaryManager_1 = require("./summary/SummaryManager");
 var request = require("request-promise");
 var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
@@ -102,7 +103,7 @@ var BaseConfig = /** @class */ (function () {
     };
     BaseConfig.prototype.save = function (res) {
         return __awaiter(this, void 0, void 0, function () {
-            var res1, body, resp;
+            var res1, sb, body, resp;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -122,6 +123,21 @@ var BaseConfig = /** @class */ (function () {
                         if (res1.length == 0) {
                             return [2 /*return*/];
                         }
+                        sb = new SummaryManager_1.SummeryBuilder();
+                        res1 = res1.map(function (x) {
+                            switch (x.lang) {
+                                case CONST_1.LANG[CONST_1.LANG.BENGALI]:
+                                    x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.BENAGLI);
+                                    break;
+                                case CONST_1.LANG[CONST_1.LANG.ENGLISH]:
+                                    x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.ENGLISH);
+                                    break;
+                                case CONST_1.LANG[CONST_1.LANG.HINDI]:
+                                    x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.HINDI);
+                                    break;
+                            }
+                            return x;
+                        });
                         body = { '_payload': res1 };
                         return [4 /*yield*/, request({
                                 uri: 'http://simplestore.dipankar.co.in/api/news/bulk_insert',

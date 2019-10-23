@@ -9,7 +9,8 @@ export class NilkonthoConfig extends BaseConfig {
     }
     getRootConfig():RootConfig{
         return {
-            'title': 'NilKontho'
+            'title': 'NilKontho',
+            is_active:true,
         }
     }
     getLang(): LANG {
@@ -19,7 +20,7 @@ export class NilkonthoConfig extends BaseConfig {
     getPageParseConfig(): Array<PageParseConfig> {
       return [
         { name: 'title',   selector: 'article .post-inner h1', type: Type.TEXT },
-        { name: 'img',     selector: 'article  .single-post-thumb img', type: Type.IMAGE },
+        { name: 'img',     selector: 'article .single-post-thumb img', type: Type.IMAGE },
         { name: 'details', selector: 'article .post-inner .entry > p ', type: Type.TEXT },
       ]
     }

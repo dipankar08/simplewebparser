@@ -23,7 +23,8 @@ var NilkonthoConfig = /** @class */ (function (_super) {
     }
     NilkonthoConfig.prototype.getRootConfig = function () {
         return {
-            'title': 'NilKontho'
+            'title': 'NilKontho',
+            is_active: true,
         };
     };
     NilkonthoConfig.prototype.getLang = function () {
@@ -32,7 +33,7 @@ var NilkonthoConfig = /** @class */ (function (_super) {
     NilkonthoConfig.prototype.getPageParseConfig = function () {
         return [
             { name: 'title', selector: 'article .post-inner h1', type: crawler_1.Type.TEXT },
-            { name: 'img', selector: 'article  .single-post-thumb img', type: crawler_1.Type.IMAGE },
+            { name: 'img', selector: 'article .single-post-thumb img', type: crawler_1.Type.IMAGE },
             { name: 'details', selector: 'article .post-inner .entry > p ', type: crawler_1.Type.TEXT },
         ];
     };
