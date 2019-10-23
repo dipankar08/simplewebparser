@@ -10,7 +10,7 @@ import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from '
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
 import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
 import { BbcBengaliConfig } from './config/bbc_bengali';
-import { Kolkata247 } from './config/kolkata247';
+import { Kolkata247, KolkataTimes24 } from './config/kolkata247';
 import { NDTVBanglaConfig } from './config/ndtv_bangla';
 import { NDTVEnglishConfig } from './config/ndtv_english';
 import { NDTVHindiConfig } from './config/ndtv_hindi';
@@ -30,6 +30,7 @@ import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig } from './config/
 
 var configList:Array<BaseConfig> =[
     // BENGALI
+    new KolkataTimes24(),
     new GNEBanglaConfig(),
     new DarkariTipsConfig(),
     new BanglarPranConfig(),
@@ -134,4 +135,4 @@ async function test(){
 
 //test()
 cronJob();
-//new GNEBanglaConfig().execute()
+//new KolkataTimes24().execute()

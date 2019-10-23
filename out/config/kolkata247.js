@@ -53,4 +53,45 @@ var Kolkata247 = /** @class */ (function (_super) {
     return Kolkata247;
 }(baseconfig_1.BaseConfig));
 exports.Kolkata247 = Kolkata247;
+var KolkataTimes24 = /** @class */ (function (_super) {
+    __extends(KolkataTimes24, _super);
+    function KolkataTimes24() {
+        return _super.call(this, "") || this;
+    }
+    KolkataTimes24.prototype.getRootConfig = function () {
+        return {
+            'title': 'Kolkata Times 24',
+            is_active: true
+        };
+    };
+    KolkataTimes24.prototype.getLang = function () {
+        return CONST_1.LANG.BENGALI;
+    };
+    KolkataTimes24.prototype.getPageParseConfig = function () {
+        return [
+            { name: 'title', selector: 'article header h1', type: crawler_1.Type.TEXT },
+            { name: 'img', selector: 'article  .td-post-featured-image img', type: crawler_1.Type.IMAGE },
+            { name: 'details', selector: 'article .td-post-content > p', type: crawler_1.Type.TEXT },
+        ];
+    };
+    KolkataTimes24.prototype.getTestPageUrl = function () {
+        return "https://kolkatatimes24.com/west-bengal/21026/tmc-counsellor-of-kharagpur-stop-durga-idol-immersion-for-chhat-puja/?relatedposts_hit=1&relatedposts_origin=22890&relatedposts_position=0";
+    };
+    KolkataTimes24.prototype.getStoryListConfig = function () {
+        return [
+            { stream: CONST_1.STREAM.OFF_BEAT, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/offbeat/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/kolkata/', limit: 5 },
+            { stream: CONST_1.STREAM.STATE, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/west-bengal/' },
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/national/' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/world/' },
+            { stream: CONST_1.STREAM.POLITICS, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/politics/' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/sports/' },
+            { stream: CONST_1.STREAM.BUSINESS, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/business-and-economy/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/technology/' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.td-module-thumb > a', url: 'https://kolkatatimes24.com/category/entertainment/' },
+        ];
+    };
+    return KolkataTimes24;
+}(baseconfig_1.BaseConfig));
+exports.KolkataTimes24 = KolkataTimes24;
 //# sourceMappingURL=kolkata247.js.map

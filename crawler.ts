@@ -3,6 +3,7 @@ import { Analytics } from "./analytics";
 import { url } from "inspector";
 import { StoryListConfig, LIMIT, STREAM } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
+import { SummaryStrategy } from "./config/summary/SummaryManager";
 
 let request = require('async-request'), // TODO: move to const request = require("request-promise");
     response;
@@ -20,6 +21,7 @@ export type RootConfig = {
     defaultImg?:String, // default image to be shown if img not found.
     title:String, // optinal title
     is_active?:Boolean,
+    summary?:SummaryStrategy,
 }
 
 export type SourceConfig = {

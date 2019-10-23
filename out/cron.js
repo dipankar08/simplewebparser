@@ -58,6 +58,7 @@ var techcrunch_1 = require("./config/techcrunch");
 var banglarpran_1 = require("./config/banglarpran");
 var configList = [
     // BENGALI
+    new kolkata247_1.KolkataTimes24(),
     new banglarpran_1.GNEBanglaConfig(),
     new banglarpran_1.DarkariTipsConfig(),
     new banglarpran_1.BanglarPranConfig(),
@@ -202,5 +203,5 @@ function test() {
 }
 //test()
 cronJob();
-//new GNEBanglaConfig().execute()
+//new KolkataTimes24().execute()
 //# sourceMappingURL=cron.js.map
