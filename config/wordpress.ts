@@ -2,7 +2,13 @@
 import {BaseConfig} from "./baseconfig";
 import { PageParseConfig, Type, RootConfig } from "../crawler";
 import { LANG, STREAM, ListConfig, StoryListConfig } from "./CONST";
+import { RSA_PKCS1_OAEP_PADDING } from "constants";
 
+let wp:Array<PageParseConfig>  =  [
+    { name: 'title',   selector: 'article header h1', type: Type.TEXT },
+    { name: 'img',     selector: 'article  .td-post-featured-image img', type: Type.IMAGE },
+    { name: 'details', selector: 'article .td-post-content > p', type: Type.TEXT },
+  ]
 export class BanglarPranConfig extends BaseConfig {
     constructor() { 
         super(""); 
@@ -22,11 +28,7 @@ export class BanglarPranConfig extends BaseConfig {
     }
 
     getPageParseConfig(): Array<PageParseConfig> {
-      return [
-        { name: 'title',   selector: 'article header h1', type: Type.TEXT },
-        { name: 'img',     selector: 'article  .td-post-featured-image img', type: Type.IMAGE },
-        { name: 'details', selector: 'article .td-post-content > p', type: Type.TEXT },
-      ]
+        return wp;
     }
 
     getTestPageUrl(): String {
@@ -74,11 +76,7 @@ export class DarkariTipsConfig extends BaseConfig {
     }
 
     getPageParseConfig(): Array<PageParseConfig> {
-      return [
-        { name: 'title',   selector: 'article header h1', type: Type.TEXT },
-        { name: 'img',     selector: 'article  .td-post-featured-image img', type: Type.IMAGE },
-        { name: 'details', selector: 'article .td-post-content > p', type: Type.TEXT },
-      ]
+        return wp;
     }
 
     getTestPageUrl(): String {
@@ -99,7 +97,6 @@ export class GNEBanglaConfig extends BaseConfig {
     constructor() { 
         super(""); 
     }
-
     getRootConfig():RootConfig{
         return {
             'title': 'GNE Bangla',
@@ -110,16 +107,8 @@ export class GNEBanglaConfig extends BaseConfig {
         return LANG.BENGALI
     }
 
-    getLimit():number{
-        return 2;
-    }
-
     getPageParseConfig(): Array<PageParseConfig> {
-      return [
-        { name: 'title',   selector: 'article header h1', type: Type.TEXT },
-        { name: 'img',     selector: 'article  .td-post-featured-image img', type: Type.IMAGE },
-        { name: 'details', selector: 'article .td-post-content > p', type: Type.TEXT },
-      ]
+        return wp;
     }
 
     getTestPageUrl(): String {
@@ -138,6 +127,86 @@ export class GNEBanglaConfig extends BaseConfig {
             {stream: STREAM.TECHNOLOGY, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/technology/'},
             {stream: STREAM.SPORTS, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/sports-news/'},
             {stream: STREAM.ENTERTAINMENT, selector:'.td-category-grid .td-module-thumb > a',url:'https://gnebangla.in/category/entertainment/'},
+        ]
+    }
+}
+
+export class BharatBartaConfig extends BaseConfig {
+    constructor() { 
+        super("bharatbarta"); 
+    }
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Bharat Barta',
+            is_active:true,
+        }
+    }
+    getLang(): LANG {
+        return LANG.BENGALI
+    }
+
+    getPageParseConfig(): Array<PageParseConfig> {
+        return wp;
+    }
+
+    getTestPageUrl(): String {
+        return "https://www.bharatbarta.com/silver-ganguly-in-the-title-again-what-he-said-in-the-trinomul-context/"
+    }
+
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.VIRAL, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/vairal/'},
+            
+            {stream: STREAM.ENTERTAINMENT, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/entertainment'},
+
+            {stream: STREAM.FIRST_PAGE, selector:' .td-module-thumb > a',url:'https://www.bharatbarta.com/category/news'},
+            {stream: STREAM.POLITICS, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/politics-news'},
+            {stream: STREAM.LIFESTYLE, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/lifestyle'},
+
+            {stream: STREAM.TECHNOLOGY, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/technology'},
+            {stream: STREAM.SPORTS, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/sports'},
+            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/bb-special/'},
+          
+        ]
+    }
+}
+
+
+export class Totka24X7Config extends BaseConfig {
+    constructor() { 
+        super(""); 
+    }
+    getRootConfig():RootConfig{
+        return {
+            'title': 'Totka24X7',
+            is_active:true,
+        }
+    }
+    getLang(): LANG {
+        return LANG.BENGALI
+    }
+
+    getPageParseConfig(): Array<PageParseConfig> {
+        return wp;
+    }
+
+    getTestPageUrl(): String {
+        return "https://www.totka24x7.com/archives/68729"
+    }
+
+    getStoryListConfig():Array<StoryListConfig>{
+        return [
+            {stream: STREAM.LIFESTYLE, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/lifestyle'},
+
+            {stream: STREAM.LS_MONEY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/earn-money'},
+            {stream: STREAM.LS_VIRAL, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/viral'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/entertainment'},
+
+            {stream: STREAM.INTERNATIONAL, selector:'.td-module-thumb > a',url:'https://gnebangla.in/category/international/'},
+            {stream: STREAM.TECHNOLOGY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/technology'},
+            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/headlines'},
+            {stream: STREAM.ASTROLOGY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/astrology'},
+            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/different-news'},
         ]
     }
 }

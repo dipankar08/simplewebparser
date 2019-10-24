@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var config = require('config');
 exports.LIMIT = 10;
 var LANG;
 (function (LANG) {
@@ -39,5 +40,11 @@ var STREAM;
     STREAM[STREAM["POLITICS"] = 27] = "POLITICS";
     STREAM[STREAM["VIRAL"] = 28] = "VIRAL";
     STREAM[STREAM["DOOARS"] = 29] = "DOOARS";
+    STREAM[STREAM["LS_MONEY"] = 30] = "LS_MONEY";
+    STREAM[STREAM["LS_VIRAL"] = 31] = "LS_VIRAL";
+    STREAM[STREAM["ASTROLOGY"] = 32] = "ASTROLOGY";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
+exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1';
+exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile' : 'http://simplestore.dipankar.co.in/api/news_profile1';
+console.log("[INFO] Using Root URL: " + exports.DB_URL);
 //# sourceMappingURL=CONST.js.map

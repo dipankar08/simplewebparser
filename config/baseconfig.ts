@@ -1,5 +1,5 @@
 import {PageParseConfig, Crawler, StringAnyMap, RootConfig} from '../crawler'
-import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig } from './CONST';
+import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig, DB_URL } from './CONST';
 import { Analytics } from '../analytics';
 import { SummeryBuilder, SummaryStrategy } from './summary/SummaryManager';
 const request = require("request-promise");
@@ -88,9 +88,9 @@ export abstract class BaseConfig {
 
 
         const body = { '_payload': res1}; 
-
+        console.log(`[INFO]: Uisng URL for insert is : ${DB_URL}`)
         let resp = await request({
-            uri:'http://simplestore.dipankar.co.in/api/news/bulk_insert',
+            uri:`${DB_URL}/bulk_insert`,
             method: 'POST',
             body: body,
             json:true

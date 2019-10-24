@@ -1,7 +1,7 @@
 import { strict } from "assert";
 import { Analytics } from "./analytics";
 import { url } from "inspector";
-import { StoryListConfig, LIMIT, STREAM } from "./config/CONST";
+import { StoryListConfig, LIMIT, STREAM, DB_URL } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
 import { SummaryStrategy } from "./config/summary/SummaryManager";
 
@@ -224,7 +224,7 @@ export class Crawler {
             return null
         }
         // find duplicate in server
-        let resp = await request('http://simplestore.dipankar.co.in/api/news/exist',{
+        let resp = await request(`${DB_URL}/exist`,{
             method: 'POST',
             data: JSON.stringify({
                 _field: 'url',

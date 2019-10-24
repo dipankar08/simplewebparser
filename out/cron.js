@@ -55,13 +55,13 @@ var nilkontho_1 = require("./config/nilkontho");
 var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
 var bartaman_1 = require("./config/bartaman");
 var techcrunch_1 = require("./config/techcrunch");
-var banglarpran_1 = require("./config/banglarpran");
+var wordpress_1 = require("./config/wordpress");
 var configList = [
     // BENGALI
     new kolkata247_1.KolkataTimes24(),
-    new banglarpran_1.GNEBanglaConfig(),
-    new banglarpran_1.DarkariTipsConfig(),
-    new banglarpran_1.BanglarPranConfig(),
+    new wordpress_1.GNEBanglaConfig(),
+    new wordpress_1.DarkariTipsConfig(),
+    new wordpress_1.BanglarPranConfig(),
     new anandabazar_1.AnandabazarConfig(),
     new zeenews_1.ZeeNewsBengaliConfig(),
     new news18_1.News18BengaliConfig(),
@@ -75,6 +75,8 @@ var configList = [
     new nilkontho_1.NilkonthoConfig(),
     new indiatimes_bengali_1.IndiaTimesBengaliConfig(),
     new bartaman_1.BartamanConfig(),
+    new wordpress_1.BharatBartaConfig(),
+    new wordpress_1.Totka24X7Config(),
     // new NDTVBanglaConfig(), Broken
     // ENGLISH
     //new NDTVEnglishConfig(),
@@ -165,7 +167,7 @@ function updateprofile() {
                         });
                     }
                     return [4 /*yield*/, request({
-                            uri: 'http://simplestore.dipankar.co.in/api/news_profile/insertorupdate',
+                            uri: CONST_1.PROFILE_URL + "/insertorupdate",
                             method: 'POST',
                             body: {
                                 _payload: payload,
@@ -182,5 +184,5 @@ function updateprofile() {
     });
 }
 cronJob();
-//new TechCrunchConfig().execute()
+//new BharatBartaConfig().execute()
 //# sourceMappingURL=cron.js.map

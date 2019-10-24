@@ -1,6 +1,8 @@
 import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../crawler";
 
+const config = require('config');
+
 export const LIMIT:number = 10;
 export enum LANG{
     BENGALI,
@@ -38,7 +40,10 @@ export enum STREAM {
     HOROSCOPE,
     POLITICS,
     VIRAL,
-    DOOARS
+    DOOARS,
+    LS_MONEY,
+    LS_VIRAL,
+    ASTROLOGY
 }
 
 export type ListConfig = {
@@ -53,3 +58,7 @@ export type StoryListConfig = {
     stream:STREAM,
     extra?:StringAnyMap
 }
+
+export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1'
+export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile':'http://simplestore.dipankar.co.in/api/news_profile1'
+console.log(`[INFO] Using Root URL: ${DB_URL}`)

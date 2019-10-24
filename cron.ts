@@ -5,7 +5,7 @@ var Url = require('url-parse');
  const request = require("request-promise");
 import { BaseConfig } from './config/baseconfig';
 import { AnandabazarConfig } from './config/anandabazar';
-import { ListConfig, LANG, STREAM } from './config/CONST';
+import { ListConfig, LANG, STREAM, PROFILE_URL } from './config/CONST';
 import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/zeenews';
 import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
 import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
@@ -26,7 +26,7 @@ import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
 import { BartamanConfig } from './config/bartaman';
 import { hostname } from 'os';
 import { TechCrunchConfig } from './config/techcrunch';
-import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig } from './config/banglarpran';
+import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig, BharatBartaConfig, Totka24X7Config } from './config/wordpress';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -47,6 +47,8 @@ var configList:Array<BaseConfig> =[
     new NilkonthoConfig(),
     new IndiaTimesBengaliConfig(),
     new BartamanConfig(),
+    new BharatBartaConfig(),
+    new Totka24X7Config(),
     // new NDTVBanglaConfig(), Broken
 
     // ENGLISH
@@ -110,7 +112,7 @@ async function updateprofile(){
     }
 
     let resp = await request({
-        uri:'http://simplestore.dipankar.co.in/api/news_profile/insertorupdate',
+        uri:`${PROFILE_URL}/insertorupdate`,
         method: 'POST',
         body:{
             _payload:payload,
@@ -123,4 +125,4 @@ async function updateprofile(){
 }
 
 cronJob();
-//new TechCrunchConfig().execute()
+//new BharatBartaConfig().execute()

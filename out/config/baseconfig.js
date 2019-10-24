@@ -139,8 +139,9 @@ var BaseConfig = /** @class */ (function () {
                             return x;
                         });
                         body = { '_payload': res1 };
+                        console.log("[INFO]: Uisng URL for insert is : " + CONST_1.DB_URL);
                         return [4 /*yield*/, request({
-                                uri: 'http://simplestore.dipankar.co.in/api/news/bulk_insert',
+                                uri: CONST_1.DB_URL + "/bulk_insert",
                                 method: 'POST',
                                 body: body,
                                 json: true

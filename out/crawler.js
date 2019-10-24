@@ -291,7 +291,7 @@ var Crawler = /** @class */ (function () {
                         if (urlList.length == 0) {
                             return [2 /*return*/, null];
                         }
-                        return [4 /*yield*/, request('http://simplestore.dipankar.co.in/api/news/exist', {
+                        return [4 /*yield*/, request(CONST_1.DB_URL + "/exist", {
                                 method: 'POST',
                                 data: JSON.stringify({
                                     _field: 'url',
