@@ -1,4 +1,4 @@
-./config/default.json
+config/default.json
 ./*/*.pyc
 ./*/*/*.pyc
 ./*.private
