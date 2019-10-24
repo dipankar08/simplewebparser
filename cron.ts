@@ -125,4 +125,4 @@ async function updateprofile(){
 }
 
 cronJob();
-//new BharatBartaConfig().execute()
+//new Totka24X7Config().execute()

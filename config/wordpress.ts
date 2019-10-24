@@ -155,17 +155,17 @@ export class BharatBartaConfig extends BaseConfig {
 
     getStoryListConfig():Array<StoryListConfig>{
         return [
-            {stream: STREAM.VIRAL, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/vairal/'},
+            {stream: STREAM.VIRAL, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/vairal/'},
             
-            {stream: STREAM.ENTERTAINMENT, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/entertainment'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/entertainment'},
 
-            {stream: STREAM.FIRST_PAGE, selector:' .td-module-thumb > a',url:'https://www.bharatbarta.com/category/news'},
-            {stream: STREAM.POLITICS, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/politics-news'},
-            {stream: STREAM.LIFESTYLE, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/lifestyle'},
+            {stream: STREAM.FIRST_PAGE, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/news'},
+            {stream: STREAM.POLITICS, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/politics-news'},
+            {stream: STREAM.LIFESTYLE, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/lifestyle'},
 
-            {stream: STREAM.TECHNOLOGY, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/technology'},
-            {stream: STREAM.SPORTS, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/sports'},
-            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.bharatbarta.com/category/bb-special/'},
+            {stream: STREAM.TECHNOLOGY, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/technology'},
+            {stream: STREAM.SPORTS, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/sports'},
+            {stream: STREAM.OTHER, selector:'.td-main-content .td-module-thumb > a',url:'https://www.bharatbarta.com/category/bb-special/'},
           
         ]
     }
@@ -196,17 +196,17 @@ export class Totka24X7Config extends BaseConfig {
 
     getStoryListConfig():Array<StoryListConfig>{
         return [
-            {stream: STREAM.LIFESTYLE, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/lifestyle'},
+            {stream: STREAM.LIFESTYLE, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/lifestyle'},
 
-            {stream: STREAM.LS_MONEY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/earn-money'},
-            {stream: STREAM.LS_VIRAL, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/viral'},
-            {stream: STREAM.ENTERTAINMENT, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/entertainment'},
+            {stream: STREAM.LS_MONEY, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/earn-money'},
+            {stream: STREAM.LS_VIRAL, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/viral'},
+            {stream: STREAM.ENTERTAINMENT, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/entertainment'},
 
-            {stream: STREAM.INTERNATIONAL, selector:'.td-module-thumb > a',url:'https://gnebangla.in/category/international/'},
-            {stream: STREAM.TECHNOLOGY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/technology'},
-            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/headlines'},
-            {stream: STREAM.ASTROLOGY, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/astrology'},
-            {stream: STREAM.OTHER, selector:'.td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/different-news'},
+            {stream: STREAM.INTERNATIONAL, selector:'.td-main-content .td-module-thumb > a',url:'https://gnebangla.in/category/international/'},
+            {stream: STREAM.TECHNOLOGY, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/technology'},
+            {stream: STREAM.OTHER, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/headlines'},
+            {stream: STREAM.ASTROLOGY, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/astrology'},
+            {stream: STREAM.OTHER, selector:'.td-main-content .td-module-thumb > a',url:'https://www.totka24x7.com/archives/category/different-news'},
         ]
     }
 }
