@@ -37,25 +37,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
 var Url = require('url-parse');
+var entrypoints_1 = require("./config/rss/entrypoints");
 var request = require("request-promise");
-var anandabazar_1 = require("./config/anandabazar");
+var anandabazar_1 = require("./config/website/anandabazar");
 var CONST_1 = require("./config/CONST");
-var zeenews_1 = require("./config/zeenews");
-var news18_1 = require("./config/news18");
-var oneindia_1 = require("./config/oneindia");
-var bbc_bengali_1 = require("./config/bbc_bengali");
-var kolkata247_1 = require("./config/kolkata247");
-var business_insiders_1 = require("./config/business_insiders");
+var zeenews_1 = require("./config/website/zeenews");
+var news18_1 = require("./config/website/news18");
+var oneindia_1 = require("./config/website/oneindia");
+var bbc_bengali_1 = require("./config/website/bbc_bengali");
+var kolkata247_1 = require("./config/website/kolkata247");
+var business_insiders_1 = require("./config/website/business_insiders");
 var analytics_1 = require("./analytics");
-var pratidin_1 = require("./config/pratidin");
-var thehindu_1 = require("./config/thehindu");
-var ajjkal_1 = require("./config/ajjkal");
-var dainikstatesman_1 = require("./config/dainikstatesman");
-var nilkontho_1 = require("./config/nilkontho");
-var indiatimes_bengali_1 = require("./config/indiatimes_bengali");
-var bartaman_1 = require("./config/bartaman");
-var techcrunch_1 = require("./config/techcrunch");
-var wordpress_1 = require("./config/wordpress");
+var pratidin_1 = require("./config/website/pratidin");
+var thehindu_1 = require("./config/website/thehindu");
+var ajjkal_1 = require("./config/website/ajjkal");
+var dainikstatesman_1 = require("./config/website/dainikstatesman");
+var nilkontho_1 = require("./config/website/nilkontho");
+var indiatimes_bengali_1 = require("./config/website/indiatimes_bengali");
+var bartaman_1 = require("./config/website/bartaman");
+var techcrunch_1 = require("./config/website/techcrunch");
+var wordpress_1 = require("./config/website/wordpress");
 var configList = [
     // BENGALI
     new kolkata247_1.KolkataTimes24(),
@@ -183,6 +184,7 @@ function updateprofile() {
         });
     });
 }
-cronJob();
+//cronJob();
+entrypoints_1.rssCronJob();
 //new Totka24X7Config().execute()
 //# sourceMappingURL=cron.js.map

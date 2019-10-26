@@ -1,5 +1,5 @@
 import { StringifyOptions } from "querystring";
-import { StringAnyMap } from "../crawler";
+import { StringAnyMap } from "../config/utils/types";
 
 const config = require('config');
 

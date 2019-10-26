@@ -49,16 +49,6 @@ var Type;
     Type[Type["IMAGE"] = 1] = "IMAGE";
     Type[Type["MULTI_TEXT"] = 2] = "MULTI_TEXT";
 })(Type = exports.Type || (exports.Type = {}));
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
 var Crawler = /** @class */ (function () {
     function Crawler(rootConfig, config) {
         this.rootConfig = rootConfig;

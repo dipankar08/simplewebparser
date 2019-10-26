@@ -4,6 +4,7 @@ import { url } from "inspector";
 import { StoryListConfig, LIMIT, STREAM, DB_URL } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
 import { SummaryStrategy } from "./config/summary/SummaryManager";
+import {StringAnyMap} from "./config/utils/types";
 
 let request = require('async-request'), // TODO: move to const request = require("request-promise");
     response;
@@ -42,21 +43,6 @@ export type ExpandLinkConfig = {
     extra: object,
     limit:number,
 }
-
-export interface StringTMap<T> { [key: string]: T; };
-export interface NumberTMap<T> { [key: number]: T; };
-
-export interface StringAnyMap extends StringTMap<any> {};
-export interface NumberAnyMap extends NumberTMap<any> {};
-
-export interface StringStringMap extends StringTMap<string> {};
-export interface NumberStringMap extends NumberTMap<string> {};
-
-export interface StringNumberMap extends StringTMap<number> {};
-export interface NumberNumberMap extends NumberTMap<number> {};
-
-export interface StringBooleanMap extends StringTMap<boolean> {};
-export interface NumberBooleanMap extends NumberTMap<boolean> {};
 
 export class Crawler {
     config: Array<PageParseConfig>;

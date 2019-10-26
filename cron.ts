@@ -1,32 +1,34 @@
 const cron = require('node-cron');
 var Url = require('url-parse');
 
+import {rssCronJob} from "./config/rss/entrypoints"
  import {Crawler, Type, ExpandLinkConfig} from './crawler'
+
  const request = require("request-promise");
-import { BaseConfig } from './config/baseconfig';
-import { AnandabazarConfig } from './config/anandabazar';
+import { BaseConfig } from './config/website/baseconfig';
+import { AnandabazarConfig } from './config/website/anandabazar';
 import { ListConfig, LANG, STREAM, PROFILE_URL } from './config/CONST';
-import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/zeenews';
-import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/news18';
-import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/oneindia';
-import { BbcBengaliConfig } from './config/bbc_bengali';
-import { Kolkata247, KolkataTimes24 } from './config/kolkata247';
-import { NDTVBanglaConfig } from './config/ndtv_bangla';
-import { NDTVEnglishConfig } from './config/ndtv_english';
-import { NDTVHindiConfig } from './config/ndtv_hindi';
-import { BusinessInsidersConfig } from './config/business_insiders';
+import { ZeeNewsEnglishConfig, ZeeNewsBengaliConfig, ZeeNewsHindiConfig } from './config/website/zeenews';
+import { News18BengaliConfig, News18EnglishConfig, News18HindiConfig } from './config/website/news18';
+import { OneIndiaBengaliConfig, OneIndiaEnglishConfig, OneIndiaHindiConfig } from './config/website/oneindia';
+import { BbcBengaliConfig } from './config/website/bbc_bengali';
+import { Kolkata247, KolkataTimes24 } from './config/website/kolkata247';
+import { NDTVBanglaConfig } from './config/website/ndtv_bangla';
+import { NDTVEnglishConfig } from './config/website/ndtv_english';
+import { NDTVHindiConfig } from './config/website/ndtv_hindi';
+import { BusinessInsidersConfig } from './config/website/business_insiders';
 import { Analytics } from './analytics';
-import { PratidinConfig } from './config/pratidin';
-import { TheHinduConfig } from './config/thehindu';
-import { AjjKalConfig } from './config/ajjkal';
-import { DainikStatesmanConfig } from './config/dainikstatesman';
-import { AajBanglaConfig } from './config/ajjbangla';
-import { NilkonthoConfig } from './config/nilkontho';
-import { IndiaTimesBengaliConfig } from './config/indiatimes_bengali';
-import { BartamanConfig } from './config/bartaman';
+import { PratidinConfig } from './config/website/pratidin';
+import { TheHinduConfig } from './config/website/thehindu';
+import { AjjKalConfig } from './config/website/ajjkal';
+import { DainikStatesmanConfig } from './config/website/dainikstatesman';
+import { AajBanglaConfig } from './config/website/ajjbangla';
+import { NilkonthoConfig } from './config/website/nilkontho';
+import { IndiaTimesBengaliConfig } from './config/website/indiatimes_bengali';
+import { BartamanConfig } from './config/website/bartaman';
 import { hostname } from 'os';
-import { TechCrunchConfig } from './config/techcrunch';
-import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig, BharatBartaConfig, Totka24X7Config } from './config/wordpress';
+import { TechCrunchConfig } from './config/website/techcrunch';
+import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig, BharatBartaConfig, Totka24X7Config } from './config/website/wordpress';
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -124,5 +126,6 @@ async function updateprofile(){
 
 }
 
-cronJob();
+//cronJob();
+rssCronJob();
 //new Totka24X7Config().execute()
