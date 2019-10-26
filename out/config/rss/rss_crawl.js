@@ -42,8 +42,8 @@ var cron = require('node-cron');
 var RssCrawler = /** @class */ (function () {
     function RssCrawler() {
         this.reader_map = new Map();
-        // add your item here.
-        var mylist = [new rss_reader_1.WordPressRssReader(),];
+        // add your reader here.
+        var mylist = [new rss_reader_1.WordPressRssReader(), new rss_reader_1.YouTubeRssReader()];
         for (var _i = 0, mylist_1 = mylist; _i < mylist_1.length; _i++) {
             var l = mylist_1[_i];
             this.reader_map.set(l.getType(), l);

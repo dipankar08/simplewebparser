@@ -10,6 +10,12 @@ export enum LANG{
     HINDI,
 }
 
+export enum CATEGORIES {
+    NEWS,
+    VIRAL,
+    VIDEO,
+}
+
 export enum STREAM {
     NONE,
     HEADLINE,
@@ -43,7 +49,18 @@ export enum STREAM {
     DOOARS,
     LS_MONEY,
     LS_VIRAL,
-    ASTROLOGY
+    ASTROLOGY,
+    FESTIVE,
+    MYTHOLOGY,
+    KOLKATA,
+    RECIPE,
+    LATEST,
+    JOB,
+    TRIPURA,
+    YOUTUBE,
+    AUDIO_STORY,
+    MOTIVATIONAL,
+    COMEDY
 }
 
 export type ListConfig = {

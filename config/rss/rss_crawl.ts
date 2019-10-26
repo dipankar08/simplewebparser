@@ -1,4 +1,4 @@
-import {RSS_TYPE,BaseReader, WordPressRssReader, validate, Content} from "./rss_reader";
+import {RSS_TYPE,BaseReader, WordPressRssReader, validate, Content, YouTubeRssReader} from "./rss_reader";
 import {EntryPoint} from "./entrypoints"
 import { Analytics } from "../../analytics";
 import { getHostNameFromUrl,saveToDB } from "../utils/helper";
@@ -9,8 +9,8 @@ export class RssCrawler {
     reader_map: Map<RSS_TYPE, BaseReader> ;
     constructor(){
         this.reader_map= new Map();
-        // add your item here.
-        let mylist = [new WordPressRssReader(),]
+        // add your reader here.
+        let mylist = [new WordPressRssReader(), new YouTubeRssReader()]
 
 
         for(var l of mylist){

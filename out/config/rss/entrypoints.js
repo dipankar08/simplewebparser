@@ -41,6 +41,113 @@ var rss_crawl_1 = require("./rss_crawl");
 var analytics_1 = require("../../analytics");
 var cron = require('node-cron');
 exports.urlList = [
+    { url: 'https://www.master24.in/archives/category/politics/feed', extra: { 'stream': CONST_1.STREAM.POLITICS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // youtube feed.
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCFaQMPEjeQZk7kcHX2RouBA', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCxiudYA69dNRFEDgvolDbtA', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC9YivGoN6UKWkl0k-8G1qyQ', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCe_VQEe28mNPEwkBJ_kpxCg', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.EDUCATION, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCjjyoWPQXhskdLLmv-RyzEQ', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.AUDIO_STORY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC2KhNQ3pAmkN6Kepf8ccFZQ', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.MOTIVATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCsv4YOF2RBYh0NQ1vuHQ-hg', type: rss_reader_1.RSS_TYPE.YOUTUBE, extra: { 'stream': CONST_1.STREAM.COMEDY, 'lang': CONST_1.LANG.ENGLISH, 'categories': CONST_1.CATEGORIES.VIDEO } },
+    // AajBangla
+    { url: 'https://www.aajbangla.in/category/aajkolkata/feed', extra: { 'stream': CONST_1.STREAM.LATEST, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a6%e0%a7%87%e0%a6%b6/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a4%e0%a7%8d%e0%a6%b0%e0%a6%bf%e0%a6%aa%e0%a7%81%e0%a6%b0%e0%a6%be/feed', extra: { 'stream': CONST_1.STREAM.TRIPURA, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%bf%e0%a6%b6%e0%a7%8d%e0%a6%ac-aaj-world-news/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%96%e0%a7%87%e0%a6%b2%e0%a6%be/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%bf%e0%a6%a8%e0%a7%8b%e0%a6%a6%e0%a6%a8/feed', extra: { 'stream': CONST_1.STREAM.ENTERTAINMENT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c%e0%a6%95%e0%a7%87%e0%a6%b0-%e0%a6%a6%e0%a6%bf%e0%a6%a8/feed', extra: { 'stream': CONST_1.STREAM.ASTROLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%bf%e0%a6%b6%e0%a7%87%e0%a6%b7/feed', extra: { 'stream': CONST_1.STREAM.OFF_BEAT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%b2%e0%a6%be%e0%a6%87%e0%a6%ab%e0%a6%b8%e0%a7%8d%e0%a6%9f%e0%a6%be%e0%a6%87%e0%a6%b2/', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/category/%e0%a6%ad%e0%a7%8d%e0%a6%b0%e0%a6%ae%e0%a6%a3/', extra: { 'stream': CONST_1.STREAM.TOUR, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.aajbangla.in/feed', extra: { 'stream': CONST_1.STREAM.LATEST, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // https://www.master24.in
+    { url: 'https://www.master24.in/archives/category/politics/feed', extra: { 'stream': CONST_1.STREAM.POLITICS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/state/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/national/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/international/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/lifestyle/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/editorial/feed', extra: { 'stream': CONST_1.STREAM.EDITORIAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/tech-news/feed', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/job-and-business/feed', extra: { 'stream': CONST_1.STREAM.JOB, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/archives/category/sports/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.master24.in/feed', extra: { 'stream': CONST_1.STREAM.LATEST, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // darkaritips
+    { url: 'https://www.darkaritips.com/category/pregnancy-care/', extra: { 'stream': CONST_1.STREAM.HEALTH, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/health-message/', extra: { 'stream': CONST_1.STREAM.HEALTH, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/lifestyle/', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/recipe/', extra: { 'stream': CONST_1.STREAM.RECIPE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/tech-tips/', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/viral-news/', extra: { 'stream': CONST_1.STREAM.VIRAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/health-nutrition/', extra: { 'stream': CONST_1.STREAM.HEALTH, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/health-beauty/', extra: { 'stream': CONST_1.STREAM.HEALTH, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/category/luck/', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.darkaritips.com/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // totka24x7
+    { url: 'https://www.totka24x7.com/archives/category/lifestyle/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/earn-money/feed', extra: { 'stream': CONST_1.STREAM.BUSINESS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/viral/feed', extra: { 'stream': CONST_1.STREAM.VIRAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/entertainment/feed', extra: { 'stream': CONST_1.STREAM.ENTERTAINMENT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/technology/feed', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/headlines/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/astrology/feed', extra: { 'stream': CONST_1.STREAM.ASTROLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/archives/category/different-news/feed', extra: { 'stream': CONST_1.STREAM.OTHER, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.totka24x7.com/feed', extra: { 'stream': CONST_1.STREAM.OTHER, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // Nilkontho 
+    { url: 'https://www.nilkantho.in/category/news/kolkata/feed', extra: { 'stream': CONST_1.STREAM.KOLKATA, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/state/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/national/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/world/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/entertainment/feed', extra: { 'stream': CONST_1.STREAM.ENTERTAINMENT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/sports/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/business/feed', extra: { 'stream': CONST_1.STREAM.BUSINESS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/news/scitech/feed', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/health/feed', extra: { 'stream': CONST_1.STREAM.HEALTH, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/lifestyle/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/mythology/feed', extra: { 'stream': CONST_1.STREAM.MYTHOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/feature/feed', extra: { 'stream': CONST_1.STREAM.OTHER, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/lets-go/feed', extra: { 'stream': CONST_1.STREAM.TOUR, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/category/festive-mood/feed', extra: { 'stream': CONST_1.STREAM.FESTIVE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.nilkantho.in/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // GNE Bangla
+    { url: 'https://gnebangla.in/category/local-news/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/west-bengal/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/national-news/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/international/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/technology/feed', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/sports-news/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/entertainment/feed', extra: { 'stream': CONST_1.STREAM.ENTERTAINMENT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/viral-news/feed', extra: { 'stream': CONST_1.STREAM.VIRAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/category/lifestyle-news/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://gnebangla.in/feed', extra: { 'stream': CONST_1.STREAM.OTHER, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // KolkataTimes 24 
+    { url: 'https://kolkatatimes24.com/category/kolkata/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/politics/feed', extra: { 'stream': CONST_1.STREAM.POLITICS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/west-bengal/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/technology/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/business-and-economy/feed', extra: { 'stream': CONST_1.STREAM.BUSINESS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/national/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/world/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/sports/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/offbeat/feed', extra: { 'stream': CONST_1.STREAM.OFF_BEAT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/offbeat/fedd', extra: { 'stream': CONST_1.STREAM.OFF_BEAT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/category/lifestyle/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://kolkatatimes24.com/feed/', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    // Bharat barta
+    { url: 'https://www.bharatbarta.com/category/entertainment/feed/', extra: { 'stream': CONST_1.STREAM.ENTERTAINMENT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/news/international/feed', extra: { 'stream': CONST_1.STREAM.INTERNATIONAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/news/kolkata/feed', extra: { 'stream': CONST_1.STREAM.FIRST_PAGE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/news/national/feed', extra: { 'stream': CONST_1.STREAM.COUNTRY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/news/politics-news/feed', extra: { 'stream': CONST_1.STREAM.POLITICS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/news/state/feed', extra: { 'stream': CONST_1.STREAM.STATE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/lifestyle/feed', extra: { 'stream': CONST_1.STREAM.LIFESTYLE, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/technology/feed', extra: { 'stream': CONST_1.STREAM.TECHNOLOGY, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/sports/feed', extra: { 'stream': CONST_1.STREAM.SPORTS, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/vairal/feed', extra: { 'stream': CONST_1.STREAM.VIRAL, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/category/bb-special/feed', extra: { 'stream': CONST_1.STREAM.OFF_BEAT, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
+    { url: 'https://www.bharatbarta.com/feed/', extra: { 'stream': CONST_1.STREAM.LATEST, 'lang': CONST_1.LANG.BENGALI, 'categories': CONST_1.CATEGORIES.NEWS }, type: rss_reader_1.RSS_TYPE.WORD_PRESS },
     // banglarpran.
     { url: 'https://www.banglarpran.com/archives/category/dooars/feed', type: rss_reader_1.RSS_TYPE.WORD_PRESS, extra: { 'lang': CONST_1.LANG.BENGALI, 'stream': CONST_1.STREAM.BANGLADESH } },
     { url: 'https://www.banglarpran.com/archives/category/state/feed', type: rss_reader_1.RSS_TYPE.WORD_PRESS, extra: { 'lang': CONST_1.LANG.BENGALI, 'stream': CONST_1.STREAM.STATE } },
@@ -70,10 +177,10 @@ function startCrawl() {
 function rssCronJob() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            analytics_1.Analytics.launch("crawler");
+            analytics_1.Analytics.launch("crawler_rss");
             // await updateprofile()
-            cron.schedule('*/10 * * * *', function () {
-                console.log(Date.now() + " Running a task every 10 minutes");
+            cron.schedule('*/30 * * * *', function () {
+                console.log(Date.now() + " Running a task every 30 minutes");
                 startCrawl();
             });
             // run now too.
