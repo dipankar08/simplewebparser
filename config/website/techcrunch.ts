@@ -15,7 +15,7 @@ export class TechCrunchConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.ENGLISH
+        return LANG.IN_ENGLISH
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

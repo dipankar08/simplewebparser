@@ -1,7 +1,7 @@
-import { Content } from "../rss/rss_reader";
+
 import { Analytics } from "../../analytics";
 import { SummeryBuilder, SummaryStrategy } from "../summary/SummaryManager";
-import { LANG, DB_URL, STREAM } from "../CONST";
+import { LANG, DB_URL, STREAM, Content } from "../CONST";
 import { StringAnyMap } from "./types";
 import { uniqBy } from "lodash";
 const request = require('request-promise');
@@ -31,20 +31,18 @@ export async function saveToDB(res:Array<Content>|null){
         return;
     }
 
-
-
     // building summary as we insert.
     let sb = new SummeryBuilder()
     let payload = res1.map(x=>{
         let entry:StringAnyMap = x;
         switch(x.lang){
-            case LANG.BENGALI:
+            case LANG.IN_BENGALI:
                 entry['summary']= sb.buildSummary(x.details, SummaryStrategy.BENAGLI)
                 break;
-            case LANG.ENGLISH:
+            case LANG.IN_ENGLISH:
                 entry['summary']= sb.buildSummary(x.details, SummaryStrategy.ENGLISH)
                 break;
-            case LANG.HINDI:
+            case LANG.IN_HINDI:
                 entry['summary']= sb.buildSummary(x.details, SummaryStrategy.HINDI)
                 break;
         }
@@ -68,4 +66,28 @@ export async function saveToDB(res:Array<Content>|null){
     } else{
         console.log(`[Debug] Data saved properly in the server: ${resp.msg}`)
     }
+}
+
+export async function detectUrlNotInDb(url_list:string[]): Promise<Array<string>|null> {
+    url_list = Array.from(new Set(url_list))
+    if(url_list.length == 0){
+        return null
+    }
+    // find duplicate in server
+    let resp = await request(`${DB_URL}/exist`,{
+        method: 'POST',
+        data: JSON.stringify({
+            _field: 'url',
+            _value:url_list
+        })
+    });
+
+    let obj = JSON.parse(resp.body)
+    if(obj.status == 'success'){
+        url_list =  url_list.filter(x=> obj.out.found_list[x] == null)
+        console.log(`[INFO] Total link which is NOT in DB: ${url_list.length}, DB Found count: ${obj.out.found_count}`)
+    } else{
+        return ;
+    }
+    return url_list;
 }

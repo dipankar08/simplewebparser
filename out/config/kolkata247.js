@@ -27,7 +27,7 @@ var Kolkata247 = /** @class */ (function (_super) {
         };
     };
     Kolkata247.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     Kolkata247.prototype.getPageParseConfig = function () {
         return [
@@ -65,7 +65,7 @@ var KolkataTimes24 = /** @class */ (function (_super) {
         };
     };
     KolkataTimes24.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     KolkataTimes24.prototype.getPageParseConfig = function () {
         return [

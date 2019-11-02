@@ -20,7 +20,7 @@ export class BanglarPranConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getLimit():number{
@@ -68,7 +68,7 @@ export class DarkariTipsConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getLimit():number{
@@ -104,7 +104,7 @@ export class GNEBanglaConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {
@@ -142,7 +142,7 @@ export class BharatBartaConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {
@@ -183,7 +183,7 @@ export class Totka24X7Config extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

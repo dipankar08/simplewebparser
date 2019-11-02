@@ -74,13 +74,13 @@ export abstract class BaseConfig {
         let sb = new SummeryBuilder()
         res1 = res1.map(x=>{
             switch(x.lang){
-                case LANG[LANG.BENGALI]:
+                case LANG[LANG.IN_BENGALI]:
                     x['summary']= sb.buildSummary(x.details, SummaryStrategy.BENAGLI)
                     break;
-                case LANG[LANG.ENGLISH]:
+                case LANG[LANG.IN_ENGLISH]:
                     x['summary']= sb.buildSummary(x.details, SummaryStrategy.ENGLISH)
                     break;
-                case LANG[LANG.HINDI]:
+                case LANG[LANG.IN_HINDI]:
                     x['summary']= sb.buildSummary(x.details, SummaryStrategy.HINDI)
                     break;
             }

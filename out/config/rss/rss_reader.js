@@ -55,10 +55,6 @@ var node_html_parser_1 = require("node-html-parser");
 var fastparser = require('fast-xml-parser');
 var analytics_1 = require("../../analytics");
 var request = require('request-promise');
-function validate(c) {
-    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
-}
-exports.validate = validate;
 var RSS_TYPE;
 (function (RSS_TYPE) {
     RSS_TYPE[RSS_TYPE["WORD_PRESS"] = 0] = "WORD_PRESS";

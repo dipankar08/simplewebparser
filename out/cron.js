@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var cron = require('node-cron');
 var Url = require('url-parse');
-var entrypoints_1 = require("./config/rss/entrypoints");
 var request = require("request-promise");
 var anandabazar_1 = require("./config/website/anandabazar");
 var CONST_1 = require("./config/CONST");
@@ -57,6 +56,7 @@ var indiatimes_bengali_1 = require("./config/website/indiatimes_bengali");
 var bartaman_1 = require("./config/website/bartaman");
 var techcrunch_1 = require("./config/website/techcrunch");
 var wordpress_1 = require("./config/website/wordpress");
+var web_entrypoints_1 = require("./config/webcrawl/web_entrypoints");
 var configList = [
     // BENGALI
     new kolkata247_1.KolkataTimes24(),
@@ -185,6 +185,6 @@ function updateprofile() {
     });
 }
 //cronJob();
-entrypoints_1.rssCronJob();
+web_entrypoints_1.webCronJob();
 //new Totka24X7Config().execute()
 //# sourceMappingURL=cron.js.map

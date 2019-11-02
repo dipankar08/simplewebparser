@@ -28,7 +28,7 @@ var NilkonthoConfig = /** @class */ (function (_super) {
         };
     };
     NilkonthoConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     NilkonthoConfig.prototype.getPageParseConfig = function () {
         return [

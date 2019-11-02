@@ -7,7 +7,7 @@ export class OneIndiaBengaliConfig extends BaseConfig {
     constructor() { super("");}
 
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
     
     getRootConfig():RootConfig{
@@ -47,7 +47,7 @@ export class OneIndiaEnglishConfig extends BaseConfig {
     constructor() { super("");}
 
     getLang(): LANG {
-        return LANG.ENGLISH
+        return LANG.IN_ENGLISH
     }
     getRootConfig():RootConfig{
         return {
@@ -84,7 +84,7 @@ export class OneIndiaHindiConfig extends BaseConfig {
     constructor() { super("");}
 
     getLang(): LANG {
-        return LANG.HINDI
+        return LANG.IN_HINDI
     }
 
     getRootConfig():RootConfig{

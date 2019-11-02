@@ -22,7 +22,7 @@ var AnandabazarConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     AnandabazarConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     AnandabazarConfig.prototype.getPageParseConfig = function () {
         return [

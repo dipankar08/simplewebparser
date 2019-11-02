@@ -28,7 +28,7 @@ var TechCrunchConfig = /** @class */ (function (_super) {
         };
     };
     TechCrunchConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     TechCrunchConfig.prototype.getPageParseConfig = function () {
         return [

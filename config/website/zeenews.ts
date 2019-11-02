@@ -8,7 +8,7 @@ export class ZeeNewsBengaliConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
     getRootConfig():RootConfig{
         return {
@@ -44,7 +44,7 @@ export class ZeeNewsEnglishConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.ENGLISH
+        return LANG.IN_ENGLISH
     }
     getRootConfig():RootConfig{
         return {
@@ -87,7 +87,7 @@ export class ZeeNewsHindiConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.HINDI
+        return LANG.IN_HINDI
     }
     getRootConfig():RootConfig{
         return {

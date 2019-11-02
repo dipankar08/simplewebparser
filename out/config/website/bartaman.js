@@ -64,7 +64,7 @@ var BartamanConfig = /** @class */ (function (_super) {
         };
     };
     BartamanConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     BartamanConfig.prototype.getDataFromUrl = function (url) {
         return __awaiter(this, void 0, void 0, function () {

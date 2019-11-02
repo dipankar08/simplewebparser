@@ -22,7 +22,7 @@ var News18BengaliConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     News18BengaliConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     News18BengaliConfig.prototype.getPageParseConfig = function () {
         return [
@@ -60,7 +60,7 @@ var News18EnglishConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     News18EnglishConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     News18EnglishConfig.prototype.getPageParseConfig = function () {
         return [
@@ -101,7 +101,7 @@ var News18HindiConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     News18HindiConfig.prototype.getLang = function () {
-        return CONST_1.LANG.HINDI;
+        return CONST_1.LANG.IN_HINDI;
     };
     News18HindiConfig.prototype.getPageParseConfig = function () {
         return [

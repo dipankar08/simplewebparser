@@ -27,7 +27,7 @@ var NDTVEnglishConfig = /** @class */ (function (_super) {
         };
     };
     NDTVEnglishConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     NDTVEnglishConfig.prototype.getPageParseConfig = function () {
         return [

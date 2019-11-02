@@ -27,7 +27,7 @@ var BbcBengaliConfig = /** @class */ (function (_super) {
         };
     };
     BbcBengaliConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     BbcBengaliConfig.prototype.getLimit = function () {
         return 5;

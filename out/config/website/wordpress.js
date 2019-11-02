@@ -33,7 +33,7 @@ var BanglarPranConfig = /** @class */ (function (_super) {
         };
     };
     BanglarPranConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     BanglarPranConfig.prototype.getLimit = function () {
         return 4;
@@ -73,7 +73,7 @@ var DarkariTipsConfig = /** @class */ (function (_super) {
         };
     };
     DarkariTipsConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     DarkariTipsConfig.prototype.getLimit = function () {
         return 2;
@@ -106,7 +106,7 @@ var GNEBanglaConfig = /** @class */ (function (_super) {
         };
     };
     GNEBanglaConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     GNEBanglaConfig.prototype.getPageParseConfig = function () {
         return wp;
@@ -141,7 +141,7 @@ var BharatBartaConfig = /** @class */ (function (_super) {
         };
     };
     BharatBartaConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     BharatBartaConfig.prototype.getPageParseConfig = function () {
         return wp;
@@ -176,7 +176,7 @@ var Totka24X7Config = /** @class */ (function (_super) {
         };
     };
     Totka24X7Config.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     Totka24X7Config.prototype.getPageParseConfig = function () {
         return wp;

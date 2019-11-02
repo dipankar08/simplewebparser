@@ -22,7 +22,7 @@ var IndiaTimesBengaliConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     IndiaTimesBengaliConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     IndiaTimesBengaliConfig.prototype.getRootConfig = function () {
         return {

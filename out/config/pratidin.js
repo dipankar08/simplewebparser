@@ -27,7 +27,7 @@ var PratidinConfig = /** @class */ (function (_super) {
         };
     };
     PratidinConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     PratidinConfig.prototype.getLimit = function () {
         return 10;

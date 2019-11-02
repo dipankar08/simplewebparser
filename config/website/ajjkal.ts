@@ -14,7 +14,7 @@ export class AjjKalConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getLimit():number{

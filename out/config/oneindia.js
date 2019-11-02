@@ -22,7 +22,7 @@ var OneIndiaBengaliConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     OneIndiaBengaliConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     OneIndiaBengaliConfig.prototype.getRootConfig = function () {
         return {
@@ -60,7 +60,7 @@ var OneIndiaEnglishConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     OneIndiaEnglishConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     OneIndiaEnglishConfig.prototype.getRootConfig = function () {
         return {
@@ -96,7 +96,7 @@ var OneIndiaHindiConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     OneIndiaHindiConfig.prototype.getLang = function () {
-        return CONST_1.LANG.HINDI;
+        return CONST_1.LANG.IN_HINDI;
     };
     OneIndiaHindiConfig.prototype.getRootConfig = function () {
         return {

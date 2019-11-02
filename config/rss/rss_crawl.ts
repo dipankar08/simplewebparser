@@ -1,7 +1,8 @@
-import {RSS_TYPE,BaseReader, WordPressRssReader, validate, Content, YouTubeRssReader} from "./rss_reader";
+import {RSS_TYPE,BaseReader, WordPressRssReader, YouTubeRssReader} from "./rss_reader";
 import {EntryPoint} from "./entrypoints"
 import { Analytics } from "../../analytics";
 import { getHostNameFromUrl,saveToDB } from "../utils/helper";
+import { validate, Content } from "../CONST";
 
 const cron = require('node-cron');
 

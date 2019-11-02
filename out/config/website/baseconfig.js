@@ -126,13 +126,13 @@ var BaseConfig = /** @class */ (function () {
                         sb = new SummaryManager_1.SummeryBuilder();
                         res1 = res1.map(function (x) {
                             switch (x.lang) {
-                                case CONST_1.LANG[CONST_1.LANG.BENGALI]:
+                                case CONST_1.LANG[CONST_1.LANG.IN_BENGALI]:
                                     x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.BENAGLI);
                                     break;
-                                case CONST_1.LANG[CONST_1.LANG.ENGLISH]:
+                                case CONST_1.LANG[CONST_1.LANG.IN_ENGLISH]:
                                     x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.ENGLISH);
                                     break;
-                                case CONST_1.LANG[CONST_1.LANG.HINDI]:
+                                case CONST_1.LANG[CONST_1.LANG.IN_HINDI]:
                                     x['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.HINDI);
                                     break;
                             }

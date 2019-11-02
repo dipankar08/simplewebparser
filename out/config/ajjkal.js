@@ -27,7 +27,7 @@ var AjjKalConfig = /** @class */ (function (_super) {
         };
     };
     AjjKalConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     AjjKalConfig.prototype.getLimit = function () {
         return 3;

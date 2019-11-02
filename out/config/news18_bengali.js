@@ -22,7 +22,7 @@ var News18Config = /** @class */ (function (_super) {
         return _super.call(this, "News18Bangla") || this;
     }
     News18Config.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     News18Config.prototype.getLimit = function () {
         return 5;

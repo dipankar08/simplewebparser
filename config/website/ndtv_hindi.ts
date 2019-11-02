@@ -13,7 +13,7 @@ export class NDTVHindiConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.HINDI
+        return LANG.IN_HINDI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

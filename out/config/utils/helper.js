@@ -74,13 +74,13 @@ function saveToDB(res) {
                     payload = res1.map(function (x) {
                         var entry = x;
                         switch (x.lang) {
-                            case CONST_1.LANG.BENGALI:
+                            case CONST_1.LANG.IN_BENGALI:
                                 entry['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.BENAGLI);
                                 break;
-                            case CONST_1.LANG.ENGLISH:
+                            case CONST_1.LANG.IN_ENGLISH:
                                 entry['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.ENGLISH);
                                 break;
-                            case CONST_1.LANG.HINDI:
+                            case CONST_1.LANG.IN_HINDI:
                                 entry['summary'] = sb.buildSummary(x.details, SummaryManager_1.SummaryStrategy.HINDI);
                                 break;
                         }
@@ -112,4 +112,37 @@ function saveToDB(res) {
     });
 }
 exports.saveToDB = saveToDB;
+function detectUrlNotInDb(url_list) {
+    return __awaiter(this, void 0, void 0, function () {
+        var resp, obj;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    url_list = Array.from(new Set(url_list));
+                    if (url_list.length == 0) {
+                        return [2 /*return*/, null];
+                    }
+                    return [4 /*yield*/, request(CONST_1.DB_URL + "/exist", {
+                            method: 'POST',
+                            data: JSON.stringify({
+                                _field: 'url',
+                                _value: url_list
+                            })
+                        })];
+                case 1:
+                    resp = _a.sent();
+                    obj = JSON.parse(resp.body);
+                    if (obj.status == 'success') {
+                        url_list = url_list.filter(function (x) { return obj.out.found_list[x] == null; });
+                        console.log("[INFO] Total link which is NOT in DB: " + url_list.length + ", DB Found count: " + obj.out.found_count);
+                    }
+                    else {
+                        return [2 /*return*/];
+                    }
+                    return [2 /*return*/, url_list];
+            }
+        });
+    });
+}
+exports.detectUrlNotInDb = detectUrlNotInDb;
 //# sourceMappingURL=helper.js.map

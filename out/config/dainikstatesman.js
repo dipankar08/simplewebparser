@@ -27,7 +27,7 @@ var DainikStatesmanConfig = /** @class */ (function (_super) {
         };
     };
     DainikStatesmanConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     DainikStatesmanConfig.prototype.getLimit = function () {
         return 3;

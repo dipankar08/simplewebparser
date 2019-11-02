@@ -13,7 +13,7 @@ export class Kolkata247 extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {
@@ -53,7 +53,7 @@ export class KolkataTimes24 extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

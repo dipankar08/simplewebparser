@@ -27,7 +27,7 @@ var BusinessInsidersConfig = /** @class */ (function (_super) {
         };
     };
     BusinessInsidersConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     BusinessInsidersConfig.prototype.getPageParseConfig = function () {
         return [

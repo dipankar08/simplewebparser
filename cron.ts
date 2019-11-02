@@ -29,6 +29,7 @@ import { BartamanConfig } from './config/website/bartaman';
 import { hostname } from 'os';
 import { TechCrunchConfig } from './config/website/techcrunch';
 import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig, BharatBartaConfig, Totka24X7Config } from './config/website/wordpress';
+import { webCronJob } from "./config/webcrawl/web_entrypoints";
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -127,5 +128,5 @@ async function updateprofile(){
 }
 
 //cronJob();
-rssCronJob();
+webCronJob();
 //new Totka24X7Config().execute()

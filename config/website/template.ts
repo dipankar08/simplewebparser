@@ -8,7 +8,7 @@ export class AnandabazarConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getPageParseConfig(): Array<PageParseConfig> {

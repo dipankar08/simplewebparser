@@ -22,7 +22,7 @@ var ZeeNewsBengaliConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     ZeeNewsBengaliConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     ZeeNewsBengaliConfig.prototype.getRootConfig = function () {
         return {
@@ -59,7 +59,7 @@ var ZeeNewsEnglishConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     ZeeNewsEnglishConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     ZeeNewsEnglishConfig.prototype.getRootConfig = function () {
         return {
@@ -100,7 +100,7 @@ var ZeeNewsHindiConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     ZeeNewsHindiConfig.prototype.getLang = function () {
-        return CONST_1.LANG.HINDI;
+        return CONST_1.LANG.IN_HINDI;
     };
     ZeeNewsHindiConfig.prototype.getRootConfig = function () {
         return {

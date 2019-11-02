@@ -4,26 +4,13 @@ import {getHostNameFromUrl} from "../utils/helper"
 import { parse } from 'node-html-parser';
 var fastparser = require('fast-xml-parser');
 import { Analytics } from "../../analytics";
-import { LANG, STREAM } from "../CONST";
+import { LANG, STREAM, Content } from "../CONST";
 const request = require('request-promise');
-export type Content = {
-    title:string,
-    img:string,
-    details:string ,
-    url:string,
-    hostname:string,
-    lang:LANG,
-    stream:STREAM,
-}
-export function validate(c:Content){
-    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length >10 && c.details.length > 20;
-}
 
 export enum RSS_TYPE {
     WORD_PRESS,
     YOUTUBE
 }
-
 
 export abstract class BaseReader {
     public abstract getType():RSS_TYPE;

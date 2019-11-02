@@ -33,7 +33,7 @@ var TheHinduConfig = /** @class */ (function (_super) {
         };
     };
     TheHinduConfig.prototype.getLang = function () {
-        return CONST_1.LANG.ENGLISH;
+        return CONST_1.LANG.IN_ENGLISH;
     };
     TheHinduConfig.prototype.getLimit = function () {
         return 4;

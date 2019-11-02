@@ -8,7 +8,7 @@ export class News18BengaliConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
     getPageParseConfig(): Array<PageParseConfig> {
       return [
@@ -44,7 +44,7 @@ export class News18EnglishConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.ENGLISH
+        return LANG.IN_ENGLISH
     }
     getPageParseConfig(): Array<PageParseConfig> {
       return [
@@ -83,7 +83,7 @@ export class News18HindiConfig extends BaseConfig {
         super(""); 
     }
     getLang(): LANG {
-        return LANG.HINDI
+        return LANG.IN_HINDI
     }
     getPageParseConfig(): Array<PageParseConfig> {
       return [

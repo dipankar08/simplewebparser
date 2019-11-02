@@ -18,7 +18,7 @@ export class TheHinduConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.ENGLISH
+        return LANG.IN_ENGLISH
     }
     getLimit():number{
         return 4;

@@ -9,7 +9,7 @@ export class AnandabazarConfig extends BaseConfig {
     }
 
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     getRootConfig():RootConfig{

@@ -22,7 +22,7 @@ var AajBanglaConfig = /** @class */ (function (_super) {
         return _super.call(this, "") || this;
     }
     AajBanglaConfig.prototype.getLang = function () {
-        return CONST_1.LANG.BENGALI;
+        return CONST_1.LANG.IN_BENGALI;
     };
     AajBanglaConfig.prototype.getRootConfig = function () {
         return {

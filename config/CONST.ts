@@ -5,9 +5,9 @@ const config = require('config');
 
 export const LIMIT:number = 10;
 export enum LANG{
-    BENGALI,
-    ENGLISH,
-    HINDI,
+    IN_BENGALI,
+    IN_ENGLISH,
+    IN_HINDI,
 }
 
 export enum CATEGORIES {
@@ -75,6 +75,20 @@ export type StoryListConfig = {
     stream:STREAM,
     extra?:StringAnyMap
 }
+
+export type Content = {
+    title:string,
+    img:string,
+    details:string ,
+    url:string,
+    hostname:string,
+    lang:LANG,
+    stream:STREAM,
+}
+export function validate(c:Content){
+    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length >10 && c.details.length > 20;
+}
+
 
 export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1'
 export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile':'http://simplestore.dipankar.co.in/api/news_profile1'

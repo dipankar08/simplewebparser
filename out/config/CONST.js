@@ -4,9 +4,9 @@ var config = require('config');
 exports.LIMIT = 10;
 var LANG;
 (function (LANG) {
-    LANG[LANG["BENGALI"] = 0] = "BENGALI";
-    LANG[LANG["ENGLISH"] = 1] = "ENGLISH";
-    LANG[LANG["HINDI"] = 2] = "HINDI";
+    LANG[LANG["IN_BENGALI"] = 0] = "IN_BENGALI";
+    LANG[LANG["IN_ENGLISH"] = 1] = "IN_ENGLISH";
+    LANG[LANG["IN_HINDI"] = 2] = "IN_HINDI";
 })(LANG = exports.LANG || (exports.LANG = {}));
 var CATEGORIES;
 (function (CATEGORIES) {
@@ -61,6 +61,10 @@ var STREAM;
     STREAM[STREAM["MOTIVATIONAL"] = 42] = "MOTIVATIONAL";
     STREAM[STREAM["COMEDY"] = 43] = "COMEDY";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
+function validate(c) {
+    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
+}
+exports.validate = validate;
 exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1';
 exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile' : 'http://simplestore.dipankar.co.in/api/news_profile1';
 console.log("[INFO] Using Root URL: " + exports.DB_URL);

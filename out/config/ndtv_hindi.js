@@ -27,7 +27,7 @@ var NDTVHindiConfig = /** @class */ (function (_super) {
         };
     };
     NDTVHindiConfig.prototype.getLang = function () {
-        return CONST_1.LANG.HINDI;
+        return CONST_1.LANG.IN_HINDI;
     };
     NDTVHindiConfig.prototype.getPageParseConfig = function () {
         return [

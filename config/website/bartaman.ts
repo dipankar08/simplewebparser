@@ -17,7 +17,7 @@ export class BartamanConfig extends BaseConfig {
         }
     }
     getLang(): LANG {
-        return LANG.BENGALI
+        return LANG.IN_BENGALI
     }
 
     async getDataFromUrl(url:string):Promise<string>{
