@@ -88,6 +88,7 @@ export type Content = {
     lang:string,
     stream:string,
     is_active:string;
+    is_partner:boolean;
 }
 // THIS MUST BE SAME AS CLIENT.
 export type Profile = {
@@ -129,7 +130,8 @@ export function buildContent(dict):Content{
         url:dict.url,
         hostname:dict.hostname,
         lang:LANG[dict.lang],
-        stream:STREAM[dict.stream]
+        stream:STREAM[dict.stream],
+        is_partner: dict.is_partner,
     }
 }
 

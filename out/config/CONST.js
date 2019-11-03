@@ -89,7 +89,8 @@ function buildContent(dict) {
         url: dict.url,
         hostname: dict.hostname,
         lang: LANG[dict.lang],
-        stream: STREAM[dict.stream]
+        stream: STREAM[dict.stream],
+        is_partner: dict.is_partner,
     };
 }
 exports.buildContent = buildContent;
