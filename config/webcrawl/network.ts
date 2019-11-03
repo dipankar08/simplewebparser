@@ -84,8 +84,18 @@ export async function parseStoreList(url:string, config:WebConfig): Promise<Arra
     let urlList:Array<string> =[]
     try{
         console.log(`[INFO] Fetching link ${url}`)
-        let resp = await request(url);
-        let body = resp.body;
+        var body;
+        try{
+            if(config.networkFetcher){
+                body = await config.networkFetcher(url);
+            } else{
+                let resp = await request(url);
+                body = resp.body
+            }
+        } catch(error){
+            Analytics.exception(error)
+            return []
+        }
         let $ = cheerio.load(body);
         
         let url_list: Array<string>  = []

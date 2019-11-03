@@ -43,9 +43,7 @@ var BbcBengaliConfig = /** @class */ (function (_super) {
         return "https://www.bbc.com/bengali/news-49696031";
     };
     BbcBengaliConfig.prototype.getStoryListConfig = function () {
-        return [
-            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
-        ];
+        return [];
     };
     return BbcBengaliConfig;
 }(baseconfig_1.BaseConfig));

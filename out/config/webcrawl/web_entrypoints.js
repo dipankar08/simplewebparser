@@ -45,10 +45,158 @@ var network_1 = require("./network");
 var cron = require('node-cron');
 exports.urlList = [
     {
+        name: 'Bartaman',
+        type: new web_reader_1.BartamanWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.HEADLINE, url: 'https://bartamanpatrika.com/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bartamanpatrika.com/section.php?cID=12' },
+            { stream: CONST_1.STREAM.STATE, url: 'https://bartamanpatrika.com/section.php?cID=13' },
+            { stream: CONST_1.STREAM.COUNTRY, url: 'https://bartamanpatrika.com/section.php?cID=14' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://bartamanpatrika.com/section.php?cID=15' },
+            { stream: CONST_1.STREAM.SPORTS, url: 'https://bartamanpatrika.com/section.php?cID=18' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://bartamanpatrika.com/section.php?cID=45' },
+            { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://bartamanpatrika.com/section.php?cID=4' },
+            { stream: CONST_1.STREAM.SCIENCE, url: 'https://bartamanpatrika.com/section.php?cID=67' },
+        ]
+    },
+    {
+        name: 'Ei Somoy',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.other_main_news1 li> a', url: 'https://eisamay.indiatimes.com/' },
+            { stream: CONST_1.STREAM.STATE, url: 'https://eisamay.indiatimes.com/west-bengal-news/kolkata-news/articlelist/15991773.cms' },
+            { stream: CONST_1.STREAM.COUNTRY, url: 'https://eisamay.indiatimes.com/nation/articlelist/15819599.cms' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://eisamay.indiatimes.com/international/articlelist/15819594.cms' },
+            { stream: CONST_1.STREAM.BUSINESS, url: 'https://eisamay.indiatimes.com/business/articlelist/15819574.cms' },
+            { stream: CONST_1.STREAM.COUNTRY, url: 'https://eisamay.indiatimes.com/nation/articlelist/15819599.cms' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://eisamay.indiatimes.com/entertainment/cinema/articlelist/15935855.cms' },
+        ]
+    },
+    {
+        name: 'Tech Crunch',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_ENGLISH,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: 'a.post-block__title__link', url: 'https://techcrunch.com/apps/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: 'a.post-block__title__link', url: 'https://techcrunch.com/startups/' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: 'a.post-block__title__link', url: 'https://techcrunch.com/gadgets/' },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: 'article h1', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: 'article .article__featured-image-wrapper  img', type: network_1.WebElementType.IMAGE },
+            { name: 'details', selector: 'article .article-content > p', type: network_1.WebElementType.TEXT },
+        ]
+    },
+    {
+        name: 'Statesman Bengali',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.COUNTRY, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/india' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/world' },
+            { stream: CONST_1.STREAM.STATE, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bengal' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/binodan' },
+            { stream: CONST_1.STREAM.SPORTS, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/sports' },
+            { stream: CONST_1.STREAM.EDITORIAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/editorial' },
+            { stream: CONST_1.STREAM.FOOD, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/food' },
+            { stream: CONST_1.STREAM.OTHER, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bichitra' },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: '.storybox h1', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: '.storybox .imgholder  img', type: network_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.storybox .content-body > p', type: network_1.WebElementType.TEXT },
+        ]
+    },
+    {
+        name: 'Business Insider',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_ENGLISH,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.BUSINESS, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/business" },
+            { stream: CONST_1.STREAM.SCIENCE, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/science" },
+            { stream: CONST_1.STREAM.TECHNOLOGY, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/sai" },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: '.ArticleCont article h1', type: network_1.WebElementType.TEXT },
+            { name: 'details', selector: '.ArticleCont .article_content .story-text', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: '.ArticleCont img', type: network_1.WebElementType.IMAGE, attr: 'data-original' },
+        ]
+    },
+    {
+        name: 'Pratidin',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.HEADLINE, selector: '.carousel  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
+            { stream: CONST_1.STREAM.HEADLINE, selector: '.daily-news  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.tatka_update_list  .scale_img a', url: 'https://www.sangbadpratidin.in/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'ul.more_news_list li > a', url: 'https://www.sangbadpratidin.in/latest-update/' },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: '.container .hot_news h1', type: network_1.WebElementType.TEXT },
+            { name: 'details', selector: '.container .news_content_area > p', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: '.container img.hot_news_image', type: network_1.WebElementType.IMAGE },
+        ]
+    },
+    {
+        name: 'Anandabazar',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { url: 'https://www.anandabazar.com/', selector: '.container .abp-homepage-main-story-wrap-new a', stream: CONST_1.STREAM.HEADLINE },
+            { url: 'https://www.anandabazar.com/', selector: '.abp-homepage-lead-story-wrap a', stream: CONST_1.STREAM.HEADLINE },
+            { url: 'https://www.anandabazar.com/', selector: '.abp-homepage-editor-story-wrap a', stream: CONST_1.STREAM.FIRST_PAGE },
+            { url: 'https://www.anandabazar.com/state', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.STATE },
+            { url: 'https://www.anandabazar.com/international', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.INTERNATIONAL },
+            { url: 'https://www.anandabazar.com/business', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.BUSINESS },
+            { url: 'https://www.anandabazar.com/others/science', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.SCIENCE },
+            { url: 'https://www.anandabazar.com/entertainment', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.ENTERTAINMENT },
+            { url: 'https://www.anandabazar.com/topic/short-story', selector: '.row .article-image > a', stream: CONST_1.STREAM.SHORT_STORY },
+            { url: 'https://www.anandabazar.com/travel', selector: '.carousel-inner .item a', stream: CONST_1.STREAM.TRAVEL },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: '#story_container h1', type: network_1.WebElementType.TEXT },
+            { name: 'details', selector: '#story_container .articleBody', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: '#story_container  img', type: network_1.WebElementType.IMAGE },
+        ]
+    },
+    {
+        name: 'BBC Bengali',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
+        ],
+        storyParseConfig: [
+            { name: 'title', selector: '.story-body h1', type: network_1.WebElementType.TEXT },
+            { name: 'details', selector: '.story-body .story-body__inner > p', type: network_1.WebElementType.TEXT },
+            { name: 'img', selector: '.story-body figure  img', type: network_1.WebElementType.IMAGE },
+        ]
+    },
+    {
         name: 'OneIndia Bengali',
         type: new web_reader_1.OneIndiaWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: false,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.oneindia.com/news/kolkata/' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://bengali.oneindia.com/news/india/' },
@@ -63,6 +211,7 @@ exports.urlList = [
         type: new web_reader_1.OneIndiaWebReader(),
         lang: CONST_1.LANG.IN_ENGLISH,
         is_active: true,
+        is_partner: false,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '#containerMain .main-block a', url: 'https://www.oneindia.com/' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://www.oneindia.com/india/' },
@@ -75,6 +224,7 @@ exports.urlList = [
         type: new web_reader_1.OneIndiaWebReader(),
         lang: CONST_1.LANG.IN_HINDI,
         is_active: true,
+        is_partner: false,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '#containerMain .newsBlock a', url: 'https://hindi.oneindia.com/' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://hindi.oneindia.com/news/india/' },
@@ -86,6 +236,7 @@ exports.urlList = [
         type: new web_reader_1.News18WebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.COUNTRY, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/national/' },
             { stream: CONST_1.STREAM.STATE, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/kolkata/' },
@@ -100,6 +251,7 @@ exports.urlList = [
         type: new web_reader_1.News18WebReader(),
         lang: CONST_1.LANG.IN_ENGLISH,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.HEADLINE, selector: '.lead-story a', url: 'https://www.news18.com/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.hotTopic a', url: 'https://www.news18.com/politics/' },
@@ -122,6 +274,7 @@ exports.urlList = [
         type: new web_reader_1.News18WebReader(),
         lang: CONST_1.LANG.IN_HINDI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.topnews a', url: 'https://hindi.news18.com/' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.hotTopic a', url: 'https://hindi.news18.com/news/nation/' },
@@ -144,6 +297,7 @@ exports.urlList = [
         type: new web_reader_1.ArticleWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.nilkantho.in/category/news/kolkata/' },
             { stream: CONST_1.STREAM.STATE, url: 'https://www.nilkantho.in/category/news/state/' },
@@ -163,6 +317,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.darkaritips.com/headline/' },
             { stream: CONST_1.STREAM.HEALTH, url: 'https://www.darkaritips.com/category/health-message/' },
@@ -174,6 +329,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.VIRAL, url: 'https://gnebangla.in/category/viral-news/' },
             { stream: CONST_1.STREAM.STATE, url: 'https://gnebangla.in/category/local-news/' },
@@ -190,6 +346,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.kolkata24x7.com/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.kolkata24x7.com/' },
@@ -205,6 +362,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: false,
         links: [
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a6%e0%a7%87%e0%a6%b6/' },
             { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%95%e0%a6%b2%e0%a6%95%e0%a6%be%e0%a6%a4%e0%a6%be/' },
@@ -223,6 +381,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.totka24x7.com/archives/category/lifestyle' },
             { stream: CONST_1.STREAM.BUSINESS, url: 'https://www.totka24x7.com/archives/category/earn-money' },
@@ -240,6 +399,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.VIRAL, url: 'https://www.bharatbarta.com/category/vairal/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://www.bharatbarta.com/category/entertainment/' },
@@ -256,6 +416,7 @@ exports.urlList = [
         type: new web_reader_1.WordPressWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
+        is_partner: true,
         links: [
             { stream: CONST_1.STREAM.BANGLADESH, url: 'https://www.banglarpran.com/archives/category/dooars' },
             { stream: CONST_1.STREAM.STATE, url: 'https://www.banglarpran.com/archives/category/state' },

@@ -101,16 +101,16 @@ var WebCrawler = /** @class */ (function () {
                                             return [2 /*return*/, "continue"];
                                         }
                                         // remove dups
-                                        console.log("++ Link/Merge Total " + top_urls.length);
+                                        console.log("[INFO] Link/Merge Total " + top_urls.length);
                                         top_urls = lodash_1.uniqBy(top_urls, 'url');
-                                        console.log("++ Link/After Uniques " + top_urls.length);
+                                        console.log("[INFO] Link/After Uniques " + top_urls.length);
                                         return [4 /*yield*/, db_helper_1.detectUrlNotInDb(top_urls.map(function (x) { return x.url; }))];
                                     case 5:
                                         notinDb = _c.sent();
                                         if (!isTest) {
                                             top_urls = top_urls.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
                                         }
-                                        console.log("++ Link/Not in DB " + top_urls.length);
+                                        console.log("[INFO] Link/Not in DB " + top_urls.length);
                                         stories = [];
                                         _b = 0, top_urls_1 = top_urls;
                                         _c.label = 6;
@@ -127,6 +127,7 @@ var WebCrawler = /** @class */ (function () {
                                         storyDict['lang'] = web_entry.lang;
                                         storyDict['stream'] = link.stream;
                                         storyDict['is_active'] = web_entry.is_active ? "1" : "0";
+                                        storyDict['is_partner'] = web_entry.is_partner;
                                         cont = CONST_1.buildContent(storyDict);
                                         if (CONST_1.validate(cont)) {
                                             stories.push(cont);
@@ -152,7 +153,7 @@ var WebCrawler = /** @class */ (function () {
                                         _b++;
                                         return [3 /*break*/, 6];
                                     case 12:
-                                        console.log("++ Try saving count: " + stories.length);
+                                        console.log("[INFO] Try saving count: " + stories.length);
                                         if (isTest) {
                                             console.log(stories);
                                             if (stories.length == 0) {

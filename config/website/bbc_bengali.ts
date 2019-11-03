@@ -34,7 +34,7 @@ export class BbcBengaliConfig extends BaseConfig {
 
     getStoryListConfig():Array<StoryListConfig>{
         return [
-            {stream: STREAM.FIRST_PAGE, selector:'.eagle .eagle-item > a',url:'https://www.bbc.com/bengali/news'},
+            
         ]
     }
 }

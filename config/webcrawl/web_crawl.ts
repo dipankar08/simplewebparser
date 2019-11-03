@@ -3,10 +3,9 @@ let request = require('async-request'), // TODO: move to const request = require
 const cheerio = require('cheerio')
 var Url = require('url-parse');
 import { Analytics } from "../../analytics";
-import { getHostNameFromUrl,saveToDB, detectUrlNotInDb } from "../utils/db_helper";
-import { BaseWebReader, WordPressWebReader } from "./web_reader";
+import { saveToDB, detectUrlNotInDb } from "../utils/db_helper";
 import { WebEntryPoint } from "./web_entrypoints";
-import { validate, Content, DB_URL, buildContent } from "../CONST";
+import { validate,buildContent } from "../CONST";
 import { uniqBy } from "lodash";
 import { parseStoreList, parseStory } from "./network";
 
@@ -46,16 +45,16 @@ export class WebCrawler {
                 continue;
             }
             // remove dups
-            console.log(`++ Link/Merge Total ${top_urls.length}`)
+            console.log(`[INFO] Link/Merge Total ${top_urls.length}`)
             top_urls = uniqBy(top_urls,'url')
-            console.log(`++ Link/After Uniques ${top_urls.length}`)
+            console.log(`[INFO] Link/After Uniques ${top_urls.length}`)
 
             // find howmnay link should we parse as they are not in db.
             let notinDb =  await detectUrlNotInDb(top_urls.map(x=>x.url));
             if(!isTest){
                 top_urls = top_urls.filter(x=> notinDb.indexOf(x.url) != -1);
             }
-            console.log(`++ Link/Not in DB ${top_urls.length}`)
+            console.log(`[INFO] Link/Not in DB ${top_urls.length}`)
 
             // Now parse each story page.
             let stories = []
@@ -67,6 +66,7 @@ export class WebCrawler {
                     storyDict['lang'] = web_entry.lang;
                     storyDict['stream'] = link.stream;
                     storyDict['is_active']= web_entry.is_active?"1":"0"
+                    storyDict['is_partner'] = web_entry.is_partner
 
                     // build and validate contents
                     let cont = buildContent(storyDict);
@@ -86,7 +86,7 @@ export class WebCrawler {
                     break;
                 }
             }
-            console.log(`++ Try saving count: ${stories.length}`)
+            console.log(`[INFO] Try saving count: ${stories.length}`)
             if(isTest){
                 console.log(stories);
                 if(stories.length == 0){

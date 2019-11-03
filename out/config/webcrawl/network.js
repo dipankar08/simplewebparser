@@ -115,19 +115,34 @@ function parseStory(url, config) {
 exports.parseStory = parseStory;
 function parseStoreList(url, config) {
     return __awaiter(this, void 0, void 0, function () {
-        var urlList, resp, body, $, url_list, _i, _a, n, err_1;
+        var urlList, body, resp, error_3, $, url_list, _i, _a, n, err_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     urlList = [];
                     _b.label = 1;
                 case 1:
-                    _b.trys.push([1, 3, , 4]);
+                    _b.trys.push([1, 9, , 10]);
                     console.log("[INFO] Fetching link " + url);
-                    return [4 /*yield*/, request(url)];
+                    _b.label = 2;
                 case 2:
+                    _b.trys.push([2, 7, , 8]);
+                    if (!config.networkFetcher) return [3 /*break*/, 4];
+                    return [4 /*yield*/, config.networkFetcher(url)];
+                case 3:
+                    body = _b.sent();
+                    return [3 /*break*/, 6];
+                case 4: return [4 /*yield*/, request(url)];
+                case 5:
                     resp = _b.sent();
                     body = resp.body;
+                    _b.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    error_3 = _b.sent();
+                    analytics_1.Analytics.exception(error_3);
+                    return [2 /*return*/, []];
+                case 8:
                     $ = cheerio.load(body);
                     url_list = [];
                     for (_i = 0, _a = $(config.list_selector); _i < _a.length; _i++) {
@@ -148,12 +163,12 @@ function parseStoreList(url, config) {
                         analytics_1.Analytics.action("error_parse_root_url", url);
                     }
                     return [2 /*return*/, url_list];
-                case 3:
+                case 9:
                     err_1 = _b.sent();
                     analytics_1.Analytics.action("error_parse_root_url", url);
                     analytics_1.Analytics.exception(err_1, { "url": url });
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 10];
+                case 10: return [2 /*return*/];
             }
         });
     });
