@@ -54,6 +54,11 @@ var Analytics = /** @class */ (function () {
         var obj = _.extend(res, extra);
         this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', obj);
     };
+    Analytics.hit_tracker = function (extra) {
+        if (extra === void 0) { extra = {}; }
+        extra['type'] = 'hit_tracker';
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/hit_tracker', extra);
+    };
     Analytics.exception = function (e, extra) {
         if (extra === void 0) { extra = {}; }
         var errObj = { type: "exception", "error": e.name, location: 'Please see the stack', stack: e.stack };
@@ -127,7 +132,9 @@ var Analytics = /** @class */ (function () {
                         this.pendingItems.push({ url: url, data: data });
                         return [3 /*break*/, 3];
                     case 1:
-                        data['session'] = this.session;
+                        if (data['type'] == 'hit_tracker') {
+                            data['session'] = this.session;
+                        }
                         data['app_id'] = this.app_id;
                         console.log("[ANA] Sending Logs: url: " + url + ", data: " + data);
                         return [4 /*yield*/, fetch_req(url, {

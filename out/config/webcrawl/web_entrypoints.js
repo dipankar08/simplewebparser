@@ -46,6 +46,7 @@ var cron = require('node-cron');
 exports.urlList = [
     {
         name: 'Bartaman',
+        profile_img: 'https://bartamanpatrika.com/images/logo.png',
         type: new web_reader_1.BartamanWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
@@ -460,7 +461,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(exports.urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(exports.urlList, true /*if this */)];
+                    return [4 /*yield*/, c.crawl(exports.urlList, false /*if this */)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

@@ -40,7 +40,7 @@ export class WebCrawler {
                 }
             }
             if(top_urls.length == 0){
-                Analytics.action("empty_root_url", weblink.url);
+                Analytics.hit_tracker({'action':"empty_root_url", 'link': weblink.url});
                 console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
                 continue;
             }
@@ -68,6 +68,10 @@ export class WebCrawler {
                     storyDict['is_active']= web_entry.is_active?"1":"0"
                     storyDict['is_partner'] = web_entry.is_partner
 
+                    if(!storyDict.img){
+                        storyDict.img = web_entry.profile_img;
+                    }
+
                     // build and validate contents
                     let cont = buildContent(storyDict);
                     if(validate(cont)){
@@ -75,11 +79,11 @@ export class WebCrawler {
                     } else{
                         console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
                         console.log(cont);
-                        Analytics.action("empty_data_found", storyDict.url);
+                        Analytics.hit_tracker({'action':"empty_data_found", 'link': storyDict.url});
                     }
                 } catch(e){
                     console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
-                    Analytics.action("exception_while_fetching", link.url);
+                    Analytics.hit_tracker({'action':"exception_while_fetching", 'link': link.url});
                     Analytics.exception(e);
                 }
                 if(isTest){

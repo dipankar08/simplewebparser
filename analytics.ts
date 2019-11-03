@@ -27,6 +27,11 @@ export class Analytics {
         this.pump('http://simplestore.dipankar.co.in/api/_analytics/action', obj)
     }
 
+    static hit_tracker(extra:Object ={}){
+        extra['type'] = 'hit_tracker';
+        this.pump('http://simplestore.dipankar.co.in/api/_analytics/hit_tracker', extra)
+    }
+
      static exception(e:Error, extra:Object = {}){
          let errObj = {type:"exception", "error": e.name, location:'Please see the stack', stack:e.stack};
          let obj = _.extend(errObj, extra)
@@ -69,7 +74,9 @@ export class Analytics {
         if(this.session == null){
             this.pendingItems.push({url:url, data:data})
         } else{
-            data['session'] = this.session;
+            if(data['type'] == 'hit_tracker'){
+                data['session'] = this.session;
+            }
             data['app_id'] = this.app_id;
             console.log(`[ANA] Sending Logs: url: ${url}, data: ${data}`)
             await fetch_req(url, {

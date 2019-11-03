@@ -27,6 +27,7 @@ export type WebEntryPoint = {
 export var urlList:Array<WebEntryPoint> = [
     {
         name:'Bartaman',
+        profile_img:'https://bartamanpatrika.com/images/logo.png',
         type:new BartamanWebReader(),
         lang:LANG.IN_BENGALI,
         is_active:true,
@@ -448,7 +449,7 @@ async function updateProfile(list:WebEntryPoint[]){
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, true/*if this */);
+    await c.crawl(urlList, false/*if this */);
 }
 // function. 
 export async function webCronJob(){

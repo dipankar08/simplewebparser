@@ -96,7 +96,7 @@ var WebCrawler = /** @class */ (function () {
                                         return [3 /*break*/, 1];
                                     case 4:
                                         if (top_urls.length == 0) {
-                                            analytics_1.Analytics.action("empty_root_url", weblink.url);
+                                            analytics_1.Analytics.hit_tracker({ 'action': "empty_root_url", 'link': weblink.url });
                                             console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
                                             return [2 /*return*/, "continue"];
                                         }
@@ -128,6 +128,9 @@ var WebCrawler = /** @class */ (function () {
                                         storyDict['stream'] = link.stream;
                                         storyDict['is_active'] = web_entry.is_active ? "1" : "0";
                                         storyDict['is_partner'] = web_entry.is_partner;
+                                        if (!storyDict.img) {
+                                            storyDict.img = web_entry.profile_img;
+                                        }
                                         cont = CONST_1.buildContent(storyDict);
                                         if (CONST_1.validate(cont)) {
                                             stories.push(cont);
@@ -135,13 +138,13 @@ var WebCrawler = /** @class */ (function () {
                                         else {
                                             console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
                                             console.log(cont);
-                                            analytics_1.Analytics.action("empty_data_found", storyDict.url);
+                                            analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
                                         }
                                         return [3 /*break*/, 10];
                                     case 9:
                                         e_1 = _c.sent();
                                         console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
-                                        analytics_1.Analytics.action("exception_while_fetching", link.url);
+                                        analytics_1.Analytics.hit_tracker({ 'action': "exception_while_fetching", 'link': link.url });
                                         analytics_1.Analytics.exception(e_1);
                                         return [3 /*break*/, 10];
                                     case 10:
