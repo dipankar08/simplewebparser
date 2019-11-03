@@ -1,45 +1,65 @@
-let Parser = require('rss-parser');
-let parser = new Parser();
-import {getHostNameFromUrl} from "../utils/helper"
-import { parse } from 'node-html-parser';
-var fastparser = require('fast-xml-parser');
-import { Analytics } from "../../analytics";
-import { LANG, STREAM, Content } from "../CONST";
-import { String } from "lodash";
 import { WebConfig, WebElementType } from "./network";
-import { WebEntryPoint } from "./web_entrypoints";
-const request = require('request-promise');
-
-export enum WEB_TYPE {
-    WORD_PRESS,
-    ABP,
-    ZEE
-}
 
 export abstract class BaseWebReader {
-    public abstract getType():WEB_TYPE;
     public abstract getWebConfig():WebConfig;
-    public abstract async read(entrypoint:WebEntryPoint): Promise<Array<Content>>;
 }
 
+const globalBlackListUrl =['/livetv/','/photogallery/','/videos/','/video/']
+
 export class WordPressWebReader extends BaseWebReader {
-    public getType(): WEB_TYPE {
-        return WEB_TYPE.WORD_PRESS;
-    }    
     public getWebConfig(): WebConfig {
         return {
-            list_selector:'',
+            ignoreUrlRegex: globalBlackListUrl,
+            list_selector:'.td-main-content .td-module-thumb > a',
             storyParseConfig:[
                 { name: 'title',   selector: 'article header h1', type: WebElementType.TEXT },
                 { name: 'img',     selector: 'article  .td-post-featured-image img', type: WebElementType.IMAGE },
                 { name: 'details', selector: 'article .td-post-content > p', type: WebElementType.TEXT }]
         }
     }
-    public async read(entrypoint: WebEntryPoint): Promise<Content[]> {
-        return []
+}
+
+export class ArticleWebReader extends BaseWebReader {
+    public getWebConfig(): WebConfig {
+        return {
+            ignoreUrlRegex: globalBlackListUrl,
+            list_selector:'article h2 a', // used in nil kontho.
+            storyParseConfig:[
+                { name: 'title',   selector: 'article h1', type: WebElementType.TEXT },
+                { name: 'img',     selector: 'article img', type: WebElementType.IMAGE },
+                { name: 'details', selector: 'article p ', type: WebElementType.TEXT },
+            ]
+        }
     }
 }
 
+export class News18WebReader extends BaseWebReader {
+    public getWebConfig(): WebConfig {
+        return {
+            ignoreUrlRegex: globalBlackListUrl,
+            list_selector:'.nwslist-withbrdr li a',
+            storyParseConfig:[
+                { name: 'title', selector: '.article_box h1', type: WebElementType.TEXT },
+                { name: 'details', selector: '.article_box #article_body p', type: WebElementType.TEXT },
+                { name: 'img', selector: '.article_box .articleimg img', type: WebElementType.IMAGE },
+            ]
+        }
+    }
+}
+
+export class OneIndiaWebReader extends BaseWebReader {
+    public getWebConfig(): WebConfig {
+        return {
+            ignoreUrlRegex: globalBlackListUrl,
+            list_selector:'article .article-img a',
+            storyParseConfig:[
+                { name: 'title', selector: 'article h1', type: WebElementType.TEXT },
+                { name: 'details', selector: 'article .oi-article-lt > p', type: WebElementType.TEXT },
+                { name: 'img', selector: 'article figure  img', type: WebElementType.IMAGE },
+            ]
+        }
+    }
+}
 
 
 

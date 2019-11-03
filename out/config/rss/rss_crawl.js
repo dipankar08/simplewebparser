@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var rss_reader_1 = require("./rss_reader");
 var analytics_1 = require("../../analytics");
-var helper_1 = require("../utils/helper");
+var db_helper_1 = require("../utils/db_helper");
 var CONST_1 = require("../CONST");
 var cron = require('node-cron');
 var RssCrawler = /** @class */ (function () {
@@ -57,17 +57,17 @@ var RssCrawler = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         result = [];
-                        hostname = helper_1.getHostNameFromUrl(list[0].url);
+                        hostname = db_helper_1.getHostNameFromUrl(list[0].url);
                         _i = 0, list_1 = list;
                         _c.label = 1;
                     case 1:
                         if (!(_i < list_1.length)) return [3 /*break*/, 9];
                         l = list_1[_i];
                         // detect a host complete 
-                        if (helper_1.getHostNameFromUrl(l.url) != hostname) {
+                        if (db_helper_1.getHostNameFromUrl(l.url) != hostname) {
                             this.save(result);
                             result = [];
-                            hostname = helper_1.getHostNameFromUrl(l.url);
+                            hostname = db_helper_1.getHostNameFromUrl(l.url);
                         }
                         _c.label = 2;
                     case 2:
@@ -90,7 +90,7 @@ var RssCrawler = /** @class */ (function () {
                     case 6: return [3 /*break*/, 8];
                     case 7:
                         e_1 = _c.sent();
-                        analytics_1.Analytics.action('rss_link_broken', helper_1.getHostNameFromUrl(l.url), { "url": l.url });
+                        analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(l.url), { "url": l.url });
                         return [3 /*break*/, 8];
                     case 8:
                         _i++;
@@ -108,7 +108,7 @@ var RssCrawler = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: 
                     // saving item.
-                    return [4 /*yield*/, helper_1.saveToDB(list)];
+                    return [4 /*yield*/, db_helper_1.saveToDB(list)];
                     case 1:
                         // saving item.
                         _a.sent();

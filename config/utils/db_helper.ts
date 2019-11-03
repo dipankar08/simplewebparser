@@ -1,7 +1,7 @@
 
 import { Analytics } from "../../analytics";
 import { SummeryBuilder, SummaryStrategy } from "../summary/SummaryManager";
-import { LANG, DB_URL, STREAM, Content } from "../CONST";
+import { LANG, DB_URL, STREAM, Content, Profile, PROFILE_URL } from "../CONST";
 import { StringAnyMap } from "./types";
 import { uniqBy } from "lodash";
 const request = require('request-promise');
@@ -20,7 +20,7 @@ export async function saveToDB(res:Array<Content>|null){
             return true;
         } else{
             Analytics.action("error_empty_data",x.url);
-            console.log(`>>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
+            console.log(`>>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
             return false
         }
     })
@@ -31,29 +31,8 @@ export async function saveToDB(res:Array<Content>|null){
         return;
     }
 
-    // building summary as we insert.
-    let sb = new SummeryBuilder()
-    let payload = res1.map(x=>{
-        let entry:StringAnyMap = x;
-        switch(x.lang){
-            case LANG.IN_BENGALI:
-                entry['summary']= sb.buildSummary(x.details, SummaryStrategy.BENAGLI)
-                break;
-            case LANG.IN_ENGLISH:
-                entry['summary']= sb.buildSummary(x.details, SummaryStrategy.ENGLISH)
-                break;
-            case LANG.IN_HINDI:
-                entry['summary']= sb.buildSummary(x.details, SummaryStrategy.HINDI)
-                break;
-        }
-        entry.lang = LANG[x.lang]
-        entry.stream = STREAM[x.stream]
-        entry.is_active = "1"
-        return entry;
-    })
-
-    const body = { '_payload': payload,"_field":'url'}; 
-    console.log(`[INFO]: Uisng URL for insert is : ${DB_URL}`)
+    const body = { '_payload': res1,"_field":'url'}; 
+    console.log(`[INFO]: Using URL for insert is : ${DB_URL}`)
     let resp = await request({
         uri:`${DB_URL}/insertorupdate`,
         method: 'POST',
@@ -74,20 +53,34 @@ export async function detectUrlNotInDb(url_list:string[]): Promise<Array<string>
         return null
     }
     // find duplicate in server
-    let resp = await request(`${DB_URL}/exist`,{
+    let resp = await request({
+        uri: `${DB_URL}/exist`,
         method: 'POST',
-        data: JSON.stringify({
+        body: {
             _field: 'url',
             _value:url_list
-        })
+        },
+        json: true
     });
 
-    let obj = JSON.parse(resp.body)
-    if(obj.status == 'success'){
-        url_list =  url_list.filter(x=> obj.out.found_list[x] == null)
-        console.log(`[INFO] Total link which is NOT in DB: ${url_list.length}, DB Found count: ${obj.out.found_count}`)
+    if(resp.status == 'success'){
+        url_list =  url_list.filter(x=> resp.out.found_list[x] == null)
+        console.log(`[INFO] Total link which is NOT in DB: ${url_list.length}, DB Found count: ${resp.out.found_count}`)
     } else{
         return ;
     }
     return url_list;
+}
+
+export async function updateProfileToDb(profiles: Array<Profile>){
+    let resp = await request({
+        uri:`${PROFILE_URL}/insertorupdate`,
+        method: 'POST',
+        body:{
+            _payload:profiles,
+            _field:'hostname'
+        },
+        json: true
+    });
+    console.log(resp)
 }

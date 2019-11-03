@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var SummaryManager_1 = require("./summary/SummaryManager");
 var config = require('config');
 exports.LIMIT = 10;
 var LANG;
@@ -60,12 +61,39 @@ var STREAM;
     STREAM[STREAM["AUDIO_STORY"] = 41] = "AUDIO_STORY";
     STREAM[STREAM["MOTIVATIONAL"] = 42] = "MOTIVATIONAL";
     STREAM[STREAM["COMEDY"] = 43] = "COMEDY";
+    STREAM[STREAM["NATIONAL"] = 44] = "NATIONAL";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
 function validate(c) {
     return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
 }
 exports.validate = validate;
-exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1';
-exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile' : 'http://simplestore.dipankar.co.in/api/news_profile1';
+function buildContent(dict) {
+    var sb = new SummaryManager_1.SummeryBuilder();
+    switch (dict.lang) {
+        case LANG.IN_BENGALI:
+            dict['summary'] = sb.buildSummary(dict.details, SummaryManager_1.SummaryStrategy.BENAGLI);
+            break;
+        case LANG.IN_ENGLISH:
+            dict['summary'] = sb.buildSummary(dict.details, SummaryManager_1.SummaryStrategy.ENGLISH);
+            break;
+        case LANG.IN_HINDI:
+            dict['summary'] = sb.buildSummary(dict.details, SummaryManager_1.SummaryStrategy.HINDI);
+            break;
+    }
+    return {
+        title: dict.title,
+        img: dict.img,
+        details: dict.details,
+        summary: dict.summary,
+        is_active: dict.is_active,
+        url: dict.url,
+        hostname: dict.hostname,
+        lang: LANG[dict.lang],
+        stream: STREAM[dict.stream]
+    };
+}
+exports.buildContent = buildContent;
+exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1';
+exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile1' : 'http://simplestore.dipankar.co.in/api/news_profile1';
 console.log("[INFO] Using Root URL: " + exports.DB_URL);
 //# sourceMappingURL=CONST.js.map

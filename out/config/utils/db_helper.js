@@ -126,4 +126,27 @@ function detectUrlNotInDb(url_list) {
     });
 }
 exports.detectUrlNotInDb = detectUrlNotInDb;
-//# sourceMappingURL=helper.js.map
+function updateProfileToDb(profiles) {
+    return __awaiter(this, void 0, void 0, function () {
+        var resp;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, request({
+                        uri: CONST_1.PROFILE_URL + "/insertorupdate",
+                        method: 'POST',
+                        body: {
+                            _payload: profiles,
+                            _field: 'hostname'
+                        },
+                        json: true
+                    })];
+                case 1:
+                    resp = _a.sent();
+                    console.log(resp);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.updateProfileToDb = updateProfileToDb;
+//# sourceMappingURL=db_helper.js.map

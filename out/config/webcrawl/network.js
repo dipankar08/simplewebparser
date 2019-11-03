@@ -119,7 +119,6 @@ function parseStoreList(url, config) {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    console.log("[INFO] Total Story List count: " + url.length);
                     urlList = [];
                     _b.label = 1;
                 case 1:

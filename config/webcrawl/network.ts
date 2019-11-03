@@ -7,7 +7,6 @@ let request = require('async-request'), // TODO: move to const request = require
 const cheerio = require('cheerio')
 var Url = require('url-parse');
 
-
 export enum WebElementType {
     TEXT,
     IMAGE,
@@ -20,7 +19,7 @@ export type WebConfig ={
     list_limit?:number,
 
     // advance config
-    ignoreUrlRegex?:Array<String>,
+    ignoreUrlRegex?:Array<string>,
     ignoreLineRegex?:Array<string>,
     networkFetcher?:Function,
 
@@ -82,7 +81,6 @@ export async function parseStory(url: string, config:WebConfig):Promise<StringAn
 }
 
 export async function parseStoreList(url:string, config:WebConfig): Promise<Array<string>|null> {
-    console.log(`[INFO] Total Story List count: ${url.length}`)
     let urlList:Array<string> =[]
     try{
         console.log(`[INFO] Fetching link ${url}`)

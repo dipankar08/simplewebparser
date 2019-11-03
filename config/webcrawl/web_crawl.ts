@@ -3,87 +3,99 @@ let request = require('async-request'), // TODO: move to const request = require
 const cheerio = require('cheerio')
 var Url = require('url-parse');
 import { Analytics } from "../../analytics";
-import { getHostNameFromUrl,saveToDB } from "../utils/helper";
-import { BaseWebReader, WEB_TYPE, WordPressWebReader } from "./web_reader";
+import { getHostNameFromUrl,saveToDB, detectUrlNotInDb } from "../utils/db_helper";
+import { BaseWebReader, WordPressWebReader } from "./web_reader";
 import { WebEntryPoint } from "./web_entrypoints";
-import { validate, Content, DB_URL } from "../CONST";
+import { validate, Content, DB_URL, buildContent } from "../CONST";
 import { uniqBy } from "lodash";
+import { parseStoreList, parseStory } from "./network";
 
 const cron = require('node-cron');
 
 export class WebCrawler {
-    reader_map: Map<WEB_TYPE, BaseWebReader> ;
-    constructor(){
-        this.reader_map= new Map();
-        // add your reader here.
-        let mylist = [new WordPressWebReader()]
-
-
-        for(var l of mylist){
-            this.reader_map.set(l.getType(), l);
-        }
-    }
-
-    async crawl(list:Array<WebEntryPoint>){
-        // First Round Just get the list of URLs.
-        let result =[];
-        let current = list[0];
-        for(var l of list){
-            // detect a host complete 
-            if(getHostNameFromUrl(l.url) != getHostNameFromUrl(current.url)){
-                this.processURLList(result, current)
-                result = []
-                current = l
+    // passing test as true will test one link for each categories
+    async crawl(list:Array<WebEntryPoint>, isTest:Boolean = false){
+        for(var web_entry of list){
+            if(!web_entry.is_active){
+                console.log(`[INFO] Skipping as the info is not active ${web_entry.name}`)
+                continue;
             }
-            try{
-              
-            } catch(e){
-                Analytics.action('rss_link_broken',getHostNameFromUrl(l.url),{"url":l.url})
-            }   
-        }
-        this.processURLList(result, current);
-    }
-
-
-    // send a list of URLs
-    async processURLList(urlList: string[], config:WebEntryPoint) {
-        /* 
-       console.log(`[INFO] Total storyLink found: ${urlList.length}`)
-        // remove duplicate :
-        urlList = uniqBy(urlList,'url')
-        console.log(`[INFO] Total count of Story Link(After remove duplicate): ${urlList.length}`)
-
-        if(urlList.length == 0){
-            return null
-        }
-        // find duplicate in server
-        let resp = await request(`${DB_URL}/exist`,{
-            method: 'POST',
-            data: JSON.stringify({
-                _field: 'url',
-                _value:urlList
-            })
-        });
-        let obj = JSON.parse(resp.body)
-        if(obj.status == 'success'){
-            Analytics.action('stat_parse_duplicate','dummy',{'unique_count':urlList.length - obj.out.found_count, 'duplicate_count': obj.out.found_count,'domain':Url(url).hostname})
-            urlList =  urlList.filter(x=> obj.out.found_list[x.url] == null)
-            console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
-           if(urlList.length == 0){
-                return;
+            console.log("====================== P R O C E S S I N G===========================")
+            let config = web_entry.type.getWebConfig();
+            // override the config
+            if(web_entry.storyParseConfig){
+                config.storyParseConfig = web_entry.storyParseConfig;
             }
-        } else{
-            return;
+            let top_urls = [];
+            for (var weblink of web_entry.links){
+                // override the selector.
+                if(weblink.selector){
+                    config.list_selector = weblink.selector;
+                }
+                let urls = await parseStoreList(weblink.url, config);
+                top_urls = top_urls.concat(urls.map(u=>{
+                    return {url:u,stream:weblink.stream}
+                }))
+                if(isTest){
+                    break;
+                }
+            }
+            if(top_urls.length == 0){
+                Analytics.action("empty_root_url", weblink.url);
+                console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
+                continue;
+            }
+            // remove dups
+            console.log(`++ Link/Merge Total ${top_urls.length}`)
+            top_urls = uniqBy(top_urls,'url')
+            console.log(`++ Link/After Uniques ${top_urls.length}`)
+
+            // find howmnay link should we parse as they are not in db.
+            let notinDb =  await detectUrlNotInDb(top_urls.map(x=>x.url));
+            if(!isTest){
+                top_urls = top_urls.filter(x=> notinDb.indexOf(x.url) != -1);
+            }
+            console.log(`++ Link/Not in DB ${top_urls.length}`)
+
+            // Now parse each story page.
+            let stories = []
+            for(var link of top_urls){
+                try{
+                    let storyDict = await parseStory(link.url, config);
+
+                    // append any extra here.
+                    storyDict['lang'] = web_entry.lang;
+                    storyDict['stream'] = link.stream;
+                    storyDict['is_active']= web_entry.is_active?"1":"0"
+
+                    // build and validate contents
+                    let cont = buildContent(storyDict);
+                    if(validate(cont)){
+                        stories.push(cont);
+                    } else{
+                        console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
+                        console.log(cont);
+                        Analytics.action("empty_data_found", storyDict.url);
+                    }
+                } catch(e){
+                    console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$")
+                    Analytics.action("exception_while_fetching", link.url);
+                    Analytics.exception(e);
+                }
+                if(isTest){
+                    break;
+                }
+            }
+            console.log(`++ Try saving count: ${stories.length}`)
+            if(isTest){
+                console.log(stories);
+                if(stories.length == 0){
+                    throw Error("Please fix this now.")
+                }
+                console.log("TEST PASSED - PLEASE CHECK ABOVE");
+                continue;
+            }
+            await saveToDB(stories);
         }
-       // Now fetch the URL which not in DB and insert.
-       let result = []
-       for( let u of urlList){
-           let res = await this.reader_map.get(config.;
-           if(res != null){
-               result.push(assignIn(res, u.extra))
-           }
-       }
-        await saveToDB(result);
-    */
     }
 }

@@ -1,5 +1,6 @@
 import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../config/utils/types";
+import { SummeryBuilder, SummaryStrategy } from "./summary/SummaryManager";
 
 const config = require('config');
 
@@ -60,7 +61,8 @@ export enum STREAM {
     YOUTUBE,
     AUDIO_STORY,
     MOTIVATIONAL,
-    COMEDY
+    COMEDY,
+    NATIONAL
 }
 
 export type ListConfig = {
@@ -75,21 +77,62 @@ export type StoryListConfig = {
     stream:STREAM,
     extra?:StringAnyMap
 }
-
+// THIS MUST BE SAME AS CLIENT.
 export type Content = {
     title:string,
     img:string,
     details:string ,
+    summary?:string,
     url:string,
     hostname:string,
-    lang:LANG,
-    stream:STREAM,
+    lang:string,
+    stream:string,
+    is_active:string;
 }
+// THIS MUST BE SAME AS CLIENT.
+export type Profile = {
+    title:string,
+    lang:string,
+    hostname:string,
+    img:string,
+    streams:Array<string>,
+    count_followers:number,
+    is_active:string
+}
+
+
 export function validate(c:Content){
     return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length >10 && c.details.length > 20;
 }
 
 
-export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news' : 'http://simplestore.dipankar.co.in/api/news1'
-export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile':'http://simplestore.dipankar.co.in/api/news_profile1'
+export function buildContent(dict):Content{
+    let sb = new SummeryBuilder()
+    switch(dict.lang){
+        case LANG.IN_BENGALI:
+            dict['summary']= sb.buildSummary(dict.details, SummaryStrategy.BENAGLI)
+            break;
+        case LANG.IN_ENGLISH:
+            dict['summary']= sb.buildSummary(dict.details, SummaryStrategy.ENGLISH)
+            break;
+        case LANG.IN_HINDI:
+            dict['summary']= sb.buildSummary(dict.details, SummaryStrategy.HINDI)
+            break;
+    }
+
+    return {
+        title: dict.title,
+        img:dict.img,
+        details:dict.details,
+        summary:dict.summary,
+        is_active:dict.is_active,
+        url:dict.url,
+        hostname:dict.hostname,
+        lang:LANG[dict.lang],
+        stream:STREAM[dict.stream]
+    }
+}
+
+export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1'
+export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile1':'http://simplestore.dipankar.co.in/api/news_profile1'
 console.log(`[INFO] Using Root URL: ${DB_URL}`)

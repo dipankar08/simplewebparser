@@ -1,6 +1,6 @@
 let Parser = require('rss-parser');
 let parser = new Parser();
-import {getHostNameFromUrl} from "../utils/helper"
+import {getHostNameFromUrl} from "../utils/db_helper"
 import { parse } from 'node-html-parser';
 var fastparser = require('fast-xml-parser');
 import { Analytics } from "../../analytics";

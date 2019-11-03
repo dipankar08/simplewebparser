@@ -50,7 +50,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Parser = require('rss-parser');
 var parser = new Parser();
-var helper_1 = require("../utils/helper");
+var db_helper_1 = require("../utils/db_helper");
 var node_html_parser_1 = require("node-html-parser");
 var fastparser = require('fast-xml-parser');
 var analytics_1 = require("../../analytics");
@@ -89,7 +89,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
                         for (_i = 0, _a = feed.items; _i < _a.length; _i++) {
                             item = _a[_i];
                             link = item.link;
-                            hostname = helper_1.getHostNameFromUrl(link);
+                            hostname = db_helper_1.getHostNameFromUrl(link);
                             try {
                                 html = node_html_parser_1.parse(item['content:encoded']);
                                 result.push({
@@ -97,13 +97,13 @@ var WordPressRssReader = /** @class */ (function (_super) {
                                     img: this.getImgFromHTML(hostname, html),
                                     details: html.text,
                                     url: item.link,
-                                    hostname: helper_1.getHostNameFromUrl(url),
+                                    hostname: db_helper_1.getHostNameFromUrl(url),
                                     lang: extra.lang,
                                     stream: extra.stream
                                 });
                             }
                             catch (e) {
-                                analytics_1.Analytics.action('rss_link_broken', helper_1.getHostNameFromUrl(item.link), { "url": link });
+                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link), { "url": link });
                             }
                         }
                         return [2 /*return*/, result];
@@ -158,7 +158,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                                 });
                             }
                             catch (e) {
-                                analytics_1.Analytics.action('rss_link_broken', helper_1.getHostNameFromUrl(item.link['@_href']), { "url": item.link['@_href'] });
+                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link['@_href']), { "url": item.link['@_href'] });
                             }
                         }
                         return [2 /*return*/, result];

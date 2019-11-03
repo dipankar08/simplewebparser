@@ -12,3 +12,12 @@ export interface NumberNumberMap extends NumberTMap<number> {};
 
 export interface StringBooleanMap extends StringTMap<boolean> {};
 export interface NumberBooleanMap extends NumberTMap<boolean> {};
+
+export const functionWithPromise = item => { //a function that returns a promise
+    return Promise.resolve('ok')
+}
+  
+export const anAsyncFunction = async item => {
+    return await functionWithPromise(item)
+  }
+  
