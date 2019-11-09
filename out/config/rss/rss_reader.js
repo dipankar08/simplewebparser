@@ -54,18 +54,19 @@ var db_helper_1 = require("../utils/db_helper");
 var node_html_parser_1 = require("node-html-parser");
 var fastparser = require('fast-xml-parser');
 var analytics_1 = require("../../analytics");
+var dlog_1 = require("../utils/dlog");
 var request = require('request-promise');
 var RSS_TYPE;
 (function (RSS_TYPE) {
     RSS_TYPE[RSS_TYPE["WORD_PRESS"] = 0] = "WORD_PRESS";
     RSS_TYPE[RSS_TYPE["YOUTUBE"] = 1] = "YOUTUBE";
 })(RSS_TYPE = exports.RSS_TYPE || (exports.RSS_TYPE = {}));
-var BaseReader = /** @class */ (function () {
-    function BaseReader() {
+var BaseRSSReader = /** @class */ (function () {
+    function BaseRSSReader() {
     }
-    return BaseReader;
+    return BaseRSSReader;
 }());
-exports.BaseReader = BaseReader;
+exports.BaseRSSReader = BaseRSSReader;
 var WordPressRssReader = /** @class */ (function (_super) {
     __extends(WordPressRssReader, _super);
     function WordPressRssReader() {
@@ -81,7 +82,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
                 switch (_b.label) {
                     case 0:
                         // fetch URL and then read.
-                        console.log("[RSS] Start redding RSS " + url);
+                        dlog_1.d("[RSS] Start redding RSS " + url);
                         return [4 /*yield*/, parser.parseURL(url)];
                     case 1:
                         feed = _b.sent();
@@ -103,6 +104,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
                                 });
                             }
                             catch (e) {
+                                dlog_1.ex(e);
                                 analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link), { "url": link });
                             }
                         }
@@ -121,7 +123,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
         }
     };
     return WordPressRssReader;
-}(BaseReader));
+}(BaseRSSReader));
 exports.WordPressRssReader = WordPressRssReader;
 var YouTubeRssReader = /** @class */ (function (_super) {
     __extends(YouTubeRssReader, _super);
@@ -138,7 +140,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                 switch (_b.label) {
                     case 0:
                         // fetch URL and then read.
-                        console.log("[RSS] Start redding RSS " + url);
+                        dlog_1.d("[RSS] Start redding RSS " + url);
                         return [4 /*yield*/, request.get(url)];
                     case 1:
                         rawdata = _b.sent();
@@ -158,6 +160,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                                 });
                             }
                             catch (e) {
+                                dlog_1.ex(e);
                                 analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link['@_href']), { "url": item.link['@_href'] });
                             }
                         }
@@ -167,6 +170,6 @@ var YouTubeRssReader = /** @class */ (function (_super) {
         });
     };
     return YouTubeRssReader;
-}(BaseReader));
+}(BaseRSSReader));
 exports.YouTubeRssReader = YouTubeRssReader;
 //# sourceMappingURL=rss_reader.js.map

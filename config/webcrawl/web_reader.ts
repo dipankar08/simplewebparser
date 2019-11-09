@@ -5,7 +5,7 @@ export abstract class BaseWebReader {
     public abstract getWebConfig():WebConfig;
 }
 
-const globalBlackListUrl =['/livetv/','/photogallery/','/videos/','/video/']
+const globalBlackListUrl =['/livetv/','/photogallery/','/videos/','/video/','/videos/','/photos/','/photo/']
 
 export class DefaultWebReader extends BaseWebReader {
     public getWebConfig(): WebConfig {

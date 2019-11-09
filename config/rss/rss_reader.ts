@@ -5,6 +5,7 @@ import { parse } from 'node-html-parser';
 var fastparser = require('fast-xml-parser');
 import { Analytics } from "../../analytics";
 import { LANG, STREAM, Content } from "../CONST";
+import { d, ex } from "../utils/dlog";
 const request = require('request-promise');
 
 export enum RSS_TYPE {
@@ -12,20 +13,20 @@ export enum RSS_TYPE {
     YOUTUBE
 }
 
-export abstract class BaseReader {
+export abstract class BaseRSSReader {
     public abstract getType():RSS_TYPE;
     public abstract async read(url: string, extra: any): Promise<Array<Content>>;
 }
 
 
-export class WordPressRssReader extends BaseReader {
+export class WordPressRssReader extends BaseRSSReader {
     getType(): RSS_TYPE {
         return RSS_TYPE.WORD_PRESS;
     }
 
     async read(url: string, extra: any): Promise<Array<Content>> {
         // fetch URL and then read.
-        console.log(`[RSS] Start redding RSS ${url}`);
+        d(`[RSS] Start redding RSS ${url}`);
         let feed = await parser.parseURL(url);
         let result = []
         for(var item of feed.items){
@@ -43,6 +44,7 @@ export class WordPressRssReader extends BaseReader {
                     stream: extra.stream
                 })
             } catch(e){
+                ex(e)
                 Analytics.action('rss_link_broken',getHostNameFromUrl(item.link),{"url":link})
             }
         }
@@ -58,14 +60,14 @@ export class WordPressRssReader extends BaseReader {
     }
 }
 
-export class YouTubeRssReader extends BaseReader {
+export class YouTubeRssReader extends BaseRSSReader {
     getType(): RSS_TYPE {
         return RSS_TYPE.YOUTUBE;
     }
 
     async read(url: string, extra: any): Promise<Array<Content>> {
         // fetch URL and then read.
-        console.log(`[RSS] Start redding RSS ${url}`);
+        d(`[RSS] Start redding RSS ${url}`);
         let rawdata= await request.get(url);
         var feed = fastparser.parse(rawdata,{ ignoreAttributes : false});
 
@@ -82,6 +84,7 @@ export class YouTubeRssReader extends BaseReader {
                     stream: extra.stream
                 })
             } catch(e){
+                ex(e)
                 Analytics.action('rss_link_broken',getHostNameFromUrl(item.link['@_href']),{"url":item.link['@_href']})
             }
         }

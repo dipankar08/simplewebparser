@@ -1,14 +1,30 @@
 import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../config/utils/types";
 import { SummeryBuilder, SummaryStrategy } from "./summary/SummaryManager";
+import { d } from "./utils/dlog";
 
 const config = require('config');
 
 export const LIMIT:number = 10;
+
+
 export enum LANG{
-    IN_BENGALI,
     IN_ENGLISH,
     IN_HINDI,
+
+    IN_BENGALI,
+    IN_ASSAMESE,
+    IN_ORIYA,
+
+    IN_MARATHI,
+    IN_GUJARATI,
+
+    IN_TAMIL,
+    IN_TELUGU,
+    IN_MALAYALAM,
+
+    BD_BENGALI,
+    BD_ENGLISH
 }
 
 export enum CATEGORIES {
@@ -62,7 +78,9 @@ export enum STREAM {
     AUDIO_STORY,
     MOTIVATIONAL,
     COMEDY,
-    NATIONAL
+    NATIONAL,
+    CRIME,
+    RELIGION
 }
 
 export type ListConfig = {
@@ -103,7 +121,7 @@ export type Profile = {
 
 
 export function validate(c:Content){
-    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length >10 && c.details.length > 20;
+    return c && c.url && c.title && c.img && c.details && c.title.length > 10 && c.url.length >10 && c.details.length > 20;
 }
 
 
@@ -119,9 +137,11 @@ export function buildContent(dict):Content{
         case LANG.IN_HINDI:
             dict['summary']= sb.buildSummary(dict.details, SummaryStrategy.HINDI)
             break;
+        default:
+            dict['summary']= sb.buildSummary(dict.details, SummaryStrategy.DEFAULT)
     }
 
-    return {
+    let cont:Content = {
         title: dict.title,
         img:dict.img,
         details:dict.details,
@@ -133,8 +153,13 @@ export function buildContent(dict):Content{
         stream:STREAM[dict.stream],
         is_partner: dict.is_partner,
     }
+    if(validate(cont)){
+        return cont;
+    } else{
+        return null;
+    }
 }
 
 export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1'
 export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile1':'http://simplestore.dipankar.co.in/api/news_profile1'
-console.log(`[INFO] Using Root URL: ${DB_URL}`)
+d(`Using Root URL: ${DB_URL}`)

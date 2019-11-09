@@ -39,6 +39,7 @@ var rss_reader_1 = require("./rss_reader");
 var CONST_1 = require("../CONST");
 var rss_crawl_1 = require("./rss_crawl");
 var analytics_1 = require("../../analytics");
+var dlog_1 = require("../utils/dlog");
 var cron = require('node-cron');
 exports.urlList = [
     /*
@@ -237,7 +238,7 @@ function rssCronJob() {
             analytics_1.Analytics.launch("crawler_rss");
             // await updateprofile()
             cron.schedule('*/30 * * * *', function () {
-                console.log(Date.now() + " Running a task every 30 minutes");
+                dlog_1.d(Date.now() + " Running a task every 30 minutes");
                 startCrawl();
             });
             // run now too.

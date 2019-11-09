@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var CONST_1 = require("../CONST");
 var analytics_1 = require("../../analytics");
-var request = require('async-request'), // TODO: move to const request = require("request-promise");
-response;
+var dlog_1 = require("../utils/dlog");
+var request = require("request-promise");
 var cheerio = require('cheerio');
 var Url = require('url-parse');
 var WebElementType;
@@ -49,7 +49,7 @@ var WebElementType;
 })(WebElementType = exports.WebElementType || (exports.WebElementType = {}));
 function parseStory(url, config) {
     return __awaiter(this, void 0, void 0, function () {
-        var result, url1, body, resp, error_1, $_1, _i, _a, item, val, error_2;
+        var result, url1, body, error_1, $_1, _i, _a, item, val, error_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -58,7 +58,7 @@ function parseStory(url, config) {
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 9, , 10]);
-                    console.log("[DEBUG] Try fetching... " + url);
+                    dlog_1.d("[DEBUG] Try fetching... " + url);
                     url1 = new Url(url);
                     _b.label = 2;
                 case 2:
@@ -70,16 +70,16 @@ function parseStory(url, config) {
                     return [3 /*break*/, 6];
                 case 4: return [4 /*yield*/, request(url)];
                 case 5:
-                    resp = _b.sent();
-                    body = resp.body;
+                    body = _b.sent();
                     _b.label = 6;
                 case 6: return [3 /*break*/, 8];
                 case 7:
                     error_1 = _b.sent();
+                    dlog_1.ex(error_1);
                     analytics_1.Analytics.exception(error_1);
                     return [2 /*return*/, {}];
                 case 8:
-                    console.log("[INFO Fetching done!");
+                    dlog_1.d("[INFO Fetching done!");
                     result['hostname'] = url1.hostname;
                     $_1 = cheerio.load(body);
                     for (_i = 0, _a = config.storyParseConfig; _i < _a.length; _i++) {
@@ -104,8 +104,8 @@ function parseStory(url, config) {
                 case 9:
                     error_2 = _b.sent();
                     analytics_1.Analytics.exception(error_2, result);
-                    console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
-                    console.log(error_2);
+                    dlog_1.d("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
+                    dlog_1.d(error_2);
                     return [3 /*break*/, 10];
                 case 10: return [2 /*return*/, result];
             }
@@ -115,7 +115,7 @@ function parseStory(url, config) {
 exports.parseStory = parseStory;
 function parseStoreList(url, config) {
     return __awaiter(this, void 0, void 0, function () {
-        var urlList, body, resp, error_3, $, url_list, _i, _a, n, err_1;
+        var urlList, body, error_3, $, url_list, _i, _a, n, err_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -123,7 +123,7 @@ function parseStoreList(url, config) {
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 9, , 10]);
-                    console.log("[INFO] Fetching link " + url);
+                    dlog_1.d("[INFO] Fetching link " + url);
                     _b.label = 2;
                 case 2:
                     _b.trys.push([2, 7, , 8]);
@@ -134,12 +134,12 @@ function parseStoreList(url, config) {
                     return [3 /*break*/, 6];
                 case 4: return [4 /*yield*/, request(url)];
                 case 5:
-                    resp = _b.sent();
-                    body = resp.body;
+                    body = _b.sent();
                     _b.label = 6;
                 case 6: return [3 /*break*/, 8];
                 case 7:
                     error_3 = _b.sent();
+                    dlog_1.ex(error_3);
                     analytics_1.Analytics.exception(error_3);
                     return [2 /*return*/, []];
                 case 8:
@@ -150,13 +150,13 @@ function parseStoreList(url, config) {
                         url_list.push(n.attribs.href);
                     }
                     url_list = url_list.map(function (x) { return absUrl(url.toString(), x); });
-                    console.log("[INFO] LinkFound/all: " + url_list.length);
+                    dlog_1.d("[INFO] LinkFound/all: " + url_list.length);
                     url_list = Array.from(new Set(url_list));
-                    console.log("[INFO] LinkFound/unique: " + url_list.length);
+                    dlog_1.d("[INFO] LinkFound/unique: " + url_list.length);
                     url_list = getFilteredUrl(url, url_list, config);
-                    console.log("[INFO] LinkFound/filter: " + url_list.length);
+                    dlog_1.d("[INFO] LinkFound/filter: " + url_list.length);
                     url_list = url_list.slice(0, config.list_limit ? config.list_limit : CONST_1.LIMIT);
-                    console.log("[INFO] LinkFound/slice: " + url_list.length);
+                    dlog_1.d("[INFO] LinkFound/slice: " + url_list.length);
                     // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                     url_list = url_list.reverse();
                     if (url_list.length == 0) {
@@ -165,10 +165,11 @@ function parseStoreList(url, config) {
                     return [2 /*return*/, url_list];
                 case 9:
                     err_1 = _b.sent();
+                    dlog_1.ex(err_1);
                     analytics_1.Analytics.action("error_parse_root_url", url);
                     analytics_1.Analytics.exception(err_1, { "url": url });
                     return [3 /*break*/, 10];
-                case 10: return [2 /*return*/];
+                case 10: return [2 /*return*/, []];
             }
         });
     });
@@ -202,7 +203,7 @@ function getFilteredUrl(root_url, urls_abs, config) {
     for (var _i = 0, urls_abs_1 = urls_abs; _i < urls_abs_1.length; _i++) {
         var u = urls_abs_1[_i];
         if (Url(u).hostname != Url(root_url).hostname) {
-            console.log("[INFO] Ignore url " + u + " for out of domain fetch");
+            dlog_1.d("[INFO] Ignore url " + u + " for out of domain fetch");
             continue;
         }
         if (config.ignoreUrlRegex && config.ignoreUrlRegex.length > 0) {
@@ -210,7 +211,7 @@ function getFilteredUrl(root_url, urls_abs, config) {
             for (var _a = 0, _b = config.ignoreUrlRegex; _a < _b.length; _a++) {
                 var ic = _b[_a];
                 if (u.indexOf(ic) != -1) {
-                    console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                    dlog_1.d("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
                     flag = 1;
                     break;
                 }
@@ -248,7 +249,7 @@ function cleanHtmlData(url, str, config) {
         return shouldNotIgnore;
     }).join("\n");
     if (str.length == 0) {
-        console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
+        dlog_1.d("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
     }
     return str;
 }

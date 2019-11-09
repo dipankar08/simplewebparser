@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var dlog_1 = require("./config/utils/dlog");
 var SummaryStrategy;
 (function (SummaryStrategy) {
     SummaryStrategy[SummaryStrategy["NULL"] = 0] = "NULL";
@@ -99,6 +100,7 @@ var BengaliStrategy = /** @class */ (function (_super) {
             return result.map(function (x) { return "\u25CF  " + x; }).join("\n");
         }
         catch (e) {
+            dlog_1.ex(e);
             console.log("[INFO] summarization fails");
         }
         return input;
@@ -137,6 +139,7 @@ var HindiStrategy = /** @class */ (function (_super) {
             return result.map(function (x) { return "\u25CF  " + x; }).join("\n");
         }
         catch (e) {
+            dlog_1.ex(e);
             console.log("[INFO] summarization fails");
         }
         return input;
@@ -175,6 +178,7 @@ var EnglishStrategy = /** @class */ (function (_super) {
             return result.map(function (x) { return "\u25CF  " + x; }).join("\n");
         }
         catch (e) {
+            dlog_1.ex(e);
             console.log("[INFO] summarization fails");
         }
         return input;

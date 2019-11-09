@@ -1,4 +1,5 @@
 import { String } from "lodash";
+import { ex } from "./config/utils/dlog";
 
 export enum SummaryStrategy{
     NULL,
@@ -78,6 +79,7 @@ export  class BengaliStrategy extends BaseStrategyProvider {
             result = result.slice(0,3);
             return result.map(x=>`●  ${x}`).join("\n");
         } catch(e){
+            ex(e)
             console.log("[INFO] summarization fails")
         }
        return input
@@ -109,6 +111,7 @@ export  class HindiStrategy extends BaseStrategyProvider {
             result = result.slice(0,3);
             return result.map(x=>`●  ${x}`).join("\n");
         } catch(e){
+            ex(e)
             console.log("[INFO] summarization fails")
         }
         return input
@@ -140,6 +143,7 @@ export  class EnglishStrategy extends BaseStrategyProvider {
             result = result.slice(0,3);
             return result.map(x=>`●  ${x}`).join("\n");
         } catch(e){
+            ex(e)
             console.log("[INFO] summarization fails")
         }
         return input;

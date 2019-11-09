@@ -39,6 +39,7 @@ var rss_reader_1 = require("./rss_reader");
 var analytics_1 = require("../../analytics");
 var db_helper_1 = require("../utils/db_helper");
 var CONST_1 = require("../CONST");
+var dlog_1 = require("../utils/dlog");
 var cron = require('node-cron');
 var RssCrawler = /** @class */ (function () {
     function RssCrawler() {
@@ -90,6 +91,7 @@ var RssCrawler = /** @class */ (function () {
                     case 6: return [3 /*break*/, 8];
                     case 7:
                         e_1 = _c.sent();
+                        dlog_1.ex(e_1);
                         analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(l.url), { "url": l.url });
                         return [3 /*break*/, 8];
                     case 8:

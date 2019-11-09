@@ -56,7 +56,7 @@ var BaseWebReader = /** @class */ (function () {
     return BaseWebReader;
 }());
 exports.BaseWebReader = BaseWebReader;
-var globalBlackListUrl = ['/livetv/', '/photogallery/', '/videos/', '/video/'];
+var globalBlackListUrl = ['/livetv/', '/photogallery/', '/videos/', '/video/', '/videos/', '/photos/', '/photo/'];
 var DefaultWebReader = /** @class */ (function (_super) {
     __extends(DefaultWebReader, _super);
     function DefaultWebReader() {

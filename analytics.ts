@@ -1,3 +1,5 @@
+import { d } from "./config/utils/dlog";
+
 //POST => http://{{server}}/api/_analytics/launch => {"app_id":"{{app_id}}","app_version":"1.0","device_os":"android", "device_id":"abc","device_api":"27"} => "session":"(?<session>.*?)"
 //POST => http://{{server}}/api/_analytics/action => {"app_id":"{{app_id}}","session":"{{session}}","type":"click", "target_id":"btn1"} => Tracked action
 //POST => http://{{server}}/api/_analytics/exception => {"app_id":"{{app_id}}", "session":"{{session}}","type":"RuntimeException", "location":"Main.c:20","stack":"full stack here"} => Tracked exception
@@ -55,7 +57,7 @@ export class Analytics {
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json);
+            d(json);
             this.session = json.out.session;
             this.pumpPending();
         });
@@ -74,18 +76,18 @@ export class Analytics {
         if(this.session == null){
             this.pendingItems.push({url:url, data:data})
         } else{
-            if(data['type'] == 'hit_tracker'){
+            if(data['type'] != 'hit_tracker'){
                 data['session'] = this.session;
             }
             data['app_id'] = this.app_id;
-            console.log(`[ANA] Sending Logs: url: ${url}, data: ${data}`)
+            d(`Sending Logs: url: ${url}, data: ${data}`)
             await fetch_req(url, {
                 method: 'post',
                 body:    JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' },
             }).then(res => res.json())
             .then(json => {
-                console.log(json);
+                d(json);
             });
         }
     }

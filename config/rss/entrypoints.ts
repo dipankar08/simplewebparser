@@ -2,6 +2,7 @@ import { RSS_TYPE } from "./rss_reader";
 import { LANG, STREAM, CATEGORIES } from "../CONST";
 import {RssCrawler} from "./rss_crawl"
 import { Analytics } from "../../analytics";
+import { d } from "../utils/dlog";
 const cron = require('node-cron');
 
 export type EntryPoint = {
@@ -210,7 +211,7 @@ export async function rssCronJob(){
     Analytics.launch("crawler_rss");
     // await updateprofile()
     cron.schedule('*/30 * * * *', () => {
-        console.log(`${Date.now()} Running a task every 30 minutes`);
+        d(`${Date.now()} Running a task every 30 minutes`);
         startCrawl()
     });
     // run now too.

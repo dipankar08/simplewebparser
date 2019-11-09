@@ -56,7 +56,8 @@ var indiatimes_bengali_1 = require("./config/website/indiatimes_bengali");
 var bartaman_1 = require("./config/website/bartaman");
 var techcrunch_1 = require("./config/website/techcrunch");
 var wordpress_1 = require("./config/website/wordpress");
-var web_entrypoints_1 = require("./config/webcrawl/web_entrypoints");
+var main_1 = require("./config/webcrawl/main");
+var dlog_1 = require("./config/utils/dlog");
 var configList = [
     // BENGALI
     new kolkata247_1.KolkataTimes24(),
@@ -112,7 +113,7 @@ function prod() {
                     _a.sent();
                     return [3 /*break*/, 4];
                 case 3:
-                    console.log("[INFO] Ignored as not active :" + item.getRootConfig().title);
+                    dlog_1.d("[INFO] Ignored as not active :" + item.getRootConfig().title);
                     _a.label = 4;
                 case 4:
                     _i++;
@@ -120,6 +121,7 @@ function prod() {
                 case 5: return [3 /*break*/, 7];
                 case 6:
                     err_1 = _a.sent();
+                    dlog_1.ex(err_1);
                     analytics_1.Analytics.action("crash", "Server has crashed with error");
                     analytics_1.Analytics.exception(err_1);
                     return [3 /*break*/, 7];
@@ -139,7 +141,7 @@ function cronJob() {
                 case 1:
                     _a.sent();
                     cron.schedule('*/30 * * * *', function () {
-                        console.log(Date.now() + " Running a task every 15 minutes");
+                        dlog_1.d(Date.now() + " Running a task every 15 minutes");
                         prod();
                     });
                     // run now too.
@@ -178,13 +180,13 @@ function updateprofile() {
                         })];
                 case 1:
                     resp = _a.sent();
-                    console.log(resp);
+                    dlog_1.d(resp);
                     return [2 /*return*/];
             }
         });
     });
 }
 //cronJob();
-web_entrypoints_1.webCronJob();
+main_1.webCronJob();
 //new Totka24X7Config().execute()
 //# sourceMappingURL=cron.js.map

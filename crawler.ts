@@ -5,6 +5,7 @@ import { StoryListConfig, LIMIT, STREAM, DB_URL } from "./config/CONST";
 import {uniqBy, assignIn} from "lodash"
 import { SummaryStrategy } from "./config/summary/SummaryManager";
 import {StringAnyMap} from "./config/utils/types";
+import { d, ex } from "./config/utils/dlog";
 
 let request = require('async-request'), // TODO: move to const request = require("request-promise");
     response;
@@ -56,7 +57,7 @@ export class Crawler {
         let result:StringAnyMap ={}
         result['url']= url;
         try {
-            console.log(`[DEBUG] Try fetching... ${url}`);
+            d(`[DEBUG] Try fetching... ${url}`);
             let url1 = new Url(url);
             var body;
             try{
@@ -67,10 +68,11 @@ export class Crawler {
                     body = resp.body
                 }
             } catch(error){
+                ex(error);
                 Analytics.exception(error)
                 return {};
             }
-            console.log("[INFO Fetching done!")
+            d("[INFO Fetching done!")
             result['hostname'] =url1.hostname
             let $ = cheerio.load(body);
             for (var item of this.config) {
@@ -92,20 +94,21 @@ export class Crawler {
             }
         } catch (error) {     
             Analytics.exception(error, result)
-            console.log(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
-            console.log(error);
+            d(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
+            d(error);
         }
         return result;
     }
 
     public async parseMany(config:ExpandLinkConfig):Promise<Array<StringAnyMap>|null> {
-        console.log(`[DEBUG] Parse many for : ${config.url}`);
-        console.log(`[DEBUG] TRY Fetching... ${config.url}`);
+        d(`[DEBUG] Parse many for : ${config.url}`);
+        d(`[DEBUG] TRY Fetching... ${config.url}`);
 
         var resp;
         try{
             resp = await request(config.url);
         } catch(e){
+            ex(e)
             Analytics.exception(e)
             return null;
         }
@@ -129,7 +132,7 @@ export class Crawler {
             for(let u of urls_abs){
                 for (let ic of this.rootConfig.ignoreUrlRegex){
                     if(u.indexOf(ic) != -1){
-                        console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
+                        d(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
                         break;
                     }
                     url_filtered.push(u)
@@ -142,10 +145,10 @@ export class Crawler {
         // put a limit
         let urls_final = url_filtered.slice(0, config.limit);
 
-        console.log(`[DEBUG] URL LIST : ${urls_final}`);
+        d(`[DEBUG] URL LIST : ${urls_final}`);
         if(urls_final.length == 0){
             Analytics.action('error_broken_root_url', `Effected URL: ${config.url} for selector ${config.selectors}`,{hostname:new Url(config.url).hostname, url:config.url})
-            console.log(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
+            d(`[DEBUG] PARSE MANY FAILED: not a single child url found for ${config.url}`);
             return []
         }
 
@@ -161,12 +164,12 @@ export class Crawler {
 
     // Much Optimized Crawling
     public async parseStoryList(storyConfig: Array<StoryListConfig>): Promise<Array<StringAnyMap>|null> {
-        console.log(`[INFO] Total Story List count: ${storyConfig.length}`)
+        d(`[INFO] Total Story List count: ${storyConfig.length}`)
         let urlList:Array<StringAnyMap> =[]
         for( let config of storyConfig){
-            console.log(`[INFO] =====================  PROCESSING ${STREAM[config.stream]} =======================`)
+            d(`[INFO] =====================  PROCESSING ${STREAM[config.stream]} =======================`)
             try{
-                console.log(`[INFO] Fetching link ${config.url}`)
+                d(`[INFO] Fetching link ${config.url}`)
                 let body = null;
                 if(this.rootConfig.networkFetcher){
                     body = await this.rootConfig.networkFetcher(config.url);
@@ -181,13 +184,13 @@ export class Crawler {
                     url_list1.push(n.attribs.href)
                 }
                 let urls_abs = url_list1.map(x=> this.absUrl(config.url.toString(), x));
-                console.log(`[INFO] LinkFound/all: ${urls_abs.length}`)
+                d(`[INFO] LinkFound/all: ${urls_abs.length}`)
                 urls_abs = Array.from(new Set(urls_abs))
-                console.log(`[INFO] LinkFound/unique: ${urls_abs.length}`)
+                d(`[INFO] LinkFound/unique: ${urls_abs.length}`)
                 urls_abs = this.getFilteredUrl(config.url, urls_abs)
-                console.log(`[INFO] LinkFound/filter: ${urls_abs.length}`)
+                d(`[INFO] LinkFound/filter: ${urls_abs.length}`)
                 urls_abs = urls_abs.slice(0, config.limit ? config.limit: LIMIT);
-                console.log(`[INFO] LinkFound/slice: ${urls_abs.length}`)
+                d(`[INFO] LinkFound/slice: ${urls_abs.length}`)
                 // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                 urls_abs = urls_abs.reverse()
                 if(urls_abs.length ==0){
@@ -195,16 +198,17 @@ export class Crawler {
                 }
                 urlList = urlList.concat(urls_abs.map(x=> {return {'url': x, 'extra':config.extra}}))
             }catch(err){
+                ex(err)
                 Analytics.action("error_parse_root_url", config.url);
                 Analytics.exception(err,{"url":config.url})
             }
         }
-        console.log(`[INFO] Total count of Story Link: ${urlList.length}`)
+        d(`[INFO] Total count of Story Link: ${urlList.length}`)
 
         // remove duplicate :
         urlList = uniqBy(urlList,'url')
         //urlList = Array.from(new Set(urlList))
-        console.log(`[INFO] Total count of Story Link(After remove duplicate): ${urlList.length}`)
+        d(`[INFO] Total count of Story Link(After remove duplicate): ${urlList.length}`)
 
         if(urlList.length == 0){
             return null
@@ -222,7 +226,7 @@ export class Crawler {
         if(obj.status == 'success'){
             Analytics.action('stat_parse_duplicate','dummy',{'unique_count':urlList.length - obj.out.found_count, 'duplicate_count': obj.out.found_count,'domain':Url(url).hostname})
             urlList =  urlList.filter(x=> obj.out.found_list[x.url] == null)
-            console.log(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
+            d(`[INFO] Total link which is NOT in DB: ${urlList.length}, DB Found count: ${obj.out.found_count}`)
            if(urlList.length == 0){
                 return;
             }
@@ -293,7 +297,7 @@ export class Crawler {
         }
         ).join("\n");
         if(str.length == 0){
-            console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
+            d(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
         }
         return str;
     }
@@ -303,14 +307,14 @@ export class Crawler {
         let url_filtered = []
         for(let u of urls_abs){
             if(Url(u).hostname != Url(root_url).hostname){
-                console.log(`[INFO] Ignore url ${u} for out of domain fetch`)
+                d(`[INFO] Ignore url ${u} for out of domain fetch`)
                 continue;
             }
             if(this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0){
                 let flag =0;
                 for (let ic of this.rootConfig.ignoreUrlRegex){
                     if(u.indexOf(ic) != -1){
-                        console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
+                        d(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
                         flag =1;
                         break;   
                     }

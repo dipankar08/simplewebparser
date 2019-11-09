@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var analytics_1 = require("../../analytics");
 var CONST_1 = require("../CONST");
 var lodash_1 = require("lodash");
+var dlog_1 = require("./dlog");
 var request = require('request-promise');
 var Url = require('url-parse');
 function getHostNameFromUrl(url) {
@@ -59,18 +60,18 @@ function saveToDB(res) {
                         }
                         else {
                             analytics_1.Analytics.action("error_empty_data", x.url);
-                            console.log(">>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
+                            dlog_1.d(">>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
                             return false;
                         }
                     });
-                    console.log("[RSS] Before unique " + res1.length);
+                    dlog_1.d("[RSS] Before unique " + res1.length);
                     res1 = lodash_1.uniqBy(res1, 'url');
-                    console.log("[RSS] After unique " + res1.length);
+                    dlog_1.d("[RSS] After unique " + res1.length);
                     if (res1.length == 0) {
                         return [2 /*return*/];
                     }
                     body = { '_payload': res1, "_field": 'url' };
-                    console.log("[INFO]: Using URL for insert is : " + CONST_1.DB_URL);
+                    dlog_1.d("[INFO]: Using URL for insert is : " + CONST_1.DB_URL);
                     return [4 /*yield*/, request({
                             uri: CONST_1.DB_URL + "/insertorupdate",
                             method: 'POST',
@@ -79,12 +80,12 @@ function saveToDB(res) {
                         })];
                 case 1:
                     resp = _a.sent();
-                    console.log(resp);
+                    dlog_1.d(resp);
                     if ((resp.status == 'error')) {
                         analytics_1.Analytics.action('error_saving_data', resp);
                     }
                     else {
-                        console.log("[Debug] Data saved properly in the server: " + resp.msg);
+                        dlog_1.d("[Debug] Data saved properly in the server: " + resp.msg);
                     }
                     return [2 /*return*/];
             }
@@ -115,7 +116,7 @@ function detectUrlNotInDb(url_list) {
                     resp = _a.sent();
                     if (resp.status == 'success') {
                         url_list = url_list.filter(function (x) { return resp.out.found_list[x] == null; });
-                        console.log("[INFO] Total link which is NOT in DB: " + url_list.length + ", DB Found count: " + resp.out.found_count);
+                        dlog_1.d("[INFO] Total link which is NOT in DB: " + url_list.length + ", DB Found count: " + resp.out.found_count);
                     }
                     else {
                         return [2 /*return*/];
@@ -142,7 +143,7 @@ function updateProfileToDb(profiles) {
                     })];
                 case 1:
                     resp = _a.sent();
-                    console.log(resp);
+                    dlog_1.d(resp);
                     return [2 /*return*/];
             }
         });

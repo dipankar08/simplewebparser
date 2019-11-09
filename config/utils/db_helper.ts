@@ -4,6 +4,7 @@ import { SummeryBuilder, SummaryStrategy } from "../summary/SummaryManager";
 import { LANG, DB_URL, STREAM, Content, Profile, PROFILE_URL } from "../CONST";
 import { StringAnyMap } from "./types";
 import { uniqBy } from "lodash";
+import { d } from "./dlog";
 const request = require('request-promise');
 
 var Url = require('url-parse');
@@ -20,30 +21,30 @@ export async function saveToDB(res:Array<Content>|null){
             return true;
         } else{
             Analytics.action("error_empty_data",x.url);
-            console.log(`>>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
+            d(`>>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
             return false
         }
     })
-    console.log(`[RSS] Before unique ${res1.length}`)
+    d(`[RSS] Before unique ${res1.length}`)
     res1 = uniqBy(res1,'url')
-    console.log(`[RSS] After unique ${res1.length}`)
+    d(`[RSS] After unique ${res1.length}`)
     if(res1.length == 0){
         return;
     }
 
     const body = { '_payload': res1,"_field":'url'}; 
-    console.log(`[INFO]: Using URL for insert is : ${DB_URL}`)
+    d(`[INFO]: Using URL for insert is : ${DB_URL}`)
     let resp = await request({
         uri:`${DB_URL}/insertorupdate`,
         method: 'POST',
         body: body,
         json:true
     });
-    console.log(resp);
+    d(resp);
     if((resp.status =='error')){
         Analytics.action('error_saving_data', resp);
     } else{
-        console.log(`[Debug] Data saved properly in the server: ${resp.msg}`)
+        d(`[Debug] Data saved properly in the server: ${resp.msg}`)
     }
 }
 
@@ -65,7 +66,7 @@ export async function detectUrlNotInDb(url_list:string[]): Promise<Array<string>
 
     if(resp.status == 'success'){
         url_list =  url_list.filter(x=> resp.out.found_list[x] == null)
-        console.log(`[INFO] Total link which is NOT in DB: ${url_list.length}, DB Found count: ${resp.out.found_count}`)
+        d(`[INFO] Total link which is NOT in DB: ${url_list.length}, DB Found count: ${resp.out.found_count}`)
     } else{
         return ;
     }
@@ -82,5 +83,5 @@ export async function updateProfileToDb(profiles: Array<Profile>){
         },
         json: true
     });
-    console.log(resp)
+    d(resp)
 }

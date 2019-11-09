@@ -39,6 +39,7 @@ var crawler_1 = require("../../crawler");
 var CONST_1 = require("../CONST");
 var analytics_1 = require("../../analytics");
 var SummaryManager_1 = require("../summary/SummaryManager");
+var dlog_1 = require("../utils/dlog");
 var request = require("request-promise");
 var BaseConfig = /** @class */ (function () {
     function BaseConfig(tag) {
@@ -57,19 +58,19 @@ var BaseConfig = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log("[" + this.tag + "] Test started");
+                        dlog_1.d("[" + this.tag + "] Test started");
                         crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
                         return [4 /*yield*/, crawler.parse(this.getTestPageUrl().toString())];
                     case 1:
                         res = _a.sent();
-                        console.log(res.title);
-                        console.log(res.details);
-                        console.log(res.img);
+                        dlog_1.d(res.title);
+                        dlog_1.d(res.details);
+                        dlog_1.d(res.img);
                         if (res.title.length > 10 && res.details.length > 10 && res.img != undefined && res.img.length > 10) {
-                            console.log("[" + this.tag + "] Test Passed");
+                            dlog_1.d("[" + this.tag + "] Test Passed");
                         }
                         else {
-                            console.log("[" + this.tag + "] Test Failed for url: " + this.getTestPageUrl());
+                            dlog_1.d("[" + this.tag + "] Test Failed for url: " + this.getTestPageUrl());
                         }
                         return [2 /*return*/];
                 }
@@ -83,7 +84,7 @@ var BaseConfig = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        console.log("[" + this.tag + "] Execution started for " + this.getRootConfig());
+                        dlog_1.d("[" + this.tag + "] Execution started for " + this.getRootConfig());
                         crawler = new crawler_1.Crawler(this.getRootConfig(), this.getPageParseConfig());
                         newConfig = this.getStoryListConfig().map(function (x) {
                             x.extra = { 'lang': CONST_1.LANG[_this.getLang()] };
@@ -116,7 +117,7 @@ var BaseConfig = /** @class */ (function () {
                             }
                             else {
                                 analytics_1.Analytics.action("error_empty_data", x.url);
-                                console.log(">>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
+                                dlog_1.d(">>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
                                 return false;
                             }
                         });
@@ -139,7 +140,7 @@ var BaseConfig = /** @class */ (function () {
                             return x;
                         });
                         body = { '_payload': res1 };
-                        console.log("[INFO]: Uisng URL for insert is : " + CONST_1.DB_URL);
+                        dlog_1.d("[INFO]: Uisng URL for insert is : " + CONST_1.DB_URL);
                         return [4 /*yield*/, request({
                                 uri: CONST_1.DB_URL + "/bulk_insert",
                                 method: 'POST',
@@ -148,12 +149,12 @@ var BaseConfig = /** @class */ (function () {
                             })];
                     case 1:
                         resp = _a.sent();
-                        console.log(resp);
+                        dlog_1.d(resp);
                         if ((resp.status == 'error')) {
                             analytics_1.Analytics.action('error_saving_data', resp);
                         }
                         else {
-                            console.log("[Debug] Data saved properly in the server: " + resp.msg);
+                            dlog_1.d("[Debug] Data saved properly in the server: " + resp.msg);
                         }
                         return [2 /*return*/];
                 }

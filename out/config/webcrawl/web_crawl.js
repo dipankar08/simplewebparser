@@ -35,156 +35,187 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var request = require('async-request'), // TODO: move to const request = require("request-promise");
-response;
-var cheerio = require('cheerio');
-var Url = require('url-parse');
 var analytics_1 = require("../../analytics");
 var db_helper_1 = require("../utils/db_helper");
 var CONST_1 = require("../CONST");
 var lodash_1 = require("lodash");
 var network_1 = require("./network");
+var dlog_1 = require("../utils/dlog");
 var cron = require('node-cron');
 var WebCrawler = /** @class */ (function () {
     function WebCrawler() {
     }
     // passing test as true will test one link for each categories
-    WebCrawler.prototype.crawl = function (list, isTest) {
+    WebCrawler.prototype.crawl = function (list, isTest, name) {
         if (isTest === void 0) { isTest = false; }
+        if (name === void 0) { name = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var _loop_1, _i, list_1, web_entry;
+            var _i, list_1, web_entry, stories;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _loop_1 = function () {
-                            var config, top_urls, _i, _a, weblink, urls, notinDb, stories, _b, top_urls_1, link, storyDict, cont, e_1;
-                            return __generator(this, function (_c) {
-                                switch (_c.label) {
-                                    case 0:
-                                        if (!web_entry.is_active) {
-                                            console.log("[INFO] Skipping as the info is not active " + web_entry.name);
-                                            return [2 /*return*/, "continue"];
-                                        }
-                                        console.log("====================== P R O C E S S I N G===========================");
-                                        config = web_entry.type.getWebConfig();
-                                        // override the config
-                                        if (web_entry.storyParseConfig) {
-                                            config.storyParseConfig = web_entry.storyParseConfig;
-                                        }
-                                        top_urls = [];
-                                        _i = 0, _a = web_entry.links;
-                                        _c.label = 1;
-                                    case 1:
-                                        if (!(_i < _a.length)) return [3 /*break*/, 4];
-                                        weblink = _a[_i];
-                                        // override the selector.
-                                        if (weblink.selector) {
-                                            config.list_selector = weblink.selector;
-                                        }
-                                        return [4 /*yield*/, network_1.parseStoreList(weblink.url, config)];
-                                    case 2:
-                                        urls = _c.sent();
-                                        top_urls = top_urls.concat(urls.map(function (u) {
-                                            return { url: u, stream: weblink.stream };
-                                        }));
-                                        if (isTest) {
-                                            return [3 /*break*/, 4];
-                                        }
-                                        _c.label = 3;
-                                    case 3:
-                                        _i++;
-                                        return [3 /*break*/, 1];
-                                    case 4:
-                                        if (top_urls.length == 0) {
-                                            analytics_1.Analytics.hit_tracker({ 'action': "empty_root_url", 'link': weblink.url });
-                                            console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
-                                            return [2 /*return*/, "continue"];
-                                        }
-                                        // remove dups
-                                        console.log("[INFO] Link/Merge Total " + top_urls.length);
-                                        top_urls = lodash_1.uniqBy(top_urls, 'url');
-                                        console.log("[INFO] Link/After Uniques " + top_urls.length);
-                                        return [4 /*yield*/, db_helper_1.detectUrlNotInDb(top_urls.map(function (x) { return x.url; }))];
-                                    case 5:
-                                        notinDb = _c.sent();
-                                        if (!isTest) {
-                                            top_urls = top_urls.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
-                                        }
-                                        console.log("[INFO] Link/Not in DB " + top_urls.length);
-                                        stories = [];
-                                        _b = 0, top_urls_1 = top_urls;
-                                        _c.label = 6;
-                                    case 6:
-                                        if (!(_b < top_urls_1.length)) return [3 /*break*/, 12];
-                                        link = top_urls_1[_b];
-                                        _c.label = 7;
-                                    case 7:
-                                        _c.trys.push([7, 9, , 10]);
-                                        return [4 /*yield*/, network_1.parseStory(link.url, config)];
-                                    case 8:
-                                        storyDict = _c.sent();
-                                        // append any extra here.
-                                        storyDict['lang'] = web_entry.lang;
-                                        storyDict['stream'] = link.stream;
-                                        storyDict['is_active'] = web_entry.is_active ? "1" : "0";
-                                        storyDict['is_partner'] = web_entry.is_partner;
-                                        if (!storyDict.img) {
-                                            storyDict.img = web_entry.profile_img;
-                                        }
-                                        cont = CONST_1.buildContent(storyDict);
-                                        if (CONST_1.validate(cont)) {
-                                            stories.push(cont);
-                                        }
-                                        else {
-                                            console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
-                                            console.log(cont);
-                                            analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
-                                        }
-                                        return [3 /*break*/, 10];
-                                    case 9:
-                                        e_1 = _c.sent();
-                                        console.log("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$");
-                                        analytics_1.Analytics.hit_tracker({ 'action': "exception_while_fetching", 'link': link.url });
-                                        analytics_1.Analytics.exception(e_1);
-                                        return [3 /*break*/, 10];
-                                    case 10:
-                                        if (isTest) {
-                                            return [3 /*break*/, 12];
-                                        }
-                                        _c.label = 11;
-                                    case 11:
-                                        _b++;
-                                        return [3 /*break*/, 6];
-                                    case 12:
-                                        console.log("[INFO] Try saving count: " + stories.length);
-                                        if (isTest) {
-                                            console.log(stories);
-                                            if (stories.length == 0) {
-                                                throw Error("Please fix this now.");
-                                            }
-                                            console.log("TEST PASSED - PLEASE CHECK ABOVE");
-                                            return [2 /*return*/, "continue"];
-                                        }
-                                        return [4 /*yield*/, db_helper_1.saveToDB(stories)];
-                                    case 13:
-                                        _c.sent();
-                                        return [2 /*return*/];
-                                }
-                            });
-                        };
                         _i = 0, list_1 = list;
                         _a.label = 1;
                     case 1:
-                        if (!(_i < list_1.length)) return [3 /*break*/, 4];
+                        if (!(_i < list_1.length)) return [3 /*break*/, 8];
                         web_entry = list_1[_i];
-                        return [5 /*yield**/, _loop_1()];
+                        if (name != null) {
+                            if (web_entry.name != name) {
+                                return [3 /*break*/, 7];
+                            }
+                        }
+                        if (!web_entry.is_active) {
+                            dlog_1.d("[INFO] Skipping as the info is not active " + web_entry.name);
+                            return [3 /*break*/, 7];
+                        }
+                        dlog_1.d("====================== P R O C E S S I N G===========================");
+                        stories = null;
+                        if (!web_entry.is_rss_feed) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.processRssFeed(web_entry)];
                     case 2:
+                        stories = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 3: return [4 /*yield*/, this.processWebFeed(web_entry)];
+                    case 4:
+                        stories = _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        dlog_1.d("[INFO] Try saving count: " + stories.length);
+                        if (isTest) {
+                            dlog_1.d(stories[0]);
+                            if (stories.length == 0) {
+                                throw Error("Please fix this now.");
+                            }
+                            dlog_1.d("TEST PASSED - PLEASE CHECK ABOVE");
+                            return [3 /*break*/, 7];
+                        }
+                        if (!(stories.length > 0)) return [3 /*break*/, 7];
+                        return [4 /*yield*/, db_helper_1.saveToDB(stories)];
+                    case 6:
                         _a.sent();
-                        _a.label = 3;
+                        _a.label = 7;
+                    case 7:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 8: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // makeing RSS Feed call. 
+    WebCrawler.prototype.processRssFeed = function (web_entry, isTest) {
+        if (isTest === void 0) { isTest = false; }
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, []];
+            });
+        });
+    };
+    // making web call.
+    WebCrawler.prototype.processWebFeed = function (web_entry, isTest) {
+        if (isTest === void 0) { isTest = false; }
+        return __awaiter(this, void 0, void 0, function () {
+            var config, top_urls, _i, _a, weblink, urls, notinDb, stories, _b, top_urls_1, link, storyDict, cont, e_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        config = web_entry.type.getWebConfig();
+                        // override the config
+                        if (web_entry.storyParseConfig) {
+                            config.storyParseConfig = web_entry.storyParseConfig;
+                        }
+                        if (web_entry.link_selector) {
+                            config.list_selector = web_entry.link_selector;
+                        }
+                        top_urls = [];
+                        _i = 0, _a = web_entry.links;
+                        _c.label = 1;
+                    case 1:
+                        if (!(_i < _a.length)) return [3 /*break*/, 4];
+                        weblink = _a[_i];
+                        // override the selector.
+                        if (weblink.selector) {
+                            config.list_selector = weblink.selector;
+                        }
+                        return [4 /*yield*/, network_1.parseStoreList(weblink.url, config)];
+                    case 2:
+                        urls = _c.sent();
+                        top_urls = top_urls.concat(urls.map(function (u) {
+                            return { url: u, stream: weblink.stream };
+                        }));
+                        if (isTest) {
+                            return [3 /*break*/, 4];
+                        }
+                        _c.label = 3;
                     case 3:
                         _i++;
                         return [3 /*break*/, 1];
-                    case 4: return [2 /*return*/];
+                    case 4:
+                        if (top_urls.length == 0) {
+                            analytics_1.Analytics.hit_tracker({ 'action': "empty_root_url", 'link': weblink.url });
+                            dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + weblink.url);
+                            return [2 /*return*/, []];
+                        }
+                        // remove dups
+                        dlog_1.d("[INFO] Link/Merge Total " + top_urls.length);
+                        top_urls = lodash_1.uniqBy(top_urls, 'url');
+                        dlog_1.d("[INFO] Link/After Uniques " + top_urls.length);
+                        return [4 /*yield*/, db_helper_1.detectUrlNotInDb(top_urls.map(function (x) { return x.url; }))];
+                    case 5:
+                        notinDb = _c.sent();
+                        if (!isTest) {
+                            top_urls = top_urls.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
+                        }
+                        dlog_1.d("[INFO] Link/Not in DB " + top_urls.length);
+                        stories = [];
+                        _b = 0, top_urls_1 = top_urls;
+                        _c.label = 6;
+                    case 6:
+                        if (!(_b < top_urls_1.length)) return [3 /*break*/, 12];
+                        link = top_urls_1[_b];
+                        _c.label = 7;
+                    case 7:
+                        _c.trys.push([7, 9, , 10]);
+                        return [4 /*yield*/, network_1.parseStory(link.url, config)];
+                    case 8:
+                        storyDict = _c.sent();
+                        // append any extra here.
+                        storyDict['lang'] = web_entry.lang;
+                        storyDict['stream'] = link.stream;
+                        storyDict['is_active'] = web_entry.is_active ? "1" : "0";
+                        storyDict['is_partner'] = web_entry.is_partner;
+                        if (!storyDict.img) {
+                            storyDict.img = web_entry.profile_img;
+                        }
+                        cont = CONST_1.buildContent(storyDict);
+                        if (cont && CONST_1.validate(cont)) {
+                            stories.push(cont);
+                        }
+                        else {
+                            if (isTest) {
+                                throw Error("Content validation failed");
+                            }
+                            dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
+                            dlog_1.d(cont);
+                            analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
+                        }
+                        return [3 /*break*/, 10];
+                    case 9:
+                        e_1 = _c.sent();
+                        dlog_1.ex(e_1);
+                        dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ :" + link.url);
+                        analytics_1.Analytics.hit_tracker({ 'action': "exception_while_fetching", 'link': link.url });
+                        analytics_1.Analytics.exception(e_1);
+                        return [3 /*break*/, 10];
+                    case 10:
+                        if (isTest) {
+                            return [3 /*break*/, 12];
+                        }
+                        _c.label = 11;
+                    case 11:
+                        _b++;
+                        return [3 /*break*/, 6];
+                    case 12: return [2 /*return*/, stories];
                 }
             });
         });

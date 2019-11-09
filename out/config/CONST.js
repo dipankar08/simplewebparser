@@ -1,13 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SummaryManager_1 = require("./summary/SummaryManager");
+var dlog_1 = require("./utils/dlog");
 var config = require('config');
 exports.LIMIT = 10;
 var LANG;
 (function (LANG) {
-    LANG[LANG["IN_BENGALI"] = 0] = "IN_BENGALI";
-    LANG[LANG["IN_ENGLISH"] = 1] = "IN_ENGLISH";
-    LANG[LANG["IN_HINDI"] = 2] = "IN_HINDI";
+    LANG[LANG["IN_ENGLISH"] = 0] = "IN_ENGLISH";
+    LANG[LANG["IN_HINDI"] = 1] = "IN_HINDI";
+    LANG[LANG["IN_BENGALI"] = 2] = "IN_BENGALI";
+    LANG[LANG["IN_ASSAMESE"] = 3] = "IN_ASSAMESE";
+    LANG[LANG["IN_ORIYA"] = 4] = "IN_ORIYA";
+    LANG[LANG["IN_MARATHI"] = 5] = "IN_MARATHI";
+    LANG[LANG["IN_GUJARATI"] = 6] = "IN_GUJARATI";
+    LANG[LANG["IN_TAMIL"] = 7] = "IN_TAMIL";
+    LANG[LANG["IN_TELUGU"] = 8] = "IN_TELUGU";
+    LANG[LANG["IN_MALAYALAM"] = 9] = "IN_MALAYALAM";
+    LANG[LANG["BD_BENGALI"] = 10] = "BD_BENGALI";
+    LANG[LANG["BD_ENGLISH"] = 11] = "BD_ENGLISH";
 })(LANG = exports.LANG || (exports.LANG = {}));
 var CATEGORIES;
 (function (CATEGORIES) {
@@ -62,9 +72,11 @@ var STREAM;
     STREAM[STREAM["MOTIVATIONAL"] = 42] = "MOTIVATIONAL";
     STREAM[STREAM["COMEDY"] = 43] = "COMEDY";
     STREAM[STREAM["NATIONAL"] = 44] = "NATIONAL";
+    STREAM[STREAM["CRIME"] = 45] = "CRIME";
+    STREAM[STREAM["RELIGION"] = 46] = "RELIGION";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
 function validate(c) {
-    return c && c.url && c.title && c.img && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
+    return c && c.url && c.title && c.img && c.details && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
 }
 exports.validate = validate;
 function buildContent(dict) {
@@ -79,8 +91,10 @@ function buildContent(dict) {
         case LANG.IN_HINDI:
             dict['summary'] = sb.buildSummary(dict.details, SummaryManager_1.SummaryStrategy.HINDI);
             break;
+        default:
+            dict['summary'] = sb.buildSummary(dict.details, SummaryManager_1.SummaryStrategy.DEFAULT);
     }
-    return {
+    var cont = {
         title: dict.title,
         img: dict.img,
         details: dict.details,
@@ -92,9 +106,15 @@ function buildContent(dict) {
         stream: STREAM[dict.stream],
         is_partner: dict.is_partner,
     };
+    if (validate(cont)) {
+        return cont;
+    }
+    else {
+        return null;
+    }
 }
 exports.buildContent = buildContent;
 exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1';
 exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile1' : 'http://simplestore.dipankar.co.in/api/news_profile1';
-console.log("[INFO] Using Root URL: " + exports.DB_URL);
+dlog_1.d("Using Root URL: " + exports.DB_URL);
 //# sourceMappingURL=CONST.js.map

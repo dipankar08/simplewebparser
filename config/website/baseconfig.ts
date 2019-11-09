@@ -3,6 +3,7 @@ import {StringAnyMap} from "./../utils/types";
 import { LANG, ListConfig, STREAM, LIMIT, StoryListConfig, DB_URL } from '../CONST';
 import { Analytics } from '../../analytics';
 import { SummeryBuilder, SummaryStrategy } from '../summary/SummaryManager';
+import { d } from '../utils/dlog';
 const request = require("request-promise");
 
 export abstract class BaseConfig {
@@ -27,23 +28,23 @@ export abstract class BaseConfig {
     }
 
     async test(){
-        console.log(`[${this.tag}] Test started`);
+        d(`[${this.tag}] Test started`);
         let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
         let res = await crawler.parse(this.getTestPageUrl().toString())
         
-        console.log(res.title);
-        console.log(res.details)
-        console.log(res.img)
+        d(res.title);
+        d(res.details)
+        d(res.img)
 
         if(res.title.length >10 && res.details.length >10 && res.img != undefined && res.img.length >10){
-            console.log(`[${this.tag}] Test Passed`);
+            d(`[${this.tag}] Test Passed`);
         } else{
-            console.log(`[${this.tag}] Test Failed for url: ${this.getTestPageUrl()}`);
+            d(`[${this.tag}] Test Failed for url: ${this.getTestPageUrl()}`);
         }
     }
 
     async execute(){
-        console.log(`[${this.tag}] Execution started for ${this.getRootConfig()}`);
+        d(`[${this.tag}] Execution started for ${this.getRootConfig()}`);
         let crawler = new Crawler(this.getRootConfig(), this.getPageParseConfig());
         let newConfig:Array<StoryListConfig> = this.getStoryListConfig().map(x => {
             x.extra ={'lang':LANG[this.getLang()]}
@@ -63,7 +64,7 @@ export abstract class BaseConfig {
                 return true;
             } else{
                 Analytics.action("error_empty_data",x.url);
-                console.log(`>>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
+                d(`>>>>>>>>>>>> [ERROR] Empty data receiced so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
                 return false
             }
         })
@@ -89,7 +90,7 @@ export abstract class BaseConfig {
 
 
         const body = { '_payload': res1}; 
-        console.log(`[INFO]: Uisng URL for insert is : ${DB_URL}`)
+        d(`[INFO]: Uisng URL for insert is : ${DB_URL}`)
         let resp = await request({
             uri:`${DB_URL}/bulk_insert`,
             method: 'POST',
@@ -97,11 +98,11 @@ export abstract class BaseConfig {
             json:true
         });
         
-        console.log(resp);
+        d(resp);
         if((resp.status =='error')){
             Analytics.action('error_saving_data', resp);
         } else{
-            console.log(`[Debug] Data saved properly in the server: ${resp.msg}`)
+            d(`[Debug] Data saved properly in the server: ${resp.msg}`)
         }
     }
 }

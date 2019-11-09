@@ -1,13 +1,14 @@
-import {RSS_TYPE,BaseReader, WordPressRssReader, YouTubeRssReader} from "./rss_reader";
+import {RSS_TYPE,BaseRSSReader, WordPressRssReader, YouTubeRssReader} from "./rss_reader";
 import {EntryPoint} from "./entrypoints"
 import { Analytics } from "../../analytics";
 import { getHostNameFromUrl,saveToDB } from "../utils/db_helper";
 import { validate, Content } from "../CONST";
+import { ex } from "../utils/dlog";
 
 const cron = require('node-cron');
 
 export class RssCrawler {
-    reader_map: Map<RSS_TYPE, BaseReader> ;
+    reader_map: Map<RSS_TYPE, BaseRSSReader> ;
     constructor(){
         this.reader_map= new Map();
         // add your reader here.
@@ -37,6 +38,7 @@ export class RssCrawler {
                     }
                 }
             } catch(e){
+                ex(e);
                 Analytics.action('rss_link_broken',getHostNameFromUrl(l.url),{"url":l.url})
             }   
         }

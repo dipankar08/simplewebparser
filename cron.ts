@@ -29,7 +29,8 @@ import { BartamanConfig } from './config/website/bartaman';
 import { hostname } from 'os';
 import { TechCrunchConfig } from './config/website/techcrunch';
 import { BanglarPranConfig, DarkariTipsConfig, GNEBanglaConfig, BharatBartaConfig, Totka24X7Config } from './config/website/wordpress';
-import { webCronJob } from "./config/webcrawl/web_entrypoints";
+import { webCronJob } from "./config/webcrawl/main";
+import { d, ex } from "./config/utils/dlog";
 
 var configList:Array<BaseConfig> =[
     // BENGALI
@@ -78,10 +79,11 @@ async function prod(){
                 if(item.getRootConfig().is_active){
                     await item.execute();
                 } else{
-                    console.log(`[INFO] Ignored as not active :${item.getRootConfig().title}`);
+                    d(`[INFO] Ignored as not active :${item.getRootConfig().title}`);
                 }
             }
         } catch(err){
+            ex(err)
             Analytics.action("crash","Server has crashed with error")
             Analytics.exception(err);
         }
@@ -92,7 +94,7 @@ async function cronJob(){
     Analytics.launch("crawler");
     await updateprofile()
     cron.schedule('*/30 * * * *', () => {
-        console.log(`${Date.now()} Running a task every 15 minutes`);
+        d(`${Date.now()} Running a task every 15 minutes`);
             prod();
     });
     // run now too.
@@ -123,7 +125,7 @@ async function updateprofile(){
         },
         json: true
     });
-    console.log(resp)
+    d(resp)
 
 }
 

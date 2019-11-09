@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var dlog_1 = require("./config/utils/dlog");
 //POST => http://{{server}}/api/_analytics/launch => {"app_id":"{{app_id}}","app_version":"1.0","device_os":"android", "device_id":"abc","device_api":"27"} => "session":"(?<session>.*?)"
 //POST => http://{{server}}/api/_analytics/action => {"app_id":"{{app_id}}","session":"{{session}}","type":"click", "target_id":"btn1"} => Tracked action
 //POST => http://{{server}}/api/_analytics/exception => {"app_id":"{{app_id}}", "session":"{{session}}","type":"RuntimeException", "location":"Main.c:20","stack":"full stack here"} => Tracked exception
@@ -85,7 +86,7 @@ var Analytics = /** @class */ (function () {
                             })
                                 .then(function (res) { return res.json(); })
                                 .then(function (json) {
-                                console.log(json);
+                                dlog_1.d(json);
                                 _this.session = json.out.session;
                                 _this.pumpPending();
                             })];
@@ -132,18 +133,18 @@ var Analytics = /** @class */ (function () {
                         this.pendingItems.push({ url: url, data: data });
                         return [3 /*break*/, 3];
                     case 1:
-                        if (data['type'] == 'hit_tracker') {
+                        if (data['type'] != 'hit_tracker') {
                             data['session'] = this.session;
                         }
                         data['app_id'] = this.app_id;
-                        console.log("[ANA] Sending Logs: url: " + url + ", data: " + data);
+                        dlog_1.d("Sending Logs: url: " + url + ", data: " + data);
                         return [4 /*yield*/, fetch_req(url, {
                                 method: 'post',
                                 body: JSON.stringify(data),
                                 headers: { 'Content-Type': 'application/json' },
                             }).then(function (res) { return res.json(); })
                                 .then(function (json) {
-                                console.log(json);
+                                dlog_1.d(json);
                             })];
                     case 2:
                         _a.sent();

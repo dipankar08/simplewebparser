@@ -39,6 +39,7 @@ var analytics_1 = require("./analytics");
 var inspector_1 = require("inspector");
 var CONST_1 = require("./config/CONST");
 var lodash_1 = require("lodash");
+var dlog_1 = require("./config/utils/dlog");
 var request = require('async-request'), // TODO: move to const request = require("request-promise");
 response;
 var cheerio = require('cheerio');
@@ -65,7 +66,7 @@ var Crawler = /** @class */ (function () {
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 9, , 10]);
-                        console.log("[DEBUG] Try fetching... " + url);
+                        dlog_1.d("[DEBUG] Try fetching... " + url);
                         url1 = new Url(url);
                         _b.label = 2;
                     case 2:
@@ -83,10 +84,11 @@ var Crawler = /** @class */ (function () {
                     case 6: return [3 /*break*/, 8];
                     case 7:
                         error_1 = _b.sent();
+                        dlog_1.ex(error_1);
                         analytics_1.Analytics.exception(error_1);
                         return [2 /*return*/, {}];
                     case 8:
-                        console.log("[INFO Fetching done!");
+                        dlog_1.d("[INFO Fetching done!");
                         result['hostname'] = url1.hostname;
                         $_1 = cheerio.load(body);
                         for (_i = 0, _a = this.config; _i < _a.length; _i++) {
@@ -111,8 +113,8 @@ var Crawler = /** @class */ (function () {
                     case 9:
                         error_2 = _b.sent();
                         analytics_1.Analytics.exception(error_2, result);
-                        console.log("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
-                        console.log(error_2);
+                        dlog_1.d("[ERROR] article parse failed for URL:" + url + ", Error is: " + error_2);
+                        dlog_1.d(error_2);
                         return [3 /*break*/, 10];
                     case 10: return [2 /*return*/, result];
                 }
@@ -126,8 +128,8 @@ var Crawler = /** @class */ (function () {
             return __generator(this, function (_h) {
                 switch (_h.label) {
                     case 0:
-                        console.log("[DEBUG] Parse many for : " + config.url);
-                        console.log("[DEBUG] TRY Fetching... " + config.url);
+                        dlog_1.d("[DEBUG] Parse many for : " + config.url);
+                        dlog_1.d("[DEBUG] TRY Fetching... " + config.url);
                         _h.label = 1;
                     case 1:
                         _h.trys.push([1, 3, , 4]);
@@ -137,6 +139,7 @@ var Crawler = /** @class */ (function () {
                         return [3 /*break*/, 4];
                     case 3:
                         e_1 = _h.sent();
+                        dlog_1.ex(e_1);
                         analytics_1.Analytics.exception(e_1);
                         return [2 /*return*/, null];
                     case 4:
@@ -159,7 +162,7 @@ var Crawler = /** @class */ (function () {
                                 for (_e = 0, _f = this.rootConfig.ignoreUrlRegex; _e < _f.length; _e++) {
                                     ic = _f[_e];
                                     if (u.indexOf(ic) != -1) {
-                                        console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                                        dlog_1.d("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
                                         break;
                                     }
                                     url_filtered.push(u);
@@ -170,10 +173,10 @@ var Crawler = /** @class */ (function () {
                             url_filtered = urls_abs;
                         }
                         urls_final = url_filtered.slice(0, config.limit);
-                        console.log("[DEBUG] URL LIST : " + urls_final);
+                        dlog_1.d("[DEBUG] URL LIST : " + urls_final);
                         if (urls_final.length == 0) {
                             analytics_1.Analytics.action('error_broken_root_url', "Effected URL: " + config.url + " for selector " + config.selectors, { hostname: new Url(config.url).hostname, url: config.url });
-                            console.log("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
+                            dlog_1.d("[DEBUG] PARSE MANY FAILED: not a single child url found for " + config.url);
                             return [2 /*return*/, []];
                         }
                         result = [];
@@ -205,18 +208,18 @@ var Crawler = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        console.log("[INFO] Total Story List count: " + storyConfig.length);
+                        dlog_1.d("[INFO] Total Story List count: " + storyConfig.length);
                         urlList = [];
                         _loop_1 = function (config) {
                             var body, resp_1, $, url_list1, _i, _a, n, urls_abs, err_1;
                             return __generator(this, function (_b) {
                                 switch (_b.label) {
                                     case 0:
-                                        console.log("[INFO] =====================  PROCESSING " + CONST_1.STREAM[config.stream] + " =======================");
+                                        dlog_1.d("[INFO] =====================  PROCESSING " + CONST_1.STREAM[config.stream] + " =======================");
                                         _b.label = 1;
                                     case 1:
                                         _b.trys.push([1, 6, , 7]);
-                                        console.log("[INFO] Fetching link " + config.url);
+                                        dlog_1.d("[INFO] Fetching link " + config.url);
                                         body = null;
                                         if (!this_1.rootConfig.networkFetcher) return [3 /*break*/, 3];
                                         return [4 /*yield*/, this_1.rootConfig.networkFetcher(config.url)];
@@ -236,13 +239,13 @@ var Crawler = /** @class */ (function () {
                                             url_list1.push(n.attribs.href);
                                         }
                                         urls_abs = url_list1.map(function (x) { return _this.absUrl(config.url.toString(), x); });
-                                        console.log("[INFO] LinkFound/all: " + urls_abs.length);
+                                        dlog_1.d("[INFO] LinkFound/all: " + urls_abs.length);
                                         urls_abs = Array.from(new Set(urls_abs));
-                                        console.log("[INFO] LinkFound/unique: " + urls_abs.length);
+                                        dlog_1.d("[INFO] LinkFound/unique: " + urls_abs.length);
                                         urls_abs = this_1.getFilteredUrl(config.url, urls_abs);
-                                        console.log("[INFO] LinkFound/filter: " + urls_abs.length);
+                                        dlog_1.d("[INFO] LinkFound/filter: " + urls_abs.length);
                                         urls_abs = urls_abs.slice(0, config.limit ? config.limit : CONST_1.LIMIT);
-                                        console.log("[INFO] LinkFound/slice: " + urls_abs.length);
+                                        dlog_1.d("[INFO] LinkFound/slice: " + urls_abs.length);
                                         // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                                         urls_abs = urls_abs.reverse();
                                         if (urls_abs.length == 0) {
@@ -252,6 +255,7 @@ var Crawler = /** @class */ (function () {
                                         return [3 /*break*/, 7];
                                     case 6:
                                         err_1 = _b.sent();
+                                        dlog_1.ex(err_1);
                                         analytics_1.Analytics.action("error_parse_root_url", config.url);
                                         analytics_1.Analytics.exception(err_1, { "url": config.url });
                                         return [3 /*break*/, 7];
@@ -273,11 +277,11 @@ var Crawler = /** @class */ (function () {
                         _i++;
                         return [3 /*break*/, 1];
                     case 4:
-                        console.log("[INFO] Total count of Story Link: " + urlList.length);
+                        dlog_1.d("[INFO] Total count of Story Link: " + urlList.length);
                         // remove duplicate :
                         urlList = lodash_1.uniqBy(urlList, 'url');
                         //urlList = Array.from(new Set(urlList))
-                        console.log("[INFO] Total count of Story Link(After remove duplicate): " + urlList.length);
+                        dlog_1.d("[INFO] Total count of Story Link(After remove duplicate): " + urlList.length);
                         if (urlList.length == 0) {
                             return [2 /*return*/, null];
                         }
@@ -294,7 +298,7 @@ var Crawler = /** @class */ (function () {
                         if (obj.status == 'success') {
                             analytics_1.Analytics.action('stat_parse_duplicate', 'dummy', { 'unique_count': urlList.length - obj.out.found_count, 'duplicate_count': obj.out.found_count, 'domain': Url(inspector_1.url).hostname });
                             urlList = urlList.filter(function (x) { return obj.out.found_list[x.url] == null; });
-                            console.log("[INFO] Total link which is NOT in DB: " + urlList.length + ", DB Found count: " + obj.out.found_count);
+                            dlog_1.d("[INFO] Total link which is NOT in DB: " + urlList.length + ", DB Found count: " + obj.out.found_count);
                             if (urlList.length == 0) {
                                 return [2 /*return*/];
                             }
@@ -370,7 +374,7 @@ var Crawler = /** @class */ (function () {
             return shouldNotIgnore;
         }).join("\n");
         if (str.length == 0) {
-            console.log("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
+            dlog_1.d("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
         }
         return str;
     };
@@ -380,7 +384,7 @@ var Crawler = /** @class */ (function () {
         for (var _i = 0, urls_abs_2 = urls_abs; _i < urls_abs_2.length; _i++) {
             var u = urls_abs_2[_i];
             if (Url(u).hostname != Url(root_url).hostname) {
-                console.log("[INFO] Ignore url " + u + " for out of domain fetch");
+                dlog_1.d("[INFO] Ignore url " + u + " for out of domain fetch");
                 continue;
             }
             if (this.rootConfig.ignoreUrlRegex && this.rootConfig.ignoreUrlRegex.length > 0) {
@@ -388,7 +392,7 @@ var Crawler = /** @class */ (function () {
                 for (var _a = 0, _b = this.rootConfig.ignoreUrlRegex; _a < _b.length; _a++) {
                     var ic = _b[_a];
                     if (u.indexOf(ic) != -1) {
-                        console.log("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
+                        dlog_1.d("[INFO] Ignoring url " + u + " as it is getting ignored by rootConfig");
                         flag = 1;
                         break;
                     }

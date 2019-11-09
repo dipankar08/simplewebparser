@@ -2,8 +2,8 @@ import { LIMIT, DB_URL } from "../CONST";
 import { Analytics } from "../../analytics";
 import { String } from "lodash";
 import { StringAnyMap } from "../utils/types";
-let request = require('async-request'), // TODO: move to const request = require("request-promise");
-    response;
+import { d, ex } from "../utils/dlog";
+const request = require("request-promise");
 const cheerio = require('cheerio')
 var Url = require('url-parse');
 
@@ -38,21 +38,21 @@ export async function parseStory(url: string, config:WebConfig):Promise<StringAn
     let result:StringAnyMap ={}
     result['url']= url;
     try {
-        console.log(`[DEBUG] Try fetching... ${url}`);
+        d(`[DEBUG] Try fetching... ${url}`);
         let url1 = new Url(url);
         var body;
         try{
             if(config.networkFetcher){
                 body = await config.networkFetcher(url);
             } else{
-                let resp = await request(url);
-                body = resp.body
+                body = await request(url);
             }
         } catch(error){
+            ex(error);
             Analytics.exception(error)
             return {};
         }
-        console.log("[INFO Fetching done!")
+        d("[INFO Fetching done!")
         result['hostname'] =url1.hostname
         let $ = cheerio.load(body);
         for (var item of config.storyParseConfig) {
@@ -74,25 +74,25 @@ export async function parseStory(url: string, config:WebConfig):Promise<StringAn
         }
     } catch (error) {     
         Analytics.exception(error, result)
-        console.log(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
-        console.log(error);
+        d(`[ERROR] article parse failed for URL:${url}, Error is: ${error}`)
+        d(error);
     }
     return result;
 }
 
-export async function parseStoreList(url:string, config:WebConfig): Promise<Array<string>|null> {
+export async function parseStoreList(url:string, config:WebConfig): Promise<Array<string>> {
     let urlList:Array<string> =[]
     try{
-        console.log(`[INFO] Fetching link ${url}`)
+        d(`[INFO] Fetching link ${url}`)
         var body;
         try{
             if(config.networkFetcher){
                 body = await config.networkFetcher(url);
             } else{
-                let resp = await request(url);
-                body = resp.body
+                body = await request(url);
             }
         } catch(error){
+            ex(error);
             Analytics.exception(error)
             return []
         }
@@ -104,16 +104,16 @@ export async function parseStoreList(url:string, config:WebConfig): Promise<Arra
         }
 
         url_list = url_list.map(x=> absUrl(url.toString(), x));
-        console.log(`[INFO] LinkFound/all: ${url_list.length}`)
+        d(`[INFO] LinkFound/all: ${url_list.length}`)
         
         url_list = Array.from(new Set(url_list))
-        console.log(`[INFO] LinkFound/unique: ${url_list.length}`)
+        d(`[INFO] LinkFound/unique: ${url_list.length}`)
             
         url_list = getFilteredUrl(url, url_list, config)
-        console.log(`[INFO] LinkFound/filter: ${url_list.length}`)
+        d(`[INFO] LinkFound/filter: ${url_list.length}`)
 
         url_list = url_list.slice(0, config.list_limit ? config.list_limit: LIMIT);
-        console.log(`[INFO] LinkFound/slice: ${url_list.length}`)
+        d(`[INFO] LinkFound/slice: ${url_list.length}`)
            
         // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
         url_list = url_list.reverse()
@@ -122,9 +122,11 @@ export async function parseStoreList(url:string, config:WebConfig): Promise<Arra
         }
         return url_list;
     }catch(err){
+        ex(err)
         Analytics.action("error_parse_root_url", url);
         Analytics.exception(err,{"url":url})
     }
+    return []
 }
 
 export function absUrl(root:string, url:string){
@@ -157,14 +159,14 @@ export function getFilteredUrl(root_url, urls_abs, config:WebConfig){
     let url_filtered = []
     for(let u of urls_abs){
         if(Url(u).hostname != Url(root_url).hostname){
-            console.log(`[INFO] Ignore url ${u} for out of domain fetch`)
+            d(`[INFO] Ignore url ${u} for out of domain fetch`)
             continue;
         }
         if(config.ignoreUrlRegex && config.ignoreUrlRegex.length > 0){
             let flag =0;
             for (let ic of config.ignoreUrlRegex){
                 if(u.indexOf(ic) != -1){
-                    console.log(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
+                    d(`[INFO] Ignoring url ${u} as it is getting ignored by rootConfig`)
                     flag =1;
                     break;   
                 }
@@ -202,7 +204,7 @@ export function cleanHtmlData(url:string, str:string, config:WebConfig){
     }
     ).join("\n");
     if(str.length == 0){
-        console.log(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
+        d(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
     }
     return str;
 }
