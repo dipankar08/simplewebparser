@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var web_entrypoints_1 = require("./web_entrypoints");
 var db_helper_1 = require("../utils/db_helper");
 var CONST_1 = require("../CONST");
 var _ = require("lodash");
@@ -65,6 +64,11 @@ function updateProfile(list) {
         });
     });
 }
+var urlList = [];
+//urlList= urlList.concat(require('./sources/bengali_big').urlList) // OK
+//urlList= urlList.concat(require('./sources/bengali_small').urlList) // OK ONE MISSING
+//urlList= urlList.concat(require('./sources/english_big').urlList) // OK
+urlList = urlList.concat(require('./sources/other_lang').urlList); // NOT OK
 function startCrawl() {
     return __awaiter(this, void 0, void 0, function () {
         var c;
@@ -72,10 +76,10 @@ function startCrawl() {
             switch (_a.label) {
                 case 0:
                     c = new web_crawl_1.WebCrawler();
-                    return [4 /*yield*/, updateProfile(web_entrypoints_1.urlList)];
+                    return [4 /*yield*/, updateProfile(urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(web_entrypoints_1.urlList, true /*if this */, 'Bartaman')];
+                    return [4 /*yield*/, c.crawl(urlList, true /*if this */)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

@@ -14,7 +14,6 @@ export abstract class BaseRSSReader {
     public abstract async read(url: string, extra: any): Promise<Array<StringAnyMap>>;
 }
 
-
 export class WordPressRssReader extends BaseRSSReader {
 
     async read(url: string, extra: any): Promise<Array<StringAnyMap>> {

@@ -2,7 +2,6 @@ var rp = require('request-promise');
 import * as fs from 'fs';
 var cheerio = require('cheerio'); 
 import {d, ex} from './../utils/dlog'
-import { urlList } from './web_entrypoints';
 import { StringAnyMap } from '../utils/types';
 var Url = require('url-parse');
 

@@ -30,6 +30,7 @@ var SummeryBuilder = /** @class */ (function () {
         var strategyList = [
             new NULLStrategy(),
             new BengaliStrategy(),
+            new EnglishStrategy(),
             new HindiStrategy(),
             new DefaultStrategy(),
         ];

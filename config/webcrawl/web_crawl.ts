@@ -63,6 +63,9 @@ export class WebCrawler {
             d(`[INFO] Try saving count: ${stories.length}`)
             if(isTest){
                 d(stories[0]);
+                if(!validate(stories[0])){
+                    throw("validation failed");
+                }
                 if(stories.length == 0){
                     throw Error("Please fix this now.")
                 }

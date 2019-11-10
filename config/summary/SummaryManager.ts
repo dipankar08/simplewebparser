@@ -21,9 +21,9 @@ export class SummeryBuilder {
    constructor(){
         // add you item here.
         let strategyList = [
-        
             new NULLStrategy(),
             new BengaliStrategy(),
+            new EnglishStrategy(),
             new HindiStrategy(),
             new DefaultStrategy(),
         ]

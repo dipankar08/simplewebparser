@@ -108,6 +108,9 @@ var WebCrawler = /** @class */ (function () {
                         dlog_1.d("[INFO] Try saving count: " + stories.length);
                         if (isTest) {
                             dlog_1.d(stories[0]);
+                            if (!CONST_1.validate(stories[0])) {
+                                throw ("validation failed");
+                            }
                             if (stories.length == 0) {
                                 throw Error("Please fix this now.");
                             }
