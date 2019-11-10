@@ -55,12 +55,8 @@ var node_html_parser_1 = require("node-html-parser");
 var fastparser = require('fast-xml-parser');
 var analytics_1 = require("../../analytics");
 var dlog_1 = require("../utils/dlog");
+var htmlparser_1 = require("../webcrawl/htmlparser");
 var request = require('request-promise');
-var RSS_TYPE;
-(function (RSS_TYPE) {
-    RSS_TYPE[RSS_TYPE["WORD_PRESS"] = 0] = "WORD_PRESS";
-    RSS_TYPE[RSS_TYPE["YOUTUBE"] = 1] = "YOUTUBE";
-})(RSS_TYPE = exports.RSS_TYPE || (exports.RSS_TYPE = {}));
 var BaseRSSReader = /** @class */ (function () {
     function BaseRSSReader() {
     }
@@ -72,9 +68,6 @@ var WordPressRssReader = /** @class */ (function (_super) {
     function WordPressRssReader() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    WordPressRssReader.prototype.getType = function () {
-        return RSS_TYPE.WORD_PRESS;
-    };
     WordPressRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
             var feed, result, _i, _a, item, link, hostname, html;
@@ -99,7 +92,6 @@ var WordPressRssReader = /** @class */ (function (_super) {
                                     details: html.text,
                                     url: item.link,
                                     hostname: db_helper_1.getHostNameFromUrl(url),
-                                    lang: extra.lang,
                                     stream: extra.stream
                                 });
                             }
@@ -130,9 +122,6 @@ var YouTubeRssReader = /** @class */ (function (_super) {
     function YouTubeRssReader() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    YouTubeRssReader.prototype.getType = function () {
-        return RSS_TYPE.YOUTUBE;
-    };
     YouTubeRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
             var rawdata, feed, result, _i, _a, item;
@@ -156,7 +145,6 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                                     url: item.link['@_href'],
                                     hostname: item.author,
                                     lang: extra.lang,
-                                    stream: extra.stream
                                 });
                             }
                             catch (e) {
@@ -172,4 +160,47 @@ var YouTubeRssReader = /** @class */ (function (_super) {
     return YouTubeRssReader;
 }(BaseRSSReader));
 exports.YouTubeRssReader = YouTubeRssReader;
+// some of the RSS encoded over HTML like 
+// https://www.dinamani.com/%E0%AE%B5%E0%AE%BF%E0%AE%B3%E0%AF%88%E0%AE%AF%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81/%E0%AE%9A%E0%AF%86%E0%AE%AF%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%95%E0%AE%B3%E0%AF%8D/rssfeed/?id=480
+var HTMLEnCodedRssReader = /** @class */ (function (_super) {
+    __extends(HTMLEnCodedRssReader, _super);
+    function HTMLEnCodedRssReader() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    HTMLEnCodedRssReader.prototype.read = function (url, extra) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        // fetch URL and then read.
+                        dlog_1.d("[RSS] Start reading RSS " + url);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, htmlparser_1.findAllDataList(url, 'item', [
+                                { name: 'title', selector: 'title', type: htmlparser_1.WebElementType.TEXT },
+                                { name: 'img', selector: 'img', type: htmlparser_1.WebElementType.IMAGE },
+                                { name: 'details', selector: 'story p', type: htmlparser_1.WebElementType.TEXT_MULTI },
+                                { name: 'url', selector: 'link', type: htmlparser_1.WebElementType.INNER_TEXT },
+                            ])];
+                    case 2:
+                        result = _a.sent();
+                        result = result.map(function (x) {
+                            x['stream'] = extra.stream;
+                            return x;
+                        });
+                        return [2 /*return*/, result];
+                    case 3:
+                        e_1 = _a.sent();
+                        dlog_1.ex(e_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, []];
+                }
+            });
+        });
+    };
+    return HTMLEnCodedRssReader;
+}(BaseRSSReader));
+exports.HTMLEnCodedRssReader = HTMLEnCodedRssReader;
 //# sourceMappingURL=rss_reader.js.map

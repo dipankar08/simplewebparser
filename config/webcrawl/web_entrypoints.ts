@@ -5,7 +5,7 @@ import { Analytics } from "../../analytics";
 import { getHostNameFromUrl, updateProfileToDb } from "../utils/db_helper";
 import _ = require("lodash");
 import { WebElementParseConfig, WebElementType } from "./network";
-import { WordPressRssReader, BaseRSSReader } from "../rss/rss_reader";
+import { WordPressRssReader, BaseRSSReader, HTMLEnCodedRssReader } from "../rss/rss_reader";
 
 export type WebLink ={
     url:string,
@@ -675,8 +675,8 @@ export var urlList:Array<WebEntryPoint> = [
             name:'dinamani',
             lang:LANG.IN_TAMIL,
             profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/dinamani.jgp',
-
-            rsstype:new WordPressRssReader(),
+            
+            rsstype:new HTMLEnCodedRssReader(),
             is_rss_feed: true,
 
             is_active:true,

@@ -1,19 +1,3 @@
-import { RSS_TYPE } from "./rss_reader";
-import { LANG, STREAM, CATEGORIES } from "../CONST";
-import {RssCrawler} from "./rss_crawl"
-import { Analytics } from "../../analytics";
-import { d } from "../utils/dlog";
-const cron = require('node-cron');
-
-export type EntryPoint = {
-    url:string,
-    type:RSS_TYPE,
-    extra: any; // LANG and STREAM
-}
-
-
-export var urlList:Array<EntryPoint> = [
-   
 /* 
     // TimesNews
     {url:'http://eisamay.indiatimes.com/city/rssfeedsection/15819618.cms', extra:{'stream':STREAM.KOLKATA, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -84,7 +68,7 @@ export var urlList:Array<EntryPoint> = [
     {url:'https://www.aajbangla.in/category/%e0%a6%b2%e0%a6%be%e0%a6%87%e0%a6%ab%e0%a6%b8%e0%a7%8d%e0%a6%9f%e0%a6%be%e0%a6%87%e0%a6%b2/', extra:{'stream':STREAM.LIFESTYLE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.aajbangla.in/category/%e0%a6%ad%e0%a7%8d%e0%a6%b0%e0%a6%ae%e0%a6%a3/', extra:{'stream':STREAM.TOUR, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.aajbangla.in/feed', extra:{'stream':STREAM.LATEST, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-*/
+
     // https://www.master24.in
     {url:'https://www.master24.in/archives/category/politics/feed', extra:{'stream':STREAM.POLITICS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.master24.in/archives/category/state/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -201,24 +185,7 @@ export var urlList:Array<EntryPoint> = [
     {url:'https://www.youtube.com/feeds/videos.xml?channel_id=UC2KhNQ3pAmkN6Kepf8ccFZQ', type:RSS_TYPE.YOUTUBE, extra:{ 'stream':STREAM.MOTIVATIONAL,'lang':LANG.IN_BENGALI,'categories':CATEGORIES.VIDEO}},
     {url:'https://www.youtube.com/feeds/videos.xml?channel_id=UCsv4YOF2RBYh0NQ1vuHQ-hg', type:RSS_TYPE.YOUTUBE, extra:{ 'stream':STREAM.COMEDY,'lang':LANG.IN_ENGLISH,'categories':CATEGORIES.VIDEO}},
 ]
-
-async function startCrawl(){
-    let c = new RssCrawler();
-    await c.crawl(urlList);
-}
-// function. 
-export async function rssCronJob(){
-    Analytics.launch("crawler_rss");
-    // await updateprofile()
-    cron.schedule('*/30 * * * *', () => {
-        d(`${Date.now()} Running a task every 30 minutes`);
-        startCrawl()
-    });
-    // run now too.
-    startCrawl(); 
-}
-
-
+*/
 
 
 

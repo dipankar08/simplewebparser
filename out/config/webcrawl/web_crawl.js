@@ -41,6 +41,7 @@ var CONST_1 = require("../CONST");
 var lodash_1 = require("lodash");
 var network_1 = require("./network");
 var dlog_1 = require("../utils/dlog");
+var _ = require("lodash");
 var cron = require('node-cron');
 var WebCrawler = /** @class */ (function () {
     function WebCrawler() {
@@ -80,6 +81,26 @@ var WebCrawler = /** @class */ (function () {
                         stories = _a.sent();
                         _a.label = 5;
                     case 5:
+                        // build and validate contents
+                        stories = stories.map(function (storyDict) {
+                            var cont = CONST_1.buildContent(storyDict);
+                            if (cont && CONST_1.validate(cont)) {
+                                return cont;
+                            }
+                            else {
+                                if (isTest) {
+                                    // throw Error("Content validation failed")
+                                }
+                                dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
+                                dlog_1.d(cont);
+                                analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
+                            }
+                            return null;
+                        });
+                        // remove nulls
+                        _.remove(stories, function (x) { return x == null; });
+                        // remove duplicates
+                        _.uniqBy(stories, 'url');
                         dlog_1.d("[INFO] Try saving count: " + stories.length);
                         if (isTest) {
                             dlog_1.d(stories[0]);
@@ -106,8 +127,41 @@ var WebCrawler = /** @class */ (function () {
     WebCrawler.prototype.processRssFeed = function (web_entry, isTest) {
         if (isTest === void 0) { isTest = false; }
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, []];
+            var storyList, _i, _a, link, list, _b, list_2, l, notinDb;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        storyList = [];
+                        _i = 0, _a = web_entry.links;
+                        _c.label = 1;
+                    case 1:
+                        if (!(_i < _a.length)) return [3 /*break*/, 4];
+                        link = _a[_i];
+                        return [4 /*yield*/, web_entry.rsstype.read(link.url, { stream: link.stream })];
+                    case 2:
+                        list = _c.sent();
+                        for (_b = 0, list_2 = list; _b < list_2.length; _b++) {
+                            l = list_2[_b];
+                            storyList.push(this.addExtra(l, web_entry));
+                        }
+                        _c.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4:
+                        dlog_1.d("[INFO] LINK/ALL " + storyList.length);
+                        // remove duplicates
+                        _.uniqBy(storyList, 'url');
+                        dlog_1.d("[INFO] LINK/AFTER_UNIQUE " + storyList.length);
+                        return [4 /*yield*/, db_helper_1.detectUrlNotInDb(storyList.map(function (x) { return x.url; }))];
+                    case 5:
+                        notinDb = _c.sent();
+                        if (notinDb.length != 0) {
+                            storyList = storyList.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
+                        }
+                        dlog_1.d("[INFO] LINK/NOT_IN_DB " + storyList.length);
+                        return [2 /*return*/, storyList];
+                }
             });
         });
     };
@@ -115,7 +169,7 @@ var WebCrawler = /** @class */ (function () {
     WebCrawler.prototype.processWebFeed = function (web_entry, isTest) {
         if (isTest === void 0) { isTest = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var config, top_urls, _i, _a, weblink, urls, notinDb, stories, _b, top_urls_1, link, storyDict, cont, e_1;
+            var config, top_urls, _i, _a, weblink, urls, notinDb, stories, _b, top_urls_1, link, storyDict, e_1;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -179,26 +233,9 @@ var WebCrawler = /** @class */ (function () {
                         return [4 /*yield*/, network_1.parseStory(link.url, config)];
                     case 8:
                         storyDict = _c.sent();
-                        // append any extra here.
-                        storyDict['lang'] = web_entry.lang;
                         storyDict['stream'] = link.stream;
-                        storyDict['is_active'] = web_entry.is_active ? "1" : "0";
-                        storyDict['is_partner'] = web_entry.is_partner;
-                        if (!storyDict.img) {
-                            storyDict.img = web_entry.profile_img;
-                        }
-                        cont = CONST_1.buildContent(storyDict);
-                        if (cont && CONST_1.validate(cont)) {
-                            stories.push(cont);
-                        }
-                        else {
-                            if (isTest) {
-                                throw Error("Content validation failed");
-                            }
-                            dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
-                            dlog_1.d(cont);
-                            analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
-                        }
+                        this.addExtra(storyDict, web_entry);
+                        stories.push(storyDict);
                         return [3 /*break*/, 10];
                     case 9:
                         e_1 = _c.sent();
@@ -219,6 +256,18 @@ var WebCrawler = /** @class */ (function () {
                 }
             });
         });
+    };
+    // adding extra element in each story.
+    WebCrawler.prototype.addExtra = function (storyDict, web_entry) {
+        // append any extra here.
+        storyDict['lang'] = web_entry.lang;
+        storyDict['hostname'] = db_helper_1.getHostNameFromUrl(storyDict.url);
+        storyDict['is_active'] = web_entry.is_active ? "1" : "0";
+        storyDict['is_partner'] = web_entry.is_partner;
+        if (!storyDict.img) {
+            storyDict.img = web_entry.profile_img;
+        }
+        return storyDict;
     };
     return WebCrawler;
 }());

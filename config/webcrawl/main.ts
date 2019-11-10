@@ -24,7 +24,7 @@ async function updateProfile(list:WebEntryPoint[]){
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, true/*if this */,'dinamani');
+    await c.crawl(urlList, false/*if this */,'dinamani');
 }
 // function. 
 export async function webCronJob(){

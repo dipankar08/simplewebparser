@@ -38,7 +38,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var rss_reader_1 = require("./rss_reader");
 var analytics_1 = require("../../analytics");
 var db_helper_1 = require("../utils/db_helper");
-var CONST_1 = require("../CONST");
 var dlog_1 = require("../utils/dlog");
 var cron = require('node-cron');
 var RssCrawler = /** @class */ (function () {
@@ -81,9 +80,6 @@ var RssCrawler = /** @class */ (function () {
                     case 4:
                         if (!(_a < _b.length)) return [3 /*break*/, 6];
                         item = _b[_a];
-                        if (CONST_1.validate(item)) {
-                            result.push(item);
-                        }
                         _c.label = 5;
                     case 5:
                         _a++;

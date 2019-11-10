@@ -1,11 +1,12 @@
 
 import { Analytics } from "../../analytics";
-import { saveToDB, detectUrlNotInDb } from "../utils/db_helper";
+import { saveToDB, detectUrlNotInDb, getHostNameFromUrl } from "../utils/db_helper";
 import { WebEntryPoint } from "./web_entrypoints";
 import { validate,buildContent } from "../CONST";
 import { uniqBy, String } from "lodash";
 import { parseStoreList, parseStory } from "./network";
 import { d, ex } from "../utils/dlog";
+import _ = require("lodash");
 
 const cron = require('node-cron');
 
@@ -29,6 +30,28 @@ export class WebCrawler {
             } else{
                 stories = await this.processWebFeed(web_entry);
             }
+
+            // build and validate contents
+            stories = stories.map(storyDict=>{
+                let cont = buildContent(storyDict);
+                if(cont && validate(cont)){
+                    return cont;
+                } else{
+                    if(isTest){
+                       // throw Error("Content validation failed")
+                    }
+                    d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${storyDict.url}`)
+                    d(cont);
+                    Analytics.hit_tracker({'action':"empty_data_found", 'link': storyDict.url});
+                }
+                return null;
+            });
+            // remove nulls
+            _.remove(stories, x=>x==null)
+
+            // remove duplicates
+            _.uniqBy(stories, 'url');
+
             d(`[INFO] Try saving count: ${stories.length}`)
             if(isTest){
                 d(stories[0]);
@@ -45,7 +68,26 @@ export class WebCrawler {
     }
     // makeing RSS Feed call. 
     async processRssFeed(web_entry:WebEntryPoint,isTest:Boolean = false):Promise<Array<any>>  {
-        return []
+        let storyList = []
+        for(var link of web_entry.links){
+            let list = await  web_entry.rsstype.read(link.url, {stream:link.stream});
+            for(var l of list){
+                storyList.push(this.addExtra(l, web_entry));
+            }
+        }
+        d(`[INFO] LINK/ALL ${storyList.length}`)
+        // remove duplicates
+        _.uniqBy(storyList, 'url');
+        d(`[INFO] LINK/AFTER_UNIQUE ${storyList.length}`)
+
+        // find howmnay link should we parse as they are not in db.
+        let notinDb =  await detectUrlNotInDb(storyList.map(x=>x.url));
+        if(notinDb.length != 0){
+            storyList = storyList.filter(x=> notinDb.indexOf(x.url) != -1);
+        }
+        d(`[INFO] LINK/NOT_IN_DB ${storyList.length}`)
+
+        return storyList;
     }
 
     // making web call.
@@ -94,29 +136,9 @@ export class WebCrawler {
         for(var link of top_urls){
             try{
                 let storyDict = await parseStory(link.url, config);
-
-                // append any extra here.
-                storyDict['lang'] = web_entry.lang;
                 storyDict['stream'] = link.stream;
-                storyDict['is_active']= web_entry.is_active?"1":"0"
-                storyDict['is_partner'] = web_entry.is_partner
-
-                if(!storyDict.img){
-                    storyDict.img = web_entry.profile_img;
-                }
-
-                // build and validate contents
-                let cont = buildContent(storyDict);
-                if(cont && validate(cont)){
-                    stories.push(cont);
-                } else{
-                    if(isTest){
-                        throw Error("Content validation failed")
-                    }
-                    d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${storyDict.url}`)
-                    d(cont);
-                    Analytics.hit_tracker({'action':"empty_data_found", 'link': storyDict.url});
-                }
+                this.addExtra(storyDict, web_entry);
+                stories.push(storyDict);
             } catch(e){
                 ex(e)
                 d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ :${link.url}`)
@@ -128,5 +150,18 @@ export class WebCrawler {
             }
         }
         return stories;
+    }
+
+    // adding extra element in each story.
+    addExtra(storyDict: import("../utils/types").StringAnyMap, web_entry: WebEntryPoint) {
+        // append any extra here.
+        storyDict['lang'] = web_entry.lang;
+        storyDict['hostname'] = getHostNameFromUrl(storyDict.url)
+        storyDict['is_active']= web_entry.is_active?"1":"0"
+        storyDict['is_partner'] = web_entry.is_partner
+        if(!storyDict.img){
+            storyDict.img = web_entry.profile_img;
+        }
+        return storyDict;
     }
 }

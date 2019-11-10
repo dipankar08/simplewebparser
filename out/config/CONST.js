@@ -76,7 +76,35 @@ var STREAM;
     STREAM[STREAM["RELIGION"] = 46] = "RELIGION";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
 function validate(c) {
-    return c && c.url && c.title && c.img && c.details && c.title.length > 10 && c.url.length > 10 && c.details.length > 20;
+    if (!c) {
+        dlog_1.d('Missing content');
+        return false;
+    }
+    if (!(c.img && c.img.length > 5)) {
+        dlog_1.d('Missing img');
+        return false;
+    }
+    if (!(c.title && c.title.length > 5)) {
+        dlog_1.d('Missing title');
+        return false;
+    }
+    if (!(c.details && c.details.length > 5)) {
+        dlog_1.d('Missing details');
+        return false;
+    }
+    if (!(c.hostname && c.hostname.length > 5)) {
+        dlog_1.d('Missing hostname');
+        return false;
+    }
+    if (!(c.stream && c.stream.length > 2)) {
+        dlog_1.d('Missing stream');
+        return false;
+    }
+    if (!(c.lang && c.lang.length > 5)) {
+        dlog_1.d('Missing lang');
+        return false;
+    }
+    return true;
 }
 exports.validate = validate;
 function buildContent(dict) {

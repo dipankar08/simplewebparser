@@ -1,7 +1,6 @@
 const cron = require('node-cron');
 var Url = require('url-parse');
 
-import {rssCronJob} from "./config/rss/entrypoints"
  import {Crawler, Type, ExpandLinkConfig} from './crawler'
 
  const request = require("request-promise");

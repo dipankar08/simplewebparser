@@ -610,7 +610,7 @@ exports.urlList = [
         name: 'dinamani',
         lang: CONST_1.LANG.IN_TAMIL,
         profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/dinamani.jgp',
-        rsstype: new rss_reader_1.WordPressRssReader(),
+        rsstype: new rss_reader_1.HTMLEnCodedRssReader(),
         is_rss_feed: true,
         is_active: true,
         is_partner: false,
