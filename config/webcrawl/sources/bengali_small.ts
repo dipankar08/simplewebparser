@@ -36,23 +36,28 @@ export let urlList:Array<WebEntryPoint> = [
             {stream:STREAM.ENTERTAINMENT, url:'https://gnebangla.in/category/entertainment/'},
         ]
     },
-    // TODO: PLEASE FIX THIS
+    // TODO: PLEASE FIX THIS KOLAKTA 24X7
+
     {
-        name:'Kolkata 24X7',
-        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/kolkata_24x7.png',
-        type:new WordPressWebReader(),
+        name:'Totka 24X7',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/totka_24x7.png',
         lang:LANG.IN_BENGALI,
-        is_active:false,
+        is_active:true,
         is_partner:true,
+
         links:[
-            {stream: STREAM.HEADLINE, url:'https://www.kolkata24x7.com/'},
-            {stream: STREAM.FIRST_PAGE, url:'https://www.kolkata24x7.com/'},
-            {stream: STREAM.STATE, url:'https://www.kolkata24x7.com/category/kolkata/'},
-            {stream: STREAM.NATIONAL, url:'https://www.kolkata24x7.com/category/national-news/'},
-            {stream: STREAM.STATE, url:'https://www.kolkata24x7.com/category/west-bengal/'},
-            {stream: STREAM.INTERNATIONAL, url:'https://www.kolkata24x7.com/category/international-news/'},
-            {stream: STREAM.TECHNOLOGY, url:'https://www.kolkata24x7.com/category/tech-news/'},
-        ]
+            {url:'https://www.totka24x7.com/archives/category/lifestyle/feed', 'stream':STREAM.LIFESTYLE},
+            {url:'https://www.totka24x7.com/archives/category/earn-money/feed', 'stream':STREAM.BUSINESS},
+            {url:'https://www.totka24x7.com/archives/category/viral/feed', 'stream':STREAM.VIRAL},
+            {url:'https://www.totka24x7.com/archives/category/entertainment/feed', 'stream':STREAM.ENTERTAINMENT},
+            {url:'https://www.totka24x7.com/archives/category/technology/feed', 'stream':STREAM.TECHNOLOGY},
+            {url:'https://www.totka24x7.com/archives/category/headlines/feed', 'stream':STREAM.FIRST_PAGE},
+            {url:'https://www.totka24x7.com/archives/category/astrology/feed', 'stream':STREAM.ASTROLOGY},
+            {url:'https://www.totka24x7.com/archives/category/different-news/feed', 'stream':STREAM.OTHER},
+            {url:'https://www.totka24x7.com/feed', 'stream':STREAM.OTHER},
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
     },
 
     {
@@ -100,25 +105,7 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.TOUR, url:'https://www.aajbangla.in/category/%e0%a6%ad%e0%a7%8d%e0%a6%b0%e0%a6%ae%e0%a6%a3/'},
         ]
     },
-    {
-        name:'Totka 24X7',
-        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/totka_24x7.png',
-        type:new WordPressWebReader(),
-        lang:LANG.IN_BENGALI,
-        is_active:true,
-        is_partner:true,
-        links:[
-            {stream:STREAM.LIFESTYLE, url:'https://www.totka24x7.com/archives/category/lifestyle'},
-            {stream:STREAM.BUSINESS, url:'https://www.totka24x7.com/archives/category/earn-money'},
-            {stream:STREAM.VIRAL, url:'https://www.totka24x7.com/archives/category/viral'},
-            {stream:STREAM.ENTERTAINMENT, url:'https://www.totka24x7.com/archives/category/entertainment'},
-            {stream:STREAM.INTERNATIONAL, url:'https://www.totka24x7.com/archives/category/international'},
-            {stream:STREAM.TECHNOLOGY, url:'https://www.totka24x7.com/archives/category/technology'},
-            {stream:STREAM.HEADLINE, url:'https://www.totka24x7.com/archives/category/headlines'},
-            {stream:STREAM.ASTROLOGY, url:'https://www.totka24x7.com/archives/category/astrology'},
-            {stream:STREAM.OFF_BEAT, url:'https://www.totka24x7.com/archives/category/different-news'},
-        ]
-    },
+
 
     {
         name:'Bharat Barta',

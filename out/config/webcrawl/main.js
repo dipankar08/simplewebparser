@@ -80,7 +80,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Kolkata Times 24')];
+                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Kolkata 24X7')];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
