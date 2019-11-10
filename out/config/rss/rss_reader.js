@@ -70,15 +70,25 @@ var WordPressRssReader = /** @class */ (function (_super) {
     }
     WordPressRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
-            var feed, result, _i, _a, item, link, hostname, html;
+            var feed, e_1, result, _i, _a, item, link, hostname, html;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         // fetch URL and then read.
                         dlog_1.d("[RSS] Start redding RSS " + url);
-                        return [4 /*yield*/, parser.parseURL(url)];
+                        feed = null;
+                        _b.label = 1;
                     case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, parser.parseURL(url)];
+                    case 2:
                         feed = _b.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _b.sent();
+                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        return [2 /*return*/, []];
+                    case 4:
                         result = [];
                         for (_i = 0, _a = feed.items; _i < _a.length; _i++) {
                             item = _a[_i];
@@ -124,16 +134,32 @@ var YouTubeRssReader = /** @class */ (function (_super) {
     }
     YouTubeRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
-            var rawdata, feed, result, _i, _a, item;
+            var rawdata, e_2, feed, result, _i, _a, item;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         // fetch URL and then read.
                         dlog_1.d("[RSS] Start redding RSS " + url);
-                        return [4 /*yield*/, request.get(url)];
+                        _b.label = 1;
                     case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, request.get(url)];
+                    case 2:
                         rawdata = _b.sent();
-                        feed = fastparser.parse(rawdata, { ignoreAttributes: false });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_2 = _b.sent();
+                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        return [2 /*return*/, []];
+                    case 4:
+                        feed = null;
+                        try {
+                            feed = fastparser.parse(rawdata, { ignoreAttributes: false });
+                        }
+                        catch (e) {
+                            analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                            return [2 /*return*/, []];
+                        }
                         result = [];
                         for (_i = 0, _a = feed.feed.entry; _i < _a.length; _i++) {
                             item = _a[_i];
@@ -169,7 +195,7 @@ var HTMLEnCodedRssReader = /** @class */ (function (_super) {
     }
     HTMLEnCodedRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, e_1;
+            var result, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -192,8 +218,8 @@ var HTMLEnCodedRssReader = /** @class */ (function (_super) {
                         });
                         return [2 /*return*/, result];
                     case 3:
-                        e_1 = _a.sent();
-                        dlog_1.ex(e_1);
+                        e_3 = _a.sent();
+                        dlog_1.ex(e_3);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/, []];
                 }

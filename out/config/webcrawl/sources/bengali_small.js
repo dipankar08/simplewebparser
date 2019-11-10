@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CONST_1 = require("../../CONST");
 var web_reader_1 = require("../web_reader");
+var rss_reader_1 = require("../../rss/rss_reader");
 exports.urlList = [
     {
         name: 'Darkari Tips',
@@ -51,6 +52,29 @@ exports.urlList = [
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.kolkata24x7.com/category/international-news/' },
             { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://www.kolkata24x7.com/category/tech-news/' },
         ]
+    },
+    {
+        name: 'Kolkata Times 24',
+        profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/kolkatatimes24.png',
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: true,
+        links: [
+            { url: 'https://kolkatatimes24.com/category/kolkata/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
+            { url: 'https://kolkatatimes24.com/category/politics/feed', 'stream': CONST_1.STREAM.POLITICS },
+            { url: 'https://kolkatatimes24.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://kolkatatimes24.com/category/technology/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
+            { url: 'https://kolkatatimes24.com/category/business-and-economy/feed', 'stream': CONST_1.STREAM.BUSINESS },
+            { url: 'https://kolkatatimes24.com/category/national/feed', 'stream': CONST_1.STREAM.COUNTRY },
+            { url: 'https://kolkatatimes24.com/category/world/feed', 'stream': CONST_1.STREAM.INTERNATIONAL },
+            { url: 'https://kolkatatimes24.com/category/sports/feed', 'stream': CONST_1.STREAM.SPORTS },
+            { url: 'https://kolkatatimes24.com/category/offbeat/feed', 'stream': CONST_1.STREAM.OFF_BEAT },
+            { url: 'https://kolkatatimes24.com/category/offbeat/feed', 'stream': CONST_1.STREAM.OFF_BEAT },
+            { url: 'https://kolkatatimes24.com/category/lifestyle/feed', 'stream': CONST_1.STREAM.LIFESTYLE },
+            { url: 'https://kolkatatimes24.com/feed/', 'stream': CONST_1.STREAM.FIRST_PAGE },
+        ],
+        is_rss_feed: true,
+        rsstype: new rss_reader_1.WordPressRssReader(),
     },
     {
         name: 'Aaj Bangla',

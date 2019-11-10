@@ -67,8 +67,8 @@ function updateProfile(list) {
 var urlList = [];
 urlList = urlList.concat(require('./sources/bengali_big').urlList); // OK
 urlList = urlList.concat(require('./sources/partner_small').urlList); // OK
-//urlList= urlList.concat(require('./sources/bengali_small').urlList) // OK ONE MISSING
-//urlList= urlList.concat(require('./sources/english_big').urlList) // OK
+urlList = urlList.concat(require('./sources/bengali_small').urlList); // OK ONE MISSING
+urlList = urlList.concat(require('./sources/english_big').urlList); // OK
 urlList = urlList.concat(require('./sources/other_lang').urlList); // NOT OK
 function startCrawl() {
     return __awaiter(this, void 0, void 0, function () {
@@ -80,7 +80,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'News Kranti')];
+                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Kolkata Times 24')];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

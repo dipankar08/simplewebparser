@@ -2,6 +2,7 @@ import { WebEntryPoint } from "../web_entrypoints";
 import { LANG, STREAM } from "../../CONST";
 import { DefaultWebReader, ArticleWebReader, WordPressWebReader } from "../web_reader";
 import { WebElementType } from "../htmlparser";
+import { WordPressRssReader } from "../../rss/rss_reader";
 
 export let urlList:Array<WebEntryPoint> = [
     {
@@ -53,6 +54,32 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.TECHNOLOGY, url:'https://www.kolkata24x7.com/category/tech-news/'},
         ]
     },
+
+    {
+        name:'Kolkata Times 24',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/kolkatatimes24.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:true,
+        links:[
+            {url:'https://kolkatatimes24.com/category/kolkata/feed', 'stream':STREAM.FIRST_PAGE},
+            {url:'https://kolkatatimes24.com/category/politics/feed', 'stream':STREAM.POLITICS},
+            {url:'https://kolkatatimes24.com/category/west-bengal/feed', 'stream':STREAM.STATE},
+            {url:'https://kolkatatimes24.com/category/technology/feed', 'stream':STREAM.FIRST_PAGE},
+            {url:'https://kolkatatimes24.com/category/business-and-economy/feed', 'stream':STREAM.BUSINESS},
+            {url:'https://kolkatatimes24.com/category/national/feed', 'stream':STREAM.COUNTRY},
+            {url:'https://kolkatatimes24.com/category/world/feed', 'stream':STREAM.INTERNATIONAL},
+            {url:'https://kolkatatimes24.com/category/sports/feed', 'stream':STREAM.SPORTS},
+            {url:'https://kolkatatimes24.com/category/offbeat/feed', 'stream':STREAM.OFF_BEAT},
+            {url:'https://kolkatatimes24.com/category/offbeat/feed', 'stream':STREAM.OFF_BEAT},
+            {url:'https://kolkatatimes24.com/category/lifestyle/feed', 'stream':STREAM.LIFESTYLE},
+            {url:'https://kolkatatimes24.com/feed/', 'stream':STREAM.FIRST_PAGE},
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
+    },
+
+
     {
         name:'Aaj Bangla',
         profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/aj_bangla_tv.png',

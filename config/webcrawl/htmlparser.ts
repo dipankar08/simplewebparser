@@ -3,6 +3,7 @@ import * as fs from 'fs';
 var cheerio = require('cheerio'); 
 import {d, ex} from './../utils/dlog'
 import { StringAnyMap } from '../utils/types';
+import { Analytics } from '../../analytics';
 var Url = require('url-parse');
 
 export type WebElementParseConfig = {
@@ -24,9 +25,16 @@ export enum WebElementType {
 async function findAllImage(url, selector):Promise<Array<any>>{
     try{
         d(`Fetching ${url} ...`)
-        let $  = await rp.get({url:url,transform: function (body) {
-            return cheerio.load(body);
-        }})
+        var $ ;
+        try{
+            $ = await rp.get({url:url,transform: function (body) {
+                return cheerio.load(body);
+            }})
+        } catch(e){
+            Analytics.hit_tracker({'action':'network_error',url:url});
+            return []
+        }
+
         let data = $(selector).toArray().map(x=>{
             if(x.attribs){
                 return {url:x.attribs.src, filename:x.attribs.title.toLowerCase().replace(/ /g,'_')+'.png' }
@@ -43,9 +51,16 @@ async function findAllImage(url, selector):Promise<Array<any>>{
 async function findAllUrls(url, selector):Promise<Array<any>>{
     try{
         d(`Fetching ${url} ...`)
-        let $  = await rp.get({url:url,transform: function (body) {
-            return cheerio.load(body);
-        }})
+        var $ ;
+        try{
+            $ = await rp.get({url:url,transform: function (body) {
+                return cheerio.load(body);
+            }})
+        } catch(e){
+            Analytics.hit_tracker({'action':'network_error',url:url});
+            return []
+        }
+
         let data = $(selector).toArray().map(x=>{
             if(x.attribs){
                 return {url:x.attribs.href, title:x.attribs.title.toLowerCase().replace(/ /g,'_')}
@@ -65,9 +80,14 @@ export async function findAllData(url, config_list:Array<WebElementParseConfig>,
         // this allow passing $ object directly which will skip the fetching request.
         if($ == null){
             d(`Fetching ${url} ...`)
-             $ = await rp.get({url:url,transform: function (body) {
-                return cheerio.load(body);
-            }})
+            try{
+                $ = await rp.get({url:url,transform: function (body) {
+                    return cheerio.load(body);
+                }})
+            } catch(e){
+                Analytics.hit_tracker({'action':'network_error',url:url});
+                return []
+            }
         }
         let res = {}
         for(var k of config_list){
@@ -85,9 +105,14 @@ export async function findAllDataList(url:string, list_selector:string, entries:
         // this allow passing $ object directly which will skip the fetching request.
         if($ == null){
             d(`Fetching ${url} ...`)
-             $ = await rp.get({url:url,transform: function (body) {
-                return cheerio.load(body);
-            }})
+            try{
+                $ = await rp.get({url:url,transform: function (body) {
+                    return cheerio.load(body);
+                }})
+            } catch(e){
+                Analytics.hit_tracker({'action':'network_error',url:url});
+                return []
+            }
         }
 
         let data = $(list_selector).toArray().map(x=>{

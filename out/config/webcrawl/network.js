@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var dlog_1 = require("../utils/dlog");
-var request = require("request-promise");
-var cheerio = require('cheerio');
 var Url = require('url-parse');
 function getFilteredUrl(root_url, urls_abs, config) {
     var url_filtered = [];

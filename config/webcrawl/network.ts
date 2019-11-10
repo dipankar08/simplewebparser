@@ -1,11 +1,5 @@
-import { LIMIT, DB_URL } from "../CONST";
-import { Analytics } from "../../analytics";
-import { String } from "lodash";
-import { StringAnyMap } from "../utils/types";
 import { d, ex } from "../utils/dlog";
 import { WebElementParseConfig } from "./htmlparser";
-const request = require("request-promise");
-const cheerio = require('cheerio')
 var Url = require('url-parse');
 
 export type WebConfig ={

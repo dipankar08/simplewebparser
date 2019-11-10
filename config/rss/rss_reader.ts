@@ -19,7 +19,13 @@ export class WordPressRssReader extends BaseRSSReader {
     async read(url: string, extra: any): Promise<Array<StringAnyMap>> {
         // fetch URL and then read.
         d(`[RSS] Start redding RSS ${url}`);
-        let feed = await parser.parseURL(url);
+        var feed = null;
+        try{
+            feed = await parser.parseURL(url);
+        } catch(e){
+            Analytics.hit_tracker({'action':'network_error',url:url});
+            return []
+        }
         let result = []
         for(var item of feed.items){
             let link = item.link
@@ -55,8 +61,21 @@ export class YouTubeRssReader extends BaseRSSReader {
     async read(url: string, extra: any): Promise<Array<Content>> {
         // fetch URL and then read.
         d(`[RSS] Start redding RSS ${url}`);
-        let rawdata= await request.get(url);
-        var feed = fastparser.parse(rawdata,{ ignoreAttributes : false});
+        var rawdata;
+        try{
+            rawdata= await request.get(url);
+        } catch(e){
+            Analytics.hit_tracker({'action':'network_error',url:url});
+            return []
+        }
+ 
+        var feed = null;
+        try{
+            feed = fastparser.parse(rawdata,{ ignoreAttributes : false});
+        } catch(e){
+            Analytics.hit_tracker({'action':'network_error',url:url});
+            return []
+        }
 
         let result = []
         for(var item of feed.feed.entry){

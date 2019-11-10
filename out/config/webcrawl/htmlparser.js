@@ -38,6 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var rp = require('request-promise');
 var cheerio = require('cheerio');
 var dlog_1 = require("./../utils/dlog");
+var analytics_1 = require("../../analytics");
 var Url = require('url-parse');
 var WebElementType;
 (function (WebElementType) {
@@ -50,17 +51,26 @@ var WebElementType;
 })(WebElementType = exports.WebElementType || (exports.WebElementType = {}));
 function findAllImage(url, selector) {
     return __awaiter(this, void 0, void 0, function () {
-        var $, data, e_1;
+        var $, e_1, data, e_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 5, , 6]);
                     dlog_1.d("Fetching " + url + " ...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
-                case 1:
+                case 2:
                     $ = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_1 = _a.sent();
+                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    return [2 /*return*/, []];
+                case 4:
                     data = $(selector).toArray().map(function (x) {
                         if (x.attribs) {
                             return { url: x.attribs.src, filename: x.attribs.title.toLowerCase().replace(/ /g, '_') + '.png' };
@@ -70,28 +80,37 @@ function findAllImage(url, selector) {
                         }
                     });
                     return [2 /*return*/, data];
-                case 2:
-                    e_1 = _a.sent();
-                    console.log(e_1);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                case 5:
+                    e_2 = _a.sent();
+                    console.log(e_2);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
 }
 function findAllUrls(url, selector) {
     return __awaiter(this, void 0, void 0, function () {
-        var $, data, e_2;
+        var $, e_3, data, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 5, , 6]);
                     dlog_1.d("Fetching " + url + " ...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
-                case 1:
+                case 2:
                     $ = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_3 = _a.sent();
+                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    return [2 /*return*/, []];
+                case 4:
                     data = $(selector).toArray().map(function (x) {
                         if (x.attribs) {
                             return { url: x.attribs.href, title: x.attribs.title.toLowerCase().replace(/ /g, '_') };
@@ -101,11 +120,11 @@ function findAllUrls(url, selector) {
                         }
                     });
                     return [2 /*return*/, data];
-                case 2:
-                    e_2 = _a.sent();
-                    console.log(e_2);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                case 5:
+                    e_4 = _a.sent();
+                    console.log(e_4);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
@@ -114,31 +133,38 @@ function findAllUrls(url, selector) {
 function findAllData(url, config_list, $) {
     if ($ === void 0) { $ = null; }
     return __awaiter(this, void 0, void 0, function () {
-        var res, _i, config_list_1, k, e_3;
+        var e_5, res, _i, config_list_1, k, e_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    if (!($ == null)) return [3 /*break*/, 2];
+                    _a.trys.push([0, 5, , 6]);
+                    if (!($ == null)) return [3 /*break*/, 4];
                     dlog_1.d("Fetching " + url + " ...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
-                case 1:
-                    $ = _a.sent();
-                    _a.label = 2;
                 case 2:
+                    $ = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_5 = _a.sent();
+                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    return [2 /*return*/, []];
+                case 4:
                     res = {};
                     for (_i = 0, config_list_1 = config_list; _i < config_list_1.length; _i++) {
                         k = config_list_1[_i];
                         res[k.name] = parseWebElements(url, $, $('html'), k);
                     }
                     return [2 /*return*/, res];
-                case 3:
-                    e_3 = _a.sent();
-                    console.log(e_3);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                case 5:
+                    e_6 = _a.sent();
+                    console.log(e_6);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
@@ -148,20 +174,27 @@ exports.findAllData = findAllData;
 function findAllDataList(url, list_selector, entries, $) {
     if ($ === void 0) { $ = null; }
     return __awaiter(this, void 0, void 0, function () {
-        var data, e_4;
+        var e_7, data, e_8;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    if (!($ == null)) return [3 /*break*/, 2];
+                    _a.trys.push([0, 5, , 6]);
+                    if (!($ == null)) return [3 /*break*/, 4];
                     dlog_1.d("Fetching " + url + " ...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
-                case 1:
-                    $ = _a.sent();
-                    _a.label = 2;
                 case 2:
+                    $ = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_7 = _a.sent();
+                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    return [2 /*return*/, []];
+                case 4:
                     data = $(list_selector).toArray().map(function (x) {
                         var res = {
                             'url': url
@@ -173,11 +206,11 @@ function findAllDataList(url, list_selector, entries, $) {
                         return res;
                     });
                     return [2 /*return*/, data];
-                case 3:
-                    e_4 = _a.sent();
-                    console.log(e_4);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                case 5:
+                    e_8 = _a.sent();
+                    console.log(e_8);
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
