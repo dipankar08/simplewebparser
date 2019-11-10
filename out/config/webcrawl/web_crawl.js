@@ -147,6 +147,9 @@ var WebCrawler = /** @class */ (function () {
                         return [4 /*yield*/, web_entry.rsstype.read(link.url, { stream: link.stream })];
                     case 2:
                         list = _c.sent();
+                        if (list.length == 0) {
+                            analytics_1.Analytics.hit_tracker({ "action": "rss_link_has_no_data", 'url': link.url });
+                        }
                         for (_b = 0, list_2 = list; _b < list_2.length; _b++) {
                             l = list_2[_b];
                             storyList.push(this.addExtra(l, web_entry));

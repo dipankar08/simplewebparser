@@ -22,7 +22,8 @@ async function updateProfile(list:WebEntryPoint[]){
 }
 
 let urlList:Array<WebEntryPoint> = []
-//urlList= urlList.concat(require('./sources/bengali_big').urlList) // OK
+urlList= urlList.concat(require('./sources/bengali_big').urlList) // OK
+urlList= urlList.concat(require('./sources/partner_small').urlList) // OK
 //urlList= urlList.concat(require('./sources/bengali_small').urlList) // OK ONE MISSING
 //urlList= urlList.concat(require('./sources/english_big').urlList) // OK
 urlList= urlList.concat(require('./sources/other_lang').urlList) // NOT OK
@@ -30,7 +31,7 @@ urlList= urlList.concat(require('./sources/other_lang').urlList) // NOT OK
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, true/*if this */);
+    await c.crawl(urlList, false/*if this */,'News Kranti');
 }
 
 // function. 

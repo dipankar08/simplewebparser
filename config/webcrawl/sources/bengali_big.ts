@@ -5,6 +5,35 @@ import { WebElementType } from "../htmlparser";
 
 export let urlList:Array<WebEntryPoint> = [
     {
+        name:'AajKal',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/aajkaal.png',
+        type:new DefaultWebReader(),
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:false,
+        links:[
+            {stream: STREAM.KOLKATA, url:'https://www.aajkaal.in/kolkata'},
+            {stream: STREAM.STATE, url:'https://www.aajkaal.in/state'},
+            {stream: STREAM.NATIONAL, url:'https://www.aajkaal.in/national'},
+            {stream: STREAM.INTERNATIONAL, url:'https://www.aajkaal.in/international'},
+            {stream: STREAM.BUSINESS, url:'https://www.aajkaal.in/business'},
+            {stream: STREAM.ENTERTAINMENT, url:'https://www.aajkaal.in/entertainment'},
+            {stream: STREAM.SPORTS, url:'https://www.aajkaal.in/sports'},
+            {stream: STREAM.NORTH_BENGAL, url:'https://www.aajkaal.in/northbengal'},
+            {stream: STREAM.LIFESTYLE, url:'https://www.aajkaal.in/lifestyle'},
+            {stream: STREAM.OFF_BEAT, url:'https://www.aajkaal.in/offbeat'},
+            {stream: STREAM.TOUR, url:'https://www.aajkaal.in/tour'},
+            {stream: STREAM.TECHNOLOGY, url:'https://www.aajkaal.in/sciencetechnology'},
+            {stream: STREAM.HEALTH, url:'https://www.aajkaal.in/helth'},
+        ],
+        link_selector:'.image-holder a',
+        storyParseConfig:[
+            { name: 'title',   selector: '.blog-detail-banner h1', type: WebElementType.TEXT },
+            { name: 'img',     selector: '.blog-detail-banner .image-holder  img', type: WebElementType.IMAGE },
+            { name: 'details', selector: '.blog-detail  p', type: WebElementType.TEXT },
+        ]
+    },   
+    {
         name:'Bartaman',
         profile_img:'https://bartamanpatrika.com/images/logo.png',
         type:new BartamanWebReader(),

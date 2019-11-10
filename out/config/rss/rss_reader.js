@@ -110,7 +110,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
             return html.querySelector("img").attributes.src;
         }
         else {
-            analytics_1.Analytics.action('rss_image_not_found', hostname);
+            analytics_1.Analytics.hit_tracker({ 'action': 'rss_image_not_found', hostname: hostname });
             return null;
         }
     };

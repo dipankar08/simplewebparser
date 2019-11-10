@@ -45,7 +45,7 @@ export class WordPressRssReader extends BaseRSSReader {
         if(html.querySelector("img")){
             return html.querySelector("img").attributes.src
         } else{
-            Analytics.action('rss_image_not_found',hostname);
+            Analytics.hit_tracker({'action':'rss_image_not_found',hostname:hostname});
             return null
         }
     }

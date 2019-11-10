@@ -5,6 +5,35 @@ var web_reader_1 = require("../web_reader");
 var htmlparser_1 = require("../htmlparser");
 exports.urlList = [
     {
+        name: 'AajKal',
+        profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/aajkaal.png',
+        type: new web_reader_1.DefaultWebReader(),
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.KOLKATA, url: 'https://www.aajkaal.in/kolkata' },
+            { stream: CONST_1.STREAM.STATE, url: 'https://www.aajkaal.in/state' },
+            { stream: CONST_1.STREAM.NATIONAL, url: 'https://www.aajkaal.in/national' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.aajkaal.in/international' },
+            { stream: CONST_1.STREAM.BUSINESS, url: 'https://www.aajkaal.in/business' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://www.aajkaal.in/entertainment' },
+            { stream: CONST_1.STREAM.SPORTS, url: 'https://www.aajkaal.in/sports' },
+            { stream: CONST_1.STREAM.NORTH_BENGAL, url: 'https://www.aajkaal.in/northbengal' },
+            { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.aajkaal.in/lifestyle' },
+            { stream: CONST_1.STREAM.OFF_BEAT, url: 'https://www.aajkaal.in/offbeat' },
+            { stream: CONST_1.STREAM.TOUR, url: 'https://www.aajkaal.in/tour' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://www.aajkaal.in/sciencetechnology' },
+            { stream: CONST_1.STREAM.HEALTH, url: 'https://www.aajkaal.in/helth' },
+        ],
+        link_selector: '.image-holder a',
+        storyParseConfig: [
+            { name: 'title', selector: '.blog-detail-banner h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.blog-detail-banner .image-holder  img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.blog-detail  p', type: htmlparser_1.WebElementType.TEXT },
+        ]
+    },
+    {
         name: 'Bartaman',
         profile_img: 'https://bartamanpatrika.com/images/logo.png',
         type: new web_reader_1.BartamanWebReader(),

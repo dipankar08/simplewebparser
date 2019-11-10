@@ -83,6 +83,9 @@ export class WebCrawler {
         let storyList = []
         for(var link of web_entry.links){
             let list = await  web_entry.rsstype.read(link.url, {stream:link.stream});
+            if(list.length ==0){
+                Analytics.hit_tracker({"action":"rss_link_has_no_data", 'url':link.url})
+            }
             for(var l of list){
                 storyList.push(this.addExtra(l, web_entry));
             }

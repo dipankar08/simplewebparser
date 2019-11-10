@@ -74,6 +74,13 @@ var STREAM;
     STREAM[STREAM["NATIONAL"] = 44] = "NATIONAL";
     STREAM[STREAM["CRIME"] = 45] = "CRIME";
     STREAM[STREAM["RELIGION"] = 46] = "RELIGION";
+    STREAM[STREAM["NORTH_BENGAL"] = 47] = "NORTH_BENGAL";
+    STREAM[STREAM["BIHAR"] = 48] = "BIHAR";
+    STREAM[STREAM["GK"] = 49] = "GK";
+    STREAM[STREAM["SPORTS_FEATURE"] = 50] = "SPORTS_FEATURE";
+    STREAM[STREAM["SPORTS_MOMENT"] = 51] = "SPORTS_MOMENT";
+    STREAM[STREAM["UTTRAKHAND"] = 52] = "UTTRAKHAND";
+    STREAM[STREAM["UTTAR_PRADESH"] = 53] = "UTTAR_PRADESH";
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
 function validate(c) {
     if (!c) {
@@ -96,7 +103,7 @@ function validate(c) {
         dlog_1.d('Missing hostname');
         return false;
     }
-    if (!(c.stream && c.stream.length > 2)) {
+    if (!(c.stream && c.stream.length > 0)) {
         dlog_1.d('Missing stream');
         return false;
     }

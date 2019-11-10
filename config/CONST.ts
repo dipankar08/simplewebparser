@@ -80,7 +80,14 @@ export enum STREAM {
     COMEDY,
     NATIONAL,
     CRIME,
-    RELIGION
+    RELIGION,
+    NORTH_BENGAL,
+    BIHAR,
+    GK,
+    SPORTS_FEATURE,
+    SPORTS_MOMENT,
+    UTTRAKHAND,
+    UTTAR_PRADESH
 }
 
 export type ListConfig = {
@@ -137,7 +144,7 @@ export function validate(c:Content):boolean{
     if(!( c.hostname && c.hostname.length > 5)){
         d('Missing hostname'); return false;
     }
-    if(!( c.stream && c.stream.length > 2)){
+    if(!( c.stream && c.stream.length > 0)){
         d('Missing stream'); return false;
     }
     if(!( c.lang && c.lang.length > 5)){
