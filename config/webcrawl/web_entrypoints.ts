@@ -4,7 +4,7 @@ import {WebCrawler} from "./web_crawl"
 import { Analytics } from "../../analytics";
 import { getHostNameFromUrl, updateProfileToDb } from "../utils/db_helper";
 import _ = require("lodash");
-import { WebElementParseConfig, WebElementType } from "./network";
+import { WebElementParseConfig, WebElementType } from "./htmlparser"
 import { WordPressRssReader, BaseRSSReader, HTMLEnCodedRssReader } from "../rss/rss_reader";
 
 export type WebLink ={

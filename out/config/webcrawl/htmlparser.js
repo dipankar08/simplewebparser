@@ -46,6 +46,7 @@ var WebElementType;
     WebElementType[WebElementType["MULTI_TEXT"] = 2] = "MULTI_TEXT";
     WebElementType[WebElementType["TEXT_MULTI"] = 3] = "TEXT_MULTI";
     WebElementType[WebElementType["INNER_TEXT"] = 4] = "INNER_TEXT";
+    WebElementType[WebElementType["URL_LIST"] = 5] = "URL_LIST";
 })(WebElementType = exports.WebElementType || (exports.WebElementType = {}));
 function findAllImage(url, selector) {
     return __awaiter(this, void 0, void 0, function () {
@@ -109,75 +110,91 @@ function findAllUrls(url, selector) {
         });
     });
 }
-//todo
-function findAllData(url, selector) {
+// find a object of information form a page.
+function findAllData(url, config_list, $) {
+    if ($ === void 0) { $ = null; }
     return __awaiter(this, void 0, void 0, function () {
-        var $, data, e_3;
+        var res, _i, config_list_1, k, e_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 3, , 4]);
+                    if (!($ == null)) return [3 /*break*/, 2];
                     dlog_1.d("Fetching " + url + " ...");
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
                 case 1:
                     $ = _a.sent();
-                    data = $(selector).toArray().map(function (x) {
-                        if (x.attribs) {
-                            return { url: x.attribs.href, title: x.attribs.title.toLowerCase().replace(/ /g, '_') };
-                        }
-                        else {
-                            return null;
-                        }
-                    });
-                    return [2 /*return*/, data];
+                    _a.label = 2;
                 case 2:
+                    res = {};
+                    for (_i = 0, config_list_1 = config_list; _i < config_list_1.length; _i++) {
+                        k = config_list_1[_i];
+                        res[k.name] = parseWebElements(url, $, $('html'), k);
+                    }
+                    return [2 /*return*/, res];
+                case 3:
                     e_3 = _a.sent();
                     console.log(e_3);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
-function findAllDataList(url, list_selector, entries) {
+exports.findAllData = findAllData;
+// find a list of object of information form a page.
+function findAllDataList(url, list_selector, entries, $) {
+    if ($ === void 0) { $ = null; }
     return __awaiter(this, void 0, void 0, function () {
-        var $_1, data, e_4;
+        var data, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 3, , 4]);
+                    if (!($ == null)) return [3 /*break*/, 2];
                     dlog_1.d("Fetching " + url + " ...");
                     return [4 /*yield*/, rp.get({ url: url, transform: function (body) {
                                 return cheerio.load(body);
                             } })];
                 case 1:
-                    $_1 = _a.sent();
-                    data = $_1(list_selector).toArray().map(function (x) {
+                    $ = _a.sent();
+                    _a.label = 2;
+                case 2:
+                    data = $(list_selector).toArray().map(function (x) {
                         var res = {
                             'url': url
                         };
                         for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
                             var k = entries_1[_i];
-                            res[k.name] = parseWebElements(url, $_1, $_1(x), k);
+                            res[k.name] = parseWebElements(url, $, $(x), k);
                         }
                         return res;
                     });
                     return [2 /*return*/, data];
-                case 2:
+                case 3:
                     e_4 = _a.sent();
                     console.log(e_4);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
 exports.findAllDataList = findAllDataList;
+//tested
 function parseWebElements(url, $, entry, config) {
     try {
         switch (config.type) {
+            case WebElementType.URL_LIST:
+                var url_list = [];
+                for (var _i = 0, _a = $(config.selector); _i < _a.length; _i++) {
+                    var n = _a[_i];
+                    url_list.push(n.attribs.href);
+                }
+                url_list = url_list.map(function (x) { return absUrl(url.toString(), x); });
+                return url_list;
             case WebElementType.INNER_TEXT:
                 return entry.find(config.selector)[0].next.data;
             case WebElementType.TEXT:

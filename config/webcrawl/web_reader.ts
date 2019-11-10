@@ -1,4 +1,5 @@
-import { WebConfig, WebElementType } from "./network";
+import { WebElementType } from "./htmlparser";
+import { WebConfig } from "./network";
 const request = require('request-promise');
 
 export abstract class BaseWebReader {

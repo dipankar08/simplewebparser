@@ -75,7 +75,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(web_entrypoints_1.urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(web_entrypoints_1.urlList, false /*if this */, 'dinamani')];
+                    return [4 /*yield*/, c.crawl(web_entrypoints_1.urlList, true /*if this */, 'Bartaman')];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

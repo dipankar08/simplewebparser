@@ -48,7 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var network_1 = require("./network");
+var htmlparser_1 = require("./htmlparser");
 var request = require('request-promise');
 var BaseWebReader = /** @class */ (function () {
     function BaseWebReader() {
@@ -67,9 +67,9 @@ var DefaultWebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: 'body a',
             storyParseConfig: [
-                { name: 'title', selector: 'body h1', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: 'body img', type: network_1.WebElementType.IMAGE },
-                { name: 'details', selector: 'body p', type: network_1.WebElementType.TEXT }
+                { name: 'title', selector: 'body h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: 'body img', type: htmlparser_1.WebElementType.IMAGE },
+                { name: 'details', selector: 'body p', type: htmlparser_1.WebElementType.TEXT }
             ]
         };
     };
@@ -87,9 +87,9 @@ var BartamanWebReader = /** @class */ (function (_super) {
             list_selector: '.firstSection a.bisad',
             networkFetcher: this.getDataFromUrl,
             storyParseConfig: [
-                { name: 'title', selector: '.head-news h4', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: '.head-news .thumbnail  img', type: network_1.WebElementType.IMAGE },
-                { name: 'details', selector: '.head-news .content', type: network_1.WebElementType.TEXT },
+                { name: 'title', selector: '.head-news h4', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: '.head-news .thumbnail  img', type: htmlparser_1.WebElementType.IMAGE },
+                { name: 'details', selector: '.head-news .content', type: htmlparser_1.WebElementType.TEXT },
             ]
         };
     };
@@ -122,9 +122,9 @@ var WordPressWebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: '.td-main-content .td-module-thumb > a',
             storyParseConfig: [
-                { name: 'title', selector: 'article header h1', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: 'article  .td-post-featured-image img', type: network_1.WebElementType.IMAGE },
-                { name: 'details', selector: 'article .td-post-content > p', type: network_1.WebElementType.TEXT }
+                { name: 'title', selector: 'article header h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: 'article  .td-post-featured-image img', type: htmlparser_1.WebElementType.IMAGE },
+                { name: 'details', selector: 'article .td-post-content > p', type: htmlparser_1.WebElementType.TEXT }
             ]
         };
     };
@@ -141,9 +141,9 @@ var ArticleWebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: 'article h2 a',
             storyParseConfig: [
-                { name: 'title', selector: 'article h1', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: 'article img', type: network_1.WebElementType.IMAGE },
-                { name: 'details', selector: 'article p ', type: network_1.WebElementType.TEXT },
+                { name: 'title', selector: 'article h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: 'article img', type: htmlparser_1.WebElementType.IMAGE },
+                { name: 'details', selector: 'article p ', type: htmlparser_1.WebElementType.TEXT },
             ]
         };
     };
@@ -160,9 +160,9 @@ var News18WebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: '.nwslist-withbrdr li a',
             storyParseConfig: [
-                { name: 'title', selector: '.article_box h1', type: network_1.WebElementType.TEXT },
-                { name: 'details', selector: '.article_box #article_body p', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: '.article_box .articleimg img', type: network_1.WebElementType.IMAGE },
+                { name: 'title', selector: '.article_box h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'details', selector: '.article_box #article_body p', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: '.article_box .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
             ]
         };
     };
@@ -179,9 +179,9 @@ var OneIndiaWebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: 'article .article-img a',
             storyParseConfig: [
-                { name: 'title', selector: 'article h1', type: network_1.WebElementType.TEXT },
-                { name: 'details', selector: 'article .oi-article-lt > p', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: 'article figure  img', type: network_1.WebElementType.IMAGE },
+                { name: 'title', selector: 'article h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'details', selector: 'article .oi-article-lt > p', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: 'article figure  img', type: htmlparser_1.WebElementType.IMAGE },
             ]
         };
     };
@@ -198,9 +198,9 @@ var IndiaTimesWebReader = /** @class */ (function (_super) {
             ignoreUrlRegex: globalBlackListUrl,
             list_selector: '.artlisting li .imgsec > a',
             storyParseConfig: [
-                { name: 'title', selector: '.leftmain h1', type: network_1.WebElementType.TEXT },
-                { name: 'img', selector: '.leftmain .article  .articleImage img', type: network_1.WebElementType.IMAGE },
-                { name: 'details', selector: '.leftmain arttextxml', type: network_1.WebElementType.TEXT },
+                { name: 'title', selector: '.leftmain h1', type: htmlparser_1.WebElementType.TEXT },
+                { name: 'img', selector: '.leftmain .article  .articleImage img', type: htmlparser_1.WebElementType.IMAGE },
+                { name: 'details', selector: '.leftmain arttextxml', type: htmlparser_1.WebElementType.TEXT },
             ]
         };
     };

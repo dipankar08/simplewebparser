@@ -1,5 +1,12 @@
+import _ = require("lodash")
+
 export function d(msg:any){
-    console.log(`[DEBUG] ${msg}`)
+    if(_.isString(msg)){
+        console.log(`[DEBUG] ${msg}`)
+    } else{
+        console.log(`[DEBUG] ${JSON.stringify(msg)}`)
+    }
+   
 }
 export function i(msg:any){
     console.log(`[INFO] ${msg}`)

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var web_reader_1 = require("./web_reader");
 var CONST_1 = require("../CONST");
-var network_1 = require("./network");
+var htmlparser_1 = require("./htmlparser");
 var rss_reader_1 = require("../rss/rss_reader");
 exports.urlList = [
     {
@@ -70,9 +70,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.TECHNOLOGY, selector: 'a.post-block__title__link', url: 'https://techcrunch.com/gadgets/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: 'article h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: 'article .article__featured-image-wrapper  img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: 'article .article-content > p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: 'article h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: 'article .article__featured-image-wrapper  img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: 'article .article-content > p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -93,9 +93,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.OTHER, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bichitra' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.storybox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.storybox .imgholder  img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.storybox .content-body > p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.storybox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.storybox .imgholder  img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.storybox .content-body > p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -111,9 +111,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.TECHNOLOGY, selector: ".toplist_stories figure > a", url: "https://www.businessinsider.in/sai" },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.ArticleCont article h1', type: network_1.WebElementType.TEXT },
-            { name: 'details', selector: '.ArticleCont .article_content .story-text', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.ArticleCont img', type: network_1.WebElementType.IMAGE, attr: 'data-original' },
+            { name: 'title', selector: '.ArticleCont article h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '.ArticleCont .article_content .story-text', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.ArticleCont img', type: htmlparser_1.WebElementType.IMAGE, attr: 'data-original' },
         ]
     },
     {
@@ -130,9 +130,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'ul.more_news_list li > a', url: 'https://www.sangbadpratidin.in/latest-update/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.container .hot_news h1', type: network_1.WebElementType.TEXT },
-            { name: 'details', selector: '.container .news_content_area > p', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.container img.hot_news_image', type: network_1.WebElementType.IMAGE },
+            { name: 'title', selector: '.container .hot_news h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '.container .news_content_area > p', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.container img.hot_news_image', type: htmlparser_1.WebElementType.IMAGE },
         ]
     },
     {
@@ -155,9 +155,9 @@ exports.urlList = [
             { url: 'https://www.anandabazar.com/travel', selector: '.carousel-inner .item a', stream: CONST_1.STREAM.TRAVEL },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '#story_container h1', type: network_1.WebElementType.TEXT },
-            { name: 'details', selector: '#story_container .articleBody', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '#story_container  img', type: network_1.WebElementType.IMAGE },
+            { name: 'title', selector: '#story_container h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '#story_container .articleBody', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '#story_container  img', type: htmlparser_1.WebElementType.IMAGE },
         ]
     },
     {
@@ -171,9 +171,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.story-body h1', type: network_1.WebElementType.TEXT },
-            { name: 'details', selector: '.story-body .story-body__inner > p', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.story-body figure  img', type: network_1.WebElementType.IMAGE },
+            { name: 'title', selector: '.story-body h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '.story-body .story-body__inner > p', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.story-body figure  img', type: htmlparser_1.WebElementType.IMAGE },
         ]
     },
     {
@@ -239,9 +239,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.MOVIE, selector: '.hotTopic a', url: 'https://www.news18.com/movies/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.article-sbox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.article-sbox .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.article-sbox #article_body p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.article-sbox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.article-sbox .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.article-sbox #article_body p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -263,9 +263,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.SPORTS, selector: '.hotTopic a', url: 'https://hindi.news18.com/news/sports/cricket/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '#article h1', type: network_1.WebElementType.TEXT },
-            { name: 'details', selector: '#article .storypara', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '#article_body .articleimg img', type: network_1.WebElementType.IMAGE },
+            { name: 'title', selector: '#article h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '#article .storypara', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '#article_body .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
         ]
     },
     {
@@ -335,9 +335,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.MOVIE, selector: '.hotTopic a', url: 'https://www.news18.com/movies/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.article-sbox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.article-sbox .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.article-sbox #article_body p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.article-sbox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.article-sbox .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.article-sbox #article_body p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -359,9 +359,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.MOVIE, selector: '.hotTopic a', url: 'https://www.news18.com/movies/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.article-sbox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.article-sbox .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.article-sbox #article_body p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.article-sbox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.article-sbox .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.article-sbox #article_body p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -383,9 +383,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.MOVIE, selector: '.hotTopic a', url: 'https://www.news18.com/movies/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.article-sbox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.article-sbox .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.article-sbox #article_body p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.article-sbox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.article-sbox .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.article-sbox #article_body p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -407,9 +407,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.MOVIE, selector: '.hotTopic a', url: 'https://www.news18.com/movies/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.article-sbox h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '.article-sbox .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '.article-sbox #article_body p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '.article-sbox h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.article-sbox .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '.article-sbox #article_body p', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -429,9 +429,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.CRIME, selector: '.hotTopic a', url: 'https://malayalam.news18.com/crime/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '#article h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: '#article .articleimg img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: '#article #article_body .storypara', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: '#article h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '#article .articleimg img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: '#article #article_body .storypara', type: htmlparser_1.WebElementType.TEXT },
         ]
     },
     {
@@ -599,9 +599,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.CRIME, url: 'https://www.dharitri.com/category/crime-news/' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: 'article h1', type: network_1.WebElementType.TEXT },
-            { name: 'img', selector: 'article .post-thumbnail img', type: network_1.WebElementType.IMAGE },
-            { name: 'details', selector: 'article.post p', type: network_1.WebElementType.TEXT },
+            { name: 'title', selector: 'article h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: 'article .post-thumbnail img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'details', selector: 'article.post p', type: htmlparser_1.WebElementType.TEXT },
         ],
         link_selector: '.thumbnail a',
     },

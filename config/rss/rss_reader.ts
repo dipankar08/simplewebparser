@@ -81,7 +81,7 @@ export class YouTubeRssReader extends BaseRSSReader {
 // some of the RSS encoded over HTML like 
 // https://www.dinamani.com/%E0%AE%B5%E0%AE%BF%E0%AE%B3%E0%AF%88%E0%AE%AF%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81/%E0%AE%9A%E0%AF%86%E0%AE%AF%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%95%E0%AE%B3%E0%AF%8D/rssfeed/?id=480
 export class HTMLEnCodedRssReader extends BaseRSSReader {
-    async read(url: string, extra: any): Promise<Array<Content>> {
+    async read(url: string, extra: any): Promise<Array<StringAnyMap>> {
         // fetch URL and then read.
         d(`[RSS] Start reading RSS ${url}`);
         try{

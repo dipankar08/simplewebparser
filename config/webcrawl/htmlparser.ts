@@ -3,6 +3,7 @@ import * as fs from 'fs';
 var cheerio = require('cheerio'); 
 import {d, ex} from './../utils/dlog'
 import { urlList } from './web_entrypoints';
+import { StringAnyMap } from '../utils/types';
 var Url = require('url-parse');
 
 export type WebElementParseConfig = {
@@ -17,7 +18,8 @@ export enum WebElementType {
     IMAGE,
     MULTI_TEXT,
     TEXT_MULTI,
-    INNER_TEXT
+    INNER_TEXT,
+    URL_LIST
 }
 
 async function findAllImage(url, selector):Promise<Array<any>>{
@@ -57,32 +59,38 @@ async function findAllUrls(url, selector):Promise<Array<any>>{
         console.log(e)
     }
 }
-//todo
-async function findAllData(url, selector):Promise<Array<any>>{
+
+// find a object of information form a page.
+export async function findAllData(url, config_list:Array<WebElementParseConfig>, $=null):Promise<StringAnyMap>{
     try{
-        d(`Fetching ${url} ...`)
-        let $  = await rp.get({url:url,transform: function (body) {
-            return cheerio.load(body);
-        }})
-        let data = $(selector).toArray().map(x=>{
-            if(x.attribs){
-                return {url:x.attribs.href, title:x.attribs.title.toLowerCase().replace(/ /g,'_')}
-            } else{
-                return null;
-            }
-        })
-        return data;
+        // this allow passing $ object directly which will skip the fetching request.
+        if($ == null){
+            d(`Fetching ${url} ...`)
+             $ = await rp.get({url:url,transform: function (body) {
+                return cheerio.load(body);
+            }})
+        }
+        let res = {}
+        for(var k of config_list){
+            res[k.name] = parseWebElements(url, $, $('html'),k)
+        }
+        return res;
     } catch(e){
         console.log(e)
     }
 }
 
-export async function findAllDataList(url:string, list_selector:string, entries:Array<WebElementParseConfig>):Promise<Array<any>>{
+// find a list of object of information form a page.
+export async function findAllDataList(url:string, list_selector:string, entries:Array<WebElementParseConfig>, $=null):Promise<Array<StringAnyMap>>{
     try{
-        d(`Fetching ${url} ...`)
-        let $  = await rp.get({url:url,transform: function (body) {
-            return cheerio.load(body);
-        }})
+        // this allow passing $ object directly which will skip the fetching request.
+        if($ == null){
+            d(`Fetching ${url} ...`)
+             $ = await rp.get({url:url,transform: function (body) {
+                return cheerio.load(body);
+            }})
+        }
+
         let data = $(list_selector).toArray().map(x=>{
             var res ={
                 'url': url
@@ -98,9 +106,18 @@ export async function findAllDataList(url:string, list_selector:string, entries:
     }
 }
 
+//tested
 function parseWebElements(url:string, $, entry,  config: WebElementParseConfig){
     try{
         switch (config.type) {
+            case WebElementType.URL_LIST:
+                let url_list: Array<string>  = []
+                for(let n of $(config.selector)){
+                    url_list.push(n.attribs.href)
+                }
+                url_list = url_list.map(x=> absUrl(url.toString(), x));
+                return url_list;
+
             case WebElementType.INNER_TEXT:
                 return entry.find(config.selector)[0].next.data;
             case WebElementType.TEXT:

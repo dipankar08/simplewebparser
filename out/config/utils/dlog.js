@@ -1,7 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var _ = require("lodash");
 function d(msg) {
-    console.log("[DEBUG] " + msg);
+    if (_.isString(msg)) {
+        console.log("[DEBUG] " + msg);
+    }
+    else {
+        console.log("[DEBUG] " + JSON.stringify(msg));
+    }
 }
 exports.d = d;
 function i(msg) {
