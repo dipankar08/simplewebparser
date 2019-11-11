@@ -42,6 +42,7 @@ var web_crawl_1 = require("./web_crawl");
 var analytics_1 = require("../../analytics");
 var dlog_1 = require("../utils/dlog");
 var cron = require('node-cron');
+var config = require('config');
 function updateProfile(list) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -78,12 +79,16 @@ function startCrawl() {
             switch (_a.label) {
                 case 0:
                     c = new web_crawl_1.WebCrawler();
-                    // await c.crawl(urlList, false); // RUN ON PROD.
-                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Ei Somoy')];
+                    if (!config.get("isProd")) return [3 /*break*/, 2];
+                    return [4 /*yield*/, c.crawl(urlList, false)];
                 case 1:
-                    // await c.crawl(urlList, false); // RUN ON PROD.
+                    _a.sent(); // RUN ON PROD.
+                    return [3 /*break*/, 4];
+                case 2: return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Ei Somoy')];
+                case 3:
                     _a.sent();
-                    return [2 /*return*/];
+                    _a.label = 4;
+                case 4: return [2 /*return*/];
             }
         });
     });

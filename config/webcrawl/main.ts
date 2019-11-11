@@ -6,6 +6,7 @@ import { WebCrawler } from "./web_crawl";
 import { Analytics } from "../../analytics";
 import { d } from "../utils/dlog";
 const cron = require('node-cron');
+const config = require('config');
 
 async function updateProfile(list:WebEntryPoint[]){
     await updateProfileToDb(list.map(x=>{
@@ -32,8 +33,13 @@ urlList = _.uniqBy(urlList, "name")
 
 async function startCrawl(){
     let c = new WebCrawler();
-   // await c.crawl(urlList, false); // RUN ON PROD.
-    await c.crawl(urlList, false/*if this */,'Ei Somoy');
+    if(config.get("isProd")){
+        await c.crawl(urlList, false); // RUN ON PROD.
+    } else{
+        await c.crawl(urlList, false/*if this */,'Ei Somoy');
+    }
+   //
+    
 }
 
 // function. 
