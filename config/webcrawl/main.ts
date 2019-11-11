@@ -26,12 +26,14 @@ urlList= urlList.concat(require('./sources/bengali_big').urlList) // OK
 urlList= urlList.concat(require('./sources/partner_small').urlList) // OK
 urlList= urlList.concat(require('./sources/bengali_small').urlList) // 
 urlList= urlList.concat(require('./sources/english_big').urlList) // OK
-urlList= urlList.concat(require('./sources/other_lang').urlList) // NOT OK
+urlList= urlList.concat(require('./sources/other_lang').urlList) // OK
+
+urlList = _.uniqBy(urlList, "name")
 
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, true/*if this */);
+    await c.crawl(urlList, false/*if this */);
 }
 
 // function. 

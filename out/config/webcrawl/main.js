@@ -69,7 +69,8 @@ urlList = urlList.concat(require('./sources/bengali_big').urlList); // OK
 urlList = urlList.concat(require('./sources/partner_small').urlList); // OK
 urlList = urlList.concat(require('./sources/bengali_small').urlList); // 
 urlList = urlList.concat(require('./sources/english_big').urlList); // OK
-urlList = urlList.concat(require('./sources/other_lang').urlList); // NOT OK
+urlList = urlList.concat(require('./sources/other_lang').urlList); // OK
+urlList = _.uniqBy(urlList, "name");
 function startCrawl() {
     return __awaiter(this, void 0, void 0, function () {
         var c;
@@ -80,7 +81,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(urlList, true /*if this */)];
+                    return [4 /*yield*/, c.crawl(urlList, false /*if this */)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
