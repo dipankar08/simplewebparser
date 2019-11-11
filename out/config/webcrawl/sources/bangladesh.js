@@ -46,4 +46,4 @@ exports.urlList = [
         rsstype: new rss_reader_1.RssTwoReader(),
     },
 ];
-//# sourceMappingURL=templates.js.map
+//# sourceMappingURL=bangladesh.js.map

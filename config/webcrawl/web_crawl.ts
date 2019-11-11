@@ -2,7 +2,7 @@
 import { Analytics } from "../../analytics";
 import { saveToDB, detectUrlNotInDb, getHostNameFromUrl } from "../utils/db_helper";
 import { WebEntryPoint } from "./web_entrypoints";
-import { validate,buildContent, LIMIT } from "../CONST";
+import { validate,buildContent, LIMIT, TELEMETRY_CRAWLER_EMPTY_DATA, TELEMETRY_RSS_LINK_HAS_EMPTY_DATA, TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY } from "../CONST";
 import { uniqBy, String } from "lodash";
 import {getFilteredUrl } from "./network";
 import { d, ex } from "../utils/dlog";
@@ -48,7 +48,7 @@ export class WebCrawler {
                     }
                     d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${storyDict.url}`)
                     d(cont);
-                    Analytics.hit_tracker({'action':"empty_data_found", 'link': storyDict.url});
+                    Analytics.hit_tracker({'action':TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url});
                 }
                 return null;
             });
@@ -84,7 +84,7 @@ export class WebCrawler {
         for(var link of web_entry.links){
             let list = await  web_entry.rsstype.read(link.url, {stream:link.stream});
             if(list.length ==0){
-                Analytics.hit_tracker({"action":"rss_link_has_no_data", 'url':link.url})
+                Analytics.hit_tracker({"action":TELEMETRY_RSS_LINK_HAS_EMPTY_DATA, 'url':link.url})
             }
             for(var l of list){
                 storyList.push(this.addExtra(l, web_entry));
@@ -148,7 +148,7 @@ export class WebCrawler {
             // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
             url_list = url_list.reverse()
             if(url_list.length ==0){
-                Analytics.action("error_parse_root_url", weblink.url); 
+                Analytics.action(TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url); 
             }
             top_urls = top_urls.concat(url_list.map(u=>{
                 return {url:u,stream:weblink.stream}
@@ -160,7 +160,6 @@ export class WebCrawler {
 
         // STEP 2: FETCHING ALL STORIES ONE BY ONE. 
         if(top_urls.length == 0){
-            Analytics.hit_tracker({'action':"empty_root_url", 'link': weblink.url});
             d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${weblink.url}`)
             return [];
         }
@@ -195,7 +194,7 @@ export class WebCrawler {
             } catch(e){
                 ex(e)
                 d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ :${link.url}`)
-                Analytics.hit_tracker({'action':"exception_while_fetching", 'link': link.url});
+                Analytics.hit_tracker({'action':TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY, 'link': link.url});
                 Analytics.exception(e);
             }
             if(isTest){

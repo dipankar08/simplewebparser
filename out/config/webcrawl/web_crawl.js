@@ -96,7 +96,7 @@ var WebCrawler = /** @class */ (function () {
                                 }
                                 dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
                                 dlog_1.d(cont);
-                                analytics_1.Analytics.hit_tracker({ 'action': "empty_data_found", 'link': storyDict.url });
+                                analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url });
                             }
                             return null;
                         });
@@ -148,7 +148,7 @@ var WebCrawler = /** @class */ (function () {
                     case 2:
                         list = _c.sent();
                         if (list.length == 0) {
-                            analytics_1.Analytics.hit_tracker({ "action": "rss_link_has_no_data", 'url': link.url });
+                            analytics_1.Analytics.hit_tracker({ "action": CONST_1.TELEMETRY_RSS_LINK_HAS_EMPTY_DATA, 'url': link.url });
                         }
                         for (_b = 0, list_2 = list; _b < list_2.length; _b++) {
                             l = list_2[_b];
@@ -221,7 +221,7 @@ var WebCrawler = /** @class */ (function () {
                         // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                         url_list = url_list.reverse();
                         if (url_list.length == 0) {
-                            analytics_1.Analytics.action("error_parse_root_url", weblink.url);
+                            analytics_1.Analytics.action(CONST_1.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url);
                         }
                         top_urls = top_urls.concat(url_list.map(function (u) {
                             return { url: u, stream: weblink.stream };
@@ -236,7 +236,6 @@ var WebCrawler = /** @class */ (function () {
                     case 6:
                         // STEP 2: FETCHING ALL STORIES ONE BY ONE. 
                         if (top_urls.length == 0) {
-                            analytics_1.Analytics.hit_tracker({ 'action': "empty_root_url", 'link': weblink.url });
                             dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + weblink.url);
                             return [2 /*return*/, []];
                         }
@@ -280,7 +279,7 @@ var WebCrawler = /** @class */ (function () {
                         e_1 = _c.sent();
                         dlog_1.ex(e_1);
                         dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ :" + link.url);
-                        analytics_1.Analytics.hit_tracker({ 'action': "exception_while_fetching", 'link': link.url });
+                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY, 'link': link.url });
                         analytics_1.Analytics.exception(e_1);
                         return [3 /*break*/, 14];
                     case 14:

@@ -1,7 +1,7 @@
 
 import { Analytics } from "../../analytics";
 import { SummeryBuilder, SummaryStrategy } from "../summary/SummaryManager";
-import { LANG, DB_URL, STREAM, Content, Profile, PROFILE_URL } from "../CONST";
+import { LANG, DB_URL, STREAM, Content, Profile, PROFILE_URL, TELEMETRY_DB_IGNORE_INVALID_DATA, TELEMETRY_DB_ERROR_SAVING } from "../CONST";
 import { StringAnyMap } from "./types";
 import { uniqBy } from "lodash";
 import { d } from "./dlog";
@@ -20,7 +20,7 @@ export async function saveToDB(res:Array<Content>|null){
         if(x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
             return true;
         } else{
-            Analytics.action("error_empty_data",x.url);
+            Analytics.hit_tracker({action: TELEMETRY_DB_IGNORE_INVALID_DATA,url:x.url});
             d(`>>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: ${x.url} <<<<<<<<<<<<<<<`)
             return false
         }
@@ -42,7 +42,7 @@ export async function saveToDB(res:Array<Content>|null){
     });
     d(resp);
     if((resp.status =='error')){
-        Analytics.action('error_saving_data', resp);
+        Analytics.action(TELEMETRY_DB_ERROR_SAVING, resp);
     } else{
         d(`[Debug] Data saved properly in the server: ${resp.msg}`)
     }

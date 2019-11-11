@@ -1,6 +1,6 @@
 import { WebEntryPoint} from "./web_entrypoints";
 import { updateProfileToDb, getHostNameFromUrl } from "../utils/db_helper";
-import { LANG, STREAM } from "../CONST";
+import { LANG, STREAM, TELEMETRY_APP_NAME } from "../CONST";
 import _ = require("lodash");
 import { WebCrawler } from "./web_crawl";
 import { Analytics } from "../../analytics";
@@ -31,12 +31,12 @@ urlList= urlList.concat(require('./sources/other_lang').urlList) // NOT OK
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, false/*if this */,'Gujarat Samachar');
+    await c.crawl(urlList, true/*if this */);
 }
 
 // function. 
 export async function webCronJob(){
-    Analytics.launch("crawler_web");
+    Analytics.launch(TELEMETRY_APP_NAME);
     // await updateprofile()
     cron.schedule('*/30 * * * *', () => {
         d(`${Date.now()} Running a task every 30 minutes`);

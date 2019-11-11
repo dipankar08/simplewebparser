@@ -39,6 +39,7 @@ var rp = require('request-promise');
 var cheerio = require('cheerio');
 var dlog_1 = require("./../utils/dlog");
 var analytics_1 = require("../../analytics");
+var CONST_1 = require("../CONST");
 var Url = require('url-parse');
 var WebElementType;
 (function (WebElementType) {
@@ -68,7 +69,7 @@ function findAllImage(url, selector) {
                     return [3 /*break*/, 4];
                 case 3:
                     e_1 = _a.sent();
-                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                     return [2 /*return*/, []];
                 case 4:
                     data = $(selector).toArray().map(function (x) {
@@ -108,7 +109,7 @@ function findAllUrls(url, selector) {
                     return [3 /*break*/, 4];
                 case 3:
                     e_3 = _a.sent();
-                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                     return [2 /*return*/, []];
                 case 4:
                     data = $(selector).toArray().map(function (x) {
@@ -151,7 +152,7 @@ function findAllData(url, config_list, $) {
                     return [3 /*break*/, 4];
                 case 3:
                     e_5 = _a.sent();
-                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                     return [2 /*return*/, []];
                 case 4:
                     res = {};
@@ -192,7 +193,7 @@ function findAllDataList(url, list_selector, entries, $) {
                     return [3 /*break*/, 4];
                 case 3:
                     e_7 = _a.sent();
-                    analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                     return [2 /*return*/, []];
                 case 4:
                     data = $(list_selector).toArray().map(function (x) {

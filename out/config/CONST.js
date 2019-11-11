@@ -3,6 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var SummaryManager_1 = require("./summary/SummaryManager");
 var dlog_1 = require("./utils/dlog");
 var config = require('config');
+exports.TELEMETRY_APP_NAME = "crawler2";
+exports.TELEMETRY_NETWORK_ERROR = "TELEMETRY_NETWORK_ERROR";
+exports.TELEMETRY_RSS_LINK_BROKEN = "TELEMETRY_NETWORK_ERROR";
+exports.TELEMETRY_RSS_IMAGE_NOT_FOUND = "TELEMETRY_NETWORK_ERROR";
+exports.TELEMETRY_RSS_LINK_HAS_EMPTY_DATA = "R";
+exports.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING = "R";
+exports.TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY = "R";
+exports.TELEMETRY_DB_IGNORE_INVALID_DATA = "TELEMETRY_NETWORK_ERROR";
+exports.TELEMETRY_DB_ERROR_SAVING = "TELEMETRY_NETWORK_ERROR";
+exports.TELEMETRY_CRAWLER_EMPTY_DATA = "TELEMETRY_NETWORK_ERROR";
 exports.LIMIT = 10;
 var LANG;
 (function (LANG) {

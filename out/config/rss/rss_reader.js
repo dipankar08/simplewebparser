@@ -54,6 +54,7 @@ var db_helper_1 = require("../utils/db_helper");
 var node_html_parser_1 = require("node-html-parser");
 var fastparser = require('fast-xml-parser');
 var analytics_1 = require("../../analytics");
+var CONST_1 = require("../CONST");
 var dlog_1 = require("../utils/dlog");
 var htmlparser_1 = require("../webcrawl/htmlparser");
 var request = require('request-promise');
@@ -86,7 +87,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
                         return [3 /*break*/, 4];
                     case 3:
                         e_1 = _b.sent();
-                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                         return [2 /*return*/, []];
                     case 4:
                         result = [];
@@ -107,7 +108,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
                             }
                             catch (e) {
                                 dlog_1.ex(e);
-                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link), { "url": link });
+                                analytics_1.Analytics.hit_tracker({ "action": CONST_1.TELEMETRY_RSS_LINK_BROKEN, "url": link });
                             }
                         }
                         return [2 /*return*/, result];
@@ -120,7 +121,7 @@ var WordPressRssReader = /** @class */ (function (_super) {
             return html.querySelector("img").attributes.src;
         }
         else {
-            analytics_1.Analytics.hit_tracker({ 'action': 'rss_image_not_found', hostname: hostname });
+            analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_RSS_IMAGE_NOT_FOUND, hostname: hostname });
             return null;
         }
     };
@@ -150,7 +151,7 @@ var RssTwoReader = /** @class */ (function (_super) {
                         return [3 /*break*/, 4];
                     case 3:
                         e_2 = _b.sent();
-                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                         return [2 /*return*/, []];
                     case 4:
                         result = [];
@@ -171,7 +172,7 @@ var RssTwoReader = /** @class */ (function (_super) {
                             }
                             catch (e) {
                                 dlog_1.ex(e);
-                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link), { "url": link });
+                                analytics_1.Analytics.hit_tracker({ "action": CONST_1.TELEMETRY_RSS_LINK_BROKEN, "url": link });
                             }
                         }
                         return [2 /*return*/, result];
@@ -184,7 +185,7 @@ var RssTwoReader = /** @class */ (function (_super) {
             return html.querySelector("img").attributes.src;
         }
         else {
-            analytics_1.Analytics.hit_tracker({ 'action': 'rss_image_not_found', hostname: hostname });
+            analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_RSS_IMAGE_NOT_FOUND, hostname: hostname });
             return null;
         }
     };
@@ -213,7 +214,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                         return [3 /*break*/, 4];
                     case 3:
                         e_3 = _b.sent();
-                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                         return [2 /*return*/, []];
                     case 4:
                         feed = null;
@@ -221,7 +222,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                             feed = fastparser.parse(rawdata, { ignoreAttributes: false });
                         }
                         catch (e) {
-                            analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                            analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_NETWORK_ERROR, url: url });
                             return [2 /*return*/, []];
                         }
                         result = [];
@@ -239,7 +240,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                             }
                             catch (e) {
                                 dlog_1.ex(e);
-                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link['@_href']), { "url": item.link['@_href'] });
+                                analytics_1.Analytics.action(CONST_1.TELEMETRY_RSS_LINK_BROKEN, db_helper_1.getHostNameFromUrl(item.link['@_href']), { "url": item.link['@_href'] });
                             }
                         }
                         return [2 /*return*/, result];

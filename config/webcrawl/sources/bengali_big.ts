@@ -149,9 +149,9 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.FIRST_PAGE, selector:'.eagle .eagle-item > a',url:'https://www.bbc.com/bengali/news'},
         ],
         storyParseConfig:[
-            { name: 'title',   selector: '.story-body h1', type: WebElementType.TEXT },
-            { name: 'details', selector: '.story-body .story-body__inner > p', type: WebElementType.TEXT },
-            { name: 'img',     selector: '.story-body figure  img', type: WebElementType.IMAGE },
+            { name: 'title',   selector: 'column--primary h1', type: WebElementType.TEXT },
+            { name: 'details', selector: 'column--primary .story-body__inner > p', type: WebElementType.TEXT },
+            { name: 'img',     selector: 'column--primary figure  img', type: WebElementType.IMAGE },
         ]
     },
     {

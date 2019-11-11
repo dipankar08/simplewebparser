@@ -147,9 +147,9 @@ exports.urlList = [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: '.story-body h1', type: htmlparser_1.WebElementType.TEXT },
-            { name: 'details', selector: '.story-body .story-body__inner > p', type: htmlparser_1.WebElementType.TEXT },
-            { name: 'img', selector: '.story-body figure  img', type: htmlparser_1.WebElementType.IMAGE },
+            { name: 'title', selector: 'column--primary h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: 'column--primary .story-body__inner > p', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: 'column--primary figure  img', type: htmlparser_1.WebElementType.IMAGE },
         ]
     },
     {

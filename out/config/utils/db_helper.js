@@ -59,7 +59,7 @@ function saveToDB(res) {
                             return true;
                         }
                         else {
-                            analytics_1.Analytics.action("error_empty_data", x.url);
+                            analytics_1.Analytics.hit_tracker({ action: CONST_1.TELEMETRY_DB_IGNORE_INVALID_DATA, url: x.url });
                             dlog_1.d(">>>>>>>>>>>> [ERROR] Empty data received so NOT saving this, URL: " + x.url + " <<<<<<<<<<<<<<<");
                             return false;
                         }
@@ -82,7 +82,7 @@ function saveToDB(res) {
                     resp = _a.sent();
                     dlog_1.d(resp);
                     if ((resp.status == 'error')) {
-                        analytics_1.Analytics.action('error_saving_data', resp);
+                        analytics_1.Analytics.action(CONST_1.TELEMETRY_DB_ERROR_SAVING, resp);
                     }
                     else {
                         dlog_1.d("[Debug] Data saved properly in the server: " + resp.msg);

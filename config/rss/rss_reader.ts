@@ -4,7 +4,7 @@ import {getHostNameFromUrl} from "../utils/db_helper"
 import { parse } from 'node-html-parser';
 var fastparser = require('fast-xml-parser');
 import { Analytics } from "../../analytics";
-import { LANG, STREAM, Content } from "../CONST";
+import { LANG, STREAM, Content, TELEMETRY_NETWORK_ERROR, TELEMETRY_RSS_LINK_BROKEN, TELEMETRY_RSS_IMAGE_NOT_FOUND } from "../CONST";
 import { d, ex } from "../utils/dlog";
 import { StringAnyMap } from "../utils/types";
 import {findAllDataList, WebElementType} from "../webcrawl/htmlparser"
@@ -23,7 +23,7 @@ export class WordPressRssReader extends BaseRSSReader {
         try{
             feed = await parser.parseURL(url);
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
         let result = []
@@ -42,7 +42,7 @@ export class WordPressRssReader extends BaseRSSReader {
                 })
             } catch(e){
                 ex(e)
-                Analytics.action('rss_link_broken',getHostNameFromUrl(item.link),{"url":link})
+                Analytics.hit_tracker({"action":TELEMETRY_RSS_LINK_BROKEN,"url":link})
             }
         }
         return result;
@@ -51,7 +51,7 @@ export class WordPressRssReader extends BaseRSSReader {
         if(html.querySelector("img")){
             return html.querySelector("img").attributes.src
         } else{
-            Analytics.hit_tracker({'action':'rss_image_not_found',hostname:hostname});
+            Analytics.hit_tracker({'action':TELEMETRY_RSS_IMAGE_NOT_FOUND,hostname:hostname});
             return null
         }
     }
@@ -66,7 +66,7 @@ export class RssTwoReader extends BaseRSSReader {
         try{
             feed = await parser.parseURL(url);
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
         let result = []
@@ -85,7 +85,7 @@ export class RssTwoReader extends BaseRSSReader {
                 })
             } catch(e){
                 ex(e)
-                Analytics.action('rss_link_broken',getHostNameFromUrl(item.link),{"url":link})
+                Analytics.hit_tracker({"action":TELEMETRY_RSS_LINK_BROKEN,"url":link})
             }
         }
         return result;
@@ -94,7 +94,7 @@ export class RssTwoReader extends BaseRSSReader {
         if(html.querySelector("img")){
             return html.querySelector("img").attributes.src
         } else{
-            Analytics.hit_tracker({'action':'rss_image_not_found',hostname:hostname});
+            Analytics.hit_tracker({'action':TELEMETRY_RSS_IMAGE_NOT_FOUND,hostname:hostname});
             return null
         }
     }
@@ -108,7 +108,7 @@ export class YouTubeRssReader extends BaseRSSReader {
         try{
             rawdata= await request.get(url);
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
  
@@ -116,7 +116,7 @@ export class YouTubeRssReader extends BaseRSSReader {
         try{
             feed = fastparser.parse(rawdata,{ ignoreAttributes : false});
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
 
@@ -133,7 +133,7 @@ export class YouTubeRssReader extends BaseRSSReader {
                 })
             } catch(e){
                 ex(e)
-                Analytics.action('rss_link_broken',getHostNameFromUrl(item.link['@_href']),{"url":item.link['@_href']})
+                Analytics.action(TELEMETRY_RSS_LINK_BROKEN,getHostNameFromUrl(item.link['@_href']),{"url":item.link['@_href']})
             }
         }
         return result;

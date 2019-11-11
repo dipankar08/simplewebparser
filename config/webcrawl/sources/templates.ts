@@ -22,7 +22,7 @@ export let urlList:Array<WebEntryPoint> = [
             { name: 'img',     selector: '.blog-detail-banner .image-holder  img', type: WebElementType.IMAGE },
             { name: 'details', selector: '.blog-detail  p', type: WebElementType.TEXT },
         ]
-    }
+    },
     { 
         name:'Gujarat Samachar',
         lang:LANG.IN_GUJARATI,

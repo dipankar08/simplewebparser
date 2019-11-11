@@ -4,6 +4,7 @@ var cheerio = require('cheerio');
 import {d, ex} from './../utils/dlog'
 import { StringAnyMap } from '../utils/types';
 import { Analytics } from '../../analytics';
+import { TELEMETRY_NETWORK_ERROR } from '../CONST';
 var Url = require('url-parse');
 
 export type WebElementParseConfig = {
@@ -31,7 +32,7 @@ async function findAllImage(url, selector):Promise<Array<any>>{
                 return cheerio.load(body);
             }})
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
 
@@ -57,7 +58,7 @@ async function findAllUrls(url, selector):Promise<Array<any>>{
                 return cheerio.load(body);
             }})
         } catch(e){
-            Analytics.hit_tracker({'action':'network_error',url:url});
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
             return []
         }
 
@@ -85,7 +86,7 @@ export async function findAllData(url, config_list:Array<WebElementParseConfig>,
                     return cheerio.load(body);
                 }})
             } catch(e){
-                Analytics.hit_tracker({'action':'network_error',url:url});
+                Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
                 return []
             }
         }
@@ -110,7 +111,7 @@ export async function findAllDataList(url:string, list_selector:string, entries:
                     return cheerio.load(body);
                 }})
             } catch(e){
-                Analytics.hit_tracker({'action':'network_error',url:url});
+                Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
                 return []
             }
         }
