@@ -2,7 +2,7 @@ import { WebEntryPoint } from "../web_entrypoints";
 import { LANG, STREAM } from "../../CONST";
 import { DefaultWebReader, ArticleWebReader, BartamanWebReader, News18WebReader } from "../web_reader";
 import { WebElementType } from "../htmlparser";
-import { HTMLEnCodedRssReader } from "../../rss/rss_reader";
+import { HTMLEnCodedRssReader, WordPressRssReader, RssTwoReader } from "../../rss/rss_reader";
 
 export let urlList:Array<WebEntryPoint> = [
  // It has RSS - Please move it RSS.
@@ -35,7 +35,6 @@ export let urlList:Array<WebEntryPoint> = [
     link_selector: '.thumbnail a',
 },
 
-    // It has RSS - Please move it RSS.
     { 
         name:'dinamani',
         lang:LANG.IN_TAMIL,
@@ -48,5 +47,48 @@ export let urlList:Array<WebEntryPoint> = [
         links:[
             {stream: STREAM.SPORTS, url:'https://www.dinamani.com/%E0%AE%B5%E0%AE%BF%E0%AE%B3%E0%AF%88%E0%AE%AF%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81/%E0%AE%9A%E0%AF%86%E0%AE%AF%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%95%E0%AE%B3%E0%AF%8D/rssfeed/?id=480&getXmlFeed=true'},
         ],
+    },
+    { 
+        name:'Asomiya Pratidin',
+        lang:LANG.IN_ASSAMESE,
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/asomiyapratidin.jgp',
+        is_active:true,
+        is_partner:false,
+        
+        links:[
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/homepage/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/guwahati/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/assam/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/north-east/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/world/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/sports/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/technology/feed'},
+            {stream: STREAM.SPORTS, url:'https://www.asomiyapratidin.in/category/business/feed'}
+        ],
+        is_rss_feed: true,
+        rsstype:new WordPressRssReader(),
+    },
+    { 
+        name:'Gujarat Samachar',
+        lang:LANG.IN_GUJARATI,
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/gujaratsamachar.jgp',
+        is_active:true,
+        is_partner:false,
+        
+        links:[
+            {stream: STREAM.HEADLINE, url:'https://www.gujaratsamachar.com/rss/top-stories'},
+            {stream: STREAM.TECHNOLOGY, url:'https://www.gujaratsamachar.com/rss/category/science-technology'},
+            {stream: STREAM.LIFESTYLE, url:'https://www.gujaratsamachar.com/rss/category/relationship'},
+            {stream: STREAM.LIFESTYLE, url:'https://www.gujaratsamachar.com/rss/category/lifestyle-fashion'},
+            {stream: STREAM.HEALTH, url:'https://www.gujaratsamachar.com/rss/category/health'},
+            {stream: STREAM.ASTROLOGY, url:'https://www.gujaratsamachar.com/rss/category/astro'},
+            {stream: STREAM.ENTERTAINMENT, url:'https://www.gujaratsamachar.com/rss/category/entertainment'},
+            {stream: STREAM.SPORTS, url:'https://www.gujaratsamachar.com/rss/category/sports'},
+            {stream: STREAM.BUSINESS, url:'https://www.gujaratsamachar.com/rss/category/business'},
+            {stream: STREAM.INTERNATIONAL, url:'https://www.gujaratsamachar.com/rss/category/international'},
+            {stream: STREAM.NATIONAL, url:'https://www.gujaratsamachar.com/rss/category/national'},
+        ],
+        is_rss_feed: true,
+        rsstype:new RssTwoReader(),
     },
 ]

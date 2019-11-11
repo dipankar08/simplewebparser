@@ -31,7 +31,7 @@ urlList= urlList.concat(require('./sources/other_lang').urlList) // NOT OK
 async function startCrawl(){
     let c = new WebCrawler();
     await updateProfile(urlList);
-    await c.crawl(urlList, false/*if this */,'Caai News');
+    await c.crawl(urlList, false/*if this */,'Gujarat Samachar');
 }
 
 // function. 

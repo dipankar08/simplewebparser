@@ -127,6 +127,70 @@ var WordPressRssReader = /** @class */ (function (_super) {
     return WordPressRssReader;
 }(BaseRSSReader));
 exports.WordPressRssReader = WordPressRssReader;
+var RssTwoReader = /** @class */ (function (_super) {
+    __extends(RssTwoReader, _super);
+    function RssTwoReader() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    RssTwoReader.prototype.read = function (url, extra) {
+        return __awaiter(this, void 0, void 0, function () {
+            var feed, e_2, result, _i, _a, item, link, hostname, html;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        // fetch URL and then read.
+                        dlog_1.d("[RSS] Start redding RSS " + url);
+                        feed = null;
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, parser.parseURL(url)];
+                    case 2:
+                        feed = _b.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_2 = _b.sent();
+                        analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
+                        return [2 /*return*/, []];
+                    case 4:
+                        result = [];
+                        for (_i = 0, _a = feed.items; _i < _a.length; _i++) {
+                            item = _a[_i];
+                            link = item.link;
+                            hostname = db_helper_1.getHostNameFromUrl(link);
+                            try {
+                                html = node_html_parser_1.parse(item['content']);
+                                result.push({
+                                    title: item.title,
+                                    img: this.getImgFromHTML(hostname, html),
+                                    details: html.text,
+                                    url: item.link,
+                                    hostname: db_helper_1.getHostNameFromUrl(url),
+                                    stream: extra.stream
+                                });
+                            }
+                            catch (e) {
+                                dlog_1.ex(e);
+                                analytics_1.Analytics.action('rss_link_broken', db_helper_1.getHostNameFromUrl(item.link), { "url": link });
+                            }
+                        }
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    RssTwoReader.prototype.getImgFromHTML = function (hostname, html) {
+        if (html.querySelector("img")) {
+            return html.querySelector("img").attributes.src;
+        }
+        else {
+            analytics_1.Analytics.hit_tracker({ 'action': 'rss_image_not_found', hostname: hostname });
+            return null;
+        }
+    };
+    return RssTwoReader;
+}(BaseRSSReader));
+exports.RssTwoReader = RssTwoReader;
 var YouTubeRssReader = /** @class */ (function (_super) {
     __extends(YouTubeRssReader, _super);
     function YouTubeRssReader() {
@@ -134,7 +198,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
     }
     YouTubeRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
-            var rawdata, e_2, feed, result, _i, _a, item;
+            var rawdata, e_3, feed, result, _i, _a, item;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -148,7 +212,7 @@ var YouTubeRssReader = /** @class */ (function (_super) {
                         rawdata = _b.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        e_2 = _b.sent();
+                        e_3 = _b.sent();
                         analytics_1.Analytics.hit_tracker({ 'action': 'network_error', url: url });
                         return [2 /*return*/, []];
                     case 4:
@@ -195,7 +259,7 @@ var HTMLEnCodedRssReader = /** @class */ (function (_super) {
     }
     HTMLEnCodedRssReader.prototype.read = function (url, extra) {
         return __awaiter(this, void 0, void 0, function () {
-            var result, e_3;
+            var result, e_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -218,8 +282,8 @@ var HTMLEnCodedRssReader = /** @class */ (function (_super) {
                         });
                         return [2 /*return*/, result];
                     case 3:
-                        e_3 = _a.sent();
-                        dlog_1.ex(e_3);
+                        e_4 = _a.sent();
+                        dlog_1.ex(e_4);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/, []];
                 }
