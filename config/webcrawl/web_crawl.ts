@@ -17,6 +17,9 @@ const cron = require('node-cron');
 export class WebCrawler {
     // passing test as true will test one link for each categories
     async crawl(list:Array<WebEntryPoint>, isTest:Boolean = false, name:string = null){
+        list = _.uniqBy(list, "name");
+        list = list.filter(x=> x.is_active)
+        d(`We have total ${list.length} Portal to be  processed`);
         for(var web_entry of list){
             if(name != null){
                 if(web_entry.name != name){

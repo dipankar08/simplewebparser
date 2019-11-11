@@ -58,6 +58,9 @@ var WebCrawler = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        list = _.uniqBy(list, "name");
+                        list = list.filter(function (x) { return x.is_active; });
+                        dlog_1.d("We have total " + list.length + " Portal to be  processed");
                         _i = 0, list_1 = list;
                         _a.label = 1;
                     case 1:
