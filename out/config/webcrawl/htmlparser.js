@@ -125,7 +125,7 @@ function findAllUrls(url, selector) {
                     e_4 = _a.sent();
                     console.log(e_4);
                     return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                case 6: return [2 /*return*/, []];
             }
         });
     });
@@ -165,7 +165,7 @@ function findAllData(url, config_list, $) {
                     e_6 = _a.sent();
                     console.log(e_6);
                     return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                case 6: return [2 /*return*/, {}];
             }
         });
     });
@@ -211,7 +211,7 @@ function findAllDataList(url, list_selector, entries, $) {
                     e_8 = _a.sent();
                     console.log(e_8);
                     return [3 /*break*/, 6];
-                case 6: return [2 /*return*/];
+                case 6: return [2 /*return*/, []];
             }
         });
     });

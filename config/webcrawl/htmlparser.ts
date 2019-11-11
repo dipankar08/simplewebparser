@@ -73,6 +73,7 @@ async function findAllUrls(url, selector):Promise<Array<any>>{
     } catch(e){
         console.log(e)
     }
+    return []
 }
 
 // find a object of information form a page.
@@ -98,6 +99,7 @@ export async function findAllData(url, config_list:Array<WebElementParseConfig>,
     } catch(e){
         console.log(e)
     }
+    return {}
 }
 
 // find a list of object of information form a page.
@@ -129,6 +131,7 @@ export async function findAllDataList(url:string, list_selector:string, entries:
     } catch(e){
         console.log(e)
     }
+    return []
 }
 
 //tested

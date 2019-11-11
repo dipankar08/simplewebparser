@@ -36,7 +36,7 @@ async function startCrawl(){
     if(config.get("isProd")){
         await c.crawl(urlList, false); // RUN ON PROD.
     } else{
-        await c.crawl(urlList, false/*if this */,'Ei Somoy');
+        await c.crawl(urlList, true/*if this */);
     }
    //
     

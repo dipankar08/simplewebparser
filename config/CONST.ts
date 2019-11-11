@@ -145,7 +145,6 @@ export type Profile = {
 
 
 export function validate(c:Content):boolean{
-
     if(!c){
         e('Missing content'); return false;
     }

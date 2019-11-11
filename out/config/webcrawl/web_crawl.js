@@ -116,12 +116,12 @@ var WebCrawler = /** @class */ (function () {
                         // Perform test 
                         dlog_1.d("[INFO] Try saving count: " + stories.length);
                         if (isTest) {
+                            if (stories.length == 0) {
+                                throw Error("Please fix this now.: http://simplestore.dipankar.co.in/api/news_test/delete?_confirmstr=news_test");
+                            }
                             dlog_1.d(stories[0]);
                             if (!CONST_1.validate(stories[0])) {
                                 throw ("validation failed");
-                            }
-                            if (stories.length == 0) {
-                                throw Error("Please fix this now.");
                             }
                             dlog_1.d("TEST PASSED - PLEASE CHECK ABOVE");
                             return [3 /*break*/, 7];
@@ -162,6 +162,12 @@ var WebCrawler = /** @class */ (function () {
                         for (_b = 0, list_2 = list; _b < list_2.length; _b++) {
                             l = list_2[_b];
                             storyList.push(this.addExtra(l, web_entry));
+                            if (isTest) {
+                                break;
+                            }
+                        }
+                        if (isTest) {
+                            return [3 /*break*/, 4];
                         }
                         _c.label = 3;
                     case 3:
@@ -220,6 +226,10 @@ var WebCrawler = /** @class */ (function () {
                     case 4:
                         parseResult = _c.sent();
                         url_list = parseResult['urls'];
+                        if (!url_list) {
+                            analytics_1.Analytics.action(CONST_1.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url);
+                            return [3 /*break*/, 5];
+                        }
                         dlog_1.d("[INFO] LinkFound/all: " + url_list.length);
                         url_list = Array.from(new Set(url_list));
                         dlog_1.d("[INFO] LinkFound/unique: " + url_list.length);
@@ -231,6 +241,7 @@ var WebCrawler = /** @class */ (function () {
                         url_list = url_list.reverse();
                         if (url_list.length == 0) {
                             analytics_1.Analytics.action(CONST_1.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url);
+                            return [3 /*break*/, 5];
                         }
                         top_urls = top_urls.concat(url_list.map(function (u) {
                             return { url: u, stream: weblink.stream };

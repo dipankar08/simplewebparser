@@ -72,12 +72,12 @@ export class WebCrawler {
             // Perform test 
             d(`[INFO] Try saving count: ${stories.length}`)
             if(isTest){
+                if(stories.length == 0){
+                    throw Error("Please fix this now.: http://simplestore.dipankar.co.in/api/news_test/delete?_confirmstr=news_test")
+                }
                 d(stories[0]);
                 if(!validate(stories[0])){
                     throw("validation failed");
-                }
-                if(stories.length == 0){
-                    throw Error("Please fix this now.")
                 }
                 d("TEST PASSED - PLEASE CHECK ABOVE");
                 continue;
@@ -98,6 +98,12 @@ export class WebCrawler {
             }
             for(var l of list){
                 storyList.push(this.addExtra(l, web_entry));
+                if(isTest){
+                    break;
+                }
+            }
+            if(isTest){
+                break;
             }
         }
         d(`[INFO] LINK/ALL ${storyList.length}`)
@@ -144,6 +150,11 @@ export class WebCrawler {
             let parseResult = await findAllData(weblink.url, [{name:'urls', selector:list_selector, type:WebElementType.URL_LIST}], $)
             let url_list = parseResult['urls']
 
+            if(!url_list){
+                Analytics.action(TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url); 
+                continue;
+            }
+
             d(`[INFO] LinkFound/all: ${url_list.length}`)
         
             url_list = Array.from(new Set(url_list))
@@ -159,6 +170,7 @@ export class WebCrawler {
             url_list = url_list.reverse()
             if(url_list.length ==0){
                 Analytics.action(TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url); 
+                continue;
             }
             top_urls = top_urls.concat(url_list.map(u=>{
                 return {url:u,stream:weblink.stream}
