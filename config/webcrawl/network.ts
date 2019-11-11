@@ -44,12 +44,21 @@ export function getFilteredUrl(root_url, urls_abs, config:WebConfig){
     return url_filtered;
 }
 
-// this function will clean the data.
-export function cleanHtmlData(url:string, str:string, config:WebConfig){
+// We will clean the data again for second time. 
+export function superCleanData(url:string, str:string, config:WebConfig){
+    if(str.length == 0){
+        return str;
+    }
+    // trim it first
     str = str.trim()
-    str = str.replace(/[\t ]+/g, " ");
-    str = str.replace(/[\r\n]+/g, '\n'); 
-    str = str.replace(/[\n]+/g, '\n'); 
+
+    // Remove portal tag line.
+    let indexD = str.indexOf(':')
+    if(indexD != -1 && indexD < 50){
+        str = str.substring(indexD+1, str.length);
+    }
+
+
     // somehow replace consecutive replace doesn't work
     str = str.split("\n").filter( x=> {
         if(x.trim().length < 1){

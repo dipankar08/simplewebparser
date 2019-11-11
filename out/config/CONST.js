@@ -94,31 +94,31 @@ var STREAM;
 })(STREAM = exports.STREAM || (exports.STREAM = {}));
 function validate(c) {
     if (!c) {
-        dlog_1.d('Missing content');
+        dlog_1.e('Missing content');
         return false;
     }
     if (!(c.img && c.img.length > 5)) {
-        dlog_1.d('Missing img');
+        dlog_1.e('Missing img');
         return false;
     }
     if (!(c.title && c.title.length > 5)) {
-        dlog_1.d('Missing title');
+        dlog_1.e('Missing title');
         return false;
     }
     if (!(c.details && c.details.length > 5)) {
-        dlog_1.d('Missing details');
+        dlog_1.e('Missing details');
         return false;
     }
     if (!(c.hostname && c.hostname.length > 5)) {
-        dlog_1.d('Missing hostname');
+        dlog_1.e('Missing hostname');
         return false;
     }
     if (!(c.stream && c.stream.length > 0)) {
-        dlog_1.d('Missing stream');
+        dlog_1.e('Missing stream');
         return false;
     }
     if (!(c.lang && c.lang.length > 5)) {
-        dlog_1.d('Missing lang');
+        dlog_1.e('Missing lang');
         return false;
     }
     return true;
@@ -159,7 +159,7 @@ function buildContent(dict) {
     }
 }
 exports.buildContent = buildContent;
-exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1';
-exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile1' : 'http://simplestore.dipankar.co.in/api/news_profile1';
+exports.DB_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news_test';
+exports.PROFILE_URL = config.get("isProd") ? 'http://simplestore.dipankar.co.in/api/news_profile1' : 'http://simplestore.dipankar.co.in/api/news_profile_test';
 dlog_1.d("Using Root URL: " + exports.DB_URL);
 //# sourceMappingURL=CONST.js.map

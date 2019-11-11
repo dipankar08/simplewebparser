@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CONST_1 = require("../../CONST");
 var web_reader_1 = require("../web_reader");
 var htmlparser_1 = require("../htmlparser");
+var rss_reader_1 = require("../rss_reader");
 exports.urlList = [
     {
         name: 'AajKal',
@@ -55,19 +56,21 @@ exports.urlList = [
     {
         name: 'Ei Somoy',
         profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/ei_somoy.png',
-        type: new web_reader_1.DefaultWebReader(),
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.other_main_news1 li> a', url: 'https://eisamay.indiatimes.com/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://eisamay.indiatimes.com/west-bengal-news/kolkata-news/articlelist/15991773.cms' },
-            { stream: CONST_1.STREAM.COUNTRY, url: 'https://eisamay.indiatimes.com/nation/articlelist/15819599.cms' },
-            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://eisamay.indiatimes.com/international/articlelist/15819594.cms' },
-            { stream: CONST_1.STREAM.BUSINESS, url: 'https://eisamay.indiatimes.com/business/articlelist/15819574.cms' },
-            { stream: CONST_1.STREAM.COUNTRY, url: 'https://eisamay.indiatimes.com/nation/articlelist/15819599.cms' },
-            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://eisamay.indiatimes.com/entertainment/cinema/articlelist/15935855.cms' },
-        ]
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'http://eisamay.indiatimes.com/city/rssfeedsection/15819618.cms' },
+            { stream: CONST_1.STREAM.STATE, url: 'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms' },
+            { stream: CONST_1.STREAM.NATIONAL, url: 'http://eisamay.indiatimes.com/nation/rssfeedsection/15819599.cms' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'http://eisamay.indiatimes.com/international/rssfeedsection/15819594.cms' },
+            { stream: CONST_1.STREAM.SPORTS, url: 'http://eisamay.indiatimes.com/sports/rssfeedsection/23000116.cms' },
+            { stream: CONST_1.STREAM.BUSINESS, url: 'http://eisamay.indiatimes.com/business/rssfeedsection/15819574.cms' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'http://eisamay.indiatimes.com/entertainment/rssfeedsection/15819570.cms' },
+            { stream: CONST_1.STREAM.LIFESTYLE, url: 'http://eisamay.indiatimes.com/lifestyle/rssfeedsection/15992436.cms' },
+        ],
+        is_rss_feed: true,
+        rsstype: new rss_reader_1.WordPressRssReader()
     },
     {
         name: 'Statesman Bengali',
@@ -147,10 +150,11 @@ exports.urlList = [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.eagle .eagle-item > a', url: 'https://www.bbc.com/bengali/news' },
         ],
         storyParseConfig: [
-            { name: 'title', selector: 'column--primary h1', type: htmlparser_1.WebElementType.TEXT },
-            { name: 'details', selector: 'column--primary .story-body__inner > p', type: htmlparser_1.WebElementType.TEXT },
-            { name: 'img', selector: 'column--primary figure  img', type: htmlparser_1.WebElementType.IMAGE },
-        ]
+            { name: 'title', selector: '.story-body h1', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'details', selector: '.story-body .story-body__inner > p', type: htmlparser_1.WebElementType.TEXT },
+            { name: 'img', selector: '.story-body figure  img', type: htmlparser_1.WebElementType.IMAGE },
+        ],
+        some_data_might_be_missing: true,
     },
     {
         name: 'Nilkontho',

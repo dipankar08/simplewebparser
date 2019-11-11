@@ -7,7 +7,7 @@ import { Analytics } from "../../analytics";
 import { LANG, STREAM, Content, TELEMETRY_NETWORK_ERROR, TELEMETRY_RSS_LINK_BROKEN, TELEMETRY_RSS_IMAGE_NOT_FOUND } from "../CONST";
 import { d, ex } from "../utils/dlog";
 import { StringAnyMap } from "../utils/types";
-import {findAllDataList, WebElementType} from "../webcrawl/htmlparser"
+import {findAllDataList, WebElementType} from "./htmlparser"
 const request = require('request-promise');
 
 export abstract class BaseRSSReader {

@@ -177,7 +177,7 @@ export function cleanHtmlData(url:string, str:string){
     }
     ).join("\n");
     if(str.length == 0){
-        d(`\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$`)
+        d("Empty Data found");
     }
     return str;
 }

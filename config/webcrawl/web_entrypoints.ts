@@ -2,7 +2,7 @@ import { BaseWebReader, WordPressWebReader, ArticleWebReader, News18WebReader, O
 import { LANG, STREAM, CATEGORIES } from "../CONST";
 import _ = require("lodash");
 import { WebElementParseConfig, } from "./htmlparser"
-import { BaseRSSReader } from "../rss/rss_reader";
+import { BaseRSSReader } from "./rss_reader";
 
 export type WebLink ={
     url:string,
@@ -26,4 +26,6 @@ export type WebEntryPoint = {
     links:Array<WebLink>        // parsing links.
     storyParseConfig?:Array<WebElementParseConfig> // this will override the parent config in WebReader.
     link_selector?:string // override config link selector
+
+    some_data_might_be_missing?:boolean // mark as true if you know some data might be missing.
 }

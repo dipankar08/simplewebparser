@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CONST_1 = require("../../CONST");
 var web_reader_1 = require("../web_reader");
 var htmlparser_1 = require("../htmlparser");
-var rss_reader_1 = require("../../rss/rss_reader");
+var rss_reader_1 = require("../rss_reader");
 exports.urlList = [
     {
         name: 'Templates',

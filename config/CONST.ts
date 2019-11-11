@@ -1,7 +1,7 @@
 import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../config/utils/types";
 import { SummeryBuilder, SummaryStrategy } from "./summary/SummaryManager";
-import { d } from "./utils/dlog";
+import { d, e } from "./utils/dlog";
 
 const config = require('config');
 
@@ -147,25 +147,25 @@ export type Profile = {
 export function validate(c:Content):boolean{
 
     if(!c){
-        d('Missing content'); return false;
+        e('Missing content'); return false;
     }
     if(!( c.img && c.img.length > 5)){
-        d('Missing img'); return false;
+        e('Missing img'); return false;
     }
     if(!( c.title && c.title.length > 5)){
-        d('Missing title'); return false;
+        e('Missing title'); return false;
     }
     if(!( c.details && c.details.length > 5)){
-        d('Missing details'); return false;
+        e('Missing details'); return false;
     }
     if(!( c.hostname && c.hostname.length > 5)){
-        d('Missing hostname'); return false;
+        e('Missing hostname'); return false;
     }
     if(!( c.stream && c.stream.length > 0)){
-        d('Missing stream'); return false;
+        e('Missing stream'); return false;
     }
     if(!( c.lang && c.lang.length > 5)){
-        d('Missing lang'); return false;
+        e('Missing lang'); return false;
     }
     return true;
 }
@@ -205,6 +205,6 @@ export function buildContent(dict):Content{
     }
 }
 
-export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news1'
-export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile1':'http://simplestore.dipankar.co.in/api/news_profile1'
+export const DB_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news1' : 'http://simplestore.dipankar.co.in/api/news_test'
+export const PROFILE_URL = config.get("isProd")? 'http://simplestore.dipankar.co.in/api/news_profile1':'http://simplestore.dipankar.co.in/api/news_profile_test'
 d(`Using Root URL: ${DB_URL}`)

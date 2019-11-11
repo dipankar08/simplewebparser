@@ -89,6 +89,10 @@ var WebCrawler = /** @class */ (function () {
                     case 5:
                         // build and validate contents
                         stories = stories.map(function (storyDict) {
+                            // last round clean ups.
+                            if (storyDict['details']) {
+                                storyDict['details'] = network_1.superCleanData(storyDict.url, storyDict['details'], web_entry);
+                            }
                             var cont = CONST_1.buildContent(storyDict);
                             if (cont && CONST_1.validate(cont)) {
                                 return cont;
@@ -97,9 +101,11 @@ var WebCrawler = /** @class */ (function () {
                                 if (isTest) {
                                     // throw Error("Content validation failed")
                                 }
-                                dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
-                                dlog_1.d(cont);
-                                analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url });
+                                if (web_entry.some_data_might_be_missing != true) {
+                                    dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
+                                    dlog_1.d(cont);
+                                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url });
+                                }
                             }
                             return null;
                         });
@@ -264,8 +270,8 @@ var WebCrawler = /** @class */ (function () {
                         _c.trys.push([9, 13, , 14]);
                         $ = null;
                         if (!config.networkFetcher) return [3 /*break*/, 11];
-                        dlog_1.d("custom fetch " + weblink.url);
-                        return [4 /*yield*/, config.networkFetcher(weblink.url)];
+                        dlog_1.d("custom fetch " + link.url);
+                        return [4 /*yield*/, config.networkFetcher(link.url)];
                     case 10:
                         body = _c.sent();
                         $ = cheerio.load(body);

@@ -262,7 +262,7 @@ function cleanHtmlData(url, str) {
         return true;
     }).join("\n");
     if (str.length == 0) {
-        dlog_1.d("\n\n[ERROR] $$$$ Parse returns an empty data . please have a look $$$$");
+        dlog_1.d("Empty Data found");
     }
     return str;
 }

@@ -78,11 +78,10 @@ function startCrawl() {
             switch (_a.label) {
                 case 0:
                     c = new web_crawl_1.WebCrawler();
-                    return [4 /*yield*/, updateProfile(urlList)];
+                    // await c.crawl(urlList, false); // RUN ON PROD.
+                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Ei Somoy')];
                 case 1:
-                    _a.sent();
-                    return [4 /*yield*/, c.crawl(urlList, false /*if this */)];
-                case 2:
+                    // await c.crawl(urlList, false); // RUN ON PROD.
                     _a.sent();
                     return [2 /*return*/];
             }
@@ -93,15 +92,20 @@ function startCrawl() {
 function webCronJob() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            analytics_1.Analytics.launch(CONST_1.TELEMETRY_APP_NAME);
-            // await updateprofile()
-            cron.schedule('*/30 * * * *', function () {
-                dlog_1.d(Date.now() + " Running a task every 30 minutes");
-                startCrawl();
-            });
-            // run now too.
-            startCrawl();
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    analytics_1.Analytics.launch(CONST_1.TELEMETRY_APP_NAME);
+                    return [4 /*yield*/, updateProfile(urlList)];
+                case 1:
+                    _a.sent();
+                    cron.schedule('*/60 * * * *', function () {
+                        dlog_1.d(Date.now() + " Running a task every 60 minutes");
+                        startCrawl();
+                    });
+                    // run now too.
+                    startCrawl();
+                    return [2 /*return*/];
+            }
         });
     });
 }

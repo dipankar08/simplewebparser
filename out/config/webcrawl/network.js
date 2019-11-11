@@ -29,12 +29,18 @@ function getFilteredUrl(root_url, urls_abs, config) {
     return url_filtered;
 }
 exports.getFilteredUrl = getFilteredUrl;
-// this function will clean the data.
-function cleanHtmlData(url, str, config) {
+// We will clean the data again for second time. 
+function superCleanData(url, str, config) {
+    if (str.length == 0) {
+        return str;
+    }
+    // trim it first
     str = str.trim();
-    str = str.replace(/[\t ]+/g, " ");
-    str = str.replace(/[\r\n]+/g, '\n');
-    str = str.replace(/[\n]+/g, '\n');
+    // Remove portal tag line.
+    var indexD = str.indexOf(':');
+    if (indexD != -1 && indexD < 50) {
+        str = str.substring(indexD + 1, str.length);
+    }
     // somehow replace consecutive replace doesn't work
     str = str.split("\n").filter(function (x) {
         if (x.trim().length < 1) {
@@ -57,5 +63,5 @@ function cleanHtmlData(url, str, config) {
     }
     return str;
 }
-exports.cleanHtmlData = cleanHtmlData;
+exports.superCleanData = superCleanData;
 //# sourceMappingURL=network.js.map

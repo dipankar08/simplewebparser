@@ -32,16 +32,16 @@ urlList = _.uniqBy(urlList, "name")
 
 async function startCrawl(){
     let c = new WebCrawler();
-    await updateProfile(urlList);
-    await c.crawl(urlList, false/*if this */);
+   // await c.crawl(urlList, false); // RUN ON PROD.
+    await c.crawl(urlList, false/*if this */,'Ei Somoy');
 }
 
 // function. 
 export async function webCronJob(){
     Analytics.launch(TELEMETRY_APP_NAME);
-    // await updateprofile()
-    cron.schedule('*/30 * * * *', () => {
-        d(`${Date.now()} Running a task every 30 minutes`);
+    await updateProfile(urlList);
+    cron.schedule('*/60 * * * *', () => {
+        d(`${Date.now()} Running a task every 60 minutes`);
         startCrawl()
     });
     // run now too.

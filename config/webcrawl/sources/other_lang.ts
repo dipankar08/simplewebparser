@@ -2,7 +2,7 @@ import { WebEntryPoint } from "../web_entrypoints";
 import { LANG, STREAM } from "../../CONST";
 import { DefaultWebReader, ArticleWebReader, BartamanWebReader, News18WebReader } from "../web_reader";
 import { WebElementType } from "../htmlparser";
-import { HTMLEnCodedRssReader, WordPressRssReader, RssTwoReader } from "../../rss/rss_reader";
+import { HTMLEnCodedRssReader, WordPressRssReader, RssTwoReader } from "../rss_reader";
 
 export let urlList:Array<WebEntryPoint> = [
  // It has RSS - Please move it RSS.

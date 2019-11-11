@@ -2,7 +2,7 @@ import { WebEntryPoint } from "../web_entrypoints";
 import { LANG, STREAM } from "../../CONST";
 import { DefaultWebReader, ArticleWebReader, BartamanWebReader, WordPressWebReader } from "../web_reader";
 import { WebElementType } from "../htmlparser";
-import { WordPressRssReader } from "../../rss/rss_reader";
+import { WordPressRssReader } from "../rss_reader";
 
 export let urlList:Array<WebEntryPoint> = [
     {

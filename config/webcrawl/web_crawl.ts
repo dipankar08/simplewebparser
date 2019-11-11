@@ -4,7 +4,7 @@ import { saveToDB, detectUrlNotInDb, getHostNameFromUrl } from "../utils/db_help
 import { WebEntryPoint } from "./web_entrypoints";
 import { validate,buildContent, LIMIT, TELEMETRY_CRAWLER_EMPTY_DATA, TELEMETRY_RSS_LINK_HAS_EMPTY_DATA, TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY } from "../CONST";
 import { uniqBy, String } from "lodash";
-import {getFilteredUrl } from "./network";
+import {getFilteredUrl, superCleanData } from "./network";
 import { d, ex } from "../utils/dlog";
 import _ = require("lodash");
 import { url } from "inspector";
@@ -42,6 +42,11 @@ export class WebCrawler {
 
             // build and validate contents
             stories = stories.map(storyDict=>{
+                // last round clean ups.
+                if(storyDict['details']){
+                    storyDict['details'] = superCleanData(storyDict.url, storyDict['details'], web_entry);
+                }
+                
                 let cont = buildContent(storyDict);
                 if(cont && validate(cont)){
                     return cont;
@@ -49,9 +54,11 @@ export class WebCrawler {
                     if(isTest){
                        // throw Error("Content validation failed")
                     }
-                    d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${storyDict.url}`)
-                    d(cont);
-                    Analytics.hit_tracker({'action':TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url});
+                    if(web_entry.some_data_might_be_missing != true){
+                        d(`[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ ${storyDict.url}`)
+                        d(cont);
+                        Analytics.hit_tracker({'action':TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url});
+                    }
                 }
                 return null;
             });
@@ -184,8 +191,8 @@ export class WebCrawler {
             try{
                 var $ = null;
                 if(config.networkFetcher){
-                    d(`custom fetch ${weblink.url}`)
-                    let body = await config.networkFetcher(weblink.url);
+                    d(`custom fetch ${link.url}`)
+                    let body = await config.networkFetcher(link.url);
                     $ = cheerio.load(body);
                 }
 

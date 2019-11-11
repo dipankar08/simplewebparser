@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CONST_1 = require("../../CONST");
-var rss_reader_1 = require("../../rss/rss_reader");
+var rss_reader_1 = require("../rss_reader");
 exports.urlList = [
     {
         name: 'Humara Bihar',
