@@ -98,9 +98,7 @@ export class WebCrawler {
 
         // find howmnay link should we parse as they are not in db.
         let notinDb =  await detectUrlNotInDb(storyList.map(x=>x.url));
-        if(notinDb.length != 0){
-            storyList = storyList.filter(x=> notinDb.indexOf(x.url) != -1);
-        }
+        storyList = storyList.filter(x=> notinDb.indexOf(x.url) != -1);
         d(`[INFO] LINK/NOT_IN_DB ${storyList.length}`)
 
         return storyList;

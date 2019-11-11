@@ -166,9 +166,7 @@ var WebCrawler = /** @class */ (function () {
                         return [4 /*yield*/, db_helper_1.detectUrlNotInDb(storyList.map(function (x) { return x.url; }))];
                     case 5:
                         notinDb = _c.sent();
-                        if (notinDb.length != 0) {
-                            storyList = storyList.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
-                        }
+                        storyList = storyList.filter(function (x) { return notinDb.indexOf(x.url) != -1; });
                         dlog_1.d("[INFO] LINK/NOT_IN_DB " + storyList.length);
                         return [2 /*return*/, storyList];
                 }

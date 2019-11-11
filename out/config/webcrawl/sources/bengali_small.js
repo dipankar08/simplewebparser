@@ -35,10 +35,33 @@ exports.urlList = [
             { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://gnebangla.in/category/entertainment/' },
         ]
     },
-    // TODO: PLEASE FIX THIS
     {
         name: 'Kolkata 24X7',
         profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/kolkata_24x7.png',
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { url: 'https://www.kolkata24x7.com/category/kolkata/feed', 'stream': CONST_1.STREAM.KOLKATA },
+            { url: 'https://www.kolkata24x7.com/category/politics/feed', 'stream': CONST_1.STREAM.POLITICS },
+            { url: 'https://www.kolkata24x7.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://www.kolkata24x7.com/category/national-news/feed', 'stream': CONST_1.STREAM.NATIONAL },
+            { url: 'https://www.kolkata24x7.com/category/international-news/feed', 'stream': CONST_1.STREAM.INTERNATIONAL },
+            { url: 'https://www.kolkata24x7.com/category/sports/feed', 'stream': CONST_1.STREAM.SPORTS },
+            { url: 'https://www.kolkata24x7.com/category/offbeat-news/feed', 'stream': CONST_1.STREAM.OFF_BEAT },
+            { url: 'https://www.kolkata24x7.com/category/education-and-career/feed', 'stream': CONST_1.STREAM.EDUCATION },
+            { url: 'https://www.kolkata24x7.com/category/offbeat-news/feed', 'stream': CONST_1.STREAM.OFF_BEAT },
+            { url: 'https://www.kolkata24x7.com/category/business-and-economy/feed', 'stream': CONST_1.STREAM.BUSINESS },
+            { url: 'https://www.kolkata24x7.com/category/lifestyle/feed/', 'stream': CONST_1.STREAM.LIFESTYLE },
+            { url: 'https://www.kolkata24x7.com/category/entertainment-news/feed/', 'stream': CONST_1.STREAM.ENTERTAINMENT },
+            { url: 'https://www.kolkata24x7.com/feed/', 'stream': CONST_1.STREAM.OTHER },
+        ],
+        is_rss_feed: true,
+        rsstype: new rss_reader_1.WordPressRssReader(),
+    },
+    {
+        name: 'Totka 24X7',
+        profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/totka_24x7.png',
         lang: CONST_1.LANG.IN_BENGALI,
         is_active: true,
         is_partner: true,
@@ -97,25 +120,6 @@ exports.urlList = [
             { stream: CONST_1.STREAM.HOROSCOPE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c%e0%a6%95%e0%a7%87%e0%a6%b0-%e0%a6%a6%e0%a6%bf%e0%a6%a8/' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.aajbangla.in/category/%e0%a6%b2%e0%a6%be%e0%a6%87%e0%a6%ab%e0%a6%b8%e0%a7%8d%e0%a6%9f%e0%a6%be%e0%a6%87%e0%a6%b2/' },
             { stream: CONST_1.STREAM.TOUR, url: 'https://www.aajbangla.in/category/%e0%a6%ad%e0%a7%8d%e0%a6%b0%e0%a6%ae%e0%a6%a3/' },
-        ]
-    },
-    {
-        name: 'Totka 24X7',
-        profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/totka_24x7.png',
-        type: new web_reader_1.WordPressWebReader(),
-        lang: CONST_1.LANG.IN_BENGALI,
-        is_active: true,
-        is_partner: true,
-        links: [
-            { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.totka24x7.com/archives/category/lifestyle' },
-            { stream: CONST_1.STREAM.BUSINESS, url: 'https://www.totka24x7.com/archives/category/earn-money' },
-            { stream: CONST_1.STREAM.VIRAL, url: 'https://www.totka24x7.com/archives/category/viral' },
-            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://www.totka24x7.com/archives/category/entertainment' },
-            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.totka24x7.com/archives/category/international' },
-            { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://www.totka24x7.com/archives/category/technology' },
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.totka24x7.com/archives/category/headlines' },
-            { stream: CONST_1.STREAM.ASTROLOGY, url: 'https://www.totka24x7.com/archives/category/astrology' },
-            { stream: CONST_1.STREAM.OFF_BEAT, url: 'https://www.totka24x7.com/archives/category/different-news' },
         ]
     },
     {

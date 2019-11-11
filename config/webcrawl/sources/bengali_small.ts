@@ -36,7 +36,32 @@ export let urlList:Array<WebEntryPoint> = [
             {stream:STREAM.ENTERTAINMENT, url:'https://gnebangla.in/category/entertainment/'},
         ]
     },
-    // TODO: PLEASE FIX THIS KOLAKTA 24X7
+
+    {
+        name:'Kolkata 24X7',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/kolkata_24x7.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:false,
+
+        links:[
+            {url:'https://www.kolkata24x7.com/category/kolkata/feed', 'stream':STREAM.KOLKATA},
+            {url:'https://www.kolkata24x7.com/category/politics/feed', 'stream':STREAM.POLITICS},
+            {url:'https://www.kolkata24x7.com/category/west-bengal/feed', 'stream':STREAM.STATE},
+            {url:'https://www.kolkata24x7.com/category/national-news/feed', 'stream':STREAM.NATIONAL},
+            {url:'https://www.kolkata24x7.com/category/international-news/feed', 'stream':STREAM.INTERNATIONAL},
+            {url:'https://www.kolkata24x7.com/category/sports/feed', 'stream':STREAM.SPORTS},
+            {url:'https://www.kolkata24x7.com/category/offbeat-news/feed', 'stream':STREAM.OFF_BEAT},
+            {url:'https://www.kolkata24x7.com/category/education-and-career/feed', 'stream':STREAM.EDUCATION},
+            {url:'https://www.kolkata24x7.com/category/offbeat-news/feed', 'stream':STREAM.OFF_BEAT},
+            {url:'https://www.kolkata24x7.com/category/business-and-economy/feed', 'stream':STREAM.BUSINESS},
+            {url:'https://www.kolkata24x7.com/category/lifestyle/feed/', 'stream':STREAM.LIFESTYLE},
+            {url:'https://www.kolkata24x7.com/category/entertainment-news/feed/', 'stream':STREAM.ENTERTAINMENT},
+            {url:'https://www.kolkata24x7.com/feed/', 'stream':STREAM.OTHER},
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
+    },
 
     {
         name:'Totka 24X7',

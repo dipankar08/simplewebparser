@@ -67,7 +67,7 @@ function updateProfile(list) {
 var urlList = [];
 urlList = urlList.concat(require('./sources/bengali_big').urlList); // OK
 urlList = urlList.concat(require('./sources/partner_small').urlList); // OK
-urlList = urlList.concat(require('./sources/bengali_small').urlList); // OK ONE MISSING
+urlList = urlList.concat(require('./sources/bengali_small').urlList); // 
 urlList = urlList.concat(require('./sources/english_big').urlList); // OK
 urlList = urlList.concat(require('./sources/other_lang').urlList); // NOT OK
 function startCrawl() {
@@ -80,7 +80,7 @@ function startCrawl() {
                     return [4 /*yield*/, updateProfile(urlList)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Kolkata 24X7')];
+                    return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'Caai News')];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
