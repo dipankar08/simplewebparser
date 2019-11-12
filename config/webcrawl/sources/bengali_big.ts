@@ -54,6 +54,27 @@ export let urlList:Array<WebEntryPoint> = [
         ]
     },
     {
+        name:'mahanagar24x7',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/mahanagar24x7.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:false,
+        links:[
+            {stream: STREAM.FIRST_PAGE, url:'https://bengali.mahanagar24x7.com/feed'},
+            {stream: STREAM.HEADLINE, url:'https://bengali.mahanagar24x7.com/category/kolkata/feed'},
+            {stream: STREAM.STATE, url:'https://bengali.mahanagar24x7.com/category/banga/feed'},
+            {stream: STREAM.NATIONAL, url:'https://bengali.mahanagar24x7.com/category/national/feed'},
+            {stream: STREAM.INTERNATIONAL, url:'https://bengali.mahanagar24x7.com/category/international/feed'},
+            {stream: STREAM.SPORTS, url:'https://bengali.mahanagar24x7.com/category/sport-newss/feed'}, 
+            {stream: STREAM.ENTERTAINMENT, url:'https://bengali.mahanagar24x7.com/category/entertainment/feed'},
+            {stream: STREAM.OFF_BEAT, url:'https://bengali.mahanagar24x7.com/category/offbeat/feed'}, 
+            {stream: STREAM.LIFESTYLE, url:'https://bengali.mahanagar24x7.com/category/life-style/feed'}, 
+            {stream: STREAM.TECHNOLOGY, url:'https://bengali.mahanagar24x7.com/category/technology/feed'}, 
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader()
+    },
+    {
         name:'Ei Somoy',
         profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/ei_somoy.png',
         lang:LANG.IN_BENGALI,

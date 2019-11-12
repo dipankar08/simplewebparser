@@ -43,9 +43,9 @@ var network_1 = require("./network");
 var dlog_1 = require("../utils/dlog");
 var _ = require("lodash");
 var htmlparser_1 = require("./htmlparser");
-var cheerio = require('cheerio');
-var Url = require('url-parse');
-var cron = require('node-cron');
+var cheerio = require("cheerio");
+var Url = require("url-parse");
+var cron = require("node-cron");
 var WebCrawler = /** @class */ (function () {
     function WebCrawler() {
     }
@@ -54,7 +54,29 @@ var WebCrawler = /** @class */ (function () {
         if (isTest === void 0) { isTest = false; }
         if (name === void 0) { name = null; }
         return __awaiter(this, void 0, void 0, function () {
-            var _i, list_1, web_entry, stories;
+            var e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.crawlInternal(list, isTest, name)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        dlog_1.ex(e_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    WebCrawler.prototype.crawlInternal = function (list, isTest, name) {
+        if (isTest === void 0) { isTest = false; }
+        if (name === void 0) { name = null; }
+        return __awaiter(this, void 0, void 0, function () {
+            var _i, list_1, web_entry, stories, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -64,34 +86,37 @@ var WebCrawler = /** @class */ (function () {
                         _i = 0, list_1 = list;
                         _a.label = 1;
                     case 1:
-                        if (!(_i < list_1.length)) return [3 /*break*/, 8];
+                        if (!(_i < list_1.length)) return [3 /*break*/, 11];
                         web_entry = list_1[_i];
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 9, , 10]);
                         if (name != null) {
                             if (web_entry.name != name) {
-                                return [3 /*break*/, 7];
+                                return [3 /*break*/, 10];
                             }
                         }
                         if (!web_entry.is_active) {
                             dlog_1.d("[INFO] Skipping as the info is not active " + web_entry.name);
-                            return [3 /*break*/, 7];
+                            return [3 /*break*/, 10];
                         }
                         dlog_1.d("====================== P R O C E S S I N G===========================");
                         stories = null;
-                        if (!web_entry.is_rss_feed) return [3 /*break*/, 3];
+                        if (!web_entry.is_rss_feed) return [3 /*break*/, 4];
                         return [4 /*yield*/, this.processRssFeed(web_entry, isTest)];
-                    case 2:
+                    case 3:
                         stories = _a.sent();
-                        return [3 /*break*/, 5];
-                    case 3: return [4 /*yield*/, this.processWebFeed(web_entry, isTest)];
-                    case 4:
-                        stories = _a.sent();
-                        _a.label = 5;
+                        return [3 /*break*/, 6];
+                    case 4: return [4 /*yield*/, this.processWebFeed(web_entry, isTest)];
                     case 5:
+                        stories = _a.sent();
+                        _a.label = 6;
+                    case 6:
                         // build and validate contents
                         stories = stories.map(function (storyDict) {
                             // last round clean ups.
-                            if (storyDict['details']) {
-                                storyDict['details'] = network_1.superCleanData(storyDict.url, storyDict['details'], web_entry);
+                            if (storyDict["details"]) {
+                                storyDict["details"] = network_1.superCleanData(storyDict.url, storyDict["details"], web_entry);
                             }
                             var cont = CONST_1.buildContent(storyDict);
                             if (cont && CONST_1.validate(cont)) {
@@ -104,7 +129,10 @@ var WebCrawler = /** @class */ (function () {
                                 if (web_entry.some_data_might_be_missing != true) {
                                     dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + storyDict.url);
                                     dlog_1.d(cont);
-                                    analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_CRAWLER_EMPTY_DATA, 'link': storyDict.url });
+                                    analytics_1.Analytics.hit_tracker({
+                                        action: CONST_1.TELEMETRY_CRAWLER_EMPTY_DATA,
+                                        link: storyDict.url
+                                    });
                                 }
                             }
                             return null;
@@ -112,8 +140,8 @@ var WebCrawler = /** @class */ (function () {
                         // remove nulls
                         _.remove(stories, function (x) { return x == null; });
                         // remove duplicates
-                        _.uniqBy(stories, 'url');
-                        // Perform test 
+                        _.uniqBy(stories, "url");
+                        // Perform test
                         dlog_1.d("[INFO] Try saving count: " + stories.length);
                         if (isTest) {
                             if (stories.length == 0) {
@@ -121,25 +149,31 @@ var WebCrawler = /** @class */ (function () {
                             }
                             dlog_1.d(stories[0]);
                             if (!CONST_1.validate(stories[0])) {
-                                throw ("validation failed");
+                                throw "validation failed";
                             }
                             dlog_1.d("TEST PASSED - PLEASE CHECK ABOVE");
-                            return [3 /*break*/, 7];
+                            return [3 /*break*/, 10];
                         }
-                        if (!(stories.length > 0)) return [3 /*break*/, 7];
+                        if (!(stories.length > 0)) return [3 /*break*/, 8];
                         return [4 /*yield*/, db_helper_1.saveToDB(stories)];
-                    case 6:
-                        _a.sent();
-                        _a.label = 7;
                     case 7:
+                        _a.sent();
+                        _a.label = 8;
+                    case 8: return [3 /*break*/, 10];
+                    case 9:
+                        e_2 = _a.sent();
+                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_CRAWLER_EXCEPTION_FOR_PUBLISHER, 'name': web_entry.name });
+                        dlog_1.ex(e_2);
+                        return [3 /*break*/, 10];
+                    case 10:
                         _i++;
                         return [3 /*break*/, 1];
-                    case 8: return [2 /*return*/];
+                    case 11: return [2 /*return*/];
                 }
             });
         });
     };
-    // makeing RSS Feed call. 
+    // makeing RSS Feed call.
     WebCrawler.prototype.processRssFeed = function (web_entry, isTest) {
         if (isTest === void 0) { isTest = false; }
         return __awaiter(this, void 0, void 0, function () {
@@ -153,11 +187,16 @@ var WebCrawler = /** @class */ (function () {
                     case 1:
                         if (!(_i < _a.length)) return [3 /*break*/, 4];
                         link = _a[_i];
-                        return [4 /*yield*/, web_entry.rsstype.read(link.url, { stream: link.stream })];
+                        return [4 /*yield*/, web_entry.rsstype.read(link.url, {
+                                stream: link.stream
+                            })];
                     case 2:
                         list = _c.sent();
                         if (list.length == 0) {
-                            analytics_1.Analytics.hit_tracker({ "action": CONST_1.TELEMETRY_RSS_LINK_HAS_EMPTY_DATA, 'url': link.url });
+                            analytics_1.Analytics.hit_tracker({
+                                action: CONST_1.TELEMETRY_RSS_LINK_HAS_EMPTY_DATA,
+                                url: link.url
+                            });
                         }
                         for (_b = 0, list_2 = list; _b < list_2.length; _b++) {
                             l = list_2[_b];
@@ -176,7 +215,7 @@ var WebCrawler = /** @class */ (function () {
                     case 4:
                         dlog_1.d("[INFO] LINK/ALL " + storyList.length);
                         // remove duplicates
-                        _.uniqBy(storyList, 'url');
+                        _.uniqBy(storyList, "url");
                         dlog_1.d("[INFO] LINK/AFTER_UNIQUE " + storyList.length);
                         return [4 /*yield*/, db_helper_1.detectUrlNotInDb(storyList.map(function (x) { return x.url; }))];
                     case 5:
@@ -192,7 +231,7 @@ var WebCrawler = /** @class */ (function () {
     WebCrawler.prototype.processWebFeed = function (web_entry, isTest) {
         if (isTest === void 0) { isTest = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var config, top_urls, _i, _a, weblink, list_selector, $, body, parseResult, url_list, notinDb, stories, _b, top_urls_1, link, $, body, storyDict, e_1;
+            var config, top_urls, _i, _a, weblink, list_selector, $, body, parseResult, url_list, notinDb, stories, _b, top_urls_1, link, $, body, storyDict, e_3;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -222,10 +261,16 @@ var WebCrawler = /** @class */ (function () {
                         body = _c.sent();
                         $ = cheerio.load(body);
                         _c.label = 3;
-                    case 3: return [4 /*yield*/, htmlparser_1.findAllData(weblink.url, [{ name: 'urls', selector: list_selector, type: htmlparser_1.WebElementType.URL_LIST }], $)];
+                    case 3: return [4 /*yield*/, htmlparser_1.findAllData(weblink.url, [
+                            {
+                                name: "urls",
+                                selector: list_selector,
+                                type: htmlparser_1.WebElementType.URL_LIST
+                            }
+                        ], $)];
                     case 4:
                         parseResult = _c.sent();
-                        url_list = parseResult['urls'];
+                        url_list = parseResult["urls"];
                         if (!url_list) {
                             analytics_1.Analytics.action(CONST_1.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING, weblink.url);
                             return [3 /*break*/, 5];
@@ -254,14 +299,14 @@ var WebCrawler = /** @class */ (function () {
                         _i++;
                         return [3 /*break*/, 1];
                     case 6:
-                        // STEP 2: FETCHING ALL STORIES ONE BY ONE. 
+                        // STEP 2: FETCHING ALL STORIES ONE BY ONE.
                         if (top_urls.length == 0) {
                             dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ " + weblink.url);
                             return [2 /*return*/, []];
                         }
                         // remove dups
                         dlog_1.d("[INFO] Link/Merge Total " + top_urls.length);
-                        top_urls = lodash_1.uniqBy(top_urls, 'url');
+                        top_urls = lodash_1.uniqBy(top_urls, "url");
                         dlog_1.d("[INFO] Link/After Uniques " + top_urls.length);
                         return [4 /*yield*/, db_helper_1.detectUrlNotInDb(top_urls.map(function (x) { return x.url; }))];
                     case 7:
@@ -290,17 +335,20 @@ var WebCrawler = /** @class */ (function () {
                     case 11: return [4 /*yield*/, htmlparser_1.findAllData(link.url, config.storyParseConfig, $)];
                     case 12:
                         storyDict = _c.sent();
-                        storyDict['stream'] = link.stream;
-                        storyDict['url'] = link.url;
+                        storyDict["stream"] = link.stream;
+                        storyDict["url"] = link.url;
                         this.addExtra(storyDict, web_entry);
                         stories.push(storyDict);
                         return [3 /*break*/, 14];
                     case 13:
-                        e_1 = _c.sent();
-                        dlog_1.ex(e_1);
+                        e_3 = _c.sent();
+                        dlog_1.ex(e_3);
                         dlog_1.d("[ERROR] $$$$$$$$$$ PLEASE CHECK THIS $$$$$$$$$$$$$ :" + link.url);
-                        analytics_1.Analytics.hit_tracker({ 'action': CONST_1.TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY, 'link': link.url });
-                        analytics_1.Analytics.exception(e_1);
+                        analytics_1.Analytics.hit_tracker({
+                            action: CONST_1.TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY,
+                            link: link.url
+                        });
+                        analytics_1.Analytics.exception(e_3);
                         return [3 /*break*/, 14];
                     case 14:
                         if (isTest) {
@@ -318,10 +366,10 @@ var WebCrawler = /** @class */ (function () {
     // adding extra element in each story.
     WebCrawler.prototype.addExtra = function (storyDict, web_entry) {
         // append any extra here.
-        storyDict['lang'] = web_entry.lang;
-        storyDict['hostname'] = db_helper_1.getHostNameFromUrl(storyDict.url);
-        storyDict['is_active'] = web_entry.is_active ? "1" : "0";
-        storyDict['is_partner'] = web_entry.is_partner;
+        storyDict["lang"] = web_entry.lang;
+        storyDict["hostname"] = db_helper_1.getHostNameFromUrl(storyDict.url);
+        storyDict["is_active"] = web_entry.is_active ? "1" : "0";
+        storyDict["is_partner"] = web_entry.is_partner;
         if (!storyDict.img) {
             storyDict.img = web_entry.profile_img;
         }

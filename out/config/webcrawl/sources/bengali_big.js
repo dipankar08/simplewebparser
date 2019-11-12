@@ -54,6 +54,27 @@ exports.urlList = [
         ]
     },
     {
+        name: 'mahanagar24x7',
+        profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/mahanagar24x7.png',
+        lang: CONST_1.LANG.IN_BENGALI,
+        is_active: true,
+        is_partner: false,
+        links: [
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.mahanagar24x7.com/feed' },
+            { stream: CONST_1.STREAM.HEADLINE, url: 'https://bengali.mahanagar24x7.com/category/kolkata/feed' },
+            { stream: CONST_1.STREAM.STATE, url: 'https://bengali.mahanagar24x7.com/category/banga/feed' },
+            { stream: CONST_1.STREAM.NATIONAL, url: 'https://bengali.mahanagar24x7.com/category/national/feed' },
+            { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://bengali.mahanagar24x7.com/category/international/feed' },
+            { stream: CONST_1.STREAM.SPORTS, url: 'https://bengali.mahanagar24x7.com/category/sport-newss/feed' },
+            { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://bengali.mahanagar24x7.com/category/entertainment/feed' },
+            { stream: CONST_1.STREAM.OFF_BEAT, url: 'https://bengali.mahanagar24x7.com/category/offbeat/feed' },
+            { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://bengali.mahanagar24x7.com/category/life-style/feed' },
+            { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://bengali.mahanagar24x7.com/category/technology/feed' },
+        ],
+        is_rss_feed: true,
+        rsstype: new rss_reader_1.WordPressRssReader()
+    },
+    {
         name: 'Ei Somoy',
         profile_img: 'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/ei_somoy.png',
         lang: CONST_1.LANG.IN_BENGALI,

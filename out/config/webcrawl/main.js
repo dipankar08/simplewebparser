@@ -84,7 +84,7 @@ function startCrawl() {
                 case 1:
                     _a.sent(); // RUN ON PROD.
                     return [3 /*break*/, 4];
-                case 2: return [4 /*yield*/, c.crawl(urlList, true /*if this */)];
+                case 2: return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'mahanagar24x7')];
                 case 3:
                     _a.sent();
                     _a.label = 4;
