@@ -44,8 +44,9 @@ export class WebCrawler {
     isTest: Boolean = false,
     name: string = null
   ) {
-    list = _.uniqBy(list, "name");
     list = list.filter(x => x.is_active);
+    list = _.uniqBy(list, "name");
+    
     d(`We have total ${list.length} Portal to be  processed`);
     for (var web_entry of list) {
       try {

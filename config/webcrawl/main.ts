@@ -28,18 +28,17 @@ urlList= urlList.concat(require('./sources/partner_small').urlList) // OK
 urlList= urlList.concat(require('./sources/bengali_small').urlList) // 
 urlList= urlList.concat(require('./sources/english_big').urlList) // OK
 urlList= urlList.concat(require('./sources/other_lang').urlList) // OK
-
-urlList = _.uniqBy(urlList, "name")
+urlList= urlList.concat(require('./sources/oneindia').urlList) // OK
+urlList= urlList.concat(require('./sources/news18').urlList) // OK
 
 async function startCrawl(){
     let c = new WebCrawler();
     if(config.get("isProd")){
         await c.crawl(urlList, false); // RUN ON PROD.
     } else{
-        await c.crawl(urlList, false/*if this */,'mahanagar24x7');
+        // PLEASE MODIFY HERE >>>>>
+        await c.crawl(urlList, false/*if this */,'OneIndia Bengali');
     }
-   //
-    
 }
 
 // function. 

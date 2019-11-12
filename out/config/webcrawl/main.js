@@ -71,7 +71,8 @@ urlList = urlList.concat(require('./sources/partner_small').urlList); // OK
 urlList = urlList.concat(require('./sources/bengali_small').urlList); // 
 urlList = urlList.concat(require('./sources/english_big').urlList); // OK
 urlList = urlList.concat(require('./sources/other_lang').urlList); // OK
-urlList = _.uniqBy(urlList, "name");
+urlList = urlList.concat(require('./sources/oneindia').urlList); // OK
+urlList = urlList.concat(require('./sources/news18').urlList); // OK
 function startCrawl() {
     return __awaiter(this, void 0, void 0, function () {
         var c;
@@ -84,8 +85,11 @@ function startCrawl() {
                 case 1:
                     _a.sent(); // RUN ON PROD.
                     return [3 /*break*/, 4];
-                case 2: return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'mahanagar24x7')];
+                case 2: 
+                // PLEASE MODIFY HERE >>>>>
+                return [4 /*yield*/, c.crawl(urlList, false /*if this */, 'OneIndia Bengali')];
                 case 3:
+                    // PLEASE MODIFY HERE >>>>>
                     _a.sent();
                     _a.label = 4;
                 case 4: return [2 /*return*/];

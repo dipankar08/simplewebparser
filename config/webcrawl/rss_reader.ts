@@ -57,6 +57,49 @@ export class WordPressRssReader extends BaseRSSReader {
     }
 }
 
+
+
+export class RssTwoSummaryReader extends BaseRSSReader {
+    async read(url: string, extra: any): Promise<Array<StringAnyMap>> {
+        // fetch URL and then read.
+        d(`[RSS] Start redding RSS ${url}`);
+        var feed = null;
+        try{
+            feed = await parser.parseURL(url);
+        } catch(e){
+            Analytics.hit_tracker({'action':TELEMETRY_NETWORK_ERROR,url:url});
+            return []
+        }
+        let result = []
+        for(var item of feed.items){
+            let link = item.link
+            try{
+                const html = parse(item['content']);
+                result.push({
+                    title: item.title,
+                    img: item.enclosure.url,
+                    details: item.content,
+                    url:item.link,
+                    hostname:getHostNameFromUrl(url),
+                    stream: extra.stream
+                })
+            } catch(e){
+                ex(e)
+                Analytics.hit_tracker({"action":TELEMETRY_RSS_LINK_BROKEN,"url":link})
+            }
+        }
+        return result;
+    }
+    getImgFromHTML(hostname:string, html):string{
+        if(html.querySelector("img")){
+            return html.querySelector("img").attributes.src
+        } else{
+            Analytics.hit_tracker({'action':TELEMETRY_RSS_IMAGE_NOT_FOUND,hostname:hostname});
+            return null
+        }
+    }
+}
+
 export class RssTwoReader extends BaseRSSReader {
 
     async read(url: string, extra: any): Promise<Array<StringAnyMap>> {
