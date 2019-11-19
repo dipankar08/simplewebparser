@@ -230,10 +230,16 @@ export class WebCrawler {
       url_list = getFilteredUrl(weblink.url, url_list, config);
       d(`[INFO] LinkFound/filter: ${url_list.length}`);
 
-      url_list = url_list.slice(
-        0,
-        config.list_limit ? config.list_limit : LIMIT
-      );
+      // finding ;limits.
+      let n_limit = LIMIT;
+      if(web_entry.limit){
+        n_limit = web_entry.limit;
+      }
+      if(config.list_limit){
+        n_limit=config.list_limit
+      }
+
+      url_list = url_list.slice(0,n_limit);
       d(`[INFO] LinkFound/slice: ${url_list.length}`);
 
       // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.

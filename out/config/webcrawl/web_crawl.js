@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -231,7 +232,7 @@ var WebCrawler = /** @class */ (function () {
     WebCrawler.prototype.processWebFeed = function (web_entry, isTest) {
         if (isTest === void 0) { isTest = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var config, top_urls, _i, _a, weblink, list_selector, $, body, parseResult, url_list, notinDb, stories, _b, top_urls_1, link, $, body, storyDict, e_3;
+            var config, top_urls, _i, _a, weblink, list_selector, $, body, parseResult, url_list, n_limit, notinDb, stories, _b, top_urls_1, link, $, body, storyDict, e_3;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -280,7 +281,14 @@ var WebCrawler = /** @class */ (function () {
                         dlog_1.d("[INFO] LinkFound/unique: " + url_list.length);
                         url_list = network_1.getFilteredUrl(weblink.url, url_list, config);
                         dlog_1.d("[INFO] LinkFound/filter: " + url_list.length);
-                        url_list = url_list.slice(0, config.list_limit ? config.list_limit : CONST_1.LIMIT);
+                        n_limit = CONST_1.LIMIT;
+                        if (web_entry.limit) {
+                            n_limit = web_entry.limit;
+                        }
+                        if (config.list_limit) {
+                            n_limit = config.list_limit;
+                        }
+                        url_list = url_list.slice(0, n_limit);
                         dlog_1.d("[INFO] LinkFound/slice: " + url_list.length);
                         // first we will slice and then make a reverse to ensure we cut latest news and then insert in reverse order.
                         url_list = url_list.reverse();

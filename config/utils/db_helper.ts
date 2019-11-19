@@ -17,7 +17,7 @@ export async function saveToDB(res:Array<Content>|null){
         return;
     }
     let res1 = res.filter(x => { 
-        if(x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0){
+        if(x && x.title && x.summary && x.img && x.title.length > 0 && x.summary.length > 0 && x.img.length > 0){
             return true;
         } else{
             Analytics.hit_tracker({action: TELEMETRY_DB_IGNORE_INVALID_DATA,url:x.url});

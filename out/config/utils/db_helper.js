@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -55,7 +56,7 @@ function saveToDB(res) {
                         return [2 /*return*/];
                     }
                     res1 = res.filter(function (x) {
-                        if (x && x.title && x.details && x.img && x.title.length > 0 && x.details.length > 0 && x.img.length > 0) {
+                        if (x && x.title && x.summary && x.img && x.title.length > 0 && x.summary.length > 0 && x.img.length > 0) {
                             return true;
                         }
                         else {

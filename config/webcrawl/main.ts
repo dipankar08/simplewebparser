@@ -37,7 +37,7 @@ async function startCrawl(){
         await c.crawl(urlList, false); // RUN ON PROD.
     } else{
         // PLEASE MODIFY HERE >>>>>
-        await c.crawl(urlList, false/*if this */,'OneIndia Bengali');
+        await c.crawl(urlList, false/*if this */,'Natun Gati');
     }
 }
 

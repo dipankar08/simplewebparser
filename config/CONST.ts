@@ -2,6 +2,7 @@ import { StringifyOptions } from "querystring";
 import { StringAnyMap } from "../config/utils/types";
 import { SummeryBuilder, SummaryStrategy } from "./summary/SummaryManager";
 import { d, e } from "./utils/dlog";
+import { Analytics } from "../analytics";
 
 const config = require('config');
 
@@ -11,6 +12,7 @@ export const TELEMETRY_NETWORK_ERROR = "TELEMETRY_NETWORK_ERROR"
 export const TELEMETRY_RSS_LINK_BROKEN = "TELEMETRY_RSS_LINK_BROKEN"
 export const TELEMETRY_RSS_IMAGE_NOT_FOUND = "TELEMETRY_RSS_IMAGE_NOT_FOUND"
 export const TELEMETRY_RSS_LINK_HAS_EMPTY_DATA = "TELEMETRY_RSS_LINK_HAS_EMPTY_DATA"
+export const TELEMETRY_MISSING_SUMMARY ="TELEMETRY_MISSING_SUMMARY"
 
 export const TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING = "TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING"
 export const TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY = "TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY"
@@ -157,6 +159,10 @@ export function validate(c:Content):boolean{
     }
     if(!( c.details && c.details.length > 5)){
         e('Missing details'); return false;
+    }
+    if(!( c.summary && c.summary.length > 100)){
+        Analytics.hit_tracker({'action':TELEMETRY_MISSING_SUMMARY,url:c.url});
+        e('Missing summary'); return false;
     }
     if(!( c.hostname && c.hostname.length > 5)){
         e('Missing hostname'); return false;

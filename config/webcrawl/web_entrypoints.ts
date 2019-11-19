@@ -28,4 +28,6 @@ export type WebEntryPoint = {
     link_selector?:string // override config link selector
 
     some_data_might_be_missing?:boolean // mark as true if you know some data might be missing.
+
+    limit?:number // limit on processing link_selector
 }

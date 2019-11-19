@@ -16,9 +16,6 @@ export type WebConfig ={
     profileDefaultImg?:string,
 }
 
-
-
-
 export function getFilteredUrl(root_url, urls_abs, config:WebConfig){
     let url_filtered = []
     for(let u of urls_abs){

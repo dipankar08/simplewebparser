@@ -70,17 +70,7 @@
     {url:'https://www.aajbangla.in/feed', extra:{'stream':STREAM.LATEST, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
 
     // https://www.master24.in
-    {url:'https://www.master24.in/archives/category/politics/feed', extra:{'stream':STREAM.POLITICS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/state/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/national/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/international/feed', extra:{'stream':STREAM.INTERNATIONAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/lifestyle/feed', extra:{'stream':STREAM.LIFESTYLE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/editorial/feed', extra:{'stream':STREAM.EDITORIAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/tech-news/feed', extra:{'stream':STREAM.TECHNOLOGY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/job-and-business/feed', extra:{'stream':STREAM.JOB, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/archives/category/sports/feed', extra:{'stream':STREAM.SPORTS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.master24.in/feed', extra:{'stream':STREAM.LATEST, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-
+    
 
     // darkaritips
     {url:'https://www.darkaritips.com/category/pregnancy-care/', extra:{'stream':STREAM.HEALTH, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},

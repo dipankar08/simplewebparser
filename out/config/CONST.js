@@ -2,12 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var SummaryManager_1 = require("./summary/SummaryManager");
 var dlog_1 = require("./utils/dlog");
+var analytics_1 = require("../analytics");
 var config = require('config');
 exports.TELEMETRY_APP_NAME = "crawler2";
 exports.TELEMETRY_NETWORK_ERROR = "TELEMETRY_NETWORK_ERROR";
 exports.TELEMETRY_RSS_LINK_BROKEN = "TELEMETRY_RSS_LINK_BROKEN";
 exports.TELEMETRY_RSS_IMAGE_NOT_FOUND = "TELEMETRY_RSS_IMAGE_NOT_FOUND";
 exports.TELEMETRY_RSS_LINK_HAS_EMPTY_DATA = "TELEMETRY_RSS_LINK_HAS_EMPTY_DATA";
+exports.TELEMETRY_MISSING_SUMMARY = "TELEMETRY_MISSING_SUMMARY";
 exports.TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING = "TELEMETRY_HTML_ROOT_LINK_HAS_NO_LISTING";
 exports.TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY = "TELEMETRY_HTML_EXCEPTION_WHILE_FETCHING_STORY";
 exports.TELEMETRY_DB_IGNORE_INVALID_DATA = "TELEMETRY_DB_IGNORE_INVALID_DATA";
@@ -108,6 +110,11 @@ function validate(c) {
     }
     if (!(c.details && c.details.length > 5)) {
         dlog_1.e('Missing details');
+        return false;
+    }
+    if (!(c.summary && c.summary.length > 100)) {
+        analytics_1.Analytics.hit_tracker({ 'action': exports.TELEMETRY_MISSING_SUMMARY, url: c.url });
+        dlog_1.e('Missing summary');
         return false;
     }
     if (!(c.hostname && c.hostname.length > 5)) {

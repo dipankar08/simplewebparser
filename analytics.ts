@@ -80,7 +80,7 @@ export class Analytics {
                 data['session'] = this.session;
             }
             data['app_id'] = this.app_id;
-            d(`Sending Logs: url: ${url}, data: ${data}`)
+            d({'msg':`Sending Logs: url: ${url}`, data: data})
             await fetch_req(url, {
                 method: 'post',
                 body:    JSON.stringify(data),

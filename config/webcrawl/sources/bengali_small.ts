@@ -168,4 +168,84 @@ export let urlList:Array<WebEntryPoint> = [
             {stream:STREAM.LIFESTYLE, url:'https://www.banglarpran.com/archives/category/lifestyle'},
         ]
     },
+
+    {
+        // BUGGY RSS FEED AS NO IMAGE.
+        name:'Bong News24x7',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/bongnews24x7.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:true,
+
+        links:[
+            {url:'https://www.bongnews24x7.com', 'stream':STREAM.FIRST_PAGE},
+            {url:'https://www.bongnews24x7.com/category/kolkata/', 'stream':STREAM.FIRST_PAGE},
+            {url:'https://www.bongnews24x7.com/category/viral/', 'stream':STREAM.VIRAL},
+            {url:'https://www.bongnews24x7.com/category/west-bengal/', 'stream':STREAM.STATE},
+            {url:'https://www.bongnews24x7.com/category/india/', 'stream':STREAM.NATIONAL},
+            {url:'https://www.bongnews24x7.com/category/international/', 'stream':STREAM.INTERNATIONAL},
+            {url:'https://www.bongnews24x7.com/category/politics/', 'stream':STREAM.POLITICS},
+
+            {url:'https://www.bongnews24x7.com/category/sports/', 'stream':STREAM.SPORTS},
+            {url:'https://www.bongnews24x7.com/category/employment-news/', 'stream':STREAM.JOB},
+            {url:'https://www.bongnews24x7.com/category/unknown-facts/', 'stream':STREAM.OFF_BEAT},
+            {url:'https://www.bongnews24x7.com/category/fashion-and-beauty/', 'stream':STREAM.LIFESTYLE},
+            {url:'https://www.bongnews24x7.com/category/entertainment/', 'stream':STREAM.ENTERTAINMENT},
+            {url:'https://www.bongnews24x7.com/category/good-luck/', 'stream':STREAM.HOROSCOPE},
+        
+        ],
+        limit:5,
+        is_rss_feed:false,
+        link_selector:'.td-module-thumb a',
+        type:new WordPressWebReader(),
+    },
+
+    {
+        name:'The Wall',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/thewall.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:true,
+        links:[
+            {url:'https://www.thewall.in/feed', 'stream':STREAM.FIRST_PAGE},
+            // NO OTHER RSS LINK FOUND.
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
+    },
+
+    {
+        name:'Master 24',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/master24.png',
+        lang:LANG.IN_BENGALI,
+        is_active:true,
+        is_partner:true,
+        links:[
+            {url:'https://www.master24.in/archives/category/politics/feed', 'stream':STREAM.POLITICS},
+            {url:'https://www.master24.in/archives/category/state/feed', 'stream':STREAM.STATE},
+            {url:'https://www.master24.in/archives/category/national/feed', 'stream':STREAM.COUNTRY},
+            {url:'https://www.master24.in/archives/category/international/feed', 'stream':STREAM.INTERNATIONAL},
+            {url:'https://www.master24.in/archives/category/lifestyle/feed', 'stream':STREAM.LIFESTYLE},
+            {url:'https://www.master24.in/archives/category/editorial/feed', 'stream':STREAM.EDITORIAL},
+            {url:'https://www.master24.in/archives/category/tech-news/feed', 'stream':STREAM.TECHNOLOGY},
+            {url:'https://www.master24.in/archives/category/job-and-business/feed', 'stream':STREAM.JOB},
+            {url:'https://www.master24.in/archives/category/sports/feed', 'stream':STREAM.SPORTS},
+            {url:'https://www.master24.in/feed', 'stream':STREAM.LATEST},
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
+    },
+    {
+        name:'Natun Gati',
+        profile_img:'https://raw.githubusercontent.com/dipankar08/staticcdn/master/img/natungati.png',
+        lang:LANG.IN_BENGALI,
+        is_active:false,
+        is_partner:true,
+        links:[
+         
+            {url:'http://www.natungati.com/feed/', 'stream':STREAM.LATEST},
+        ],
+        is_rss_feed:true,
+        rsstype:new WordPressRssReader(),
+    },
 ]
