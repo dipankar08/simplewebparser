@@ -55,9 +55,9 @@ export enum CATEGORIES {
 
 export enum STREAM {
     NONE,
-    HEADLINE,
+   // HEADLINE, // USE FIRSTPAGE
     FIRST_PAGE,
-    STATE,
+   // STATE, // USER FIRSTPAGE
     COUNTRY,
     INTERNATIONAL,
     BUSINESS,

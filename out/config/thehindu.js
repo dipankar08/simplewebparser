@@ -59,7 +59,7 @@ var TheHinduConfig = /** @class */ (function (_super) {
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/entertainment/' },
             { stream: CONST_1.STREAM.BUSINESS, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/business/' },
             { stream: CONST_1.STREAM.SPORTS, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/sport/' },
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/news/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.slick-initialized .slick-slide > a', url: 'https://www.thehindu.com/news/' },
         ];
     };
     return TheHinduConfig;

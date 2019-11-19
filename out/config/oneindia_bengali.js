@@ -39,7 +39,7 @@ var OneIndiaBengaliConfig = /** @class */ (function (_super) {
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/kolkata/' },
             { stream: CONST_1.STREAM.COUNTRY, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/india/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/kolkata/' },
-            { stream: CONST_1.STREAM.STATE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/west-bengal/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/west-bengal/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/international/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: 'article .article-img a', url: 'https://bengali.oneindia.com/news/movies/' },
         ];

@@ -45,7 +45,7 @@ var AjjKalConfig = /** @class */ (function (_super) {
     AjjKalConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/kolkata' },
-            { stream: CONST_1.STREAM.STATE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/state' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/national' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/international' },
             { stream: CONST_1.STREAM.BUSINESS, selector: '.news-tabe .col-md-4 .image-holder > a', url: 'https://aajkaal.in/business' },

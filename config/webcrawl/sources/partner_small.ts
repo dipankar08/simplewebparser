@@ -14,7 +14,7 @@ export let urlList:Array<WebEntryPoint> = [
 
         links:[
             {stream: STREAM.FIRST_PAGE, url:'https://humarabihar.in/feed'},
-            {stream: STREAM.STATE, url:'https://humarabihar.in/news-from-districts/feed'},
+            {stream: STREAM.FIRST_PAGE, url:'https://humarabihar.in/news-from-districts/feed'},
             {stream: STREAM.POLITICS, url:'https://humarabihar.in/politics/feed'},
             {stream: STREAM.BIHAR, url:'https://humarabihar.in/culture-of-bihar/feed'},
             {stream: STREAM.OFF_BEAT, url:'https://humarabihar.in/positive-news/feed'},
@@ -39,7 +39,7 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.FIRST_PAGE, url:'http://www.bebaknews.in/feed'},
             {stream: STREAM.POLITICS, url:'https://www.bebaknews.in/politics/feed'},
             {stream: STREAM.NATIONAL, url:'https://www.bebaknews.in/national-international/feed'},
-            {stream: STREAM.STATE, url:'https://www.bebaknews.in/state-news/feed'},
+            {stream: STREAM.FIRST_PAGE, url:'https://www.bebaknews.in/state-news/feed'},
             {stream: STREAM.SPORTS, url:'https://www.bebaknews.in/sports/feed'},
             {stream: STREAM.CRIME, url:'https://www.bebaknews.in/crime/feed'},
             {stream: STREAM.LIFESTYLE, url:'https://www.bebaknews.in/lifestyle/health/feed'},
@@ -112,7 +112,7 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.NATIONAL, url:'https://newskranti.com/category/national/feed/'},
             {stream: STREAM.INTERNATIONAL, url:'https://newskranti.com/category/world/feed/'},
             {stream: STREAM.POLITICS, url:'https://newskranti.com/category/politics-2/feed/'},
-            {stream: STREAM.STATE, url:'https://newskranti.com/category/state/feed'},
+            {stream: STREAM.FIRST_PAGE, url:'https://newskranti.com/category/state/feed'},
             {stream: STREAM.BUSINESS, url:'https://newskranti.com/category/business/feed/'},
             {stream: STREAM.SPORTS, url:'https://newskranti.com/category/sport/feed/'},
             {stream: STREAM.TECHNOLOGY, url:'https://newskranti.com/category/technology/feed/'},

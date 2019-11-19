@@ -43,7 +43,7 @@ var IndiaTimesBengaliConfig = /** @class */ (function (_super) {
     IndiaTimesBengaliConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.other_main_news1 li> a', url: 'https://eisamay.indiatimes.com/' },
-            { stream: CONST_1.STREAM.STATE, selector: '.artlisting li .imgsec > a', url: 'https://eisamay.indiatimes.com/west-bengal-news/kolkata-news/articlelist/15991773.cms' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.artlisting li .imgsec > a', url: 'https://eisamay.indiatimes.com/west-bengal-news/kolkata-news/articlelist/15991773.cms' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.artlisting li .imgsec > a', url: 'https://eisamay.indiatimes.com/nation/articlelist/15819599.cms' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.artlisting li .imgsec > a', url: 'https://eisamay.indiatimes.com/international/articlelist/15819594.cms' },
             { stream: CONST_1.STREAM.BUSINESS, selector: '.artlisting li .imgsec > a', url: 'https://eisamay.indiatimes.com/business/articlelist/15819574.cms' },

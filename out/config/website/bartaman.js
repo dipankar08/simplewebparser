@@ -94,9 +94,9 @@ var BartamanConfig = /** @class */ (function (_super) {
     };
     BartamanConfig.prototype.getStoryListConfig = function () {
         return [
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=12' },
-            { stream: CONST_1.STREAM.STATE, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=13' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=13' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=14' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=15' },
             { stream: CONST_1.STREAM.SPORTS, selector: '.firstSection a.bisad', url: 'https://bartamanpatrika.com/section.php?cID=18' },

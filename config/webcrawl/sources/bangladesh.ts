@@ -14,7 +14,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:false,
         links:[
             {stream: STREAM.KOLKATA, url:'https://www.aajkaal.in/kolkata'},
-            {stream: STREAM.STATE, url:'https://www.aajkaal.in/state'},
+            {stream: STREAM.FIRST_PAGE, url:'https://www.aajkaal.in/state'},
         ],
         link_selector:'.image-holder a',
         storyParseConfig:[
@@ -31,7 +31,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:false,
         
         links:[
-            {stream: STREAM.HEADLINE, url:'https://www.gujaratsamachar.com/rss/top-stories'},
+            {stream: STREAM.FIRST_PAGE, url:'https://www.gujaratsamachar.com/rss/top-stories'},
             {stream: STREAM.TECHNOLOGY, url:'https://www.gujaratsamachar.com/rss/category/science-technology'},
             {stream: STREAM.LIFESTYLE, url:'https://www.gujaratsamachar.com/rss/category/relationship'},
             {stream: STREAM.LIFESTYLE, url:'https://www.gujaratsamachar.com/rss/category/lifestyle-fashion'},

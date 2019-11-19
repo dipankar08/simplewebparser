@@ -13,7 +13,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_active:true,
         is_partner:true,
         links:[
-            {stream: STREAM.HEADLINE, selector:'.lead-story a',url:'https://www.news18.com/'},
+            {stream: STREAM.FIRST_PAGE, selector:'.lead-story a',url:'https://www.news18.com/'},
             {stream: STREAM.FIRST_PAGE, selector:'.hotTopic a',url:'https://www.news18.com/politics/'},
             {stream: STREAM.COUNTRY, selector:'.hotTopic a',url:'https://www.news18.com/india/'},
             {stream: STREAM.INTERNATIONAL, selector:'.hotTopic a',url:'https://www.news18.com/world/'},
@@ -64,7 +64,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:true,
         links:[
             {stream: STREAM.COUNTRY, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/national/'},
-            {stream: STREAM.STATE, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/kolkata/'},
+            {stream: STREAM.FIRST_PAGE, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/kolkata/'},
             {stream: STREAM.INTERNATIONAL, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/international/'},
             {stream: STREAM.TECHNOLOGY, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/technology/'},
             {stream: STREAM.ENTERTAINMENT, selector:'.nwslist-withbrdr li a',url:'https://bengali.news18.com/entertainment/'},

@@ -44,7 +44,7 @@ var ZeeNewsBengaliConfig = /** @class */ (function (_super) {
     ZeeNewsBengaliConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.COUNTRY, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/nation' },
-            { stream: CONST_1.STREAM.STATE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/state' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/world' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/entertainment' },
             { stream: CONST_1.STREAM.LIFESTYLE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/lifestyle' },
@@ -80,7 +80,7 @@ var ZeeNewsEnglishConfig = /** @class */ (function (_super) {
     };
     ZeeNewsEnglishConfig.prototype.getStoryListConfig = function () {
         return [
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.lead-block a', url: 'https://zeenews.india.com/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.lead-block a', url: 'https://zeenews.india.com/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.four-col-block  a', url: 'https://zeenews.india.com/entertainment' },
             { stream: CONST_1.STREAM.LIFESTYLE, selector: '.four-col-block  a', url: 'https://zeenews.india.com/lifestyle' },
             { stream: CONST_1.STREAM.BUSINESS, selector: '.four-col-block  a', url: 'https://zeenews.india.com/business' },
@@ -121,7 +121,7 @@ var ZeeNewsHindiConfig = /** @class */ (function (_super) {
     };
     ZeeNewsHindiConfig.prototype.getStoryListConfig = function () {
         return [
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.lead-block a', url: 'https://zeenews.india.com/hindi' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.lead-block a', url: 'https://zeenews.india.com/hindi' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.maincontent a', url: 'https://zeenews.india.com/hindi/india' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.maincontent a', url: 'https://zeenews.india.com/hindi/world' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.maincontent a', url: 'https://zeenews.india.com/hindi/india/states' },

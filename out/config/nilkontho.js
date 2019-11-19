@@ -43,7 +43,7 @@ var NilkonthoConfig = /** @class */ (function (_super) {
     NilkonthoConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/kolkata/' },
-            { stream: CONST_1.STREAM.STATE, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/state/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/state/' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/national/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/world/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.post-listing article h2 > a', url: 'https://www.nilkantho.in/category/news/entertainment/' },

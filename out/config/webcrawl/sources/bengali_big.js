@@ -14,7 +14,7 @@ exports.urlList = [
         is_partner: false,
         links: [
             { stream: CONST_1.STREAM.KOLKATA, url: 'https://www.aajkaal.in/kolkata' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.aajkaal.in/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.aajkaal.in/state' },
             { stream: CONST_1.STREAM.NATIONAL, url: 'https://www.aajkaal.in/national' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.aajkaal.in/international' },
             { stream: CONST_1.STREAM.BUSINESS, url: 'https://www.aajkaal.in/business' },
@@ -42,9 +42,9 @@ exports.urlList = [
         is_active: true,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://bartamanpatrika.com/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bartamanpatrika.com/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bartamanpatrika.com/section.php?cID=12' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://bartamanpatrika.com/section.php?cID=13' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bartamanpatrika.com/section.php?cID=13' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://bartamanpatrika.com/section.php?cID=14' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://bartamanpatrika.com/section.php?cID=15' },
             { stream: CONST_1.STREAM.SPORTS, url: 'https://bartamanpatrika.com/section.php?cID=18' },
@@ -61,8 +61,8 @@ exports.urlList = [
         is_partner: false,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.mahanagar24x7.com/feed' },
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://bengali.mahanagar24x7.com/category/kolkata/feed' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://bengali.mahanagar24x7.com/category/banga/feed' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.mahanagar24x7.com/category/kolkata/feed' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.mahanagar24x7.com/category/banga/feed' },
             { stream: CONST_1.STREAM.NATIONAL, url: 'https://bengali.mahanagar24x7.com/category/national/feed' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://bengali.mahanagar24x7.com/category/international/feed' },
             { stream: CONST_1.STREAM.SPORTS, url: 'https://bengali.mahanagar24x7.com/category/sport-newss/feed' },
@@ -82,7 +82,7 @@ exports.urlList = [
         is_partner: false,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'http://eisamay.indiatimes.com/city/rssfeedsection/15819618.cms' },
-            { stream: CONST_1.STREAM.STATE, url: 'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms' },
             { stream: CONST_1.STREAM.NATIONAL, url: 'http://eisamay.indiatimes.com/nation/rssfeedsection/15819599.cms' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'http://eisamay.indiatimes.com/international/rssfeedsection/15819594.cms' },
             { stream: CONST_1.STREAM.SPORTS, url: 'http://eisamay.indiatimes.com/sports/rssfeedsection/23000116.cms' },
@@ -103,7 +103,7 @@ exports.urlList = [
         links: [
             { stream: CONST_1.STREAM.COUNTRY, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/india' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/world' },
-            { stream: CONST_1.STREAM.STATE, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bengal' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/bengal' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/binodan' },
             { stream: CONST_1.STREAM.SPORTS, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/sports' },
             { stream: CONST_1.STREAM.EDITORIAL, selector: '.newslistbx h3 > a', url: 'https://www.dainikstatesmannews.com/editorial' },
@@ -124,8 +124,8 @@ exports.urlList = [
         is_active: true,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.carousel  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
-            { stream: CONST_1.STREAM.HEADLINE, selector: '.daily-news  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.carousel  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.daily-news  .scale_img_block > a', url: 'https://www.sangbadpratidin.in/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.tatka_update_list  .scale_img a', url: 'https://www.sangbadpratidin.in/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: 'ul.more_news_list li > a', url: 'https://www.sangbadpratidin.in/latest-update/' },
         ],
@@ -143,10 +143,10 @@ exports.urlList = [
         is_active: true,
         is_partner: false,
         links: [
-            { url: 'https://www.anandabazar.com/', selector: '.container .abp-homepage-main-story-wrap-new a', stream: CONST_1.STREAM.HEADLINE },
-            { url: 'https://www.anandabazar.com/', selector: '.abp-homepage-lead-story-wrap a', stream: CONST_1.STREAM.HEADLINE },
+            { url: 'https://www.anandabazar.com/', selector: '.container .abp-homepage-main-story-wrap-new a', stream: CONST_1.STREAM.FIRST_PAGE },
+            { url: 'https://www.anandabazar.com/', selector: '.abp-homepage-lead-story-wrap a', stream: CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.anandabazar.com/', selector: '.abp-homepage-editor-story-wrap a', stream: CONST_1.STREAM.FIRST_PAGE },
-            { url: 'https://www.anandabazar.com/state', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.STATE },
+            { url: 'https://www.anandabazar.com/state', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.anandabazar.com/international', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.INTERNATIONAL },
             { url: 'https://www.anandabazar.com/business', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.BUSINESS },
             { url: 'https://www.anandabazar.com/others/science', selector: '.sectionstoryinside-sub > div > a', stream: CONST_1.STREAM.SCIENCE },
@@ -186,7 +186,7 @@ exports.urlList = [
         is_partner: true,
         links: [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.nilkantho.in/category/news/kolkata/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.nilkantho.in/category/news/state/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.nilkantho.in/category/news/state/' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://www.nilkantho.in/category/news/national/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.nilkantho.in/category/news/world/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://www.nilkantho.in/category/news/entertainment/' },

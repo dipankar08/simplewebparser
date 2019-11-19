@@ -1,7 +1,7 @@
 /*
     // TimesNews
     {url:'http://eisamay.indiatimes.com/city/rssfeedsection/15819618.cms', extra:{'stream':STREAM.KOLKATA, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'http://eisamay.indiatimes.com/nation/rssfeedsection/15819599.cms', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'http://eisamay.indiatimes.com/international/rssfeedsection/15819594.cms', extra:{'stream':STREAM.INTERNATIONAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'http://eisamay.indiatimes.com/sports/rssfeedsection/23000116.cms', extra:{'stream':STREAM.SPORTS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -57,7 +57,7 @@
 
     // AajBangla
     {url:'https://www.aajbangla.in/category/aajkolkata/feed', extra:{'stream':STREAM.LATEST, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a6%e0%a7%87%e0%a6%b6/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a4%e0%a7%8d%e0%a6%b0%e0%a6%bf%e0%a6%aa%e0%a7%81%e0%a6%b0%e0%a6%be/feed', extra:{'stream':STREAM.TRIPURA, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%bf%e0%a6%b6%e0%a7%8d%e0%a6%ac-aaj-world-news/feed', extra:{'stream':STREAM.INTERNATIONAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -99,7 +99,7 @@
 
     // Nilkontho
     {url:'https://www.nilkantho.in/category/news/kolkata/feed', extra:{'stream':STREAM.KOLKATA, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.nilkantho.in/category/news/state/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'https://www.nilkantho.in/category/news/state/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.nilkantho.in/category/news/national/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.nilkantho.in/category/news/world/feed', extra:{'stream':STREAM.INTERNATIONAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.nilkantho.in/category/news/entertainment/feed', extra:{'stream':STREAM.ENTERTAINMENT, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -117,7 +117,7 @@
 
     // GNE Bangla
     {url:'https://gnebangla.in/category/local-news/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://gnebangla.in/category/west-bengal/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'https://gnebangla.in/category/west-bengal/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://gnebangla.in/category/national-news/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://gnebangla.in/category/international/feed', extra:{'stream':STREAM.INTERNATIONAL, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://gnebangla.in/category/technology/feed', extra:{'stream':STREAM.TECHNOLOGY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -130,7 +130,7 @@
     // KolkataTimes 24
     {url:'https://kolkatatimes24.com/category/kolkata/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://kolkatatimes24.com/category/politics/feed', extra:{'stream':STREAM.POLITICS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://kolkatatimes24.com/category/west-bengal/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'https://kolkatatimes24.com/category/west-bengal/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://kolkatatimes24.com/category/technology/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://kolkatatimes24.com/category/business-and-economy/feed', extra:{'stream':STREAM.BUSINESS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://kolkatatimes24.com/category/national/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -147,7 +147,7 @@
     {url:'https://www.bharatbarta.com/category/news/kolkata/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.bharatbarta.com/category/news/national/feed', extra:{'stream':STREAM.COUNTRY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.bharatbarta.com/category/news/politics-news/feed', extra:{'stream':STREAM.POLITICS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
-    {url:'https://www.bharatbarta.com/category/news/state/feed', extra:{'stream':STREAM.STATE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
+    {url:'https://www.bharatbarta.com/category/news/state/feed', extra:{'stream':STREAM.FIRST_PAGE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.bharatbarta.com/category/lifestyle/feed', extra:{'stream':STREAM.LIFESTYLE, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.bharatbarta.com/category/technology/feed', extra:{'stream':STREAM.TECHNOLOGY, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
     {url:'https://www.bharatbarta.com/category/sports/feed', extra:{'stream':STREAM.SPORTS, 'lang':LANG.IN_BENGALI,'categories':CATEGORIES.NEWS}, type:RSS_TYPE.WORD_PRESS},
@@ -157,7 +157,7 @@
         
     // banglarpran.
     {url:'https://www.banglarpran.com/archives/category/dooars/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.BANGLADESH}},
-    {url:'https://www.banglarpran.com/archives/category/state/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.STATE}},
+    {url:'https://www.banglarpran.com/archives/category/state/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.FIRST_PAGE}},
     {url:'https://www.banglarpran.com/archives/category/politics/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.POLITICS}},
     {url:'https://www.banglarpran.com/archives/category/india/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.COUNTRY}},
     {url:'https://www.banglarpran.com/archives/category/internation/feed', type:RSS_TYPE.WORD_PRESS, extra:{'lang':LANG.IN_BENGALI, 'stream':STREAM.INTERNATIONAL}},

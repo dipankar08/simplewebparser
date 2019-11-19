@@ -14,7 +14,7 @@ exports.urlList = [
         is_partner: false,
         links: [
             { stream: CONST_1.STREAM.KOLKATA, url: 'https://www.aajkaal.in/kolkata' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.aajkaal.in/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.aajkaal.in/state' },
         ],
         link_selector: '.image-holder a',
         storyParseConfig: [
@@ -30,7 +30,7 @@ exports.urlList = [
         is_active: false,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.gujaratsamachar.com/rss/top-stories' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.gujaratsamachar.com/rss/top-stories' },
             { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://www.gujaratsamachar.com/rss/category/science-technology' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.gujaratsamachar.com/rss/category/relationship' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.gujaratsamachar.com/rss/category/lifestyle-fashion' },

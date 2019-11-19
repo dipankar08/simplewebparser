@@ -12,7 +12,7 @@ exports.urlList = [
         is_active: true,
         is_partner: true,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.darkaritips.com/headline/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.darkaritips.com/headline/' },
             { stream: CONST_1.STREAM.HEALTH, url: 'https://www.darkaritips.com/category/health-message/' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.darkaritips.com/category/lifestyle/' },
         ]
@@ -26,8 +26,8 @@ exports.urlList = [
         is_partner: true,
         links: [
             { stream: CONST_1.STREAM.VIRAL, url: 'https://gnebangla.in/category/viral-news/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://gnebangla.in/category/local-news/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://gnebangla.in/category/west-bengal/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://gnebangla.in/category/local-news/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://gnebangla.in/category/west-bengal/' },
             { stream: CONST_1.STREAM.NATIONAL, url: 'https://gnebangla.in/category/national-news/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://gnebangla.in/category/international/' },
             { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://gnebangla.in/category/technology/' },
@@ -44,7 +44,7 @@ exports.urlList = [
         links: [
             { url: 'https://www.kolkata24x7.com/category/kolkata/feed', 'stream': CONST_1.STREAM.KOLKATA },
             { url: 'https://www.kolkata24x7.com/category/politics/feed', 'stream': CONST_1.STREAM.POLITICS },
-            { url: 'https://www.kolkata24x7.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://www.kolkata24x7.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.kolkata24x7.com/category/national-news/feed', 'stream': CONST_1.STREAM.NATIONAL },
             { url: 'https://www.kolkata24x7.com/category/international-news/feed', 'stream': CONST_1.STREAM.INTERNATIONAL },
             { url: 'https://www.kolkata24x7.com/category/sports/feed', 'stream': CONST_1.STREAM.SPORTS },
@@ -88,7 +88,7 @@ exports.urlList = [
         links: [
             { url: 'https://kolkatatimes24.com/category/kolkata/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://kolkatatimes24.com/category/politics/feed', 'stream': CONST_1.STREAM.POLITICS },
-            { url: 'https://kolkatatimes24.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://kolkatatimes24.com/category/west-bengal/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://kolkatatimes24.com/category/technology/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://kolkatatimes24.com/category/business-and-economy/feed', 'stream': CONST_1.STREAM.BUSINESS },
             { url: 'https://kolkatatimes24.com/category/national/feed', 'stream': CONST_1.STREAM.COUNTRY },
@@ -111,8 +111,8 @@ exports.urlList = [
         is_partner: false,
         links: [
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%a6%e0%a7%87%e0%a6%b6/' },
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%95%e0%a6%b2%e0%a6%95%e0%a6%be%e0%a6%a4%e0%a6%be/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%95%e0%a6%b2%e0%a6%95%e0%a6%be%e0%a6%a4%e0%a6%be/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%b0%e0%a6%be%e0%a6%9c%e0%a7%8d%e0%a6%af/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%bf%e0%a6%b6%e0%a7%8d%e0%a6%ac/' },
             { stream: CONST_1.STREAM.BANGLADESH, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%ac%e0%a6%be%e0%a6%82%e0%a6%b2%e0%a6%be%e0%a6%a6%e0%a7%87%e0%a6%b6/' },
             { stream: CONST_1.STREAM.SPORTS, url: 'https://www.aajbangla.in/category/%e0%a6%86%e0%a6%9c-%e0%a6%96%e0%a7%87%e0%a6%b2%e0%a6%be/' },
@@ -149,7 +149,7 @@ exports.urlList = [
         is_partner: true,
         links: [
             { stream: CONST_1.STREAM.BANGLADESH, url: 'https://www.banglarpran.com/archives/category/dooars' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.banglarpran.com/archives/category/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.banglarpran.com/archives/category/state' },
             { stream: CONST_1.STREAM.POLITICS, url: 'https://www.banglarpran.com/archives/category/politics' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://www.banglarpran.com/archives/category/india' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.banglarpran.com/archives/category/internation' },
@@ -168,7 +168,7 @@ exports.urlList = [
             { url: 'https://www.bongnews24x7.com', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.bongnews24x7.com/category/kolkata/', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.bongnews24x7.com/category/viral/', 'stream': CONST_1.STREAM.VIRAL },
-            { url: 'https://www.bongnews24x7.com/category/west-bengal/', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://www.bongnews24x7.com/category/west-bengal/', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.bongnews24x7.com/category/india/', 'stream': CONST_1.STREAM.NATIONAL },
             { url: 'https://www.bongnews24x7.com/category/international/', 'stream': CONST_1.STREAM.INTERNATIONAL },
             { url: 'https://www.bongnews24x7.com/category/politics/', 'stream': CONST_1.STREAM.POLITICS },
@@ -204,7 +204,7 @@ exports.urlList = [
         is_partner: true,
         links: [
             { url: 'https://www.master24.in/archives/category/politics/feed', 'stream': CONST_1.STREAM.POLITICS },
-            { url: 'https://www.master24.in/archives/category/state/feed', 'stream': CONST_1.STREAM.STATE },
+            { url: 'https://www.master24.in/archives/category/state/feed', 'stream': CONST_1.STREAM.FIRST_PAGE },
             { url: 'https://www.master24.in/archives/category/national/feed', 'stream': CONST_1.STREAM.COUNTRY },
             { url: 'https://www.master24.in/archives/category/international/feed', 'stream': CONST_1.STREAM.INTERNATIONAL },
             { url: 'https://www.master24.in/archives/category/lifestyle/feed', 'stream': CONST_1.STREAM.LIFESTYLE },

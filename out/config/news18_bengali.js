@@ -45,7 +45,7 @@ var News18Config = /** @class */ (function (_super) {
     News18Config.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.COUNTRY, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/national/' },
-            { stream: CONST_1.STREAM.STATE, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/kolkata/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/kolkata/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/international/' },
             { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/technology/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.nwslist-withbrdr li a', url: 'https://bengali.news18.com/entertainment/' },

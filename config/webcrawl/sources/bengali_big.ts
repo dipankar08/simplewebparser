@@ -14,7 +14,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:false,
         links:[
             {stream: STREAM.KOLKATA, url:'https://www.aajkaal.in/kolkata'},
-            {stream: STREAM.STATE, url:'https://www.aajkaal.in/state'},
+            {stream: STREAM.FIRST_PAGE, url:'https://www.aajkaal.in/state'},
             {stream: STREAM.NATIONAL, url:'https://www.aajkaal.in/national'},
             {stream: STREAM.INTERNATIONAL, url:'https://www.aajkaal.in/international'},
             {stream: STREAM.BUSINESS, url:'https://www.aajkaal.in/business'},
@@ -42,9 +42,9 @@ export let urlList:Array<WebEntryPoint> = [
         is_active:true,
         is_partner:false,
         links:[
-            {stream: STREAM.HEADLINE, url:'https://bartamanpatrika.com/'},
+            {stream: STREAM.FIRST_PAGE, url:'https://bartamanpatrika.com/'},
             {stream: STREAM.FIRST_PAGE, url:'https://bartamanpatrika.com/section.php?cID=12'},
-            {stream: STREAM.STATE, url:'https://bartamanpatrika.com/section.php?cID=13'},
+            {stream: STREAM.FIRST_PAGE, url:'https://bartamanpatrika.com/section.php?cID=13'},
             {stream: STREAM.COUNTRY, url:'https://bartamanpatrika.com/section.php?cID=14'},
             {stream: STREAM.INTERNATIONAL, url:'https://bartamanpatrika.com/section.php?cID=15'},
             {stream: STREAM.SPORTS, url:'https://bartamanpatrika.com/section.php?cID=18'},
@@ -61,8 +61,8 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:false,
         links:[
             {stream: STREAM.FIRST_PAGE, url:'https://bengali.mahanagar24x7.com/feed'},
-            {stream: STREAM.HEADLINE, url:'https://bengali.mahanagar24x7.com/category/kolkata/feed'},
-            {stream: STREAM.STATE, url:'https://bengali.mahanagar24x7.com/category/banga/feed'},
+            {stream: STREAM.FIRST_PAGE, url:'https://bengali.mahanagar24x7.com/category/kolkata/feed'},
+            {stream: STREAM.FIRST_PAGE, url:'https://bengali.mahanagar24x7.com/category/banga/feed'},
             {stream: STREAM.NATIONAL, url:'https://bengali.mahanagar24x7.com/category/national/feed'},
             {stream: STREAM.INTERNATIONAL, url:'https://bengali.mahanagar24x7.com/category/international/feed'},
             {stream: STREAM.SPORTS, url:'https://bengali.mahanagar24x7.com/category/sport-newss/feed'}, 
@@ -83,7 +83,7 @@ export let urlList:Array<WebEntryPoint> = [
 
         links:[
             {stream: STREAM.FIRST_PAGE, url:'http://eisamay.indiatimes.com/city/rssfeedsection/15819618.cms'},
-            {stream: STREAM.STATE, url:'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms'},
+            {stream: STREAM.FIRST_PAGE, url:'http://eisamay.indiatimes.com/state/rssfeedsection/15819609.cms'},
             {stream: STREAM.NATIONAL, url:'http://eisamay.indiatimes.com/nation/rssfeedsection/15819599.cms'},
             {stream: STREAM.INTERNATIONAL, url:'http://eisamay.indiatimes.com/international/rssfeedsection/15819594.cms'},
             {stream: STREAM.SPORTS, url:'http://eisamay.indiatimes.com/sports/rssfeedsection/23000116.cms'},
@@ -104,7 +104,7 @@ export let urlList:Array<WebEntryPoint> = [
         links:[
             {stream: STREAM.COUNTRY, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/india'},
             {stream: STREAM.INTERNATIONAL, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/world'},
-            {stream: STREAM.STATE, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/bengal'},
+            {stream: STREAM.FIRST_PAGE, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/bengal'},
             {stream: STREAM.ENTERTAINMENT, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/binodan'},
             {stream: STREAM.SPORTS, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/sports'},
             {stream: STREAM.EDITORIAL, selector:'.newslistbx h3 > a',url:'https://www.dainikstatesmannews.com/editorial'},
@@ -125,8 +125,8 @@ export let urlList:Array<WebEntryPoint> = [
         is_active:true,
         is_partner:false,
         links:[
-            { stream: STREAM.HEADLINE, selector:'.carousel  .scale_img_block > a',url:'https://www.sangbadpratidin.in/'},
-            { stream: STREAM.HEADLINE, selector:'.daily-news  .scale_img_block > a',url:'https://www.sangbadpratidin.in/'},
+            { stream: STREAM.FIRST_PAGE, selector:'.carousel  .scale_img_block > a',url:'https://www.sangbadpratidin.in/'},
+            { stream: STREAM.FIRST_PAGE, selector:'.daily-news  .scale_img_block > a',url:'https://www.sangbadpratidin.in/'},
             { stream: STREAM.FIRST_PAGE, selector:'.tatka_update_list  .scale_img a',url:'https://www.sangbadpratidin.in/'},
             { stream: STREAM.FIRST_PAGE, selector:'ul.more_news_list li > a',url:'https://www.sangbadpratidin.in/latest-update/'},
         ],
@@ -144,11 +144,11 @@ export let urlList:Array<WebEntryPoint> = [
         is_active:true,
         is_partner:false,
         links:[
-            {url:'https://www.anandabazar.com/', selector: '.container .abp-homepage-main-story-wrap-new a', stream:STREAM.HEADLINE},
-            {url:'https://www.anandabazar.com/', selector: '.abp-homepage-lead-story-wrap a', stream:STREAM.HEADLINE},
+            {url:'https://www.anandabazar.com/', selector: '.container .abp-homepage-main-story-wrap-new a', stream:STREAM.FIRST_PAGE},
+            {url:'https://www.anandabazar.com/', selector: '.abp-homepage-lead-story-wrap a', stream:STREAM.FIRST_PAGE},
             {url:'https://www.anandabazar.com/', selector: '.abp-homepage-editor-story-wrap a', stream:STREAM.FIRST_PAGE},
 
-            {url:'https://www.anandabazar.com/state',   selector: '.sectionstoryinside-sub > div > a', stream:STREAM.STATE},
+            {url:'https://www.anandabazar.com/state',   selector: '.sectionstoryinside-sub > div > a', stream:STREAM.FIRST_PAGE},
             {url:'https://www.anandabazar.com/international',   selector: '.sectionstoryinside-sub > div > a', stream:STREAM.INTERNATIONAL},
             {url:'https://www.anandabazar.com/business',   selector: '.sectionstoryinside-sub > div > a', stream:STREAM.BUSINESS},
             {url:'https://www.anandabazar.com/others/science',   selector: '.sectionstoryinside-sub > div > a', stream:STREAM.SCIENCE},
@@ -189,7 +189,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_partner:true,
         links:[
             {stream: STREAM.FIRST_PAGE,url:'https://www.nilkantho.in/category/news/kolkata/'},
-            {stream: STREAM.STATE,url:'https://www.nilkantho.in/category/news/state/'},
+            {stream: STREAM.FIRST_PAGE,url:'https://www.nilkantho.in/category/news/state/'},
             {stream: STREAM.COUNTRY,url:'https://www.nilkantho.in/category/news/national/'},
             {stream: STREAM.INTERNATIONAL,url:'https://www.nilkantho.in/category/news/world/'},
             {stream: STREAM.ENTERTAINMENT,url:'https://www.nilkantho.in/category/news/entertainment/'},

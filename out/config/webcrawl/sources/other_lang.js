@@ -15,7 +15,7 @@ exports.urlList = [
         is_partner: false,
         rss_feed_url_end: '/feed/',
         links: [
-            { stream: CONST_1.STREAM.STATE, url: 'https://www.dharitri.com/category/state-news/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.dharitri.com/category/state-news/' },
             { stream: CONST_1.STREAM.NATIONAL, url: 'https://www.dharitri.com/category/national-news/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.dharitri.com/category/metro-news/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://www.dharitri.com/category/international-news/' },
@@ -71,7 +71,7 @@ exports.urlList = [
         is_active: true,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://www.gujaratsamachar.com/rss/top-stories' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://www.gujaratsamachar.com/rss/top-stories' },
             { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://www.gujaratsamachar.com/rss/category/science-technology' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.gujaratsamachar.com/rss/category/relationship' },
             { stream: CONST_1.STREAM.LIFESTYLE, url: 'https://www.gujaratsamachar.com/rss/category/lifestyle-fashion' },

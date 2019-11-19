@@ -34,7 +34,7 @@ exports.urlList = [
         is_active: false,
         is_partner: false,
         links: [
-            { stream: CONST_1.STREAM.HEADLINE, url: 'https://gujarati.oneindia.com/news/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://gujarati.oneindia.com/news/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://gujarati.oneindia.com/movies/' },
             { stream: CONST_1.STREAM.ASTROLOGY, url: 'https://gujarati.oneindia.com/astrology/' },
             { stream: CONST_1.STREAM.TECHNOLOGY, url: 'https://gujarati.oneindia.com/auto/' },
@@ -53,7 +53,7 @@ exports.urlList = [
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.oneindia.com/news/kolkata/' },
             { stream: CONST_1.STREAM.COUNTRY, url: 'https://bengali.oneindia.com/news/india/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.oneindia.com/news/kolkata/' },
-            { stream: CONST_1.STREAM.STATE, url: 'https://bengali.oneindia.com/news/west-bengal/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, url: 'https://bengali.oneindia.com/news/west-bengal/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, url: 'https://bengali.oneindia.com/news/international/' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, url: 'https://bengali.oneindia.com/news/movies/' },
         ]

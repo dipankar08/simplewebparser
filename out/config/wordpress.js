@@ -50,7 +50,7 @@ var BanglarPranConfig = /** @class */ (function (_super) {
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/entertrainment' },
             { stream: CONST_1.STREAM.HEALTH, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/health' },
             { stream: CONST_1.STREAM.DOOARS, selector: '.td-main-content .td-module-thumb > a', url: 'hhttps://www.banglarpran.com/archives/category/dooars' },
-            { stream: CONST_1.STREAM.STATE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/state' },
             { stream: CONST_1.STREAM.POLITICS, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/politics' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/india' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-main-content .td-module-thumb > a', url: 'https://www.banglarpran.com/archives/category/internation' },
@@ -118,7 +118,7 @@ var GNEBanglaConfig = /** @class */ (function (_super) {
         return [
             { stream: CONST_1.STREAM.VIRAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/viral-news/' },
             { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/local-news/' },
-            { stream: CONST_1.STREAM.STATE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/west-bengal/' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/west-bengal/' },
             { stream: CONST_1.STREAM.COUNTRY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/national-news/' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/international/' },
             { stream: CONST_1.STREAM.TECHNOLOGY, selector: '.td-category-grid .td-module-thumb > a', url: 'https://gnebangla.in/category/technology/' },

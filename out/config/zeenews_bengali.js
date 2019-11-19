@@ -37,7 +37,7 @@ var ZeeNewsConfig = /** @class */ (function (_super) {
     ZeeNewsConfig.prototype.getStoryListConfig = function () {
         return [
             { stream: CONST_1.STREAM.COUNTRY, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/nation' },
-            { stream: CONST_1.STREAM.STATE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/state' },
+            { stream: CONST_1.STREAM.FIRST_PAGE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/state' },
             { stream: CONST_1.STREAM.INTERNATIONAL, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/world' },
             { stream: CONST_1.STREAM.ENTERTAINMENT, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/entertainment' },
             { stream: CONST_1.STREAM.LIFESTYLE, selector: '.maincontent .section-article > a', url: 'https://zeenews.india.com/bengali/lifestyle' },

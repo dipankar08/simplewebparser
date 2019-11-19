@@ -38,7 +38,7 @@ export let urlList:Array<WebEntryPoint> = [
         is_active:false,
         is_partner:false,
         links:[
-            {stream: STREAM.HEADLINE, url:'https://gujarati.oneindia.com/news/'},
+            {stream: STREAM.FIRST_PAGE, url:'https://gujarati.oneindia.com/news/'},
             {stream: STREAM.ENTERTAINMENT, url:'https://gujarati.oneindia.com/movies/'},
             {stream: STREAM.ASTROLOGY, url:'https://gujarati.oneindia.com/astrology/'},
             {stream: STREAM.TECHNOLOGY, url:'https://gujarati.oneindia.com/auto/'},
@@ -57,7 +57,7 @@ export let urlList:Array<WebEntryPoint> = [
             {stream: STREAM.FIRST_PAGE, url:'https://bengali.oneindia.com/news/kolkata/'},
             {stream: STREAM.COUNTRY, url:'https://bengali.oneindia.com/news/india/'},
             {stream: STREAM.FIRST_PAGE, url:'https://bengali.oneindia.com/news/kolkata/'},
-            {stream: STREAM.STATE, url:'https://bengali.oneindia.com/news/west-bengal/'},
+            {stream: STREAM.FIRST_PAGE, url:'https://bengali.oneindia.com/news/west-bengal/'},
             {stream: STREAM.INTERNATIONAL, url:'https://bengali.oneindia.com/news/international/'},
             {stream: STREAM.ENTERTAINMENT, url:'https://bengali.oneindia.com/news/movies/'},
         ]
