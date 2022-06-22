@@ -16,7 +16,7 @@
     "cheerio": "^1.0.0-rc.3",
     "config": "^3.2.3",
     "fast-xml-parser": "^3.14.0",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "lodash": "^4.17.15",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
